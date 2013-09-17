@@ -1,4 +1,3 @@
-//prova
 
 package entity;
 import support.Vector;
