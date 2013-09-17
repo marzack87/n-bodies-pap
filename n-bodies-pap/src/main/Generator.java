@@ -13,7 +13,9 @@ public class Generator {
  */
 	private int number;
 	
-	private int range = 99;
+	private int pos_range = 99;
+	private int vel_range = 99;
+	private int mas_range = 99;
 	
 	private double[] position_x;
 	private double[] position_y;
@@ -43,11 +45,11 @@ public class Generator {
 		
 		for (int i = 0; i < number; i++){
 			//Random r = new Random();
-			position_x[i] = (Math.random() * range) + 1;
-			position_y[i] = (Math.random() * range) + 1;
-			velocity_x[i] = (Math.random() * range) + 1;
-			velocity_y[i] = (Math.random() * range) + 1;
-			mass[i] = (Math.random() * range) + 1;
+			position_x[i] = (Math.random() * pos_range) + 1;
+			position_y[i] = (Math.random() * pos_range) + 1;
+			velocity_x[i] = (Math.random() * vel_range) + 1;
+			velocity_y[i] = (Math.random() * vel_range) + 1;
+			mass[i] = (Math.random() * mas_range) + 1;
 		}
 	}
 

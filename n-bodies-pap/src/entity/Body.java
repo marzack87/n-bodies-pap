@@ -1,4 +1,3 @@
-
 package entity;
 import support.Vector;
 
