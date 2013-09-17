@@ -22,11 +22,12 @@ public class Controller {
 	public Controller(Generator gen){
 		
 		n = gen.getNumberOfBodies();
+		allbodies = new Body[n];
 		double[][] data = gen.getData();
 		for(int i = 0; i < n; i++){
-			double mass = data[5][i];
-			double[] position = {data[1][i], data[2][i]};
-			double[] velocity = {data[3][i], data[4][i]};
+			double mass = data[4][i];
+			double[] position = {data[0][i], data[1][i]};
+			double[] velocity = {data[2][i], data[3][i]};
 			Vector pos = new Vector(position);
 			Vector vel = new Vector(velocity);
 			allbodies[i] = new Body(pos, vel, mass);
