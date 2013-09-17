@@ -1,3 +1,5 @@
+// Ricci culo!
+
 package entity;
 import support.Vector;
 
