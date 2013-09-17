@@ -1,6 +1,3 @@
-//prova
-//culo
-
 package main;
 
 import java.util.Random;
