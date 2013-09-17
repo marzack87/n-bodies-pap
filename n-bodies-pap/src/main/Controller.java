@@ -36,7 +36,7 @@ public class Controller {
 	
 	void print_body(){
 		for(int i = 0; i<n; i++){
-			System.out.println(allbodies[i].getPosition());
+			System.out.println(allbodies[i].getPosition() + " " + allbodies[i].getVelocity() + " " + allbodies[i].getMass() );
 		}
 	}
 	

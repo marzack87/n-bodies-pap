@@ -30,4 +30,12 @@ public class Body {
 	public String getPosition(){
 		return r.toString();
 	}
+	
+	public String getVelocity(){
+		return v.toString();
+	}
+	
+	public String getMass(){
+		return "" + mass;
+	}
 }
