@@ -17,23 +17,29 @@ import entity.Body;
 public class Controller {
 	 
 	private Body[] allbodies;
+	private int n;
 	
 	public Controller(Generator gen){
 		
-		int n = gen.getNumberOfBodies();
+		n = gen.getNumberOfBodies();
+		double[][] data = gen.getData();
 		for(int i = 0; i < n; i++){
-			double mass = 0; // gen.getMass
-			double[] position = {/*pos_x, pos_y*/};
-			double[] velocity = {/*vel_x, vel_y*/};
+			double mass = data[5][i];
+			double[] position = {data[1][i], data[2][i]};
+			double[] velocity = {data[3][i], data[4][i]};
 			Vector pos = new Vector(position);
 			Vector vel = new Vector(velocity);
 			allbodies[i] = new Body(pos, vel, mass);
 		}
 		
 		
-		
 	}
-
+	
+	void print_body(){
+		for(int i = 0; i<n; i++){
+			System.out.println(allbodies[i].getPosition());
+		}
+	}
 	
 
 }

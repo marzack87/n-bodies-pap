@@ -9,6 +9,7 @@ public class Main {
 		Generator gen = new Generator();
 		gen.generateRandomData(10);
 		Controller contr = new Controller(gen);
+		contr.print_body();
 	}
 
 }

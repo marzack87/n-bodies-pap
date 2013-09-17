@@ -26,4 +26,8 @@ public class Body {
 		double F = (G * this.mass * that.mass) / (dist * dist); 
 		return delta.direction().times(F);
 	} 
+	
+	public String getPosition(){
+		return r.toString();
+	}
 }
