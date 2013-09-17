@@ -5,9 +5,10 @@ public class Main {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public static void main(String[] args) { 
+		Generator gen = new Generator();
+		gen.generateRandomData(10);
+		Controller contr = new Controller(gen);
 	}
 
 }
