@@ -1,5 +1,3 @@
-// zack
-
 package main;
 
 import support.Vector;
