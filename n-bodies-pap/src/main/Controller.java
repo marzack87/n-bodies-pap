@@ -34,8 +34,6 @@ public class Controller {
 			Vector vel = new Vector(velocity);
 			allbodies[i] = new Body(pos, vel, mass);
 		}
-		
-		
 	}
 	
 	/**

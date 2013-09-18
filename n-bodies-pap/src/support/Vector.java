@@ -1,4 +1,5 @@
 package support;
+
 public class Vector { 
 
     private final int N;         // length of the vector
