@@ -87,7 +87,7 @@ public class Generator {
 	 * Create the matrix which contains the data of the bodies.
 	 * Each line contains the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses
 	 * 
-	 * @return data - double[][]
+	 * @return data - Data matrix
 	 */
 	public double[][] getData() {
 		double[][] data = {position_x, position_y, velocity_x, velocity_y, mass};

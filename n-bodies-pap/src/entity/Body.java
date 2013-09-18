@@ -20,9 +20,9 @@ public class Body {
 	 * Class Body constructor.
 	 * Initialize the properties of the body with the object passed as parameter.
 	 * 
-	 * @param p - Vector Object
-	 * @param v - Vector Object
-	 * @param mass - double value of the mass
+	 * @param p - Position vector
+	 * @param v - Velocity vector
+	 * @param mass - Value of the mass of the body
 	 */
 	public Body(Vector p, Vector v, double mass) {
 		this.p = p;
@@ -35,8 +35,8 @@ public class Body {
 	 * Permit to update the position of the body based on the force applied to the body by the others
 	 * and the discrete time.
 	 * 
-	 * @param f - Vector Object represent the vector force
-	 * @param dt
+	 * @param f - Force vector
+	 * @param dt - Time
 	 */
 	public void move(Vector f, double dt) { 
 		Vector a = f.times(1/mass);
@@ -48,8 +48,8 @@ public class Body {
 	 * Method forceFrom.
 	 * It calculates the force between the body and an another body passed as param 
 	 * 
-	 * @param that - Body Object
-	 * @return Vector Object - the force vector requested
+	 * @param that - Body
+	 * @return Vector object - The force vector requested
 	 */
 	public Vector forceFrom(Body that) {
 		double G = 6.67e-11;
