@@ -10,8 +10,6 @@ import support.Vector;
  * - double mass, the value of the mass of the body(planet)  
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- * 
- *
  */
 public class Body { 
 	private Vector p; //position
@@ -32,12 +30,27 @@ public class Body {
 		this.mass = mass; 
 	}
 	
+	/**
+	 * Method move.
+	 * Permit to update the position of the body based on the force applied to the body by the others
+	 * and the discrete time.
+	 * 
+	 * @param f - Vector Object represent the vector force
+	 * @param dt
+	 */
 	public void move(Vector f, double dt) { 
 		Vector a = f.times(1/mass);
 		v = v.plus(a.times(dt));
 		p = p.plus(v.times(dt));
 	}
 	
+	/**
+	 * Method forceFrom.
+	 * It calculates the force between the body and an another body passed as param 
+	 * 
+	 * @param that - Body Object
+	 * @return Vector Object - the force vector requested
+	 */
 	public Vector forceFrom(Body that) {
 		double G = 6.67e-11;
 		Vector delta = that.p.minus(this.p);
@@ -46,14 +59,34 @@ public class Body {
 		return delta.direction().times(F);
 	} 
 	
+	/**
+	 * Method getPosition.
+	 * It returns a String representation of the Vector position of the body calling the method toString()
+	 * of the Vector Class.
+	 * 
+	 * @return String
+	 */
 	public String getPosition(){
 		return p.toString();
 	}
 	
+	/**
+	 * Method getVelocity.
+	 * It returns a String representation of the Vector velocity of the body calling the method toString()
+	 * of the Vector Class.
+	 * 
+	 * @return String
+	 */
 	public String getVelocity(){
 		return v.toString();
 	}
 	
+	/**
+	 * Method getMass.
+	 * It returns a String representation of the mass of the body.
+	 * 
+	 * @return String
+	 */
 	public String getMass(){
 		return "" + mass;
 	}

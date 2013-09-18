@@ -1,6 +1,12 @@
 package main;
 
-
+/**
+ * Class Generator. 
+ * Represent the entity that takes care to recover the data from a file or to generate them in a random way.
+ * It has some private field.....................
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ */
 public class Generator {
 	
 /* Si occupa di prendere i dati da file oppure

@@ -9,8 +9,6 @@ import entity.Body;
  * data from the entity Generator.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- * 
- *
  */
 public class Controller {
 	 
@@ -19,6 +17,7 @@ public class Controller {
 	
 	/**
 	 * Class Controller constructor.
+	 * It takes the data stored by the Generator object and use them to initialize the bodies.
 	 * 
 	 * @param gen - Generator Object
 	 */
@@ -40,7 +39,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Function print_body
+	 * Method print_body.
 	 * Print all the informations about all the bodies presented in the allbodies array 
 	 */
 	void print_body(){
