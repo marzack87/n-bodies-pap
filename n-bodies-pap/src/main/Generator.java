@@ -3,7 +3,10 @@ package main;
 /**
  * Class Generator. 
  * Represent the entity that takes care to recover the data from a file or to generate them in a random way.
- * It has some private field.....................
+ * If the mode choose to star the simulation is taking the data from a file, an object of this class recovered from the file these data: 
+ * the number of planets (bodies) to create, in the below columns the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses.
+ * Otherwise the object to initialize the simulation creates all the data in a random way.
+ * The data recovered/created are passed to the Controller object through a matrix. 
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
@@ -29,11 +32,17 @@ public class Generator {
 	private double[] velocity_y;
 	private double[] mass;
 	
-	
+	/**
+	 * Class Generator constructor.
+	 */
 	public Generator(){
 		 
 	}
 	
+	/**
+	 * Method getDataFromFile.
+	 * It recovers from the file the data necessary to the initialization of the bodies. 
+	 */
 	public void getDataFromFile(){
 		//primo valore: NUMERO CORPI
 		
@@ -41,6 +50,10 @@ public class Generator {
 		// xxx xxx xxx xxx xxx
 	}
 	
+	/**
+	 * Method generateRandonData.
+	 * It generates the data for the initialization in a random way.
+	 */
 	public void generateRandomData(int n){
 		number = n;
 		position_x = new double[number];
@@ -58,11 +71,24 @@ public class Generator {
 			mass[i] = (Math.random() * mas_range) + 1;
 		}
 	}
-
+	
+	/**
+	 * Method getNumberOfBodies.
+	 * It returns the number of bodies.
+	 * 
+	 * @return number - Integer
+	 */
 	public int getNumberOfBodies(){
 		return number;
 	}
 	
+	/**
+	 * Method getData.
+	 * Create the matrix which contains the data of the bodies.
+	 * Each line contains the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses
+	 * 
+	 * @return data - double[][]
+	 */
 	public double[][] getData() {
 		double[][] data = {position_x, position_y, velocity_x, velocity_y, mass};
 		return data;
