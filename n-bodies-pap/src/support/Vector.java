@@ -51,7 +51,7 @@ public class Vector {
 
     /**
      * Method dot.
-     * It calculates the inner product between my vector and the vector passed as param 
+     * It calculates the inner product between my vector and the vector passed as parameter. 
      * 
      * @param that - Second vector
      * @return sum - Inner product
@@ -89,6 +89,12 @@ public class Vector {
         return this.minus(that).magnitude();
     }
 
+    /**
+     * Method plus.
+     * It calculate and returns an object Vector who represent the sum of the vector and the vector passed as parameter.
+     * 
+     * @return c - The Vector sum
+     */
     // return this + that
     public Vector plus(Vector that) {
         if (this.N != that.N) throw new RuntimeException("Dimensions don't agree");
@@ -97,7 +103,13 @@ public class Vector {
             c.data[i] = this.data[i] + that.data[i];
         return c;
     }
-
+    
+    /**
+     * Method minus.
+     * It calculate and returns an object Vector who represent the removal of the vector and the vector passed as parameter.
+     * 
+     * @return c - The Vector difference
+     */
     // return this - that
     public Vector minus(Vector that) {
         if (this.N != that.N) throw new RuntimeException("Dimensions don't agree");
@@ -106,12 +118,26 @@ public class Vector {
             c.data[i] = this.data[i] - that.data[i];
         return c;
     }
-
+    
+    /**
+     * Method cartesian.
+     * Passing an integer as parameter it returns the corrisponding coordinate of a vector.
+     * 
+     * @param i - Integer value corrisponding the index of the vector in the array.
+     * @return data[i] - The Vector difference
+     */
     // return the corresponding coordinate
     public double cartesian(int i) {
         return data[i];
     }
-
+    
+    /**
+     * Method times.
+     * It returns a new Vector object whose value is (vector * factor).
+     * 
+     * @param factor - Double number 
+     * @return data[i] - The Vector difference
+     */
     // create and return a new object whose value is (this * factor)
     public Vector times(double factor) {
         Vector c = new Vector(N);
@@ -120,13 +146,24 @@ public class Vector {
         return c;
     }
 
-
+    /**
+     * Method direction.
+     * It returns the direction of a vector corrisponding to the unit vector.
+     * 
+     * @return dir - The direction
+     */
     // return the corresponding unit vector
     public Vector direction() {
         if (this.magnitude() == 0.0) throw new RuntimeException("Zero-vector has no direction");
         return this.times(1.0 / this.magnitude());
     }
-
+    
+    /**
+     * Method toString.
+     * It returns the direction of a vector corrisponding to the unit vector.
+     * 
+     * @return s - The string represantation of the vector
+     */
     // return a string representation of the vector
     public String toString() {
         String s = "(";
