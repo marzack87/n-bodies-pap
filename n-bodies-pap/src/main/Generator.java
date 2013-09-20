@@ -28,9 +28,9 @@ public class Generator {
  */
 	private int number;
 	
-	private int pos_range = 99;
-	private int vel_range = 99;
-	private int mas_range = 99;
+	private int pos_range = 100;
+	private int vel_range = 50;
+	private int mas_range = 10;
 	
 	private double[] position_x;
 	private double[] position_y;
@@ -49,9 +49,10 @@ public class Generator {
 	 * Method initFromFile.
 	 * It recovers from the file the data necessary to the initialization of the bodies. 
 	 */
-	public void initFromFile(){
+	public void initFromFile(File f){
 		try{
-			  FileInputStream fstream = new FileInputStream("bodies.txt");
+			
+			  FileInputStream fstream = new FileInputStream(f);
 			  
 			  // Get the object of DataInputStream
 			  DataInputStream in = new DataInputStream(fstream);
@@ -76,6 +77,7 @@ public class Generator {
 				  velocity_x[i] = Double.valueOf(values[2]);
 				  velocity_y[i] = Double.valueOf(values[3]);
 				  mass[i] = Double.valueOf(values[4]);
+				  i++;
 			  }
 			  //Close the input stream
 			  in.close();
@@ -99,10 +101,10 @@ public class Generator {
 		
 		for (int i = 0; i < number; i++){
 			//Random r = new Random();
-			position_x[i] = (Math.random() * pos_range) + 1;
-			position_y[i] = (Math.random() * pos_range) + 1;
-			velocity_x[i] = (Math.random() * vel_range) + 1;
-			velocity_y[i] = (Math.random() * vel_range) + 1;
+			position_x[i] = (Math.random() * (pos_range - 1) ) + 1;
+			position_y[i] = (Math.random() * (pos_range - 1) ) + 1;
+			velocity_x[i] = (Math.random() * (vel_range - 1) ) + 1;
+			velocity_y[i] = (Math.random() * (vel_range - 1) ) + 1;
 			mass[i] = (Math.random() * mas_range) + 1;
 		}
 	}

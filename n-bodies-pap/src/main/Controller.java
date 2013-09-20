@@ -52,6 +52,7 @@ public class Controller {
 	
 	public void startSimulation(){
 		// qui parte tutto
+		this.print_body();
 	}
 	
 	/**

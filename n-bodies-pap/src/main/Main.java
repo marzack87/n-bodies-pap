@@ -9,8 +9,8 @@ public class Main {
 	 */
 	public static void main(String[] args) { 
 		
-		MainFrame initFrame = new MainFrame("What the fuck you want??");
-		initFrame.setVisible(true);
+		//MainFrame initFrame = new MainFrame("What the fuck you want??");
+		//initFrame.setVisible(true);
 		
 		Controller contr = new Controller();
 		contr.initAll();
