@@ -1,5 +1,11 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 /**
  * Class Generator. 
  * Represent the entity that takes care to recover the data from a file or to generate them in a random way.
@@ -40,21 +46,50 @@ public class Generator {
 	}
 	
 	/**
-	 * Method getDataFromFile.
+	 * Method initFromFile.
 	 * It recovers from the file the data necessary to the initialization of the bodies. 
 	 */
-	public void getDataFromFile(){
-		//primo valore: NUMERO CORPI
-		
-		//poi tabella dei dati divisi da spazi
-		// xxx xxx xxx xxx xxx
+	public void initFromFile(){
+		try{
+			  FileInputStream fstream = new FileInputStream("bodies.txt");
+			  
+			  // Get the object of DataInputStream
+			  DataInputStream in = new DataInputStream(fstream);
+			  BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			  String strLine;
+			  
+			  if ((strLine = br.readLine()) != null){
+				  number = Integer.valueOf(strLine); 
+				  position_x = new double[number];
+				  position_y = new double[number];
+				  velocity_x = new double[number];
+				  velocity_y = new double[number];
+				  mass = new double[number];
+			  } else {
+				  //Il file è vuoto, meglio lanciare una eccezione
+			  }
+			  int i = 0;
+			  while ((strLine = br.readLine()) != null)   {
+				  String[] values = strLine.split(" ");
+				  position_x[i] = Double.valueOf(values[0]);
+				  position_y[i] = Double.valueOf(values[1]);
+				  velocity_x[i] = Double.valueOf(values[2]);
+				  velocity_y[i] = Double.valueOf(values[3]);
+				  mass[i] = Double.valueOf(values[4]);
+			  }
+			  //Close the input stream
+			  in.close();
+			  
+		}catch (Exception e){//Catch exception if any
+			  System.err.println("Error: " + e.getMessage());
+		}
 	}
 	
 	/**
-	 * Method generateRandonData.
+	 * Method initWithRandonData.
 	 * It generates the data for the initialization in a random way.
 	 */
-	public void generateRandomData(int n){
+	public void initWithRandomData(int n){
 		number = n;
 		position_x = new double[number];
 		position_y = new double[number];

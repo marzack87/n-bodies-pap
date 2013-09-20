@@ -1,15 +1,20 @@
 package main;
 
+import gui.MainFrame;
+
 public class Main {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) { 
-		Generator gen = new Generator();
-		gen.generateRandomData(10);
-		Controller contr = new Controller(gen);
-		contr.print_body();
+		
+		MainFrame initFrame = new MainFrame("What the fuck you want??");
+		initFrame.setVisible(true);
+		
+		Controller contr = new Controller();
+		contr.initAll();
+		contr.startSimulation();
 	}
 
 }

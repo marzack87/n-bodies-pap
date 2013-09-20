@@ -17,13 +17,24 @@ public class Controller {
 	
 	/**
 	 * Class Controller constructor.
-	 * It takes the data stored by the Generator object and use them to initialize the bodies.
 	 * 
-	 * @param gen - Generator Object
 	 */
-	public Controller(Generator gen){
+	public Controller(){	
 		
+	}
+	
+	/**
+	 * 
+	 */
+	public void initAll(){
+		
+		Generator gen = new Generator();
+		
+		//qui bisogna gestire la scelta di come inizializzare il sistema (Random o da file)
+		gen.initWithRandomData(10);
 		n = gen.getNumberOfBodies();
+		
+		//Inizializzazione degli n Body
 		allbodies = new Body[n];
 		double[][] data = gen.getData();
 		for(int i = 0; i < n; i++){
@@ -34,6 +45,13 @@ public class Controller {
 			Vector vel = new Vector(velocity);
 			allbodies[i] = new Body(pos, vel, mass);
 		}
+		
+		//inizializzazione del Sistema
+		// ...
+	}
+	
+	public void startSimulation(){
+		// qui parte tutto
 	}
 	
 	/**
