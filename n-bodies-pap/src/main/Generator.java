@@ -48,6 +48,8 @@ public class Generator {
 	/**
 	 * Method initFromFile.
 	 * It recovers from the file the data necessary to the initialization of the bodies. 
+	 * 
+	 * @param The input file
 	 */
 	public void initFromFile(File f){
 		try{
@@ -67,7 +69,7 @@ public class Generator {
 				  velocity_y = new double[number];
 				  mass = new double[number];
 			  } else {
-				  //Il file è vuoto, meglio lanciare una eccezione
+				  //Il file e' vuoto, meglio lanciare una eccezione
 			  }
 			  int i = 0;
 			  while ((strLine = br.readLine()) != null)   {
@@ -90,6 +92,8 @@ public class Generator {
 	/**
 	 * Method initWithRandonData.
 	 * It generates the data for the initialization in a random way.
+	 * 
+	 * @param Number of Body
 	 */
 	public void initWithRandomData(int n){
 		number = n;

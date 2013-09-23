@@ -24,7 +24,9 @@ public class Controller {
 	}
 	
 	/**
-	 * 
+	 * Method initAll.
+	 * Initialize the set of the Body taking the data from a Generator object in being based 
+	 * on the choice of initialization from the customer through the GUI.
 	 */
 	public void initAll(){
 		
@@ -50,6 +52,10 @@ public class Controller {
 		// ...
 	}
 	
+	/**
+	 * Method startSimulation.
+	 * Let the Simulation to start.
+	 */
 	public void startSimulation(){
 		// qui parte tutto
 		this.print_body();

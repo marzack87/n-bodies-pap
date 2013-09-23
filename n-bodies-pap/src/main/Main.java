@@ -5,6 +5,8 @@ import gui.MainFrame;
 public class Main {
 
 	/**
+	 * Main Class.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) { 
