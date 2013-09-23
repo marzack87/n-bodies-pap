@@ -5,7 +5,7 @@ import gui.MainFrame;
 public class Main {
 
 	/**
-	 * Main Class.
+	 * Class Main.
 	 * 
 	 * @param args
 	 */

@@ -7,6 +7,13 @@ import java.io.File;
 
 import javax.swing.*;
 
+
+/**
+ * Class MainPanel.
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ *
+ */
 public class MainPanel extends JPanel implements ActionListener{
 	
 	private JButton crea, apri;
@@ -54,6 +61,10 @@ public class MainPanel extends JPanel implements ActionListener{
 		}
 	}
 }
+
+/**
+ *
+ */
 class TxtFileFilter extends javax.swing.filechooser.FileFilter {
     
 	public boolean accept(File f) {
