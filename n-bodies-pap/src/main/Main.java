@@ -1,7 +1,5 @@
 package main;
 
-import gui.MainFrame;
-
 public class Main {
 
 	/**
