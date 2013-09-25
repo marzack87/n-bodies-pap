@@ -34,6 +34,7 @@ public class MainPanel extends JPanel implements ActionListener{
 		BOX.add(BOX_button);
 		add(BOX);
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == apri){	
