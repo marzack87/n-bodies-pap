@@ -4,6 +4,7 @@ import java.util.concurrent.locks.*;
 
 class MyMonitor {
 	  
+	  //Updated per cosa lo vogliamo utilizzare?! ma sopratutto serve?!
 	  private ReentrantLock lock;
 	  private Condition goSystem, toBeUpdated, Updated;
 	  private int nBody, nDone;
