@@ -21,8 +21,8 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	public MainPanel(){
 		
-		crea 	= new JButton("Random Yo!");
-		apri 	= new JButton("Read a fuckin' file!");
+		crea = new JButton("Random Yo!");
+		apri = new JButton("Read a fuckin' file!");
 		
 		apri.addActionListener(this);
 		crea.addActionListener(this);
