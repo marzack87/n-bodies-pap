@@ -93,7 +93,7 @@ public class Generator {
 	 * Method initWithRandonData.
 	 * It generates the data for the initialization in a random way.
 	 * 
-	 * @param Number of Body
+	 * @param n - Number of Body
 	 */
 	public void initWithRandomData(int n){
 		number = n;
