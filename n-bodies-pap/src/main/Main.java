@@ -1,9 +1,12 @@
 package main;
 
+import gui.MainFrame;
+
 public class Main {
 
 	/**
 	 * Class Main.
+	 * Starter point of N-Body Simulation
 	 * 
 	 * @param args
 	 */
