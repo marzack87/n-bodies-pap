@@ -1,7 +1,8 @@
-package main;
+package entity;
 
+import java.util.*;
 import support.Vector;
-import entity.Body;
+
 
 /**
  * Class Controller. 

@@ -1,5 +1,6 @@
-package main;
+package entity;
 
+import java.io.*;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
@@ -84,7 +85,7 @@ public class Generator {
 			  //Close the input stream
 			  in.close();
 			  
-		}catch (Exception e){//Catch exception if any
+		}catch (Exception e){
 			  System.err.println("Error: " + e.getMessage());
 		}
 	}
@@ -104,7 +105,6 @@ public class Generator {
 		mass = new double[number];
 		
 		for (int i = 0; i < number; i++){
-			//Random r = new Random();
 			position_x[i] = (Math.random() * (pos_range - 1) ) + 1;
 			position_y[i] = (Math.random() * (pos_range - 1) ) + 1;
 			velocity_x[i] = (Math.random() * (vel_range - 1) ) + 1;

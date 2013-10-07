@@ -1,5 +1,6 @@
 package main;
 
+import entity.Controller;
 import gui.MainFrame;
 
 public class Main {
