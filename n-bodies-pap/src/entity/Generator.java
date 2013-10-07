@@ -1,6 +1,5 @@
 package entity;
 
-import java.io.*;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
@@ -86,7 +85,7 @@ public class Generator {
 			  in.close();
 			  
 		}catch (Exception e){
-			  System.err.println("Error: " + e.getMessage());
+			  
 		}
 	}
 	

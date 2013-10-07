@@ -1,6 +1,6 @@
 package entity;
 
-public class System {
+public class Galaxy {
 	
 	/*
 	 * Questa sara la classe che gestisce i body, ovvero quella che avra tutte le info da passare poi al visualizzatore e che quindi 
