@@ -15,7 +15,7 @@ public class MainFrame extends JFrame{
 		Container c = getContentPane();
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(250, 80);
+		setSize(300,58);
 		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		c.add(panel);
