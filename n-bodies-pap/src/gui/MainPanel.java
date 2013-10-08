@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import javax.swing.filechooser.FileFilter;
 
 import javax.swing.*;
 
@@ -12,7 +13,6 @@ import javax.swing.*;
  * Class MainPanel.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- *
  */
 public class MainPanel extends JPanel implements ActionListener{
 	
@@ -64,9 +64,10 @@ public class MainPanel extends JPanel implements ActionListener{
 }
 
 /**
- *
+ * Inner class TxtFileFilter.
+ * Represent the extention filter of the input file. Only .txt files are accepted. 
  */
-class TxtFileFilter extends javax.swing.filechooser.FileFilter {
+class TxtFileFilter extends FileFilter {
     
 	public boolean accept(File f) {
         return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
