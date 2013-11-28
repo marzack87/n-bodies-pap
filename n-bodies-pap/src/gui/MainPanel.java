@@ -5,8 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
-
 import javax.swing.*;
+
+import entity.Controller;
 
 
 /**
@@ -21,8 +22,8 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	public MainPanel(){
 		
-		crea = new JButton("Random Yo!");
-		apri = new JButton("Read a fuckin' file!");
+		crea = new JButton("Create Randomly");
+		apri = new JButton("Read datas from file");
 		
 		apri.addActionListener(this);
 		crea.addActionListener(this);
@@ -37,6 +38,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
+		// Scegliamo di inizializzare i body utilizzando un file.
 		if (source == apri){	
 			JFileChooser choose = new JFileChooser(System.getProperty("user.dir"));
 			choose.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -44,20 +46,31 @@ public class MainPanel extends JPanel implements ActionListener{
 			choose.setApproveButtonText("Apri");
 			choose.setPreferredSize(new Dimension(400,400));
 			int value=choose.showOpenDialog(this);
+			// Il file e' stato aperto?! No quindi..
 			if (value != JFileChooser.APPROVE_OPTION){
 				JOptionPane.showMessageDialog(this, "Nessun file aperto", "Errore", JOptionPane.ERROR_MESSAGE, null);
 			}else{
+				// Il file e' stato aperto
 				File f = choose.getSelectedFile();
-				/*
-				exams_frame = new ExamFrame(f);
-				exams_frame.setVisible(true);
+				System.out.println("pulsante apri");
+				Controller contr = new Controller();
+				contr.initAllWithFile(f);
+				contr.startSimulation();
+				
+				/* Una volta creati i corpi chiudiamo il main panel e dovremmo visualizzare la nuova schermata 
+				di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
 				*/
 			}
-		}else if (source == crea){
+		}
+		// Scegliamo di inizializzare i body in modo random.
+		else if (source == crea){
 			System.out.println("pulsante crea");
-			/*
-			exams_frame = new ExamFrame();
-			exams_frame.setVisible(true);
+			Controller contr = new Controller();
+			contr.initAll();
+			contr.startSimulation();
+			
+			/* Una volta creati i corpi chiudiamo il main panel e dovremmo visualizzare la nuova schermata 
+			di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
 			*/
 		}
 	}

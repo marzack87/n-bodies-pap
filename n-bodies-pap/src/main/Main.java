@@ -13,12 +13,13 @@ public class Main {
 	 */
 	public static void main(String[] args) { 
 		
-		MainFrame initFrame = new MainFrame("What the fuck you want??");
+		MainFrame initFrame = new MainFrame("N-Body Simulation");
 		initFrame.setVisible(true);
 		
-		Controller contr = new Controller();
+		/*Controller contr = new Controller();
 		contr.initAll();
 		contr.startSimulation();
+		*/
 	}
 
 }
