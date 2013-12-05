@@ -17,21 +17,21 @@ import entity.Controller;
  */
 public class MainPanel extends JPanel implements ActionListener{
 	
-	private JButton crea, apri;
+	private JButton create, open;
 	private Box BOX, BOX_button;
 	
 	public MainPanel(){
 		
-		crea = new JButton("Create Randomly");
-		apri = new JButton("Read datas from file");
+		create = new JButton("Create Randomly");
+		open = new JButton("Read datas from file");
 		
-		apri.addActionListener(this);
-		crea.addActionListener(this);
+		open.addActionListener(this);
+		create.addActionListener(this);
 		
 		BOX = new Box(BoxLayout.Y_AXIS);
 		BOX_button = new Box(BoxLayout.X_AXIS);
-		BOX_button.add(crea);
-		BOX_button.add(apri);
+		BOX_button.add(create);
+		BOX_button.add(open);
 		BOX.add(BOX_button);
 		add(BOX);
 	}
@@ -39,16 +39,16 @@ public class MainPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		// Scegliamo di inizializzare i body utilizzando un file.
-		if (source == apri){	
+		if (source == open){	
 			JFileChooser choose = new JFileChooser(System.getProperty("user.dir"));
 			choose.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			choose.setFileFilter(new TxtFileFilter());
-			choose.setApproveButtonText("Apri");
+			choose.setApproveButtonText("Open");
 			choose.setPreferredSize(new Dimension(400,400));
 			int value=choose.showOpenDialog(this);
 			// Il file e' stato aperto?! No quindi..
 			if (value != JFileChooser.APPROVE_OPTION){
-				JOptionPane.showMessageDialog(this, "Nessun file aperto", "Errore", JOptionPane.ERROR_MESSAGE, null);
+				JOptionPane.showMessageDialog(this, "No files open", "Error", JOptionPane.ERROR_MESSAGE, null);
 			}else{
 				// Il file e' stato aperto
 				File f = choose.getSelectedFile();
@@ -60,10 +60,12 @@ public class MainPanel extends JPanel implements ActionListener{
 				/* Una volta creati i corpi chiudiamo il main panel e dovremmo visualizzare la nuova schermata 
 				di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
 				*/
+				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
+				gframe.show();
 			}
 		}
 		// Scegliamo di inizializzare i body in modo random.
-		else if (source == crea){
+		else if (source == create){
 			System.out.println("pulsante crea");
 			Controller contr = new Controller();
 			contr.initAll();
@@ -72,6 +74,8 @@ public class MainPanel extends JPanel implements ActionListener{
 			/* Una volta creati i corpi chiudiamo il main panel e dovremmo visualizzare la nuova schermata 
 			di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
 			*/
+			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
+			gframe.show();
 		}
 	}
 }
