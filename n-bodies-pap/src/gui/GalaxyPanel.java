@@ -11,19 +11,24 @@ import javax.swing.*;
  */
 public class GalaxyPanel extends JPanel implements ActionListener {
 
-	private JButton add,remove,pause,stop,step;
-	private Box BOX, BOX_button, BOX_visualizer;
+	private JButton add,remove,start,pause,stop,step;
+	private VisualiserPanel visualise;
+	private Box BOX, BOX_button, BOX_visualiser;
 	
 	public GalaxyPanel(){
 		
 		add = new JButton("Add Body");
 		remove = new JButton("Remove Body");
+		start = new JButton("Start");
 		pause = new JButton("Pause");
 		stop = new JButton("Stop");
 		step = new JButton("Next step");
 		
+		visualise = new VisualiserPanel();
+		
 		add.addActionListener(this);
 		remove.addActionListener(this);
+		start.addActionListener(this);
 		pause.addActionListener(this);
 		stop.addActionListener(this);
 		step.addActionListener(this);
@@ -32,6 +37,7 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		BOX_button = new Box(BoxLayout.Y_AXIS);
 		BOX_button.add(add);
 		BOX_button.add(remove);
+		BOX_button.add(start);
 		BOX_button.add(pause);
 		BOX_button.add(stop);
 		BOX_button.add(step);

@@ -46,7 +46,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			choose.setApproveButtonText("Open");
 			choose.setPreferredSize(new Dimension(400,400));
 			int value=choose.showOpenDialog(this);
-			// Il file e' stato aperto?! No quindi..
+			// Il file e' stato aperto?! No quindi segnalami l'errore!!!
 			if (value != JFileChooser.APPROVE_OPTION){
 				JOptionPane.showMessageDialog(this, "No files open", "Error", JOptionPane.ERROR_MESSAGE, null);
 			}else{
@@ -61,7 +61,7 @@ public class MainPanel extends JPanel implements ActionListener{
 				di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
 				*/
 				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
-				gframe.show();
+				gframe.setVisible(true);
 			}
 		}
 		// Scegliamo di inizializzare i body in modo random.
@@ -75,14 +75,14 @@ public class MainPanel extends JPanel implements ActionListener{
 			di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
 			*/
 			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
-			gframe.show();
+			gframe.setVisible(true);;
 		}
 	}
 }
 
 /**
  * Inner class TxtFileFilter.
- * Represent the extention filter of the input file. Only .txt files are accepted. 
+ * Represent the filename extension filter of the input file. Only .txt files are accepted. 
  */
 class TxtFileFilter extends FileFilter {
     
