@@ -24,8 +24,6 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		stop = new JButton("Stop");
 		step = new JButton("Next step");
 		
-		visualise = new VisualiserPanel();
-		
 		add.addActionListener(this);
 		remove.addActionListener(this);
 		start.addActionListener(this);
@@ -33,7 +31,11 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		stop.addActionListener(this);
 		step.addActionListener(this);
 		
-		BOX = new Box(BoxLayout.X_AXIS);
+		visualise = new VisualiserPanel();
+		//Inserisco il visualise nel posto giusto
+		//Creo thread visualizzatore che avra' il compito di disegnare per la prima volta e di ridisegnare poi i body nel visualise
+		
+		/*BOX = new Box(BoxLayout.X_AXIS);
 		BOX_button = new Box(BoxLayout.Y_AXIS);
 		BOX_button.add(add);
 		BOX_button.add(remove);
@@ -41,13 +43,11 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		BOX_button.add(pause);
 		BOX_button.add(stop);
 		BOX_button.add(step);
-		
-		/*
 		BOX_visualizer = new Box(BoxLayout.Y_AXIS);
 		//qui ci vorrei mettere il visualizzatore dei corpi ma ho scazzato usando il box. Devo controllare meglio.
-		*/
 		BOX.add(BOX_button);
 		add(BOX);
+		*/ //DA SOSTITUIRE CON IL LAYOUT GIUSTO
 	}
 
 	

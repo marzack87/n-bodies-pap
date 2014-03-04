@@ -75,7 +75,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
 			*/
 			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
-			gframe.setVisible(true);;
+			gframe.setVisible(true);
 		}
 	}
 }
