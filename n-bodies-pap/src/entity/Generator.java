@@ -18,10 +18,9 @@ import java.io.InputStreamReader;
  */
 public class Generator {
 	
-/* Si occupa di prendere i dati da file oppure
- * di generarli automaticamente in maniera casuale
+/* It take care of the file's data or it create the data randomly
  * 
- * DATI NECESSARI:
+ * Data needed:
  * position (x, y)
  * velocity (x, y)
  * mass m

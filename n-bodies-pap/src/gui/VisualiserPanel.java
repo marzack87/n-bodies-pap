@@ -11,11 +11,11 @@ public class VisualiserPanel extends JPanel {
 	
 	
         public VisualiserPanel(){
-            setSize(400,400);
+            setSize(800,600);
         }
 
         public void paint(Graphics g){
-            g.clearRect(0,0,400,400);
+            g.clearRect(0,0,800,600);
             /*synchronized (this){
 	            if (positions!=null){
 	                for (int i=0; i<positions.length; i++){

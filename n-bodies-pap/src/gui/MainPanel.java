@@ -38,7 +38,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		// Scegliamo di inizializzare i body utilizzando un file.
+		// Initialize the body through file.
 		if (source == open){	
 			JFileChooser choose = new JFileChooser(System.getProperty("user.dir"));
 			choose.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -46,13 +46,13 @@ public class MainPanel extends JPanel implements ActionListener{
 			choose.setApproveButtonText("Open");
 			choose.setPreferredSize(new Dimension(400,400));
 			int value=choose.showOpenDialog(this);
-			// Il file e' stato aperto?! No quindi segnalami l'errore!!!
+			// Can't it open the file?! Send an error
 			if (value != JFileChooser.APPROVE_OPTION){
 				JOptionPane.showMessageDialog(this, "No files open", "Error", JOptionPane.ERROR_MESSAGE, null);
 			}else{
-				// Il file e' stato aperto
+				// File is opened
 				File f = choose.getSelectedFile();
-				System.out.println("pulsante apri");
+				System.out.println("Open button");
 				Controller contr = new Controller();
 				contr.initAllWithFile(f);
 				contr.startSimulation();
@@ -64,9 +64,9 @@ public class MainPanel extends JPanel implements ActionListener{
 				gframe.setVisible(true);
 			}
 		}
-		// Scegliamo di inizializzare i body in modo random.
+		// Initialize the body randomly.
 		else if (source == create){
-			System.out.println("pulsante crea");
+			System.out.println("Create button");
 			Controller contr = new Controller();
 			contr.initAll();
 			contr.startSimulation();
