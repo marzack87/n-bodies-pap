@@ -37,7 +37,6 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 	}
 
 	
-	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		
