@@ -57,7 +57,7 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 			// The simulation will finish
 			// si faranno terminare tutti i thread in qualche modo e il visualizer dopo aver stampato a video l'ultima posizione aggiornata morira anche lui
 			if(step.getText().equals("Next step")){
-				step.setText("Step-by-step button");
+				step.setText("Step by step");
 			}
 		}
 		if(source == step){
