@@ -21,7 +21,6 @@ public class MainPanel extends JPanel implements ActionListener{
 	private Box BOX, BOX_button;
 	
 	public MainPanel(){
-		
 		create = new JButton("Create Randomly");
 		open = new JButton("Read datas from file");
 		

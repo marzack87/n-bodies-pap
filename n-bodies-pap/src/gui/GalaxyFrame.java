@@ -22,17 +22,14 @@ public class GalaxyFrame extends JFrame{
 	public GalaxyFrame(String title){
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800,600);
-		setResizable(false);
+		setSize(930,630);
+		setResizable(true);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
 		gpanel = new GalaxyPanel();
 		vpanel = new VisualiserPanel();
 		add(vpanel, BorderLayout.CENTER);
-		add(gpanel, BorderLayout.LINE_END);
-		
-		
-		
+		add(gpanel, BorderLayout.LINE_END);	
 	}
 
 }
