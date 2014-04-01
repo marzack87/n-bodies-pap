@@ -117,6 +117,7 @@ public class Generator {
 		}
 		
 		this.initBody();
+		this.print_body();
 	}
 	
 	/**
@@ -157,6 +158,13 @@ public class Generator {
 	public double[][] getData() {
 		double[][] data = {position_x, position_y, velocity_x, velocity_y, mass};
 		return data;
+	}
+	
+	private void print_body(){
+		System.out.println("Printing bodies data...");
+		for(int i = 0; i<number; i++){
+			System.out.println(allbodies[i].getPosition() + " " + allbodies[i].getVelocity() + " " + allbodies[i].getMass() );
+		}
 	}
 	
 	

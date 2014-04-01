@@ -101,7 +101,7 @@ public class Controller {
 	 * Method print_body.
 	 * Print all the informations about all the bodies presented in the allbodies array 
 	 */
-	void print_body(){
+	private void print_body(){
 		System.out.println("Fuck");
 		for(int i = 0; i<n; i++){
 			System.out.println(allbodies[i].getPosition() + " " + allbodies[i].getVelocity() + " " + allbodies[i].getMass() );
