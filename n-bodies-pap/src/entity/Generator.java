@@ -121,7 +121,7 @@ public class Generator {
 	
 	/**
 	 * Method initBody.
-	 * 
+	 * It creates and updates the array list of the Body Objects with the datas taken from the initialization(both methods: random and from file).
 	 */
 	public void initBody(){
 		allbodies = new Body[number];
