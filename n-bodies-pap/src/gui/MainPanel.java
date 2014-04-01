@@ -56,9 +56,7 @@ public class MainPanel extends JPanel implements ActionListener{
 				contr.initAllWithFile(f);
 				contr.startSimulation();
 				
-				/* Una volta creati i corpi chiudiamo il main panel e dovremmo visualizzare la nuova schermata 
-				di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
-				*/
+				// Open GALAXY GUI
 				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
 				gframe.setVisible(true);
 			}
@@ -68,7 +66,8 @@ public class MainPanel extends JPanel implements ActionListener{
 			System.out.println("Create button");
 			Controller contr = new Controller();
 			contr.initAll();
-			contr.startSimulation();
+			//Lo start sara dato nella galassia
+			//contr.startSimulation();
 			
 			/* Una volta creati i corpi chiudiamo il main panel e dovremmo visualizzare la nuova schermata 
 			di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
