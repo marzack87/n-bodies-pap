@@ -122,7 +122,7 @@ public class Generator {
 	
 	/**
 	 * Method initBody.
-	 * It creates and updates the array list of the Body Objects with the datas taken from the initialization(both methods: random and from file).
+	 * It creates and updates the array list of the Body Objects with the datas taken from the initialization(both choice methods: random and from file).
 	 */
 	public void initBody(){
 		allbodies = new Body[number];
@@ -160,6 +160,10 @@ public class Generator {
 		return data;
 	}
 	
+	/**
+	 * Method print_body.
+	 * Print all the informations about all the bodies presented in the allbodies array 
+	 */
 	private void print_body(){
 		System.out.println("Printing bodies data...");
 		for(int i = 0; i<number; i++){
