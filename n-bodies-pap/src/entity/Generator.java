@@ -120,6 +120,24 @@ public class Generator {
 	}
 	
 	/**
+	 * Method initBody.
+	 * 
+	 */
+	public void initBody(){
+		allbodies = new Body[number];
+		double[][] data = this.getData();
+			for(int i = 0; i < number; i++){
+				double mass = data[4][i];
+				double[] position = {data[0][i], data[1][i]};
+				double[] velocity = {data[2][i], data[3][i]};
+				Vector pos = new Vector(position);
+				Vector vel = new Vector(velocity);
+				allbodies[i] = new Body(pos, vel, mass);
+			}
+		
+	}
+	
+	/**
 	 * Method getNumberOfBodies.
 	 * It returns the number of bodies.
 	 * 
@@ -141,22 +159,5 @@ public class Generator {
 		return data;
 	}
 	
-	/**
-	 * Method initBody.
-	 * 
-	 */
-	public void initBody(){
-		allbodies = new Body[number];
-		double[][] data = this.getData();
-			for(int i = 0; i < number; i++){
-				double mass = data[4][i];
-				double[] position = {data[0][i], data[1][i]};
-				double[] velocity = {data[2][i], data[3][i]};
-				Vector pos = new Vector(position);
-				Vector vel = new Vector(velocity);
-				allbodies[i] = new Body(pos, vel, mass);
-			}
-		
-	}
 	
 }
