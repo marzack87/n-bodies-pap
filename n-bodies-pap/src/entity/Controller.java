@@ -32,10 +32,12 @@ public class Controller {
 	 */
 	public void initAll(){
 		
-		Generator gen = new Generator();
+		
+		/*Generator gen = new Generator();
 		
 		//qui bisogna gestire la scelta di come inizializzare il sistema (Random o da file)
 		gen.initWithRandomData(10);
+		
 		
 		//Inizializzazione degli n Body
 		n = gen.getNumberOfBodies();
@@ -52,6 +54,7 @@ public class Controller {
 		
 		//inizializzazione del Sistema
 		// ...
+		*/
 	}
 	
 	/**
@@ -61,7 +64,7 @@ public class Controller {
 	 */
 	public void initAllWithFile(File myfile){
 		
-		File file = myfile;
+		/*File file = myfile;
 		Generator gen = new Generator();
 		gen.initFromFile(file);
 		
@@ -80,6 +83,8 @@ public class Controller {
 		
 		//inizializzazione del Sistema
 		// ...
+		 * 
+		 */
 	}
 
 	
@@ -97,6 +102,7 @@ public class Controller {
 	 * Print all the informations about all the bodies presented in the allbodies array 
 	 */
 	void print_body(){
+		System.out.println("Fuck");
 		for(int i = 0; i<n; i++){
 			System.out.println(allbodies[i].getPosition() + " " + allbodies[i].getVelocity() + " " + allbodies[i].getMass() );
 		}

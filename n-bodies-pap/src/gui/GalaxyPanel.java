@@ -1,9 +1,10 @@
 package gui;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+import entity.Controller;
 
 /**
  * Class GalaxyPanel.
@@ -16,6 +17,7 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 	private JLabel cmd;
 	
 	public GalaxyPanel(){
+		
 		cmd = new JLabel(" Commands: ");
 		
 		start = new JButton("Start");
@@ -43,6 +45,8 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		if(source == start){
 			System.out.println("Start button");
 			// The simulation will start
+			Controller contr = new Controller();
+			contr.startSimulation();
 			// Il controller fara partire il visualizer(thread) <- forse questo dovra partire gia prima..subito dopo la creazione dell'interfaccia cosi da visualizzare
 			// la posizione iniziale dei corpi
 			// successivamente creera tutti i bodythread che inizieranno a fare il loro conti

@@ -8,6 +8,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.*;
 
 import entity.Controller;
+import entity.Generator;
 
 
 /**
@@ -52,9 +53,8 @@ public class MainPanel extends JPanel implements ActionListener{
 				// File is opened
 				File f = choose.getSelectedFile();
 				System.out.println("Open button");
-				Controller contr = new Controller();
-				contr.initAllWithFile(f);
-				contr.startSimulation();
+				Generator gen = new Generator();
+				gen.initFromFile(f);
 				
 				// Open GALAXY GUI
 				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
@@ -64,14 +64,9 @@ public class MainPanel extends JPanel implements ActionListener{
 		// Initialize the body randomly.
 		else if (source == create){
 			System.out.println("Create button");
-			Controller contr = new Controller();
-			contr.initAll();
-			//Lo start sara dato nella galassia
-			//contr.startSimulation();
+			Generator gen = new Generator();
+			gen.initWithRandomData(10);
 			
-			/* Una volta creati i corpi chiudiamo il main panel e dovremmo visualizzare la nuova schermata 
-			di visualizzazione della galassia con i vari pulsanti di star ecc ecc.	
-			*/
 			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
 			gframe.setVisible(true);
 		}

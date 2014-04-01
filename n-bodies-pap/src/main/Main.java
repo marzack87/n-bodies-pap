@@ -15,10 +15,7 @@ public class Main {
 		
 		MainFrame initFrame = new MainFrame("N-Body Simulation");
 		initFrame.setVisible(true);
-		
-		/*Controller contr = new Controller();
-		contr.initAll();
-		*/
+	
 	}
 
 }

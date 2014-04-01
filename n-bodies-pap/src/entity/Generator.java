@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
+import support.Vector;
+
 /**
  * Class Generator. 
  * Represent the entity that takes care to recover the data from a file or to generate them in a random way.
@@ -36,6 +38,8 @@ public class Generator {
 	private double[] velocity_x;
 	private double[] velocity_y;
 	private double[] mass;
+	
+	private Body[] allbodies;
 	
 	/**
 	 * Class Generator constructor.
@@ -86,6 +90,8 @@ public class Generator {
 		}catch (Exception e){
 			  
 		}
+		
+		this.initBody();
 	}
 	
 	/**
@@ -109,6 +115,8 @@ public class Generator {
 			velocity_y[i] = (Math.random() * (vel_range - 1) ) + 1;
 			mass[i] = (Math.random() * mas_range) + 1;
 		}
+		
+		this.initBody();
 	}
 	
 	/**
@@ -123,7 +131,7 @@ public class Generator {
 	
 	/**
 	 * Method getData.
-	 * Create the matrix which contains the data of the bodies.
+	 * It creates the matrix which contains the data of the bodies.
 	 * Each line contains the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses
 	 * 
 	 * @return data - Data matrix
@@ -131,6 +139,24 @@ public class Generator {
 	public double[][] getData() {
 		double[][] data = {position_x, position_y, velocity_x, velocity_y, mass};
 		return data;
+	}
+	
+	/**
+	 * Method initBody.
+	 * 
+	 */
+	public void initBody(){
+		allbodies = new Body[number];
+		double[][] data = this.getData();
+			for(int i = 0; i < number; i++){
+				double mass = data[4][i];
+				double[] position = {data[0][i], data[1][i]};
+				double[] velocity = {data[2][i], data[3][i]};
+				Vector pos = new Vector(position);
+				Vector vel = new Vector(velocity);
+				allbodies[i] = new Body(pos, vel, mass);
+			}
+		
 	}
 	
 }

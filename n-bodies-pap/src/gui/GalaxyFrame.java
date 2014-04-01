@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 
 import javax.swing.*;
 
+import entity.Controller;
+
 /**
  * Class GalaxyFrame.
  * 
