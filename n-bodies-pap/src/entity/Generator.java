@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-import support.Vector;
+import support.*;
 
 /**
  * Class Generator. 
@@ -44,7 +44,7 @@ public class Generator {
 	/**
 	 * Class Generator constructor.
 	 */
-	public Generator(){
+	public Generator(Context cont){
 		 
 	}
 	
@@ -122,7 +122,7 @@ public class Generator {
 	
 	/**
 	 * Method initBody.
-	 * It creates and updates the array list of the Body Objects with the datas taken from the initialization(both choice methods: random and from file).
+	 * It creates and updates the array list of the Body Objects with the data taken from the initialization(both choice methods: random and from file).
 	 */
 	public void initBody(){
 		allbodies = new Body[number];

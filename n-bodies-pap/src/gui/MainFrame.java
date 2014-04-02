@@ -5,6 +5,8 @@ import java.awt.Toolkit;
 
 import javax.swing.*;
 
+import support.Context;
+
 /**
  * Class MainFrame.
  * 
@@ -14,9 +16,9 @@ public class MainFrame extends JFrame{
 	
 	private MainPanel panel;
 	
-	public MainFrame(String title){
+	public MainFrame(String title, Context cont){
 		super(title);
-		panel = new MainPanel();
+		panel = new MainPanel(cont);
 		Container c = getContentPane();
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

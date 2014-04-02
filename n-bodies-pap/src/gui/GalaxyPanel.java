@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import entity.Controller;
+import support.Context;
 
 /**
  * Class GalaxyPanel.
@@ -15,8 +16,11 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 
 	private JButton start,pause,stop,step;
 	private JLabel cmd;
+	private Context context;
 	
-	public GalaxyPanel(){
+	public GalaxyPanel(Context cont){
+		
+		context = cont;
 		
 		cmd = new JLabel(" Commands: ");
 		
@@ -36,6 +40,7 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		add(pause);
 		add(stop);
 		add(step);
+		
 	}
 
 	
@@ -45,7 +50,7 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		if(source == start){
 			System.out.println("Start button");
 			// The simulation will start
-			Controller contr = new Controller();
+			Controller contr = new Controller(context);
 			contr.startSimulation();
 			// Il controller fara partire il visualizer(thread) <- forse questo dovra partire gia prima..subito dopo la creazione dell'interfaccia cosi da visualizzare
 			// la posizione iniziale dei corpi

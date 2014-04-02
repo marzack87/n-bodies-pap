@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import javax.swing.*;
 
 import entity.Controller;
+import support.Context;
 
 /**
  * Class GalaxyFrame.
@@ -21,17 +22,19 @@ public class GalaxyFrame extends JFrame{
 	private GalaxyPanel gpanel;
 	private VisualiserPanel vpanel;
 	
-	public GalaxyFrame(String title){
+	public GalaxyFrame(String title, Context cont){
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(930,630);
 		setResizable(true);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
-		gpanel = new GalaxyPanel();
-		vpanel = new VisualiserPanel();
+		gpanel = new GalaxyPanel(cont);
+		vpanel = new VisualiserPanel(cont);
 		add(vpanel, BorderLayout.CENTER);
-		add(gpanel, BorderLayout.LINE_END);	
+		add(gpanel, BorderLayout.LINE_END);
+		
+		// creazione del thread Visualiser(vpanel) e start di esso. 
 	}
 
 }

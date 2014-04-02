@@ -1,21 +1,33 @@
 package gui;
 
 import java.awt.Graphics;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-
 import javax.swing.*;
+
+import support.Context;
    
 public class VisualiserPanel extends JPanel {
+		
+		private Context context;
 	
-	
-        public VisualiserPanel(){
+        public VisualiserPanel(Context cont){
             setSize(800,600);
+            context = cont;
         }
 
         public void paint(Graphics g){
             g.clearRect(0,0,800,600);
+            // dovro leggere dal context tutti i body con le rispettive posizioni e disegnarli
+            // questa sara la rappresentazione dello stato iniziale dei corpi.
+            
+            // sara poi il thread visualizer che avra in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
+            // 
+            
+            
+            // DA A.RICCI
             /*synchronized (this){
 	            if (positions!=null){
 	                for (int i=0; i<positions.length; i++){

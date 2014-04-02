@@ -1,6 +1,7 @@
 package main;
  
 import gui.MainFrame;
+import support.Context;
 
 public class Main {
 
@@ -10,9 +11,13 @@ public class Main {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) { 
+	public static void main(String[] args) {
 		
-		MainFrame initFrame = new MainFrame("N-Body Simulation");
+		// Create the context wich contains all the resource
+		Context cont = new Context();
+		
+		// Start GUI
+		MainFrame initFrame = new MainFrame("N-Body Simulation", cont);
 		initFrame.setVisible(true);
 	
 	}

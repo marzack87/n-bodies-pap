@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import entity.Controller;
 import entity.Generator;
+import support.Context;
 
 
 /**
@@ -20,10 +21,13 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	private JButton create, open;
 	private Box BOX, BOX_button;
+	private Context context;
 	
-	public MainPanel(){
+	public MainPanel(Context cont){
 		create = new JButton("Create Randomly");
 		open = new JButton("Read datas from file");
+		
+		context = cont;
 		
 		open.addActionListener(this);
 		create.addActionListener(this);
@@ -53,21 +57,21 @@ public class MainPanel extends JPanel implements ActionListener{
 				// File is opened
 				File f = choose.getSelectedFile();
 				System.out.println("Open button");
-				Generator gen = new Generator();
+				Generator gen = new Generator(context);
 				gen.initFromFile(f);
 				
 				// Open GALAXY GUI
-				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
+				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 				gframe.setVisible(true);
 			}
 		}
 		// Initialize the body randomly.
 		else if (source == create){
 			System.out.println("Create button");
-			Generator gen = new Generator();
+			Generator gen = new Generator(context);
 			gen.initWithRandomData(10);
 			
-			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY");
+			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 			gframe.setVisible(true);
 		}
 	}

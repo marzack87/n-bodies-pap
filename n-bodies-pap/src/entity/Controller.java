@@ -2,7 +2,7 @@ package entity;
 
 import java.io.File;
 
-import support.Vector;
+import support.*;
 
 
 /**
@@ -14,14 +14,16 @@ import support.Vector;
  */
 public class Controller {
 	 
-	private Body[] allbodies;
 	private int n;
+	private Context context;
 	
 	/**
 	 * Class Controller constructor.
 	 * 
 	 */
-	public Controller(){	
+	public Controller(Context cont){
+		
+		context = cont;
 		
 	}
 	
@@ -94,19 +96,19 @@ public class Controller {
 	 */
 	public void startSimulation(){
 		// qui parte tutto
-		this.print_body();
+		//this.print_body();
 	}
 	
 	/**
 	 * Method print_body.
 	 * Print all the informations about all the bodies presented in the allbodies array 
 	 */
-	private void print_body(){
+	/*private void print_body(){
 		System.out.println("Fuck");
 		for(int i = 0; i<n; i++){
 			System.out.println(allbodies[i].getPosition() + " " + allbodies[i].getVelocity() + " " + allbodies[i].getMass() );
 		}
-	}
+	}*/
 	
 
 }
