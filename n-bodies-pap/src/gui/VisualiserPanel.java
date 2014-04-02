@@ -1,10 +1,6 @@
 package gui;
 
 import java.awt.Graphics;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.*;
 
 import support.Context;
@@ -16,6 +12,7 @@ public class VisualiserPanel extends JPanel {
         public VisualiserPanel(Context cont){
             setSize(800,600);
             context = cont;
+            
         }
 
         public void paint(Graphics g){

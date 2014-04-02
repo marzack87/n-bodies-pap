@@ -1,15 +1,10 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.*;
 
-import entity.Controller;
 import support.Context;
 
 /**
@@ -26,7 +21,7 @@ public class GalaxyFrame extends JFrame{
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(930,630);
-		setResizable(true);
+		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
 		gpanel = new GalaxyPanel(cont);

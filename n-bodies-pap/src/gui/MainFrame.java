@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Container;
 import java.awt.Toolkit;
 
 import javax.swing.*;

@@ -7,7 +7,6 @@ import java.io.File;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.*;
 
-import entity.Controller;
 import entity.Generator;
 import support.Context;
 
@@ -63,6 +62,7 @@ public class MainPanel extends JPanel implements ActionListener{
 				// Open GALAXY GUI
 				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 				gframe.setVisible(true);
+				
 			}
 		}
 		// Initialize the body randomly.
@@ -73,6 +73,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			
 			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 			gframe.setVisible(true);
+		
 		}
 	}
 }

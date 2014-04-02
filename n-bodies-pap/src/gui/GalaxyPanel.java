@@ -50,7 +50,7 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		if(source == start){
 			if(start.getText().equals("Play")){
 				System.out.println("Play after a pause");
-			}
+			}else{
 			System.out.println("Start button");
 			// The simulation will start
 			Controller contr = new Controller(context);
@@ -59,6 +59,7 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 			// Il controller fara partire il visualizer(thread) <- forse questo dovra partire gia prima..subito dopo la creazione dell'interfaccia cosi da visualizzare
 			// la posizione iniziale dei corpi
 			// successivamente creera tutti i bodythread che inizieranno a fare il loro conti
+			}
 		}
 		if(source == pause){
 			System.out.println("Pause button");
