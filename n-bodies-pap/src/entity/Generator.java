@@ -165,7 +165,7 @@ public class Generator {
 	 * Print all the informations about all the bodies presented in the allbodies array 
 	 */
 	private void print_body(){
-		System.out.println("Printing bodies data...");
+		System.out.println("Printing bodies data......");
 		for(int i = 0; i<number; i++){
 			System.out.println(allbodies[i].getPosition() + " " + allbodies[i].getVelocity() + " " + allbodies[i].getMass() );
 		}
