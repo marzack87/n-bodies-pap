@@ -1,7 +1,5 @@
 package main;
-// YO!
-// FUCK
-// DIO CANE
+ 
 import entity.Controller;
 import gui.MainFrame;
 
