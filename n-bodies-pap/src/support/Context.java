@@ -7,8 +7,10 @@ import entity.Body;
 
 public class Context {
 
-    // dove salveremo i body
+    // dove salveremo i body, non sono sicuro che dovra rimanere pubblico
 	public Body[] allbodies;
+	public Boolean stop;
+	
     
     public Context(){
     	

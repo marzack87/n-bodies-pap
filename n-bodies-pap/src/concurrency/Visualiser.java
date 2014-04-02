@@ -6,9 +6,6 @@ import support.Context;
 	
 public class Visualiser extends Thread {
 	    
-	    
-	
-	private boolean stop;
     private Context context;
     
     public Visualiser(VisualiserPanel panel, Context cont){
