@@ -1,5 +1,6 @@
 package main;
 // YO!
+// FUCK
 import entity.Controller;
 import gui.MainFrame;
 
