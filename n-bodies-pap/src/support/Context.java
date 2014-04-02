@@ -8,7 +8,7 @@ import entity.Body;
 public class Context {
 
     // dove salveremo i body
-	private Body[] allbodies;
+	public Body[] allbodies;
     
     public Context(){
     	
@@ -61,4 +61,12 @@ public class Context {
     	//dall'array o che altro mi faccio dare tutti i body
     	return;
     }*/
+    
+    //da rimettere privato
+    public void print_body(){
+		System.out.println("Printing bodies data from context......");
+		for(int i = 0; i<allbodies.length; i++){
+			System.out.println(this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );
+		}
+	}
 }

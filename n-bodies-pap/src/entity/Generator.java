@@ -39,13 +39,16 @@ public class Generator {
 	private double[] velocity_y;
 	private double[] mass;
 	
-	private Body[] allbodies;
+	private Context context;
+	//private Body[] allbodies;
 	
 	/**
 	 * Class Generator constructor.
 	 */
 	public Generator(Context cont){
 		 
+		context = cont;
+	
 	}
 	
 	/**
@@ -91,7 +94,9 @@ public class Generator {
 			  
 		}
 		
+		// dovremmo inizializzare le risorse di Context
 		this.initBody();
+		this.print_body();
 	}
 	
 	/**
@@ -116,6 +121,7 @@ public class Generator {
 			mass[i] = (Math.random() * mas_range) + 1;
 		}
 		
+		// dovremmo inizializzare le risorse di Context
 		this.initBody();
 		this.print_body();
 	}
@@ -125,7 +131,7 @@ public class Generator {
 	 * It creates and updates the array list of the Body Objects with the data taken from the initialization(both choice methods: random and from file).
 	 */
 	public void initBody(){
-		allbodies = new Body[number];
+		context.allbodies = new Body[number];
 		double[][] data = this.getData();
 			for(int i = 0; i < number; i++){
 				double mass = data[4][i];
@@ -133,7 +139,7 @@ public class Generator {
 				double[] velocity = {data[2][i], data[3][i]};
 				Vector pos = new Vector(position);
 				Vector vel = new Vector(velocity);
-				allbodies[i] = new Body(pos, vel, mass);
+				context.allbodies[i] = new Body(pos, vel, mass);
 			}
 		
 	}
@@ -167,7 +173,7 @@ public class Generator {
 	private void print_body(){
 		System.out.println("Printing bodies data......");
 		for(int i = 0; i<number; i++){
-			System.out.println(allbodies[i].getPosition() + " " + allbodies[i].getVelocity() + " " + allbodies[i].getMass() );
+			System.out.println(context.allbodies[i].getPosition() + " " + context.allbodies[i].getVelocity() + " " + context.allbodies[i].getMass() );
 		}
 	}
 	
