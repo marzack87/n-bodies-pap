@@ -1,8 +1,10 @@
 package gui;
 
 import java.awt.Graphics;
+
 import javax.swing.*;
 
+import entity.Body;
 import support.Context;
    
 public class VisualiserPanel extends JPanel {
@@ -21,7 +23,6 @@ public class VisualiserPanel extends JPanel {
             // questa sara la rappresentazione dello stato iniziale dei corpi.
             
             // sara poi il thread visualizer che avra in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
-            // 
             
             
             // DA A.RICCI
