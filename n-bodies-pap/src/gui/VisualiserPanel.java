@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.*;
@@ -24,26 +25,23 @@ public class VisualiserPanel extends JPanel {
             
             // sara poi il thread visualizer che avra in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
             
-            
-            // DA A.RICCI
-            /*synchronized (this){
-	            if (positions!=null){
-	                for (int i=0; i<positions.length; i++){
-		                P2d p = positions[i];
-		                int x0 = (int)(180+p.x*180);
-		                int y0 = (int)(180-p.y*180);
-		                g.drawOval(x0,y0,20,20);
-		            }
-	            }
+            for(int i=0; i<context.allbodies.length; i++){
+            	int x,y,m;
+            	x = (int)context.allbodies[i].getPosition_X();
+            	y = (int)context.allbodies[i].getPosition_Y();
+            	m = (int)context.allbodies[i].getMassValue();
+            	g.setColor(Color.RED);
+            	g.fillOval(x,y,m,m);
+            	g.setColor(Color.BLACK);
+            	g.drawOval(x,y,m,m);
             }
+            
         }
         
-        public void updatePositions(P2d[] pos){
+        /*public void updatePositions(P2d[] pos){
             synchronized(this){
                 positions = pos;
             }
             repaint();
-        }
-    }
-*/}
+        }*/
 }
