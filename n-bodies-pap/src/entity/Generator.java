@@ -29,10 +29,10 @@ public class Generator {
  */
 	private int number;
 	
-	private int posx_range = 800;
-	private int posy_range = 600;
+	private int posx_range = 790;
+	private int posy_range = 590;
 	private int vel_range = 50;
-	private int mas_range = 10;
+	private int mas_range = 20;
 	
 	private double[] position_x;
 	private double[] position_y;
@@ -119,7 +119,7 @@ public class Generator {
 			position_y[i] = (Math.random() * (posy_range - 1) ) + 1;
 			velocity_x[i] = (Math.random() * (vel_range - 1) ) + 1;
 			velocity_y[i] = (Math.random() * (vel_range - 1) ) + 1;
-			mass[i] = (Math.random() * mas_range) + 3;
+			mass[i] = (Math.random() * mas_range) + 5;
 		}
 		
 		// dovremmo inizializzare le risorse di Context

@@ -27,13 +27,25 @@ public class VisualiserPanel extends JPanel {
             
             for(int i=0; i<context.allbodies.length; i++){
             	int x,y,m;
+            	Color c = null;
             	x = (int)context.allbodies[i].getPosition_X();
             	y = (int)context.allbodies[i].getPosition_Y();
             	m = (int)context.allbodies[i].getMassValue();
-            	g.setColor(Color.RED);
-            	g.fillOval(x,y,m,m);
+            	
+            	if (m <= 10) {
+            		c = Color.WHITE;
+            	} else if (m <= 15) {
+            		c = Color.CYAN;
+            	} else if (m <= 20) {
+            		c = Color.BLUE;
+            	} else if (m <= 25) {
+            		c = Color.BLACK;
+            	}
+            	
+            	g.setColor(c);
+            	g.fillOval(x,y,10,10);
             	g.setColor(Color.BLACK);
-            	g.drawOval(x,y,m,m);
+            	g.drawOval(x,y,10,10);
             }
             
         }
