@@ -25,19 +25,16 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		cmd = new JLabel(" Commands: ");
 		
 		start = new JButton("Start");
-		pause = new JButton("Pause");
-		stop = new JButton("Stop");
 		step = new JButton("Step by step");
+		stop = new JButton("Stop");
 		
 		start.addActionListener(this);
-		pause.addActionListener(this);
-		stop.addActionListener(this);
 		step.addActionListener(this);
+		stop.addActionListener(this);
 		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		add(cmd);
 		add(start);
-		add(pause);
 		add(stop);
 		add(step);
 		
@@ -48,10 +45,12 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 		Object source = e.getSource();
 		
 		if(source == start){
-			if(start.getText().equals("Play")){
-				System.out.println("Play after a pause");
+			if(start.getText().equals("Pause")){
+			System.out.println("Simulation freezed");
 			}else{
 			System.out.println("Start button");
+			start.setText("Pause");
+
 			// The simulation will start
 			Controller contr = new Controller(context);
 			contr.startSimulation();
@@ -60,27 +59,23 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 			// la posizione iniziale dei corpi
 			// successivamente creera tutti i bodythread che inizieranno a fare il loro conti
 			}
-		}
-		if(source == pause){
-			System.out.println("Pause button");
-			start.setText("Play");
-			// The simulation will be freezed
-		}
-		if(source == stop){
+			}
+			if(source == stop){
 			System.out.println("Stop button");
 			// The simulation will finish
 			// si faranno terminare tutti i thread in qualche modo e il visualizer dopo aver stampato a video l'ultima posizione aggiornata morira anche lui
 			if(step.getText().equals("Next step")){
-				step.setText("Step by step");
+			step.setText("Step by step");
 			}
-		}
-		if(source == step){
+			}
+			if(source == step){
 			System.out.println("Step-by-step button");
 			// The simulation's step-by-step modality
 			// qui vedremo come implementare il tutto..
 			step.setText("Next step");
-			
-		}
+
+			}
+
 
 	}
 
