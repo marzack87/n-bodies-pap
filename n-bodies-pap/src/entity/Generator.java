@@ -29,8 +29,8 @@ public class Generator {
  */
 	private int number;
 	
-	private int posx_range = 790;
-	private int posy_range = 590;
+	private int posx_range = 800 - 5;
+	private int posy_range = 600 - 5;
 	private int vel_range = 50;
 	private int mas_range = 20;
 	

@@ -43,9 +43,9 @@ public class VisualiserPanel extends JPanel {
             	}
             	
             	g.setColor(c);
-            	g.fillOval(x,y,10,10);
+            	g.fillOval(x,y,5,5);
             	g.setColor(Color.BLACK);
-            	g.drawOval(x,y,10,10);
+            	g.drawOval(x,y,5,5);
             }
             
         }
