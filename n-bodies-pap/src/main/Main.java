@@ -13,7 +13,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		// Create the context wich contains all the resource
+		// Create the context witch contains all the resource
 		Context cont = new Context();
 		
 		// Start GUI

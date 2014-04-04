@@ -71,6 +71,26 @@ public class Body {
 	}
 	
 	/**
+	 * Method getPosition_X.
+	 * It returns a double with the value of the coordinate X of the Position of the Body.
+	 * 
+	 * @return double
+	 */
+	public double getPosition_X(){
+		return p.cartesian(0);
+	}
+	
+	/**
+	 * Method getPosition_Y.
+	 * It returns a double with the value of the coordinate Y of the Position of the Body.
+	 * 
+	 * @return double
+	 */
+	public double getPosition_Y(){
+		return p.cartesian(1);
+	}
+	
+	/**
 	 * Method getVelocity.
 	 * It returns a String representation of the Vector velocity of the body calling the method toString()
 	 * of the Vector Class.
@@ -82,6 +102,26 @@ public class Body {
 	}
 	
 	/**
+	 * Method getVelocity_X.
+	 * It returns a double with the value of the coordinate X of the Velocity of the Body.
+	 * 
+	 * @return double
+	 */
+	public double getVelocity_X(){
+		return v.cartesian(0);
+	}
+	
+	/**
+	 * Method getVelocity_Y.
+	 * It returns a double with the value of the coordinate Y of the Velocity of the Body.
+	 * 
+	 * @return double
+	 */
+	public double getVelocity_Y(){
+		return v.cartesian(1);
+	}
+	
+	/**
 	 * Method getMass.
 	 * It returns a String representation of the mass of the body.
 	 * 
@@ -89,5 +129,15 @@ public class Body {
 	 */
 	public String getMass(){
 		return "" + mass;
+	}
+	
+	/**
+	 * Method getMassValue.
+	 * It returns the double value of the mass of the body.
+	 * 
+	 * @return double
+	 */
+	public double getMassValue(){
+		return mass;
 	}
 }

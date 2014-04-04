@@ -121,9 +121,9 @@ public class Vector {
     
     /**
      * Method cartesian.
-     * Passing an integer as parameter it returns the corrisponding coordinate of a vector.
+     * Passing an integer as parameter it returns the corresponding coordinate of a vector.
      * 
-     * @param i - Integer value corrisponding the index of the vector in the array.
+     * @param i - Integer value corresponding the index of the vector in the array.
      * @return data[i] - The Vector difference
      */
     // return the corresponding coordinate
