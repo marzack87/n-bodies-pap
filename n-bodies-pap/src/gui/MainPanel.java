@@ -4,9 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import javax.swing.filechooser.FileFilter;
 import javax.swing.*;
 
+import entity.Controller;
 import entity.Generator;
 import support.Context;
 
@@ -63,6 +65,14 @@ public class MainPanel extends JPanel implements ActionListener{
 				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 				gframe.setVisible(true);
 				
+				// The simulation will start
+				Controller contr = new Controller(context);
+				contr.startSimulation();
+				context.print_body();
+				// Il controller fara partire il visualizer(thread) <- forse questo dovra partire gia prima..subito dopo la creazione dell'interfaccia cosi da visualizzare
+				// la posizione iniziale dei corpi
+				// successivamente creera tutti i bodythread che inizieranno a fare il loro conti
+				
 			}
 		}
 		// Initialize the body randomly.
@@ -73,6 +83,14 @@ public class MainPanel extends JPanel implements ActionListener{
 			
 			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 			gframe.setVisible(true);
+			
+			// The simulation will start
+			Controller contr = new Controller(context);
+			contr.startSimulation();
+			context.print_body();
+			// Il controller fara partire il visualizer(thread) <- forse questo dovra partire gia prima..subito dopo la creazione dell'interfaccia cosi da visualizzare
+			// la posizione iniziale dei corpi
+			// successivamente creera tutti i bodythread che inizieranno a fare il loro conti
 		
 		}
 	}

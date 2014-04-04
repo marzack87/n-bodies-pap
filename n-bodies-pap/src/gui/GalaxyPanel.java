@@ -50,32 +50,23 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 			}else{
 			System.out.println("Start button");
 			start.setText("Pause");
-
-			// The simulation will start
-			Controller contr = new Controller(context);
-			contr.startSimulation();
-			context.print_body();
-			// Il controller fara partire il visualizer(thread) <- forse questo dovra partire gia prima..subito dopo la creazione dell'interfaccia cosi da visualizzare
-			// la posizione iniziale dei corpi
-			// successivamente creera tutti i bodythread che inizieranno a fare il loro conti
 			}
-			}
-			if(source == stop){
+		}
+		if(source == stop){
 			System.out.println("Stop button");
 			// The simulation will finish
 			// si faranno terminare tutti i thread in qualche modo e il visualizer dopo aver stampato a video l'ultima posizione aggiornata morira anche lui
 			if(step.getText().equals("Next step")){
-			step.setText("Step by step");
+				step.setText("Step by step");
 			}
-			}
-			if(source == step){
+		}
+		if(source == step){
 			System.out.println("Step-by-step button");
 			// The simulation's step-by-step modality
 			// qui vedremo come implementare il tutto..
 			step.setText("Next step");
 
-			}
-
+		}
 
 	}
 
