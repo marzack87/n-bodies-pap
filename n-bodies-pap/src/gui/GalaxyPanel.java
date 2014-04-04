@@ -59,6 +59,9 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 			if(step.getText().equals("Next step")){
 				step.setText("Step by step");
 			}
+			if(start.getText().equals("Pause")){
+				step.setText("Start");
+			}
 		}
 		if(source == step){
 			System.out.println("Step-by-step button");
