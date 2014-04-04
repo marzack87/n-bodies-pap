@@ -43,7 +43,6 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		
 		if(source == start){
 			if(start.getText().equals("Pause")){
 			System.out.println("Simulation freezed");
@@ -68,9 +67,6 @@ public class GalaxyPanel extends JPanel implements ActionListener {
 			// The simulation's step-by-step modality
 			// qui vedremo come implementare il tutto..
 			step.setText("Next step");
-
 		}
-
 	}
-
 }

@@ -18,7 +18,6 @@ public class MainFrame extends JFrame{
 	public MainFrame(String title, Context cont){
 		super(title);
 		panel = new MainPanel(cont);
-		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(320,58);
 		setResizable(false);

@@ -15,14 +15,10 @@ public class VisualiserPanel extends JPanel {
         public VisualiserPanel(Context cont){
             setSize(800,600);
             context = cont;
-            
         }
 
         public void paint(Graphics g){
             g.clearRect(0,0,800,600);
-            // dovro leggere dal context tutti i body con le rispettive posizioni e disegnarli
-            // questa sara la rappresentazione dello stato iniziale dei corpi.
-            
             // sara poi il thread visualizer che avra in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
             
             for(int i=0; i<context.allbodies.length; i++){
@@ -32,6 +28,8 @@ public class VisualiserPanel extends JPanel {
             	y = (int)context.allbodies[i].getPosition_Y();
             	m = (int)context.allbodies[i].getMassValue();
             	
+            	// We divide to the range of the masses in four bands and assegnamo a color, 
+            	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and black bigger masses. 
             	if (m <= 10) {
             		c = Color.WHITE;
             	} else if (m <= 15) {

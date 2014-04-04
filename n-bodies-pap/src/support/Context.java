@@ -5,7 +5,7 @@ import entity.Body;
 
 public class Context {
 
-    // dove salveremo i body, non sono sicuro che dovra rimanere pubblico
+    // per rimettere allbodies privato dovremo implementare i metodi per la restituzione dei body 
 	public Body[] allbodies;
 	public Boolean stop;
 	
@@ -15,7 +15,7 @@ public class Context {
     } 
     
     /**
-     * Metod updateBody.
+     * Method updateBody.
      * It update the data of a single body present in the list of all bodies.
      * 
      * @param bod
@@ -26,7 +26,7 @@ public class Context {
     }
     
     /**
-     * Metod getAllBody.
+     * Method getAllBody.
      * It return all the value of the bodies.
      * 
      * @return
@@ -38,7 +38,7 @@ public class Context {
     }*/
     
     /**
-     * Metod getBody.
+     * Method getBody.
      * It update the data of a single body present in the list of all bodies.
      * 
      * @param pos
@@ -51,7 +51,7 @@ public class Context {
     }*/
     
     /**
-     * Metod getOtherBody.
+     * Method getOtherBody.
      * It return all the value of the bodies except the body of the position specified.
      * 
      * @return
@@ -62,8 +62,12 @@ public class Context {
     	return;
     }*/
     
-    //da rimettere privato
-    public void print_body(){
+    /**
+     * Private method print_body.
+     * Prints all the value of the Body.
+     * 
+     */
+    private void print_body(){
 		System.out.println("Printing bodies data from context......");
 		for(int i = 0; i<allbodies.length; i++){
 			System.out.println(this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );

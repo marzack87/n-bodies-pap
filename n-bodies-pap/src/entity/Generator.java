@@ -41,7 +41,6 @@ public class Generator {
 	private double[] mass;
 	
 	private Context context;
-	//private Body[] allbodies;
 	
 	/**
 	 * Class Generator constructor.

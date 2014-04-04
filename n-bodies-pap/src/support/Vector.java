@@ -16,7 +16,6 @@ public class Vector {
      * 
      * @param N - Length of the vector 
      */
-    // create the zero vector of length N
     public Vector(int N) {
         this.N = N;
         this.data = new double[N];
@@ -28,7 +27,6 @@ public class Vector {
      * 
      * @param data -  Array of data 
      */
-    // create a vector from an array
     public Vector(double[] data) {
         N = data.length;
 
@@ -44,7 +42,6 @@ public class Vector {
      * 
      * @return N - length of the vector
      */
-    // return the length of the vector
     public int length() {
         return N;
     }
@@ -56,7 +53,6 @@ public class Vector {
      * @param that - Second vector
      * @return sum - Inner product
      */
-    // return the inner product of this Vector a and b
     public double dot(Vector that) {
         if (this.N != that.N) throw new RuntimeException("Dimensions don't agree");
         double sum = 0.0;
@@ -72,7 +68,6 @@ public class Vector {
      * 
      * @return norm - The vector length
      */
-    // return the Euclidean norm of this Vector
     public double magnitude() {
         return Math.sqrt(this.dot(this));
     }
@@ -83,7 +78,6 @@ public class Vector {
      * 
      * @return dist - The distance
      */
-    // return the Euclidean distance between this and that
     public double distanceTo(Vector that) {
         if (this.N != that.N) throw new RuntimeException("Dimensions don't agree");
         return this.minus(that).magnitude();
@@ -95,7 +89,6 @@ public class Vector {
      * 
      * @return c - The Vector sum
      */
-    // return this + that
     public Vector plus(Vector that) {
         if (this.N != that.N) throw new RuntimeException("Dimensions don't agree");
         Vector c = new Vector(N);
@@ -110,7 +103,6 @@ public class Vector {
      * 
      * @return c - The Vector difference
      */
-    // return this - that
     public Vector minus(Vector that) {
         if (this.N != that.N) throw new RuntimeException("Dimensions don't agree");
         Vector c = new Vector(N);
@@ -126,7 +118,6 @@ public class Vector {
      * @param i - Integer value corresponding the index of the vector in the array.
      * @return data[i] - The Vector difference
      */
-    // return the corresponding coordinate
     public double cartesian(int i) {
         return data[i];
     }
@@ -138,7 +129,6 @@ public class Vector {
      * @param factor - Double number 
      * @return data[i] - The Vector difference
      */
-    // create and return a new object whose value is (this * factor)
     public Vector times(double factor) {
         Vector c = new Vector(N);
         for (int i = 0; i < N; i++)
@@ -152,7 +142,6 @@ public class Vector {
      * 
      * @return dir - The direction
      */
-    // return the corresponding unit vector
     public Vector direction() {
         if (this.magnitude() == 0.0) throw new RuntimeException("Zero-vector has no direction");
         return this.times(1.0 / this.magnitude());
@@ -164,7 +153,6 @@ public class Vector {
      * 
      * @return s - The string represantation of the vector
      */
-    // return a string representation of the vector
     public String toString() {
         String s = "(";
         for (int i = 0; i < N; i++) {
