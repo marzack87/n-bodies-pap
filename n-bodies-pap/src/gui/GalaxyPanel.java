@@ -98,13 +98,13 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 	}
 	
 	/** 
-	 * Protected method createImageIcon
+	 * Private method createImageIcon
 	 * Returns an ImageIcon, or null if the path was invalid.
 	 * 
 	 * @param path - String 
 	 * @param description - String
 	 */
-	protected ImageIcon createImageIcon(String path,String description) {
+	private ImageIcon createImageIcon(String path,String description) {
 	    java.net.URL imgURL = getClass().getResource(path);
 	    if (imgURL != null) {
 	        return new ImageIcon(imgURL, description);
