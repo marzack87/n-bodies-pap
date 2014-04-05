@@ -70,9 +70,11 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 			if(start.getText().equals("Pause")){
 			System.out.println("Simulation freezed");
 			start.setText("Play");
-			}else{
+			}
 			System.out.println("Start button");
 			start.setText("Pause");
+			if(step.getText().equals("Next Step")){
+				step.setText("Step Mode");
 			}
 		}
 		if(source == stop){
