@@ -75,7 +75,7 @@ public class MainPanel extends JPanel implements ActionListener{
 		else if (source == create){
 			System.out.println("Create button");
 			Generator gen = new Generator(context);
-			gen.initWithRandomData(10000);
+			gen.initWithRandomData(100);
 			
 			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 			gframe.setVisible(true);
