@@ -55,7 +55,7 @@ public class Generator {
 	 * Method initFromFile.
 	 * It recovers from the file the data necessary to the initialization of the bodies. 
 	 * 
-	 * @param The input file
+	 * @param f - The input file
 	 */
 	public void initFromFile(File f){
 		try{

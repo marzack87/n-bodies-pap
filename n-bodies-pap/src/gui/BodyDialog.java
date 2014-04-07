@@ -42,8 +42,10 @@ public class BodyDialog extends JDialog implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		
-		int n = Integer.parseInt(body.getText());
-		mp.initWithRandom(n);
+		try{
+			int n = Integer.parseInt(body.getText());
+			mp.initWithRandom(n);
+		}catch(Exception ex) { System.err.println(ex); }
 		this.setVisible(false);
 		
 	}

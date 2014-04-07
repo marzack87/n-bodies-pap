@@ -33,6 +33,8 @@ public class Controller {
 	 * Method initWithRandomData.
 	 * Initialize the set of the Body taking the data from a Generator object that 
 	 * generates them randomly.
+	 * 
+	 * @param n - Number of Body
 	 */
 	public void initWithRandomData(int n){
 		
@@ -44,6 +46,8 @@ public class Controller {
 	 * Method genFromFile.
 	 * Initialize the set of the Body taking the data from a Generator object 
 	 * that collects them from a file.
+	 * 
+	 * @param myfile - The input file
 	 */
 	public void genFromFile(File myfile){
 		
@@ -60,7 +64,12 @@ public class Controller {
 		//this.print_body();
 	}
 	
-	
+	/**
+	 * Method getAllBodiesFromContext.
+	 * It returns the array of the bodies from the context. 
+	 * 
+	 * @return allbodies - Bodies array 
+	 */
 	public Body[] getAllBodiesFromContext(){
 		
 		return context.allbodies;

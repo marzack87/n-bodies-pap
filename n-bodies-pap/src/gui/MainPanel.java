@@ -80,6 +80,12 @@ public class MainPanel extends JPanel implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Method initWithRandom.
+	 * Initialize the simulation calling the initWithRandomData method of the Controller class.
+	 * 
+	 * @param number - Number of Body taken from the BodyDialog.
+	 */
 	public void initWithRandom(int number){
 
 		contr.initWithRandomData(number);
