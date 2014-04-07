@@ -2,10 +2,11 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
-
 import javax.swing.*;
 
+import concurrency.Visualiser;
 import entity.Controller;
+
 
 /**
  * Class GalaxyFrame.
@@ -28,10 +29,14 @@ public class GalaxyFrame extends JFrame{
 		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
-		gpanel = new GalaxyPanel(contr);
+		
 		vpanel = new VisualiserPanel(contr);
+		Visualiser v = new Visualiser(vpanel, contr);
+		gpanel = new GalaxyPanel(contr, v);
 		getContentPane().add(vpanel, BorderLayout.CENTER);
 	    getContentPane().add(gpanel, BorderLayout.LINE_END);
+	    
+	    
 		 
 	}
 

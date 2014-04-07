@@ -15,8 +15,9 @@ public class BodyAgent extends Thread {
 	}
 	
 	public void run(){
-		while (context.stop != true){
-			//Qui ci andra il comportamento di ogni singolo thread
+		while (true){
+			// wait sull'array dei bodies
+			// recuperare tu
 		}
 	}
 

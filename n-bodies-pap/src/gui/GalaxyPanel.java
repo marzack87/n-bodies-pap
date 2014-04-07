@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-
 import javax.swing.*;
 
+import concurrency.Visualiser;
 import entity.Controller;
 import support.Context;
 
@@ -26,7 +26,7 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 	 * Class GalaxyPanel default constructor.
 	 *
 	 **/
-	public GalaxyPanel(Controller contr){
+	public GalaxyPanel(Controller contr, Visualiser v){
 		
 		controller = contr;
 		
