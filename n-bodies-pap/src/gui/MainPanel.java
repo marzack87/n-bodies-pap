@@ -10,7 +10,6 @@ import javax.swing.*;
 
 import entity.Controller;
 import entity.Generator;
-import support.Context;
 
 
 /**
@@ -22,17 +21,17 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	private JButton create, open;
 	private Box BOX, BOX_button;
-	private Context context;
+	private Controller contr;
 	
 	/**
 	 * Class MainPanel default constructor.
 	 *
 	 **/
-	public MainPanel(Context cont){
+	public MainPanel(Controller contr){
 		create = new JButton("Create Randomly");
 		open = new JButton("Read datas from file");
 		
-		context = cont;
+		this.contr = contr;
 		
 		open.addActionListener(this);
 		create.addActionListener(this);
@@ -62,11 +61,13 @@ public class MainPanel extends JPanel implements ActionListener{
 				// File is opened
 				File f = choose.getSelectedFile();
 				System.out.println("Open button");
-				Generator gen = new Generator(context);
-				gen.initFromFile(f);
+				
+				contr.genFromFile(f);
+				//Generator gen = new Generator(context);
+				//gen.initFromFile(f);
 				
 				// Open GALAXY GUI
-				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
+				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", contr);
 				gframe.setVisible(true);
 				
 			}
@@ -74,10 +75,13 @@ public class MainPanel extends JPanel implements ActionListener{
 		// Initialize the body randomly.
 		else if (source == create){
 			System.out.println("Create button");
-			Generator gen = new Generator(context);
-			gen.initWithRandomData(100);
 			
-			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
+			contr.initWithRandomData();
+			
+			//Generator gen = new Generator(context);
+			//gen.initWithRandomData(100);
+			
+			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", contr);
 			gframe.setVisible(true);
 			
 		}

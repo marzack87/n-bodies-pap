@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 
 import javax.swing.*;
 
-import support.Context;
+import entity.Controller;
 
 /**
  * Class GalaxyFrame.
@@ -21,15 +21,15 @@ public class GalaxyFrame extends JFrame{
 	 * Class GalaxyFrame default constructor.
 	 *
 	 **/
-	public GalaxyFrame(String title, Context cont){
+	public GalaxyFrame(String title, Controller contr){
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(980,630);
 		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
-		gpanel = new GalaxyPanel(cont);
-		vpanel = new VisualiserPanel(cont);
+		gpanel = new GalaxyPanel(contr);
+		vpanel = new VisualiserPanel(contr);
 		getContentPane().add(vpanel, BorderLayout.CENTER);
 	    getContentPane().add(gpanel, BorderLayout.LINE_END);
 		 

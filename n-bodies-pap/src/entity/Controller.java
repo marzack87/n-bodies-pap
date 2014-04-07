@@ -16,6 +16,7 @@ public class Controller {
 	 
 	private int n;
 	private Context context;
+	private Generator gen; 
 	
 	/**
 	 * Class Controller default constructor.
@@ -23,72 +24,32 @@ public class Controller {
 	 */
 	public Controller(Context cont){
 		
+		gen = new Generator(cont);
 		context = cont;
 		
 	}
 	
 	/**
-	 * Method initAll.
+	 * Method initWithRandomData.
 	 * Initialize the set of the Body taking the data from a Generator object that 
 	 * generates them randomly.
 	 */
-	public void initAll(){
+	public void initWithRandomData(){
 		
-		
-		/*Generator gen = new Generator();
-		
-		//qui bisogna gestire la scelta di come inizializzare il sistema (Random o da file)
 		gen.initWithRandomData(10);
 		
-		
-		//Inizializzazione degli n Body
-		n = gen.getNumberOfBodies();
-		allbodies = new Body[n];
-		double[][] data = gen.getData();
-		for(int i = 0; i < n; i++){
-			double mass = data[4][i];
-			double[] position = {data[0][i], data[1][i]};
-			double[] velocity = {data[2][i], data[3][i]};
-			Vector pos = new Vector(position);
-			Vector vel = new Vector(velocity);
-			allbodies[i] = new Body(pos, vel, mass);
-		}
-		
-		//inizializzazione del Sistema
-		// ...
-		*/
 	}
 	
 	/**
-	 * Method initAllWithFile.
+	 * Method genFromFile.
 	 * Initialize the set of the Body taking the data from a Generator object 
 	 * that collects them from a file.
 	 */
-	public void initAllWithFile(File myfile){
+	public void genFromFile(File myfile){
 		
-		/*File file = myfile;
-		Generator gen = new Generator();
-		gen.initFromFile(file);
+		gen.initFromFile(myfile);
 		
-		//Inizializzazione degli n Body
-		n = gen.getNumberOfBodies();
-		allbodies = new Body[n];
-		double[][] data = gen.getData();
-		for(int i = 0; i < n; i++){
-			double mass = data[4][i];
-			double[] position = {data[0][i], data[1][i]};
-			double[] velocity = {data[2][i], data[3][i]};
-			Vector pos = new Vector(position);
-			Vector vel = new Vector(velocity);
-			allbodies[i] = new Body(pos, vel, mass);
-		}
-		
-		//inizializzazione del Sistema
-		// ...
-		 * 
-		 */
 	}
-
 	
 	/**
 	 * Method startSimulation.
@@ -99,16 +60,22 @@ public class Controller {
 		//this.print_body();
 	}
 	
+	
+	public Body[] getAllBodiesFromContext(){
+		
+		return context.allbodies;
+	}
+	
 	/**
 	 * Method print_body.
 	 * Print all the informations about all the bodies presented in the allbodies array 
 	 */
-	/*private void print_body(){
+	private void print_body(){
 		System.out.println("Fuck");
 		for(int i = 0; i<n; i++){
-			System.out.println(allbodies[i].getPosition() + " " + allbodies[i].getVelocity() + " " + allbodies[i].getMass() );
+			System.out.println(context.allbodies[i].getPosition() + " " + context.allbodies[i].getVelocity() + " " + context.allbodies[i].getMass() );
 		}
-	}*/
+	}
 	
 
 }

@@ -4,7 +4,7 @@ import java.awt.Toolkit;
 
 import javax.swing.*;
 
-import support.Context;
+import entity.Controller;
 
 /**
  * Class MainFrame.
@@ -19,9 +19,9 @@ public class MainFrame extends JFrame{
 	 * Class MainFrame default constructor.
 	 *
 	 **/
-	public MainFrame(String title, Context cont){
+	public MainFrame(String title, Controller contr){
 		super(title);
-		panel = new MainPanel(cont);
+		panel = new MainPanel(contr);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(320,60);
 		setResizable(false);

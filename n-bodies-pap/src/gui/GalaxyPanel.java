@@ -20,15 +20,15 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 
 	private JButton start,pause,stop,step, save;
 	private JLabel cmd, legend, white, cyan, blue, black;
-	private Context context;
+	private Controller controller;
 	
 	/**
 	 * Class GalaxyPanel default constructor.
 	 *
 	 **/
-	public GalaxyPanel(Context cont){
+	public GalaxyPanel(Controller contr){
 		
-		context = cont;
+		controller = contr;
 		
 		cmd = new JLabel(" Commands: ");
 		cmd.setAlignmentX(CENTER_ALIGNMENT);
@@ -69,10 +69,6 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 		add(cyan);
 		add(blue);
 		add(black);
-		
-		// The entity Controller which will create the BodyAgent
-		Controller contr = new Controller(context);
-		System.out.println("Controller created");
 		
 	}
 

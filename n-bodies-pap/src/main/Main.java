@@ -1,5 +1,6 @@
 package main;
  
+import entity.Controller;
 import gui.MainFrame;
 import support.Context;
 
@@ -16,8 +17,11 @@ public class Main {
 		// Create the context witch contains all the resource
 		Context cont = new Context();
 		
+		// The entity Controller which will create the BodyAgent
+		Controller contr = new Controller(cont);
+		
 		// Start GUI
-		MainFrame initFrame = new MainFrame("N-Body Simulation", cont);
+		MainFrame initFrame = new MainFrame("N-Body Simulation", contr);
 		initFrame.setVisible(true);
 	
 	}
