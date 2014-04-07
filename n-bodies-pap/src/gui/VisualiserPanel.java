@@ -12,6 +12,10 @@ public class VisualiserPanel extends JPanel {
 		
 		private Context context;
 	
+		/**
+		 * Class VisualiserPanel default constructor.
+		 *
+		 **/
         public VisualiserPanel(Context cont){
             setSize(800,600);
             context = cont;

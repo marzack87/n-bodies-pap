@@ -6,6 +6,10 @@ public class BodyAgent extends Thread {
 	
 	private Context context;
 	
+	/**
+	 * Class BodyAgent default constructor.
+	 *
+	 **/
 	public BodyAgent(Context cont, int i){
 		
 	}

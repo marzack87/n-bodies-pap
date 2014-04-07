@@ -9,7 +9,10 @@ public class Context {
 	public Body[] allbodies;
 	public Boolean stop;
 	
-    
+	/**
+	 * Class Context default constructor.
+	 *
+	 **/
     public Context(){
     	
     } 

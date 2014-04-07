@@ -24,6 +24,10 @@ public class MainPanel extends JPanel implements ActionListener{
 	private Box BOX, BOX_button;
 	private Context context;
 	
+	/**
+	 * Class MainPanel default constructor.
+	 *
+	 **/
 	public MainPanel(Context cont){
 		create = new JButton("Create Randomly");
 		open = new JButton("Read datas from file");
@@ -33,7 +37,7 @@ public class MainPanel extends JPanel implements ActionListener{
 		open.addActionListener(this);
 		create.addActionListener(this);
 		
-		BOX = new Box(BoxLayout.Y_AXIS);
+		BOX = new Box(BoxLayout.LINE_AXIS);
 		BOX_button = new Box(BoxLayout.X_AXIS);
 		BOX_button.add(create);
 		BOX_button.add(open);

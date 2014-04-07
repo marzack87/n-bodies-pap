@@ -43,7 +43,7 @@ public class Generator {
 	private Context context;
 	
 	/**
-	 * Class Generator constructor.
+	 * Class Generator default constructor.
 	 */
 	public Generator(Context cont){
 		 

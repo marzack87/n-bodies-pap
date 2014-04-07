@@ -18,7 +18,7 @@ public class Controller {
 	private Context context;
 	
 	/**
-	 * Class Controller constructor.
+	 * Class Controller default constructor.
 	 * 
 	 */
 	public Controller(Context cont){

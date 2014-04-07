@@ -17,7 +17,7 @@ public class Body {
 	private double mass; //mass
 	
 	/**
-	 * Class Body constructor.
+	 * Class Body default constructor.
 	 * Initialize the properties of the body with the object passed as parameter.
 	 * 
 	 * @param p - Position vector

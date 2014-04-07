@@ -8,6 +8,10 @@ public class Visualiser extends Thread {
 	    
     private Context context;
     
+    /**
+	 * Class Visualiser default constructor.
+	 *
+	 **/
     public Visualiser(VisualiserPanel panel, Context cont){
     	context = cont;
     }

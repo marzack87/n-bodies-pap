@@ -17,10 +17,14 @@ public class GalaxyFrame extends JFrame{
 	private GalaxyPanel gpanel;
 	private VisualiserPanel vpanel;
 	
+	/**
+	 * Class GalaxyFrame default constructor.
+	 *
+	 **/
 	public GalaxyFrame(String title, Context cont){
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(970,630);
+		setSize(980,630);
 		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
