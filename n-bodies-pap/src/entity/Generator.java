@@ -94,9 +94,9 @@ public class Generator {
 			  
 		}
 		
-		// dovremmo inizializzare le risorse di Context
+		// Initialize the context
 		this.initBody();
-		this.print_body();
+		//this.print_body();
 	}
 	
 	/**
@@ -121,9 +121,9 @@ public class Generator {
 			mass[i] = (Math.random() * mas_range) + 5;
 		}
 		
-		// dovremmo inizializzare le risorse di Context
+		// Initialize the context
 		this.initBody();
-		this.print_body();
+		//this.print_body();
 	}
 	
 	/**

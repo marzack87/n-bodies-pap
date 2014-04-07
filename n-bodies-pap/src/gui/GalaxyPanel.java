@@ -39,8 +39,6 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 		save = new JButton("Save Data");
 		save.setEnabled(false);
 		
-		
-		
 		legend = new JLabel("Legend: ");
 		legend.setAlignmentX(CENTER_ALIGNMENT);
 		ImageIcon icon_white = createImageIcon("images/white.png", "white circle");
@@ -71,6 +69,10 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 		add(cyan);
 		add(blue);
 		add(black);
+		
+		// The entity Controller which will create the BodyAgent
+		Controller contr = new Controller(context);
+		System.out.println("Controller created");
 		
 	}
 

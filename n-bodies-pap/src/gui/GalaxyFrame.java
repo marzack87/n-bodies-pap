@@ -32,8 +32,7 @@ public class GalaxyFrame extends JFrame{
 		vpanel = new VisualiserPanel(cont);
 		getContentPane().add(vpanel, BorderLayout.CENTER);
 	    getContentPane().add(gpanel, BorderLayout.LINE_END);
-		
-		// creazione del thread Visualiser(vpanel) e start di esso. 
+		 
 	}
 
 }

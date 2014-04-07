@@ -69,10 +69,6 @@ public class MainPanel extends JPanel implements ActionListener{
 				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 				gframe.setVisible(true);
 				
-				// The entity Controller which will create the BodyAgent
-				Controller contr = new Controller(context);
-				System.out.println("Controller created");
-				
 			}
 		}
 		// Initialize the body randomly.
@@ -83,9 +79,6 @@ public class MainPanel extends JPanel implements ActionListener{
 			
 			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", context);
 			gframe.setVisible(true);
-			
-			Controller contr = new Controller(context);
-			System.out.println("Controller created");
 			
 		}
 	}
