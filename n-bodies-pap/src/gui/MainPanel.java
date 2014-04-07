@@ -63,8 +63,6 @@ public class MainPanel extends JPanel implements ActionListener{
 				System.out.println("Open button");
 				
 				contr.genFromFile(f);
-				//Generator gen = new Generator(context);
-				//gen.initFromFile(f);
 				
 				// Open GALAXY GUI
 				GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", contr);
@@ -76,17 +74,22 @@ public class MainPanel extends JPanel implements ActionListener{
 		else if (source == create){
 			System.out.println("Create button");
 			
-			contr.initWithRandomData();
-			
-			//Generator gen = new Generator(context);
-			//gen.initWithRandomData(100);
-			
-			GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", contr);
-			gframe.setVisible(true);
+			JDialog body = new BodyDialog(this);
+			body.setVisible(true);
 			
 		}
 	}
+	
+	public void initWithRandom(int number){
+
+		contr.initWithRandomData(number);
+		
+		GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", contr);
+		gframe.setVisible(true);
+	}
 }
+
+
 
 /**
  * Inner class TxtFileFilter.

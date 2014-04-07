@@ -25,9 +25,7 @@ public class DoneDialog extends JDialog implements ActionListener{
 	public DoneDialog(){
 		
 		super();
-		setTitle("File saved.");
 		setSize(new Dimension(350, 70));
-		setBackground(Color.white);
 		setLayout(new BorderLayout());
 		JLabel s = new JLabel("Your simulation stats was successfully saved.");
 		add(s,BorderLayout.CENTER);

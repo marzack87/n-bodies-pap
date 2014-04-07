@@ -34,9 +34,9 @@ public class Controller {
 	 * Initialize the set of the Body taking the data from a Generator object that 
 	 * generates them randomly.
 	 */
-	public void initWithRandomData(){
+	public void initWithRandomData(int n){
 		
-		gen.initWithRandomData(10);
+		gen.initWithRandomData(n);
 		
 	}
 	
