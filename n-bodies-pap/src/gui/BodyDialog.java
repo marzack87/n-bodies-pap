@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class BodyDialog extends JDialog implements ActionListener{
@@ -45,7 +46,10 @@ public class BodyDialog extends JDialog implements ActionListener{
 		try{
 			int n = Integer.parseInt(body.getText());
 			mp.initWithRandom(n);
-		}catch(Exception ex) { System.err.println(ex); }
+		}catch(Exception ex) { 
+			System.err.println(ex); 
+			JOptionPane.showMessageDialog(this, "Wrong input data, a number MUST be inserted", "Error", JOptionPane.ERROR_MESSAGE, null);
+		}
 		this.setVisible(false);
 		
 	}
