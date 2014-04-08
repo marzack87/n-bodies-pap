@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
+import javax.swing.JOptionPane;
+
 import support.*;
 
 /**
@@ -75,7 +77,7 @@ public class Generator {
 				  velocity_y = new double[number];
 				  mass = new double[number];
 			  } else {
-				  //Il file e' vuoto, meglio lanciare una eccezione
+				  System.err.println("File is empty");
 			  }
 			  int i = 0;
 			  while ((strLine = br.readLine()) != null)   {
@@ -90,8 +92,8 @@ public class Generator {
 			  //Close the input stream
 			  in.close();
 			  
-		}catch (Exception e){
-			  
+		}catch (Exception ex){
+			System.err.println(ex); 
 		}
 		
 		// Initialize the context
@@ -171,7 +173,7 @@ public class Generator {
 	 * Print all the informations about all the bodies presented in the allbodies array 
 	 */
 	private void print_body(){
-		System.out.println("Printing bodies data......");
+		System.out.println("Printing bodies data by Generator......");
 		for(int i = 0; i<number; i++){
 			System.out.println(context.allbodies[i].getPosition() + " " + context.allbodies[i].getVelocity() + " " + context.allbodies[i].getMass() );
 		}

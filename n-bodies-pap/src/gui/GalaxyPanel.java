@@ -19,7 +19,7 @@ import support.Context;
 public class GalaxyPanel extends JPanel implements ActionListener{
 
 	private JButton start,pause,stop,step, save;
-	private JLabel cmd, legend, white, cyan, blue, black;
+	private JLabel cmd, legend, white, cyan, blue, gray;
 	private Controller controller;
 	
 	/**
@@ -47,8 +47,8 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 		cyan = new JLabel("Mid-small mass  ", icon_cyan, JLabel.LEFT);
 		ImageIcon icon_blue = createImageIcon("images/blue.png", "blue circle");
 		blue = new JLabel("Mid-big mass ", icon_blue, JLabel.LEFT);
-		ImageIcon icon_black = createImageIcon("images/black.png", "black circle");
-		black = new JLabel("Bigger mass ", icon_black, JLabel.LEFT);
+		ImageIcon icon_gray = createImageIcon("images/gray.png", "gray circle");
+		gray = new JLabel("Bigger mass ", icon_gray, JLabel.LEFT);
 		
 		start.addActionListener(this);
 		step.addActionListener(this);
@@ -68,7 +68,7 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 		add(white);
 		add(cyan);
 		add(blue);
-		add(black);
+		add(gray);
 		
 	}
 

@@ -34,21 +34,21 @@ public class VisualiserPanel extends JPanel {
             	m = (int)allbodies[i].getMassValue();
             	
             	// We divide to the range of the masses in four bands and assegnamo a color, 
-            	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and black bigger masses. 
+            	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and gray bigger masses. 
             	if (m <= 10) {
-            		c = Color.WHITE;
+            		c = Color.white;
             	} else if (m <= 15) {
-            		c = Color.CYAN;
+            		c = Color.cyan;
             	} else if (m <= 20) {
-            		c = Color.BLUE;
+            		c = Color.blue;
             	} else if (m <= 25) {
-            		c = Color.BLACK;
+            		c = Color.gray;
             	}
             	
             	g.setColor(c);
-            	g.fillOval(x,y,5,5);
-            	g.setColor(Color.BLACK);
-            	g.drawOval(x,y,5,5);
+            	g.fillOval(x,y,4,4);
+            	g.setColor(Color.black);
+            	g.drawOval(x,y,4,4);
             }
             
         }
