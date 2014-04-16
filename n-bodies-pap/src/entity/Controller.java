@@ -19,8 +19,12 @@ public class Controller {
 	private Generator gen; 
 	
 	/**
-	 * Class Controller default constructor.
+	 * Class Controller constructor.
+	 * Initialize an object Generator and take a references of the context.
 	 * 
+	 * @param cont The context of the system
+	 * 
+	 * @see support.Context
 	 */
 	public Controller(Context cont){
 		
@@ -32,7 +36,7 @@ public class Controller {
 	/**
 	 * Method initWithRandomData.
 	 * Initialize the set of the Body taking the data from a Generator object that 
-	 * generates them randomly.
+	 * generates n (the parameter specified) bodies randomly.
 	 * 
 	 * @param n - Number of Body
 	 */
@@ -48,6 +52,8 @@ public class Controller {
 	 * that collects them from a file.
 	 * 
 	 * @param myfile - The input file
+	 * 
+	 * @see File
 	 */
 	public void genFromFile(File myfile){
 		

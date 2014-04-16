@@ -2,7 +2,14 @@ package support;
 
 import entity.Body;
 
-
+/**
+ * Class Context. 
+ * Represents the context in which our simulation will be based and 
+ * contains all the resources needed to regulate the behavior of the system (Semaphore and Future array list) and 
+ * the resources on which the worker will act.  
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ */
 public class Context {
 
     // per rimettere allbodies privato dovremo implementare i metodi per la restituzione dei body 

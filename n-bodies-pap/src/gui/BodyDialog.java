@@ -12,14 +12,29 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+/**
+ * Class BodyDialog.
+ * Class that extends the JDialog class, and that is the component in which the user, once he have chosen to create the bodies randomly, 
+ * can specify their number and start their real initialization. 
+ * Once confirmation of the number of bodies the component will call the component that will represent the "Galaxy"
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ * 
+ * @see java.awt
+ * @see javax.swing
+ */
+
 public class BodyDialog extends JDialog implements ActionListener{
 	
 	private MainPanel mp;
 	private JTextField body;
 	
 	/**
-	 * Class DoneDialog default constructor.
-	 *
+	 * Class BodyDialog constructor.
+	 * 
+	 * @param mp MainPanel component
+	 * 
+	 * @see MainPanel 
 	 **/
 	public BodyDialog(MainPanel mp){
 		

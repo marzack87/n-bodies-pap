@@ -13,8 +13,13 @@ import support.Context;
 
 /**
  * Class GalaxyPanel.
+ * Component that contains the commands that are useful for the simulation 
+ * and a legend to explain the meaning of the colors of bodies.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
+ * 
+ * @see java.awt
+ * @see javax.swing
  */
 public class GalaxyPanel extends JPanel implements ActionListener{
 
@@ -24,7 +29,12 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 	
 	/**
 	 * Class GalaxyPanel default constructor.
-	 *
+	 * 
+	 * @param contr Controller entity
+	 * @param v Visualiser thread
+	 * 
+	 * @see entity.Controller
+	 * @see concurrency.Visualiser
 	 **/
 	public GalaxyPanel(Controller contr, Visualiser v){
 		
@@ -126,8 +136,8 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 	 * Private method createImageIcon.
 	 * Returns an ImageIcon, or null if the path was invalid.
 	 * 
-	 * @param path - String 
-	 * @param description - String
+	 * @param path The path of the image file 
+	 * @param description Description of te image
 	 */
 	private ImageIcon createImageIcon(String path,String description) {
 	    java.net.URL imgURL = getClass().getResource(path);
@@ -141,7 +151,7 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 	
 	/**
 	 * Private method savefile.
-	 * 
+	 * Save all the information of the simulation in a text file.
 	 */
 	private void savefile(){
 		try{

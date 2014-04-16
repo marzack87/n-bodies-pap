@@ -1,25 +1,26 @@
 package gui;
 
 import java.awt.*;
-
 import javax.swing.*;
-
-import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
 
 import java.awt.event.*;
 
 
 /**
  * Class DoneDialog.
- *
- * @author Richard Casadei, Marco Zaccheroni.
- *
+ * Class that extends the JDialog class, and it is the component,
+ * that will inform the user about the correct saving of the simulation information.
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ * 
+ * @see java.awt
+ * @see javax.swing
  **/
  
 public class DoneDialog extends JDialog implements ActionListener{
 	
 	/**
-	 * Class DoneDialog default constructor.
+	 * Class DoneDialog constructor.
 	 *
 	 **/
 	public DoneDialog(){

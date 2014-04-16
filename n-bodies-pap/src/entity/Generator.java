@@ -45,7 +45,12 @@ public class Generator {
 	private Context context;
 	
 	/**
-	 * Class Generator default constructor.
+	 * Class Generator constructor.
+	 * It takes a reference of the system context
+	 * 
+	 * @param cont The system context
+	 * 
+	 * @see support.Context
 	 */
 	public Generator(Context cont){
 		 
@@ -58,6 +63,8 @@ public class Generator {
 	 * It recovers from the file the data necessary to the initialization of the bodies. 
 	 * 
 	 * @param f - The input file
+	 * 
+	 * @see File
 	 */
 	public void initFromFile(File f){
 		try{
@@ -150,7 +157,7 @@ public class Generator {
 	 * Method getNumberOfBodies.
 	 * It returns the number of bodies.
 	 * 
-	 * @return number - Integer
+	 * @return number - Number of bodies
 	 */
 	public int getNumberOfBodies(){
 		return number;
@@ -159,7 +166,7 @@ public class Generator {
 	/**
 	 * Method getData.
 	 * It creates the matrix which contains the data of the bodies.
-	 * Each line contains the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses
+	 * Each line contains the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses.
 	 * 
 	 * @return data - Data matrix
 	 */
@@ -170,7 +177,7 @@ public class Generator {
 	
 	/**
 	 * Method print_body.
-	 * Print all the informations about all the bodies presented in the allbodies array 
+	 * Print all the informations about all the bodies presented in the allbodies array. 
 	 */
 	private void print_body(){
 		System.out.println("Printing bodies data by Generator......");

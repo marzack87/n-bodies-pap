@@ -10,8 +10,12 @@ import entity.Controller;
 
 /**
  * Class GalaxyFrame.
+ * Component that contains the display window of the bodies and the useful commands for the simulation.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
+ * 
+ * @see java.awt
+ * @see javax.swing
  */
 public class GalaxyFrame extends JFrame{
 	
@@ -19,8 +23,13 @@ public class GalaxyFrame extends JFrame{
 	private VisualiserPanel vpanel;
 	
 	/**
-	 * Class GalaxyFrame default constructor.
-	 *
+	 * Class GalaxyFrame constructor.
+	 * 
+	 * @param title Frame name
+	 * @param contr Controller entity
+	 * 
+	 * @see String
+	 * @see entity.Controller
 	 **/
 	public GalaxyFrame(String title, Controller contr){
 		super(title);

@@ -8,15 +8,19 @@ import entity.Controller;
 
 /**
  * Class MainFrame.
+ * Component in which the user can decide how to initialize the bodies.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
+ * 
+ * @see java.awt
+ * @see javax.swing
  */
 public class MainFrame extends JFrame{
 	
 	private MainPanel panel;
 	
 	/**
-	 * Class MainFrame default constructor.
+	 * Class MainFrame constructor.
 	 *
 	 **/
 	public MainFrame(String title, Controller contr){

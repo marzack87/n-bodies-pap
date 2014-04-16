@@ -7,14 +7,25 @@ import javax.swing.*;
 
 import entity.Body;
 import entity.Controller;
+
+/**
+ * Class VisualiserPanel
+ * Component where all the bodies and their interactions are visualized.
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ * 
+ * @see java.awt
+ * @see javax.swing
+ */
    
 public class VisualiserPanel extends JPanel {
 		
 		private Controller controller;
 		private Body[] allbodies;
 		/**
-		 * Class VisualiserPanel default constructor.
-		 *
+		 * Class VisualiserPanel constructor.
+		 * 
+		 * @param contr Controller entity
 		 **/
         public VisualiserPanel(Controller contr){
             setSize(800,600);
