@@ -38,7 +38,7 @@ public class Controller {
 	 * Initialize the set of the Body taking the data from a Generator object that 
 	 * generates n (the parameter specified) bodies randomly.
 	 * 
-	 * @param n - Number of Body
+	 * @param n Number of Body
 	 */
 	public void initWithRandomData(int n){
 		
@@ -51,7 +51,7 @@ public class Controller {
 	 * Initialize the set of the Body taking the data from a Generator object 
 	 * that collects them from a file.
 	 * 
-	 * @param myfile - The input file
+	 * @param myfile The input file
 	 * 
 	 * @see File
 	 */
@@ -75,7 +75,7 @@ public class Controller {
 	 * Method getAllBodiesFromContext.
 	 * It returns the array of the bodies from the context. 
 	 * 
-	 * @return allbodies - Bodies array 
+	 * @return allbodies Bodies array 
 	 */
 	public Body[] getAllBodiesFromContext(){
 		
