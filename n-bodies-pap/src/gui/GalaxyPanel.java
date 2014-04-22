@@ -102,9 +102,7 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 				}
 				controller.play();
 			}
-		}
-		// Step Mode Button
-		if(source == step){
+		} else if(source == step){
 			System.out.println("Step-by-step button");
 			// The simulation's step-by-step modality
 			// qui vedremo come implementare il tutto..
@@ -112,13 +110,14 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 			if(start.getText().equals("Pause")){
 				start.setText("Play");
 			}
+			if (!controller.SimulationIsAlive()){
+				controller.startSimulation();
+			}
 			if(controller.SimulationIsRunning()){
 				controller.pause();
 			}
 			controller.step();
-		}
-		// Stop Button
-		if(source == stop){
+		} else if(source == stop){
 			System.out.println("Stop button");
 			// The simulation will finish
 			// si faranno terminare tutti i thread in qualche modo e il visualizer dopo aver stampato a video l'ultima posizione aggiornata morira anche lui
@@ -134,9 +133,7 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 			stop.setEnabled(false);
 			
 			controller.stopSimulation();
-		}
-		// Save Button
-		if(source == save){
+		} else if(source == save){
 			System.out.println("Save Button");
 			savefile();
 		}

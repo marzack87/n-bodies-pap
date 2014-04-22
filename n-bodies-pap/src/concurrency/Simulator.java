@@ -27,8 +27,6 @@ public class Simulator extends Thread {
 	}
 	
 	public void run(){
-		// qui parte tutto
-		
 		while (simulation){
 			while(go){
 				loop();
