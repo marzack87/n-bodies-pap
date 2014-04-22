@@ -26,6 +26,7 @@ public class BodyTask implements Callable<Body> {
 		V2d force = new V2d(10,10);
 		for (int i = 0; i < all_bodies.length; i++) {
 			if (i != my_index) {
+				//System.out.println("Forza " + me.forceFrom(all_bodies[i]));
 				force.sum(me.forceFrom(all_bodies[i]));
 			}
 		}

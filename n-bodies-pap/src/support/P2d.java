@@ -16,7 +16,15 @@ public class P2d implements java.io.Serializable {
     }
 
     public P2d sum(V2d v){
-        return new P2d(x+v.x,y+v.y);
+    	double x1 = x+v.x;
+    	if(x+v.x > 800){
+    		x1 = x+v.x-800;
+    	}
+    	double y1 = y+v.y;
+    	if(y+v.y > 600){
+    		y1 = y+v.y-600; 
+    	}
+        return new P2d(x1,y1);
     }
 
     public V2d sub(P2d p){
