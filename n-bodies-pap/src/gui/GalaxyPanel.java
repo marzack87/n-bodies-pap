@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+
 import javax.swing.*;
 
 import concurrency.Visualiser;
 import entity.Controller;
-import support.Context;
 
 /**
  * Class GalaxyPanel.
@@ -79,7 +79,6 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 		add(cyan);
 		add(blue);
 		add(gray);
-		
 	}
 
 	
@@ -90,12 +89,18 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 			if(start.getText().equals("Pause")){
 				start.setText("Play");
 				System.out.println("Simulation freezed");
+				controller.pause();
 			}else{
 				System.out.println("Start button");
 				start.setText("Pause");
 				if(step.getText().equals("Next Step")){
 					step.setText("Step Mode");
 				}
+				
+				if (!controller.SimulationIsRunning()){
+					controller.startSimulation();
+				}
+				controller.play();
 			}
 		}
 		// Step Mode Button
@@ -107,6 +112,7 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 			if(start.getText().equals("Pause")){
 				start.setText("Play");
 			}
+			controller.step();
 		}
 		// Stop Button
 		if(source == stop){
@@ -123,6 +129,8 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 			start.setEnabled(false);
 			step.setEnabled(false);
 			stop.setEnabled(false);
+			
+			controller.stopSimulation();
 		}
 		// Save Button
 		if(source == save){

@@ -15,6 +15,7 @@ public class Body {
 	private Vector p; //position
 	private Vector v; //velocity
 	private double mass; //mass
+	private int index;
 	
 	/**
 	 * Class Body default constructor.
@@ -26,10 +27,11 @@ public class Body {
 	 * 
 	 * @see support.Vector
 	 */
-	public Body(Vector p, Vector v, double mass) {
+	public Body(Vector p, Vector v, double mass, int index) {
 		this.p = p;
 		this.v = v;
-		this.mass = mass; 
+		this.mass = mass;
+		this.index = index;
 	}
 	
 	/**
@@ -152,5 +154,10 @@ public class Body {
 	 */
 	public double getMassValue(){
 		return mass;
+	}
+	
+	
+	public int getIndex(){
+		return index;
 	}
 }

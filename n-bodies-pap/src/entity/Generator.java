@@ -148,7 +148,7 @@ public class Generator {
 				double[] velocity = {data[2][i], data[3][i]};
 				Vector pos = new Vector(position);
 				Vector vel = new Vector(velocity);
-				context.allbodies[i] = new Body(pos, vel, mass);
+				context.allbodies[i] = new Body(pos, vel, mass, i);
 			}
 		
 	}

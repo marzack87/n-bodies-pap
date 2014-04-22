@@ -28,11 +28,10 @@ public class Context {
      * Method updateBody.
      * It update the data of a single body present in the list of all bodies.
      * 
-     * @param bod
-     * @param pos
+     * @param body
      */
-    public void updateBody(Body bod, int pos){
-    	
+    public void updateBody(Body body){
+    	allbodies[body.getIndex()] = body;
     }
     
     /**
@@ -82,5 +81,15 @@ public class Context {
 		for(int i = 0; i<allbodies.length; i++){
 			System.out.println(this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );
 		}
+	}
+    
+    /**
+	 * Method getNumberOfBodies.
+	 * It returns the number of bodies.
+	 * 
+	 * @return number Number of bodies
+	 */
+	public int getNumberOfBodies(){
+		return allbodies.length;
 	}
 }

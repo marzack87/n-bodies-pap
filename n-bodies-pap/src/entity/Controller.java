@@ -2,6 +2,7 @@ package entity;
 
 import java.io.File;
 
+import concurrency.Simulator;
 import support.*;
 
 
@@ -17,6 +18,7 @@ public class Controller {
 	private int n;
 	private Context context;
 	private Generator gen; 
+	private Simulator simulator;
 	
 	/**
 	 * Class Controller constructor.
@@ -31,6 +33,7 @@ public class Controller {
 		gen = new Generator(cont);
 		context = cont;
 		
+		simulator = new Simulator(cont);
 	}
 	
 	/**
@@ -66,9 +69,29 @@ public class Controller {
 	 * Method startSimulation.
 	 * Let the Simulation to start.
 	 */
+	// chiamato dal play
 	public void startSimulation(){
-		// qui parte tutto
-		//this.print_body();
+		simulator.start();
+	}
+	
+	public void stopSimulation(){
+		simulator.suicide();
+	}
+	
+	public boolean SimulationIsRunning(){
+		return simulator.isAlive();
+	}
+	
+	public void play(){
+		simulator.play();
+	}
+	
+	public void pause(){
+		simulator.pause();
+	}
+	
+	public void step(){
+		simulator.step();
 	}
 	
 	/**
