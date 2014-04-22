@@ -30,7 +30,7 @@ public class Simulator extends Thread {
 		
 		while (simulation){
 			while(go){
-				
+				loop();
 			}
 		}
 	}
@@ -44,7 +44,7 @@ public class Simulator extends Thread {
 	}
 	
 	public void step(){
-		//loop();
+		loop();
 	}
 	
 	public void suicide(){
