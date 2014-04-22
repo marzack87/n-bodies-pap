@@ -144,10 +144,8 @@ public class Generator {
 		double[][] data = this.getData();
 			for(int i = 0; i < number; i++){
 				double mass = data[4][i];
-				double[] position = {data[0][i], data[1][i]};
-				double[] velocity = {data[2][i], data[3][i]};
-				Vector pos = new Vector(position);
-				Vector vel = new Vector(velocity);
+				P2d pos = new P2d(data[0][i], data[1][i]);
+				V2d vel = new V2d(data[2][i], data[3][i]);
 				context.allbodies[i] = new Body(pos, vel, mass, i);
 			}
 		

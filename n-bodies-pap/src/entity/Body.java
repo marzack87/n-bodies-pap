@@ -1,6 +1,6 @@
 package entity;
 
-import support.Vector;
+import support.*;
 
 /**
  * Class Body. 
@@ -12,8 +12,8 @@ import support.Vector;
  * @author Richiard Casadei, Marco Zaccheroni
  */
 public class Body { 
-	private Vector p; //position
-	private Vector v; //velocity
+	private P2d p; //position
+	private V2d v; //velocity
 	private double mass; //mass
 	private int index;
 	
@@ -27,7 +27,7 @@ public class Body {
 	 * 
 	 * @see support.Vector
 	 */
-	public Body(Vector p, Vector v, double mass, int index) {
+	public Body(P2d p, V2d v, double mass, int index) {
 		this.p = p;
 		this.v = v;
 		this.mass = mass;
@@ -44,10 +44,10 @@ public class Body {
 	 * 
 	 * @see support.Vector
 	 */
-	public void move(Vector f, double dt) { 
-		Vector a = f.times(1/mass);
-		v = v.plus(a.times(dt));
-		p = p.plus(v.times(dt));
+	public void move(V2d f) { 
+		V2d a = f.mul(1/mass);
+		v = v.sum(a);
+		p = p.sum(v);
 	}
 	
 	/**
@@ -60,12 +60,14 @@ public class Body {
 	 * @see entity.Body
 	 * @see support.Vector
 	 */
-	public Vector forceFrom(Body that) {
+	public V2d forceFrom(Body that) {
 		double G = 6.67e-11;
-		Vector delta = that.p.minus(this.p);
-		double dist = delta.magnitude();
+		V2d p_this = new V2d(this.p.x, this.p.y);
+		V2d p_that = new V2d(that.p.x, that.p.y);
+		V2d delta = p_that.min(p_this);
+		double dist = that.p.dist(this.p);
 		double F = (G * this.mass * that.mass) / (dist * dist); 
-		return delta.direction().times(F);
+		return delta.getNormalized().mul(F);
 	} 
 	
 	/**
@@ -88,7 +90,7 @@ public class Body {
 	 * @return double Value of the position coordinate X
 	 */
 	public double getPosition_X(){
-		return p.cartesian(0);
+		return p.x;
 	}
 	
 	/**
@@ -98,7 +100,7 @@ public class Body {
 	 * @return double Value of the position coordinate Y
 	 */
 	public double getPosition_Y(){
-		return p.cartesian(1);
+		return p.y;
 	}
 	
 	/**
@@ -121,7 +123,7 @@ public class Body {
 	 * @return double Value of the velocity coordinate X
 	 */
 	public double getVelocity_X(){
-		return v.cartesian(0);
+		return v.x;
 	}
 	
 	/**
@@ -131,7 +133,7 @@ public class Body {
 	 * @return double Value of the velocity coordinate Y
 	 */
 	public double getVelocity_Y(){
-		return v.cartesian(1);
+		return v.y;
 	}
 	
 	/**
