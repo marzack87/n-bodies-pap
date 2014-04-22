@@ -23,7 +23,7 @@ public class BodyTask implements Callable<Body> {
 	
 	public Body call() throws Exception {
 		
-		V2d force = new V2d(0,0);
+		V2d force = new V2d(10,10);
 		for (int i = 0; i < all_bodies.length; i++) {
 			if (i != my_index) {
 				force.sum(me.forceFrom(all_bodies[i]));
