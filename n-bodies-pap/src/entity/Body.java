@@ -46,8 +46,8 @@ public class Body {
 	 */
 	public void move(V2d f) { 
 		V2d a = f.mul(1/mass);
+		p = p.sum(v.sum(a.mul(1/2)));
 		v = v.sum(a);
-		p = p.sum(v);
 	}
 	
 	/**

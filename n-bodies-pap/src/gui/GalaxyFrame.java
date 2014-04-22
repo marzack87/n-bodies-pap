@@ -40,8 +40,8 @@ public class GalaxyFrame extends JFrame{
 		
 		
 		vpanel = new VisualiserPanel(contr);
-		Visualiser v = new Visualiser(vpanel, contr);
-		gpanel = new GalaxyPanel(contr, v);
+		contr.setUpVisualiser(vpanel);
+		gpanel = new GalaxyPanel(contr);
 		getContentPane().add(vpanel, BorderLayout.CENTER);
 	    getContentPane().add(gpanel, BorderLayout.LINE_END);
 	    

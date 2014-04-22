@@ -12,17 +12,18 @@ public class Simulator extends Thread {
 	
 	private boolean go;
 	private boolean simulation;
-	private ExecutorService executor;
 	private Context context;
+	private Semaphore sem;
 	
 	private static final int NTHREADS = Runtime.getRuntime().availableProcessors() + 1;
-	private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
+	private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS);
 	private List<Future<Body>> list = new ArrayList<Future<Body>>();
 	
-	public Simulator(Context c) {
+	public Simulator(Context c, Semaphore sem) {
 		context = c;
 		go = false;
 		simulation = true;
+		this.sem = sem;
 	}
 	
 	public void run(){
@@ -51,10 +52,14 @@ public class Simulator extends Thread {
 		go = simulation = false;
 	}
 	
+	public boolean go(){
+		return go;
+	}
+	
 	private void loop(){
 		/*
 		 * - LEGGERE I DATI
-		 * - CREARE I ÒBODY TASKÓ PASSANDOGLI I DATI
+		 * - CREARE I BODY TASK PASSANDOGLI I DATI
 		 * - ASPETTIAMO CHE FINISCANO TORNANDOCI I LORO VALORI AGGIORNATI
 		 * - AGGIORNIAMO I DATI
 		 * - LI PASSIAMO AL VISUALIZZATORE 
@@ -62,7 +67,7 @@ public class Simulator extends Thread {
 		Body [] all_bodies = context.allbodies;
 		for (int i = 0; i < all_bodies.length; i++){
 			Callable<Body> task = new BodyTask(all_bodies, i);
-			Future<Body> submit = executor.submit(task);
+			Future<Body> submit = exec.submit(task);
 			list.add(submit);
 		}
 		for (Future<Body> future : list){
@@ -75,7 +80,8 @@ public class Simulator extends Thread {
 				e.printStackTrace();
 			}
 		}
-		// bisogna notificare il visualizzatore
+		list.clear();
+		this.sem.release();
 	}
 	
 }

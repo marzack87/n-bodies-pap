@@ -36,7 +36,7 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 	 * @see entity.Controller
 	 * @see concurrency.Visualiser
 	 **/
-	public GalaxyPanel(Controller contr, Visualiser v){
+	public GalaxyPanel(Controller contr){
 		
 		controller = contr;
 		
@@ -97,7 +97,7 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 					step.setText("Step Mode");
 				}
 				
-				if (!controller.SimulationIsRunning()){
+				if (!controller.SimulationIsAlive()){
 					controller.startSimulation();
 				}
 				controller.play();
@@ -111,6 +111,9 @@ public class GalaxyPanel extends JPanel implements ActionListener{
 			step.setText("Next Step");
 			if(start.getText().equals("Pause")){
 				start.setText("Play");
+			}
+			if(controller.SimulationIsRunning()){
+				controller.pause();
 			}
 			controller.step();
 		}

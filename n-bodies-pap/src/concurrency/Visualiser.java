@@ -1,5 +1,8 @@
 package concurrency;
 
+import java.util.concurrent.Semaphore;
+
+import support.Context;
 import gui.VisualiserPanel;
 import entity.*;
 
@@ -16,8 +19,9 @@ import entity.*;
 	
 public class Visualiser extends Thread {
 	    
-    private Controller contr;
+    private Context cont;
     private VisualiserPanel v;
+    private Semaphore sem;
     
     /**
 	 * Class Visualiser constructor.
@@ -29,17 +33,19 @@ public class Visualiser extends Thread {
 	 * @see entity.Controller
 	 *
 	 **/
-    public Visualiser(VisualiserPanel panel, Controller contr){
-    	this.contr = contr;
-    	v = panel;
+    public Visualiser(Context cont, Semaphore sem){
+    	this.cont = cont;
+    	this.sem = sem;
     }
     
     public void run(){
-    	while(true){ //condizione dei pulsanti
-    		// wait tutti hanno fatto i loro calcoli
-    		// lock dell'array dei bodies
-    		Body[] position = contr.getAllBodiesFromContext();
-    		// rilascio il lock
+    	while(true){ 
+    		try {
+				this.sem.acquire();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    		Body[] position = cont.allbodies;
     		v.updatePositions(position);
     	}
     }
@@ -53,5 +59,10 @@ public class Visualiser extends Thread {
 	private void log(String msg){
         System.out.println("[VISUALISER] "+msg);
     }
+	
+	public void setVisualiserPanel(VisualiserPanel v){
+		this.v = v;
+	}
+	
 
 }

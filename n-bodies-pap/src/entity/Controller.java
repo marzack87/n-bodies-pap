@@ -1,8 +1,12 @@
 package entity;
 
+import gui.VisualiserPanel;
+
 import java.io.File;
+import java.util.concurrent.Semaphore;
 
 import concurrency.Simulator;
+import concurrency.Visualiser;
 import support.*;
 
 
@@ -19,6 +23,8 @@ public class Controller {
 	private Context context;
 	private Generator gen; 
 	private Simulator simulator;
+	private Visualiser visualiser;
+	Semaphore sem = new Semaphore(0);
 	
 	/**
 	 * Class Controller constructor.
@@ -33,7 +39,8 @@ public class Controller {
 		gen = new Generator(cont);
 		context = cont;
 		
-		simulator = new Simulator(cont);
+		simulator = new Simulator(cont, sem);
+		visualiser = new Visualiser(cont, sem);
 	}
 	
 	/**
@@ -71,6 +78,7 @@ public class Controller {
 	 */
 	// chiamato dal play
 	public void startSimulation(){
+		visualiser.start();
 		simulator.start();
 	}
 	
@@ -78,8 +86,12 @@ public class Controller {
 		simulator.suicide();
 	}
 	
-	public boolean SimulationIsRunning(){
+	public boolean SimulationIsAlive(){
 		return simulator.isAlive();
+	}
+	
+	public boolean SimulationIsRunning(){
+		return simulator.go();
 	}
 	
 	public void play(){
@@ -92,6 +104,10 @@ public class Controller {
 	
 	public void step(){
 		simulator.step();
+	}
+	
+	public void setUpVisualiser(VisualiserPanel v){
+		this.visualiser.setVisualiserPanel(v);
 	}
 	
 	/**
