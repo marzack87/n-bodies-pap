@@ -3,9 +3,11 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 
+import support.P2d;
 import entity.Body;
 import entity.Controller;
 
@@ -23,7 +25,7 @@ public class VisualiserPanel extends JPanel {
 		
 		private Controller controller;
 		private Body[] allbodies;
-		//private ArrayList<Body[]> history = new ArrayList<Body[]>();
+		private ArrayList<P2d[]> history = new ArrayList<P2d[]>();
 		/**
 		 * Class VisualiserPanel constructor.
 		 * 
@@ -33,31 +35,46 @@ public class VisualiserPanel extends JPanel {
             setSize(contr.getVisualizerSpace());
             controller = contr;
             allbodies = controller.getAllBodiesFromContext();
-            /*Body[] b = new Body[allbodies.length];
-            System.arraycopy(allbodies, 0, b, 0, allbodies.length);
-            history.add(b);*/
+            P2d[] pos = new P2d[allbodies.length];
+            for (Body b : allbodies) pos[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
+            history.add(pos);
         }
 
         public void paint(Graphics g){
             g.clearRect(0,0,this.getWidth(),this.getHeight());
             // sara poi il thread visualizer che avra in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
             
-            /*for (Body[] all : history) {
-            	
-            	System.out.println("culo" + all[0]);
+            int j = 0;
+            P2d[] before = new P2d[allbodies.length];
+            
+            for (P2d[] all : history) {
             	
             	for(int i=0; i<all.length; i++){
-                	int x,y;
-                	x = (int)all[i].getPosition_X();
-                	y = (int)all[i].getPosition_Y();
+            		
+            		int x_1, y_1, x_2, y_2;
+            		
+                	if (j == 0){
+            			
+                		before[i] = all[i];
+                		
+            		} else {
+            			
+            			x_1 = (int)before[i].x;
+            			y_1 = (int)before[i].y;
+            			
+            			x_2 = (int)all[i].x;
+            			y_2 = (int)all[i].y;
                 	
-                	g.setColor(Color.black);
-                    g.drawOval(x-1, y-1, 2, 2);
+            			g.setColor(Color.lightGray);
+            			g.drawLine(x_1, y_1, x_2, y_2);
+            			
+            			before[i] = all[i];
                 	
+            		}
                 }
+            	
+            	j++;
             }
-            
-            System.out.println("----");*/
             
             for(int i=0; i<allbodies.length; i++){
             	int x,y,m,v_x,v_y;
@@ -94,7 +111,7 @@ public class VisualiserPanel extends JPanel {
                 	g.fillOval(x-2,y-2,4,4);
                 	g.setColor(Color.black);
                 	g.drawOval(x-2,y-2,4,4);
-                	g.drawLine(x, y, x+v_x, y+v_y);;
+                	//g.drawLine(x, y, x+v_x, y+v_y);
             	}
             }
             
@@ -103,9 +120,9 @@ public class VisualiserPanel extends JPanel {
         public void updatePositions(Body[] pos){
             synchronized(this){
                 allbodies = pos;
-                /*Body[] b = new Body[allbodies.length];
-                System.arraycopy(allbodies, 0, b, 0, allbodies.length);
-                history.add(b);*/
+                P2d[] positions = new P2d[pos.length];
+                for (Body b : allbodies) positions[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
+                history.add(positions);
             }
             repaint();
         }
