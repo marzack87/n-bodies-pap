@@ -60,7 +60,7 @@ public class Generator {
 		posy_range = cont.visualiser_space.height - 5;
 		
 	}
-	
+	 
 	/**
 	 * Method initFromFile.
 	 * It recovers from the file the data necessary to the initialization of the bodies. 

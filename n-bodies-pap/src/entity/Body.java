@@ -73,7 +73,7 @@ public class Body {
 		
 		return Force;
 	} 
-	
+	 
 	/**
 	 * Method getPosition.
 	 * It returns a String representation of the Vector position of the body calling the method toString()
