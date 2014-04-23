@@ -33,8 +33,8 @@ public class Generator {
 	
 	private int posx_range;
 	private int posy_range;
-	private double vel_range = 25000; // m/s
-	private double mass_range = 4e24; // kg
+	private double vel_range = 50;
+	private double mass_range = 200;
 	
 	private double[] position_x;
 	private double[] position_y;
@@ -152,8 +152,8 @@ public class Generator {
 			context.allbodies[i] = new Body(pos, vel, mass, i);
 		}
 		
-		double mass_1 = 5e26;
-		P2d pos_1 = new P2d(400, 300);
+		double mass_1 = 500000;
+		P2d pos_1 = new P2d(context.visualiser_space.getWidth()/2, context.visualiser_space.getHeight()/2);
 		V2d vel_1 = new V2d(0, 0);
 		context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
 		/*double mass_2 = 500000;

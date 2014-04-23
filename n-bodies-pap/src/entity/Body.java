@@ -61,11 +61,11 @@ public class Body {
 	 * @see support.Vector
 	 */
 	public V2d forceFrom(Body that) {
-		double G = 6.67e-11;
+		double G = 6.67/*e-11*/;
 		V2d p_this = new V2d(this.p.x, this.p.y);
 		V2d p_that = new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.min(p_this);
-		double dist = (that.p.dist(this.p)*1e5);
+		double dist = that.p.dist(this.p);
 		double F = (G * (this.mass) * (that.mass)) / (dist * dist);
 		
 		V2d delta_normalized = delta.getNormalized();
