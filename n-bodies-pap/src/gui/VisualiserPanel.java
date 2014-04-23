@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.*;
 
@@ -46,17 +47,15 @@ public class VisualiserPanel extends JPanel {
             // sara poi il thread visualizer che avra' in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
             
             
-            int limit = 50;
-            if (history.size() > limit){
-            	List<P2d[]> sublist = history.subList(history.size() - (limit + 1), history.size() - 1);
-            	history.clear();
-            	history.addAll(sublist);
-            }
-            
             int j = 0;
             P2d[] before = new P2d[allbodies.length];
             
-            for (P2d[] all : history) {
+            ListIterator<P2d[]> it = history.listIterator();
+            
+            while (it.hasNext()) {
+            	
+            	P2d[] all = null;
+				all = it.next();
             	
             	for(int i=0; i<all.length; i++){
             		
@@ -132,7 +131,8 @@ public class VisualiserPanel extends JPanel {
                 P2d[] positions = new P2d[pos.length];
                 for (Body b : allbodies) positions[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
                 history.add(positions);
+                
+                repaint();
             }
-            repaint();
         }
 }
