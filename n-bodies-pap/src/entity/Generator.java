@@ -33,8 +33,8 @@ public class Generator {
 	
 	private int posx_range;
 	private int posy_range;
-	private int vel_range = 50;
-	private int mas_range = 200;
+	private double vel_range = 25000; // m/s
+	private double mass_range = 4e24; // kg
 	
 	private double[] position_x;
 	private double[] position_y;
@@ -130,7 +130,7 @@ public class Generator {
 			position_y[i] = (Math.random() * (posy_range - 1) ) + 1;
 			velocity_x[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
 			velocity_y[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
-			mass[i] = (Math.random() * mas_range) + 5;
+			mass[i] = (Math.random() * mass_range) + 5;
 		}
 		
 		// Initialize the context
@@ -152,7 +152,7 @@ public class Generator {
 			context.allbodies[i] = new Body(pos, vel, mass, i);
 		}
 		
-		double mass_1 = 500000;
+		double mass_1 = 5e26;
 		P2d pos_1 = new P2d(400, 300);
 		V2d vel_1 = new V2d(0, 0);
 		context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
