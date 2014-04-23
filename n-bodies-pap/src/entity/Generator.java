@@ -34,7 +34,7 @@ public class Generator {
 	private int posx_range = 800 - 5;
 	private int posy_range = 600 - 5;
 	private int vel_range = 50;
-	private int mas_range = 20;
+	private int mas_range = 200;
 	
 	private double[] position_x;
 	private double[] position_y;
@@ -125,8 +125,8 @@ public class Generator {
 		for (int i = 0; i < number; i++){
 			position_x[i] = (Math.random() * (posx_range - 1) ) + 1;
 			position_y[i] = (Math.random() * (posy_range - 1) ) + 1;
-			velocity_x[i] = (Math.random() * (vel_range - 1) ) + 1;
-			velocity_y[i] = (Math.random() * (vel_range - 1) ) + 1;
+			velocity_x[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
+			velocity_y[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
 			mass[i] = (Math.random() * mas_range) + 5;
 		}
 		
@@ -142,12 +142,30 @@ public class Generator {
 	public void initBody(){
 		context.allbodies = new Body[number];
 		double[][] data = this.getData();
-			for(int i = 0; i < number; i++){
-				double mass = data[4][i];
-				P2d pos = new P2d(data[0][i], data[1][i]);
-				V2d vel = new V2d(data[2][i], data[3][i]);
-				context.allbodies[i] = new Body(pos, vel, mass, i);
-			}
+		for(int i = 0; i < number; i++){
+			double mass = data[4][i];
+			P2d pos = new P2d(data[0][i], data[1][i]);
+			V2d vel = new V2d(data[2][i], data[3][i]);
+			context.allbodies[i] = new Body(pos, vel, mass, i);
+		}
+		
+		double mass_1 = 500000;
+		P2d pos_1 = new P2d(400, 300);
+		V2d vel_1 = new V2d(0, 0);
+		context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
+		/*double mass_2 = 500000;
+		P2d pos_2 = new P2d(600, 300);
+		V2d vel_2 = new V2d(0, 0);
+		context.allbodies[number-2] = new Body(pos_2, vel_2, mass_2, number-2);
+		double mass_3 = 500000;
+		P2d pos_3 = new P2d(400, 200);
+		V2d vel_3 = new V2d(0, 0);
+		context.allbodies[number-3] = new Body(pos_3, vel_3, mass_3, number-3);
+		double mass_4 = 500000;
+		P2d pos_4 = new P2d(400, 400);
+		V2d vel_4 = new V2d(0, 0);
+		context.allbodies[number-4] = new Body(pos_4, vel_4, mass_4, number-4);
+		*/
 		
 	}
 	

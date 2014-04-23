@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-
 import entity.Body;
 import support.Context;
 
@@ -62,6 +61,7 @@ public class Simulator extends Thread {
 		 * - AGGIORNIAMO I DATI
 		 * - LI PASSIAMO AL VISUALIZZATORE 
 		 */
+		
 		Body [] all_bodies = context.allbodies;
 		for (int i = 0; i < all_bodies.length; i++){
 			Callable<Body> task = new BodyTask(all_bodies, i);

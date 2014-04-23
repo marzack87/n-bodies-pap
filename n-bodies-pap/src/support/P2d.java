@@ -17,13 +17,17 @@ public class P2d implements java.io.Serializable {
 
     public P2d sum(V2d v){
     	double x1 = x+v.x;
+    	/*
     	if(x+v.x > 800){
     		x1 = x+v.x-800;
     	}
+    	*/
     	double y1 = y+v.y;
+    	/*
     	if(y+v.y > 600){
     		y1 = y+v.y-600; 
     	}
+    	*/
         return new P2d(x1,y1);
     }
 
@@ -32,7 +36,7 @@ public class P2d implements java.io.Serializable {
     }
     
     public double dist(P2d p){
-    	return Math.sqrt((x-p.x)*(x-p.x)+(y-p.y)*(y-p.y));
+    	return Math.sqrt(( x - p.x )*( x - p.x )+( y - p.y )*( y - p.y ));
     	
     }
 
