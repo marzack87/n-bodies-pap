@@ -85,6 +85,8 @@ public class Controller {
 	
 	public void stopSimulation(){
 		simulator.suicide();
+		sem.release();
+		visualiser.suicide();
 	}
 	
 	public boolean SimulationIsAlive(){

@@ -22,6 +22,7 @@ public class Visualiser extends Thread {
     private Context cont;
     private VisualiserPanel v;
     private Semaphore sem;
+    private boolean simulation;
     
     /**
 	 * Class Visualiser constructor.
@@ -36,11 +37,12 @@ public class Visualiser extends Thread {
     public Visualiser(Context cont, Semaphore sem){
     	this.cont = cont;
     	this.sem = sem;
+    	simulation = true;
     }
     
     public void run(){
     	log("I'm running..");
-    	while(true){ 
+    	while(simulation){ 
     		try {
 				this.sem.acquire();
 			} catch (InterruptedException e) {
@@ -49,7 +51,12 @@ public class Visualiser extends Thread {
     		Body[] position = cont.allbodies;
     		v.updatePositions(position);
     	}
+    	log("I'm dying..");
     }
+    
+    public void suicide(){
+		simulation = false;
+	}
     
     /**
      * Private method log.

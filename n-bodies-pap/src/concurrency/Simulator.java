@@ -26,9 +26,10 @@ public class Simulator extends Thread {
 	}
 	
 	public void run(){
+		log("I'm running..");
 		while (simulation){
-			while(go){
-				loop();
+			if (go == true){
+					loop();
 			}
 		}
 		log("I'm dying..");
@@ -65,7 +66,7 @@ public class Simulator extends Thread {
 		 * - LI PASSIAMO AL VISUALIZZATORE 
 		 */
 		try {
-			sleep(333);
+			sleep(100);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
