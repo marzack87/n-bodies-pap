@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -42,7 +43,15 @@ public class VisualiserPanel extends JPanel {
 
         public void paint(Graphics g){
             g.clearRect(0,0,this.getWidth(),this.getHeight());
-            // sara poi il thread visualizer che avra in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
+            // sara poi il thread visualizer che avra' in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
+            
+            
+            int limit = 50;
+            if (history.size() > limit){
+            	List<P2d[]> sublist = history.subList(history.size() - (limit + 1), history.size() - 1);
+            	history.clear();
+            	history.addAll(sublist);
+            }
             
             int j = 0;
             P2d[] before = new P2d[allbodies.length];
