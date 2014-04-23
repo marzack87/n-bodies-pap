@@ -31,8 +31,8 @@ public class Generator {
  */
 	private int number;
 	
-	private int posx_range = 800 - 5;
-	private int posy_range = 600 - 5;
+	private int posx_range;
+	private int posy_range;
 	private int vel_range = 50;
 	private int mas_range = 200;
 	
@@ -55,7 +55,10 @@ public class Generator {
 	public Generator(Context cont){
 		 
 		context = cont;
-	
+		
+		posx_range = cont.visualiser_space.width - 5;
+		posy_range = cont.visualiser_space.height - 5;
+		
 	}
 	
 	/**

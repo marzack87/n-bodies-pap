@@ -2,6 +2,7 @@ package entity;
 
 import gui.VisualiserPanel;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.util.concurrent.Semaphore;
 
@@ -132,5 +133,12 @@ public class Controller {
 		}
 	}
 	
+	public Dimension getVisualizerSpace(){
+		return context.visualiser_space;
+	}
 
+	public Dimension getAvailableSpace(){
+		return context.available_space;
+	}
+	
 }

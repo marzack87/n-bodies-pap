@@ -30,7 +30,7 @@ public class VisualiserPanel extends JPanel {
 		 * @param contr Controller entity
 		 **/
         public VisualiserPanel(Controller contr){
-            setSize(800,600);
+            setSize(contr.getVisualizerSpace());
             controller = contr;
             allbodies = controller.getAllBodiesFromContext();
             /*Body[] b = new Body[allbodies.length];

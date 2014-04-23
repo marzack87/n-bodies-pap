@@ -34,7 +34,7 @@ public class GalaxyFrame extends JFrame{
 	public GalaxyFrame(String title, Controller contr){
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(980,630);
+		setSize(contr.getAvailableSpace());
 		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		

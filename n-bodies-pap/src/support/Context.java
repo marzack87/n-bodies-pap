@@ -1,5 +1,8 @@
 package support;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import entity.Body;
 
 /**
@@ -15,13 +18,19 @@ public class Context {
     // per rimettere allbodies privato dovremo implementare i metodi per la restituzione dei body 
 	public Body[] allbodies;
 	public Boolean stop;
+	public Dimension available_space;
+	public Dimension visualiser_space;
 	
 	/**
 	 * Class Context default constructor.
 	 *
 	 **/
     public Context(){
-    	
+    	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    	int w = (int) screenSize.getWidth() - 50;
+    	int h = (int) screenSize.getHeight() - 50;
+    	available_space = new Dimension(w, h);
+    	visualiser_space = new Dimension(w - 180, h - 30);
     } 
     
     /**
