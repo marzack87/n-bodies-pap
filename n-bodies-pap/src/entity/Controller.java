@@ -24,7 +24,7 @@ public class Controller {
 	private Generator gen; 
 	private Simulator simulator;
 	private Visualiser visualiser;
-	Semaphore sem = new Semaphore(0);
+	Semaphore sem = new Semaphore(0); 
 	
 	/**
 	 * Class Controller constructor.

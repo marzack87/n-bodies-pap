@@ -166,4 +166,8 @@ public class Body {
 	public int getIndex(){
 		return index;
 	}
+	
+	public String toString(){
+        return "----\nBody\nposition("+p.x+","+p.y+")\nvelocity("+v.x+","+v.y+")\nmass " + mass+"\nindex " +index +"\n-----";
+    }
 }

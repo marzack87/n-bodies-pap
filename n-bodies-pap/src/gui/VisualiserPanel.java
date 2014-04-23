@@ -23,7 +23,7 @@ public class VisualiserPanel extends JPanel {
 		
 		private Controller controller;
 		private Body[] allbodies;
-		private ArrayList<Body[]> history = new ArrayList<Body[]>();
+		//private ArrayList<Body[]> history = new ArrayList<Body[]>();
 		/**
 		 * Class VisualiserPanel constructor.
 		 * 
@@ -33,16 +33,18 @@ public class VisualiserPanel extends JPanel {
             setSize(800,600);
             controller = contr;
             allbodies = controller.getAllBodiesFromContext();
-            history.add(allbodies);
+            /*Body[] b = new Body[allbodies.length];
+            System.arraycopy(allbodies, 0, b, 0, allbodies.length);
+            history.add(b);*/
         }
 
         public void paint(Graphics g){
             g.clearRect(0,0,this.getWidth(),this.getHeight());
             // sara poi il thread visualizer che avra in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
             
-            for (Body[] all : history) {
+            /*for (Body[] all : history) {
             	
-            	System.out.println("culo");
+            	System.out.println("culo" + all[0]);
             	
             	for(int i=0; i<all.length; i++){
                 	int x,y;
@@ -55,14 +57,17 @@ public class VisualiserPanel extends JPanel {
                 }
             }
             
-            System.out.println("----");
+            System.out.println("----");*/
             
             for(int i=0; i<allbodies.length; i++){
-            	int x,y,m;
+            	int x,y,m,v_x,v_y;
             	Color c = null;
             	x = (int)allbodies[i].getPosition_X();
             	y = (int)allbodies[i].getPosition_Y();
             	m = (int)allbodies[i].getMassValue();
+            	
+            	v_x = (int)allbodies[i].getVelocity_X();
+            	v_y = (int)allbodies[i].getVelocity_Y();
             	
             	// We divide to the range of the masses in four bands and assegnamo a color, 
             	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and gray bigger masses. 
@@ -89,6 +94,7 @@ public class VisualiserPanel extends JPanel {
                 	g.fillOval(x-2,y-2,4,4);
                 	g.setColor(Color.black);
                 	g.drawOval(x-2,y-2,4,4);
+                	g.drawLine(x, y, x+v_x, y+v_y);;
             	}
             }
             
@@ -97,7 +103,9 @@ public class VisualiserPanel extends JPanel {
         public void updatePositions(Body[] pos){
             synchronized(this){
                 allbodies = pos;
-                history.add(pos);
+                /*Body[] b = new Body[allbodies.length];
+                System.arraycopy(allbodies, 0, b, 0, allbodies.length);
+                history.add(b);*/
             }
             repaint();
         }

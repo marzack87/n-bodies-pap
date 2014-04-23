@@ -31,10 +31,12 @@ public class Simulator extends Thread {
 				loop();
 			}
 		}
+		log("I'm dying..");
 	}
 	
 	public void play(){
 		go = true;
+		log("Simulation started");
 	}
 	
 	public void pause(){
@@ -43,6 +45,7 @@ public class Simulator extends Thread {
 	
 	public void step(){
 		loop();
+		log("Step");
 	}
 	
 	public void suicide(){
@@ -61,7 +64,11 @@ public class Simulator extends Thread {
 		 * - AGGIORNIAMO I DATI
 		 * - LI PASSIAMO AL VISUALIZZATORE 
 		 */
-		
+		try {
+			sleep(333);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		Body [] all_bodies = context.allbodies;
 		for (int i = 0; i < all_bodies.length; i++){
 			Callable<Body> task = new BodyTask(all_bodies, i);
@@ -81,5 +88,15 @@ public class Simulator extends Thread {
 		list.clear();
 		this.sem.release();
 	}
+	
+	/**
+     * Private method log.
+     * Prints to the console a log of the activity of the Visualiser.
+     * 
+     * @param msg the message to be printed
+     */
+	private void log(String msg){
+        System.out.println("[SIMULATOR] "+msg);
+    }
 	
 }

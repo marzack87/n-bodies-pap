@@ -39,6 +39,7 @@ public class Visualiser extends Thread {
     }
     
     public void run(){
+    	log("I'm running..");
     	while(true){ 
     		try {
 				this.sem.acquire();
