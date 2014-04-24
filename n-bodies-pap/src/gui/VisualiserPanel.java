@@ -46,11 +46,14 @@ public class VisualiserPanel extends JPanel {
             g.clearRect(0,0,this.getWidth(),this.getHeight());
             // sara poi il thread visualizer che avra' in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
             
+            ArrayList<P2d[]> h = new ArrayList<P2d[]>();
+            
+            h.addAll(history);
             
             int j = 0;
             P2d[] before = new P2d[allbodies.length];
             
-            ListIterator<P2d[]> it = history.listIterator();
+            ListIterator<P2d[]> it = h.listIterator();
             
             while (it.hasNext()) {
             	
