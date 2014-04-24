@@ -82,9 +82,9 @@ public class Controller {
 	 * 
 	 * @param n Number of Body
 	 */
-	public void initWithRandomData(int n){
+	public void initWithRandomData(int n, boolean sun){
 		
-		gen.initWithRandomData(n);
+		gen.initWithRandomData(n, sun);
 		
 	}
 	

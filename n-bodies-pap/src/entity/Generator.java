@@ -110,7 +110,7 @@ public class Generator {
 		}
 		
 		// Initialize the context
-		this.initBody();
+		this.initBody(false);
 		//this.print_body();
 	}
 	
@@ -120,7 +120,7 @@ public class Generator {
 	 * 
 	 * @param n Number of Body
 	 */
-	public void initWithRandomData(int n){
+	public void initWithRandomData(int n, boolean sun){
 		number = n;
 		position_x = new double[number];
 		position_y = new double[number];
@@ -137,7 +137,7 @@ public class Generator {
 		}
 		
 		// Initialize the context
-		this.initBody();
+		this.initBody(sun);
 		//this.print_body();
 	}
 	
@@ -145,7 +145,7 @@ public class Generator {
 	 * Method initBody.
 	 * It creates and updates the array list of the Body Objects with the data taken from the initialization(both choice methods: random and from file).
 	 */
-	public void initBody(){
+	public void initBody(boolean sun){
 		context.allbodies = new Body[number];
 		double[][] data = this.getData();
 		for(int i = 0; i < number; i++){
@@ -154,24 +154,25 @@ public class Generator {
 			V2d vel = new V2d(data[2][i], data[3][i]);
 			context.allbodies[i] = new Body(pos, vel, mass, i);
 		}
-		
-		double mass_1 = 500000000;
-		P2d pos_1 = new P2d(context.visualiser_space.getWidth()/2, context.visualiser_space.getHeight()/2);
-		V2d vel_1 = new V2d(0, 0);
-		context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
-		/*double mass_2 = 500000;
-		P2d pos_2 = new P2d(600, 300);
-		V2d vel_2 = new V2d(0, 0);
-		context.allbodies[number-2] = new Body(pos_2, vel_2, mass_2, number-2);
-		double mass_3 = 500000;
-		P2d pos_3 = new P2d(400, 200);
-		V2d vel_3 = new V2d(0, 0);
-		context.allbodies[number-3] = new Body(pos_3, vel_3, mass_3, number-3);
-		double mass_4 = 500000;
-		P2d pos_4 = new P2d(400, 400);
-		V2d vel_4 = new V2d(0, 0);
-		context.allbodies[number-4] = new Body(pos_4, vel_4, mass_4, number-4);
-		*/
+		if(sun){
+			double mass_1 = 500000000;
+			P2d pos_1 = new P2d(context.visualiser_space.getWidth()/2, context.visualiser_space.getHeight()/2);
+			V2d vel_1 = new V2d(0, 0);
+			context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
+			/*double mass_2 = 500000;
+			P2d pos_2 = new P2d(600, 300);
+			V2d vel_2 = new V2d(0, 0);
+			context.allbodies[number-2] = new Body(pos_2, vel_2, mass_2, number-2);
+			double mass_3 = 500000;
+			P2d pos_3 = new P2d(400, 200);
+			V2d vel_3 = new V2d(0, 0);
+			context.allbodies[number-3] = new Body(pos_3, vel_3, mass_3, number-3);
+			double mass_4 = 500000;
+			P2d pos_4 = new P2d(400, 400);
+			V2d vel_4 = new V2d(0, 0);
+			context.allbodies[number-4] = new Body(pos_4, vel_4, mass_4, number-4);
+			*/
+		}
 		
 	}
 	

@@ -161,7 +161,7 @@ public class VisualiserPanel extends JPanel {
                 allbodies = pos;
                 P2d[] positions = new P2d[pos.length];
                 for (Body b : allbodies) positions[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
-                if (history.size() >= 100) history.remove(0);
+                if (history.size() >= 50) history.remove(0);
                 history.add(positions);
                 
                 repaint();

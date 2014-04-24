@@ -33,7 +33,7 @@ public class BodyTask implements Callable<Body> {
 			}
 		}
 		
-		me.move(force, dt);
+		if(me.getMassValue() != 500000000)me.move(force, dt);
 		
 		return me;
 	}

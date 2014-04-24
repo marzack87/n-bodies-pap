@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +29,8 @@ public class BodyDialog extends JDialog implements ActionListener{
 	
 	private MainPanel mp;
 	private JTextField body;
+	private JButton well;
+	private JCheckBox sun;
 	
 	/**
 	 * Class BodyDialog constructor.
@@ -49,7 +52,10 @@ public class BodyDialog extends JDialog implements ActionListener{
 		body = new JTextField("100");
 		add(body,BorderLayout.CENTER);
 		body.setHorizontalAlignment(JLabel.CENTER);
-		JButton well = new JButton("OK");
+		sun = new JCheckBox("Sun");
+		sun.setSelected(true);
+		add(sun,BorderLayout.EAST);
+		well = new JButton("OK");
 		well.addActionListener(this);
 		add(well,BorderLayout.SOUTH);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
@@ -58,14 +64,14 @@ public class BodyDialog extends JDialog implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		
-		try{
-			int n = Integer.parseInt(body.getText());
-			mp.initWithRandom(n);
-		}catch(Exception ex) { 
-			System.err.println(ex); 
-			JOptionPane.showMessageDialog(this, "Wrong input data, a number MUST be inserted!!!", "Error", JOptionPane.ERROR_MESSAGE, null);
-		}
-		this.setVisible(false);
+			try{
+				int n = Integer.parseInt(body.getText());
+				mp.initWithRandom(n,sun.isSelected());
+			}catch(Exception ex) { 
+				System.err.println(ex); 
+				JOptionPane.showMessageDialog(this, "Wrong input data, a number MUST be inserted!!!", "Error", JOptionPane.ERROR_MESSAGE, null);
+			}
+			this.setVisible(false);
 		
 	}
 

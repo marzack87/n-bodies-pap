@@ -92,9 +92,9 @@ public class MainPanel extends JPanel implements ActionListener{
 	 * 
 	 * @param number - Number of Body taken from the BodyDialog.
 	 */
-	public void initWithRandom(int number){
+	public void initWithRandom(int number, boolean sun){
 
-		contr.initWithRandomData(number);
+		contr.initWithRandomData(number, sun);
 		
 		GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", contr);
 		gframe.setVisible(true);
