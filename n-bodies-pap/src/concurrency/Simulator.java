@@ -70,6 +70,7 @@ public class Simulator extends Thread {
 		for (int i = 0; i < all_bodies.length; i++){
 			Callable<Body> task = new BodyTask(all_bodies, i, dt);
 			Future<Body> submit = exec.submit(task);
+			//System.out.println(exec.toString());
 			list.add(submit);
 		}
 		for (Future<Body> future : list){
