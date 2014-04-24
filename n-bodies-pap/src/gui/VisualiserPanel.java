@@ -51,6 +51,8 @@ public class VisualiserPanel extends JPanel {
         	Dimension d = getSize();
         	g2.setBackground(Color.black);
         	g2.clearRect(0,0,d.width,d.height);
+        	
+        	double[] levels = controller.getMassLevels();
             
         	//g.clearRect(0,0,this.getWidth(),this.getHeight());
             // sara poi il thread visualizer che avra' in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
@@ -90,13 +92,14 @@ public class VisualiserPanel extends JPanel {
 	            			double mass = allbodies[i].getMassValue();
 	            			Color c = null;
 	            			
-	            			if (mass <= 10) {
+	            			
+	            			if (mass <= levels[0]) {
 	                    		c = controller.dark_one;
-	                    	} else if (mass <= 50) {
+	                    	} else if (mass <= levels[1]) {
 	                    		c = controller.dark_two;
-	                    	} else if (mass <= 100) {
+	                    	} else if (mass <= levels[2]) {
 	                    		c = controller.dark_three;
-	                    	} else if (mass <= 200) {
+	                    	} else if (mass <= levels[3]) {
 	                    		c = controller.dark_five;
 	                    	}
 	            			
@@ -124,19 +127,19 @@ public class VisualiserPanel extends JPanel {
             	
             	// We divide to the range of the masses in four bands and assegnamo a color, 
             	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and gray bigger masses. 
-            	if (m <= 10) {
+            	if (m <= levels[0]) {
             		c = controller.light_one;
-            	} else if (m <= 50) {
+            	} else if (m <= levels[1]) {
             		c = controller.light_two;
-            	} else if (m <= 100) {
+            	} else if (m <= levels[2]) {
             		c = controller.light_three;
-            	} else if (m <= 200) {
+            	} else if (m <= levels[3]) {
             		c = controller.light_five;
             	}
             	
             	
             	
-            	if (m > 300) {
+            	if (m > levels[3] + 100) {
             		c = controller.sun;
             		g.setColor(c);
                 	g.fillOval(x-10,y-10,20,20);

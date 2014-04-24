@@ -178,4 +178,14 @@ public class Controller {
 		context.dt = dt;
 	}
 	
+	public double[] getMassLevels(){
+		double[] levels = new double[4];
+		levels[0] = context.mass_range / 10;
+		levels[1] = context.mass_range / 4;
+		levels[2] = context.mass_range / 2;
+		levels[3] = context.mass_range;
+		return levels;
+		
+	}
+	
 }

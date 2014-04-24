@@ -33,7 +33,7 @@ public class BodyTask implements Callable<Body> {
 			}
 		}
 		
-		if (me.getMassValue() < 300) me.move(force, dt);
+		me.move(force, dt);
 		
 		return me;
 	}

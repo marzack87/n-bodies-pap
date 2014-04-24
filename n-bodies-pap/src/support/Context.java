@@ -20,6 +20,10 @@ public class Context {
 	public Boolean stop;
 	public Dimension available_space;
 	public Dimension visualiser_space;
+	
+	public double vel_range = 50;
+	public double mass_range = 500; 
+	
 	public double dt;
 	
 	/**
