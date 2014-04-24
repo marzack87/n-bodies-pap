@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import support.Util;
 import concurrency.Visualiser;
 import entity.Controller;
 
@@ -239,15 +240,15 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	    Color c = null;
 	    
 	    if (type == 1) {
-	    	c = controller.light_one;
+	    	c = Util.light_one;
 	    } else if (type == 2) {
-	    	c = controller.light_two;
+	    	c = Util.light_two;
 	    } else if (type == 3) {
-	    	c = controller.light_three;
+	    	c = Util.light_three;
 	    } else if (type == 4) {
-	    	c = controller.light_five;
+	    	c = Util.light_five;
 	    } else if (type == 5) {
-	    	c = controller.sun;
+	    	c = Util.sun;
 	    }
 	    
 	    g.setColor(c);

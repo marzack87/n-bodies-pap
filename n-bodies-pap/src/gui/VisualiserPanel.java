@@ -12,6 +12,7 @@ import java.util.ListIterator;
 import javax.swing.*;
 
 import support.P2d;
+import support.Util;
 import entity.Body;
 import entity.Controller;
 
@@ -37,7 +38,7 @@ public class VisualiserPanel extends JPanel {
 		 * @param contr Controller entity
 		 **/
         public VisualiserPanel(Controller contr){
-            setSize(contr.getVisualizerSpace());
+            setSize(Util.VisualiserAvailableSpace());
             controller = contr;
             allbodies = controller.getAllBodiesFromContext();
             P2d[] pos = new P2d[allbodies.length];
@@ -52,7 +53,7 @@ public class VisualiserPanel extends JPanel {
         	g2.setBackground(Color.black);
         	g2.clearRect(0,0,d.width,d.height);
         	
-        	double[] levels = controller.getMassLevels();
+        	double[] levels = Util.massLevels();
             
         	//g.clearRect(0,0,this.getWidth(),this.getHeight());
             // sara poi il thread visualizer che avra' in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
@@ -94,13 +95,13 @@ public class VisualiserPanel extends JPanel {
 	            			
 	            			
 	            			if (mass <= levels[0]) {
-	                    		c = controller.dark_one;
+	                    		c = Util.dark_one;
 	                    	} else if (mass <= levels[1]) {
-	                    		c = controller.dark_two;
+	                    		c = Util.dark_two;
 	                    	} else if (mass <= levels[2]) {
-	                    		c = controller.dark_three;
+	                    		c = Util.dark_three;
 	                    	} else if (mass <= levels[3]) {
-	                    		c = controller.dark_five;
+	                    		c = Util.dark_five;
 	                    	}
 	            			
 	            			g.setColor(c);
@@ -128,19 +129,19 @@ public class VisualiserPanel extends JPanel {
             	// We divide to the range of the masses in four bands and assegnamo a color, 
             	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and gray bigger masses. 
             	if (m <= levels[0]) {
-            		c = controller.light_one;
+            		c = Util.light_one;
             	} else if (m <= levels[1]) {
-            		c = controller.light_two;
+            		c = Util.light_two;
             	} else if (m <= levels[2]) {
-            		c = controller.light_three;
+            		c = Util.light_three;
             	} else if (m <= levels[3]) {
-            		c = controller.light_five;
+            		c = Util.light_five;
             	}
             	
             	
             	
-            	if (m > levels[3] + 100) {
-            		c = controller.sun;
+            	if (m == Util.SUN_MASS) {
+            		c = Util.sun;
             		g.setColor(c);
                 	g.fillOval(x-10,y-10,20,20);
                 	g.setColor(Color.red);
@@ -161,7 +162,7 @@ public class VisualiserPanel extends JPanel {
                 allbodies = pos;
                 P2d[] positions = new P2d[pos.length];
                 for (Body b : allbodies) positions[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
-                if (history.size() >= 50) history.remove(0);
+                if (history.size() >= 100) history.remove(0);
                 history.add(positions);
                 
                 repaint();

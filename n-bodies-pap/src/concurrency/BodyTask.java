@@ -2,6 +2,7 @@ package concurrency;
 
 import java.util.concurrent.Callable;
 
+import support.Util;
 import support.V2d;
 import entity.Body;
 
@@ -33,7 +34,7 @@ public class BodyTask implements Callable<Body> {
 			}
 		}
 		
-		if(me.getMassValue() != 500000000)me.move(force, dt);
+		if(me.getMassValue() != Util.SUN_MASS)me.move(force, dt);
 		
 		return me;
 	}

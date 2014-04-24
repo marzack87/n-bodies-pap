@@ -2,8 +2,10 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
+
 import javax.swing.*;
 
+import support.Util;
 import concurrency.Visualiser;
 import entity.Controller;
 
@@ -34,7 +36,7 @@ public class GalaxyFrame extends JFrame{
 	public GalaxyFrame(String title, Controller contr){
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(contr.getAvailableSpace());
+		setSize(Util.displayAvailableSpace());
 		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		

@@ -31,31 +31,6 @@ public class Controller {
 	
 	Semaphore sem = new Semaphore(0); 
 	
-	// emerald
-	public final Color one = new Color(0x00CD7B);
-	// peter river
-	public final Color two = new Color(0x48A3DA);
-	// amethyst
-	public final Color three = new Color(0x9F57B1);
-	// wet asphalt
-	public final Color four = new Color(0x34495C);
-	// alizarin
-	public final Color five = new Color(0xEB4942);
-	// sun flower
-	public final Color sun = new Color(0xF1C442);
-	
-	public final Color dark_one = new Color(0x009D63);
-	public final Color dark_two = new Color(0x20719D);
-	public final Color dark_three = new Color(0x7D3F84);
-	public final Color dark_four = new Color(0x253542);
-	public final Color dark_five = new Color(0xA72C2E);
-	
-	public final Color light_one = new Color(0x00FCA2);
-	public final Color light_two = new Color(0x39B5FA);
-	public final Color light_three = new Color(0xEC7CF8);
-	public final Color light_four = new Color(0x6A91B1);
-	public final Color light_five = new Color(0xFF8982);
-	
 	/**
 	 * Class Controller constructor.
 	 * Initialize an object Generator and take a references of the context.
@@ -166,26 +141,10 @@ public class Controller {
 		}
 	}
 	
-	public Dimension getVisualizerSpace(){
-		return context.visualiser_space;
-	}
-
-	public Dimension getAvailableSpace(){
-		return context.available_space;
-	}
-	
 	public void setDeltaT(double dt){
 		context.dt = dt;
 	}
 	
-	public double[] getMassLevels(){
-		double[] levels = new double[4];
-		levels[0] = context.mass_range / 10;
-		levels[1] = context.mass_range / 4;
-		levels[2] = context.mass_range / 2;
-		levels[3] = context.mass_range;
-		return levels;
-		
-	}
+	
 	
 }

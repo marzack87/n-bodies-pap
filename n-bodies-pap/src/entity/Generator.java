@@ -56,11 +56,11 @@ public class Generator {
 		 
 		context = cont;
 		
-		posx_range = cont.visualiser_space.width - 5;
-		posy_range = cont.visualiser_space.height - 5;
+		posx_range = Util.VisualiserAvailableSpace().width - 5;
+		posy_range = Util.VisualiserAvailableSpace().height - 5;
 		
-		vel_range = cont.vel_range;
-		mass_range = cont.mass_range;
+		vel_range = Util.RANGE_BODIES_VELOCITY;
+		mass_range = Util.RANGE_BODIES_MASS;
 		
 	}
 	 
@@ -155,19 +155,19 @@ public class Generator {
 			context.allbodies[i] = new Body(pos, vel, mass, i);
 		}
 		if(sun){
-			double mass_1 = 500000000;
-			P2d pos_1 = new P2d(context.visualiser_space.getWidth()/2, context.visualiser_space.getHeight()/2);
+			double mass_1 = Util.SUN_MASS;
+			P2d pos_1 = new P2d(Util.VisualiserAvailableSpace().getWidth()/2, Util.VisualiserAvailableSpace().getHeight()/2);
 			V2d vel_1 = new V2d(0, 0);
 			context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
-			/*double mass_2 = 500000;
+			/*double mass_2 = Util.SUN_MASS;
 			P2d pos_2 = new P2d(600, 300);
 			V2d vel_2 = new V2d(0, 0);
 			context.allbodies[number-2] = new Body(pos_2, vel_2, mass_2, number-2);
-			double mass_3 = 500000;
+			double mass_3 = Util.SUN_MASS;
 			P2d pos_3 = new P2d(400, 200);
 			V2d vel_3 = new V2d(0, 0);
 			context.allbodies[number-3] = new Body(pos_3, vel_3, mass_3, number-3);
-			double mass_4 = 500000;
+			double mass_4 = Util.SUN_MASS;
 			P2d pos_4 = new P2d(400, 400);
 			V2d vel_4 = new V2d(0, 0);
 			context.allbodies[number-4] = new Body(pos_4, vel_4, mass_4, number-4);
