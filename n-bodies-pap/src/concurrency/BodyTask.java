@@ -11,14 +11,17 @@ public class BodyTask implements Callable<Body> {
 	private final int my_index;
 	private Body me;
 	
+	private double dt;
+	
 	/**
 	 * Class BodyTask default constructor.
 	 *
 	 **/
-	public BodyTask(Body[] all, int i){
+	public BodyTask(Body[] all, int i, double delta_t){
 		all_bodies = all;
 		my_index = i;
 		me = all_bodies[my_index];
+		dt = delta_t;
 	}
 	
 	public Body call() throws Exception {
@@ -27,12 +30,10 @@ public class BodyTask implements Callable<Body> {
 		for (int i = 0; i < all_bodies.length; i++) {
 			if (i != my_index) {
 				force = force.sum(me.forceFrom(all_bodies[i]));
-				//System.out.println("F " + force);
-				
 			}
 		}
-		//System.out.println("Res " + force);
-		if (me.getMassValue() < 300) me.move(force);
+		
+		if (me.getMassValue() < 300) me.move(force, dt);
 		
 		return me;
 	}

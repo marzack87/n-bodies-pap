@@ -152,11 +152,11 @@ public class Generator {
 			context.allbodies[i] = new Body(pos, vel, mass, i);
 		}
 		
-		double mass_1 = 500000;
+		/*double mass_1 = 500000;
 		P2d pos_1 = new P2d(context.visualiser_space.getWidth()/2, context.visualiser_space.getHeight()/2);
 		V2d vel_1 = new V2d(0, 0);
 		context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
-		/*double mass_2 = 500000;
+		double mass_2 = 500000;
 		P2d pos_2 = new P2d(600, 300);
 		V2d vel_2 = new V2d(0, 0);
 		context.allbodies[number-2] = new Body(pos_2, vel_2, mass_2, number-2);

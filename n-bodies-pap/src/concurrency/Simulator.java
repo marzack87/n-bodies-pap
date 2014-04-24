@@ -65,14 +65,10 @@ public class Simulator extends Thread {
 		 * - AGGIORNIAMO I DATI
 		 * - LI PASSIAMO AL VISUALIZZATORE 
 		 */
-		try {
-			sleep(100);
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
 		Body [] all_bodies = context.allbodies;
+		double dt = context.dt;
 		for (int i = 0; i < all_bodies.length; i++){
-			Callable<Body> task = new BodyTask(all_bodies, i);
+			Callable<Body> task = new BodyTask(all_bodies, i, dt);
 			Future<Body> submit = exec.submit(task);
 			list.add(submit);
 		}

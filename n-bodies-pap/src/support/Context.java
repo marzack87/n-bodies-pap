@@ -20,6 +20,7 @@ public class Context {
 	public Boolean stop;
 	public Dimension available_space;
 	public Dimension visualiser_space;
+	public double dt;
 	
 	/**
 	 * Class Context default constructor.
@@ -31,6 +32,7 @@ public class Context {
     	int h = (int) screenSize.getHeight() - 50;
     	available_space = new Dimension(w, h);
     	visualiser_space = new Dimension(w - 180, h - 30);
+    	dt = 0.001;
     } 
     
     /**

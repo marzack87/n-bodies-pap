@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,7 @@ public class VisualiserPanel extends JPanel {
 		private Controller controller;
 		private Body[] allbodies;
 		private ArrayList<P2d[]> history = new ArrayList<P2d[]>();
+		
 		/**
 		 * Class VisualiserPanel constructor.
 		 * 
@@ -43,49 +46,71 @@ public class VisualiserPanel extends JPanel {
         }
 
         public void paint(Graphics g){
-            g.clearRect(0,0,this.getWidth(),this.getHeight());
+        	
+        	Graphics2D g2 = (Graphics2D) g;
+        	Dimension d = getSize();
+        	g2.setBackground(Color.black);
+        	g2.clearRect(0,0,d.width,d.height);
+            
+        	//g.clearRect(0,0,this.getWidth(),this.getHeight());
             // sara poi il thread visualizer che avra' in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
             
-            ArrayList<P2d[]> h = new ArrayList<P2d[]>();
-            
-            h.addAll(history);
-            
-            int j = 0;
-            P2d[] before = new P2d[allbodies.length];
-            
-            ListIterator<P2d[]> it = h.listIterator();
-            
-            while (it.hasNext()) {
-            	
-            	P2d[] all = null;
-				all = it.next();
-            	
-            	for(int i=0; i<all.length; i++){
-            		
-            		int x_1, y_1, x_2, y_2;
-            		
-                	if (j == 0){
-            			
-                		before[i] = all[i];
-                		
-            		} else {
-            			
-            			x_1 = (int)before[i].x;
-            			y_1 = (int)before[i].y;
-            			
-            			x_2 = (int)all[i].x;
-            			y_2 = (int)all[i].y;
-                	
-            			g.setColor(Color.lightGray);
-            			g.drawLine(x_1, y_1, x_2, y_2);
-            			
-            			before[i] = all[i];
-                	
-            		}
-                }
-            	
-            	j++;
-            }
+        	if (controller.tracks) {
+        	
+	            ArrayList<P2d[]> h = new ArrayList<P2d[]>();
+	            
+	            h.addAll(history);
+	            
+	            int j = 0;
+	            P2d[] before = new P2d[allbodies.length];
+	            
+	            ListIterator<P2d[]> it = h.listIterator();
+	            
+	            while (it.hasNext()) {
+	            	
+	            	P2d[] all = null;
+					all = it.next();
+	            	
+	            	for(int i=0; i<all.length; i++){
+	            		
+	            		int x_1, y_1, x_2, y_2;
+	            		
+	                	if (j == 0){
+	            			
+	                		before[i] = all[i];
+	                		
+	            		} else {
+	            			
+	            			x_1 = (int)before[i].x;
+	            			y_1 = (int)before[i].y;
+	            			
+	            			x_2 = (int)all[i].x;
+	            			y_2 = (int)all[i].y;
+	            			
+	            			double mass = allbodies[i].getMassValue();
+	            			Color c = null;
+	            			
+	            			if (mass <= 10) {
+	                    		c = controller.dark_one;
+	                    	} else if (mass <= 50) {
+	                    		c = controller.dark_two;
+	                    	} else if (mass <= 100) {
+	                    		c = controller.dark_three;
+	                    	} else if (mass <= 200) {
+	                    		c = controller.dark_five;
+	                    	}
+	            			
+	            			g.setColor(c);
+	            			g.drawLine(x_1, y_1, x_2, y_2);
+	            			
+	            			before[i] = all[i];
+	                	
+	            		}
+	                }
+	            	
+	            	j++;
+	            }
+        	}
             
             for(int i=0; i<allbodies.length; i++){
             	int x,y,m,v_x,v_y;
@@ -100,27 +125,27 @@ public class VisualiserPanel extends JPanel {
             	// We divide to the range of the masses in four bands and assegnamo a color, 
             	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and gray bigger masses. 
             	if (m <= 10) {
-            		c = Color.white;
+            		c = controller.light_one;
             	} else if (m <= 50) {
-            		c = Color.cyan;
+            		c = controller.light_two;
             	} else if (m <= 100) {
-            		c = Color.blue;
+            		c = controller.light_three;
             	} else if (m <= 200) {
-            		c = Color.gray;
+            		c = controller.light_five;
             	}
             	
             	
             	
             	if (m > 300) {
-            		c = Color.yellow;
+            		c = controller.sun;
             		g.setColor(c);
-                	g.fillOval(x-5,y-5,10,10);
+                	g.fillOval(x-10,y-10,20,20);
                 	g.setColor(Color.red);
-                	g.drawOval(x-5,y-5,10,10);
+                	g.drawOval(x-10,y-10,20,20);
             	} else {
             		g.setColor(c);
                 	g.fillOval(x-2,y-2,4,4);
-                	g.setColor(Color.black);
+                	g.setColor(c);
                 	g.drawOval(x-2,y-2,4,4);
                 	//g.drawLine(x, y, x+v_x, y+v_y);
             	}

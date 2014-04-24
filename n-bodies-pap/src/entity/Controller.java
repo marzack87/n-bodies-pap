@@ -2,6 +2,7 @@ package entity;
 
 import gui.VisualiserPanel;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.concurrent.Semaphore;
@@ -25,7 +26,35 @@ public class Controller {
 	private Generator gen; 
 	private Simulator simulator;
 	private Visualiser visualiser;
+	
+	public boolean tracks;
+	
 	Semaphore sem = new Semaphore(0); 
+	
+	// emerald
+	public final Color one = new Color(0x00CD7B);
+	// peter river
+	public final Color two = new Color(0x48A3DA);
+	// amethyst
+	public final Color three = new Color(0x9F57B1);
+	// wet asphalt
+	public final Color four = new Color(0x34495C);
+	// alizarin
+	public final Color five = new Color(0xEB4942);
+	// sun flower
+	public final Color sun = new Color(0xF1C442);
+	
+	public final Color dark_one = new Color(0x009D63);
+	public final Color dark_two = new Color(0x20719D);
+	public final Color dark_three = new Color(0x7D3F84);
+	public final Color dark_four = new Color(0x253542);
+	public final Color dark_five = new Color(0xA72C2E);
+	
+	public final Color light_one = new Color(0x00FCA2);
+	public final Color light_two = new Color(0x39B5FA);
+	public final Color light_three = new Color(0xEC7CF8);
+	public final Color light_four = new Color(0x6A91B1);
+	public final Color light_five = new Color(0xFF8982);
 	
 	/**
 	 * Class Controller constructor.
@@ -42,6 +71,8 @@ public class Controller {
 		
 		simulator = new Simulator(cont, sem);
 		visualiser = new Visualiser(cont, sem);
+		
+		tracks = true;
 	}
 	
 	/**
@@ -141,6 +172,10 @@ public class Controller {
 
 	public Dimension getAvailableSpace(){
 		return context.available_space;
+	}
+	
+	public void setDeltaT(double dt){
+		context.dt = dt;
 	}
 	
 }

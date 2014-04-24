@@ -44,10 +44,12 @@ public class Body {
 	 * 
 	 * @see support.Vector
 	 */
-	public void move(V2d f) { 
+	public void move(V2d f, double dt) { 
 		V2d a = f.mul(1/mass);
-		v = v.sum(a);
-		p = p.sum(v.sum(a.mul(1/2)));
+		V2d dv = a.mul(dt);
+		V2d dp = (v.sum(dv.mul(1/2))).mul(dt);
+		p = p.sum(dp);
+		v = v.sum(dv);
 	}
 	
 	/**
@@ -66,6 +68,7 @@ public class Body {
 		V2d p_that = new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.min(p_this);
 		double dist = that.p.dist(this.p);
+		dist = dist - 4;
 		double F = (G * (this.mass) * (that.mass)) / (dist * dist);
 		
 		V2d delta_normalized = delta.getNormalized();
