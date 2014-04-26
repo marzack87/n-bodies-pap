@@ -188,6 +188,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 				btn_step.setEnabled(true);
 				btn_stop.setEnabled(true);
 				btn_save.setEnabled(false);
+				
 		} else if (source == chb_tracks) {
 			if (chb_tracks.isSelected()){
 				// Track selected or not

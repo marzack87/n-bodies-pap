@@ -45,10 +45,14 @@ public class Controller {
 		gen = new Generator(cont);
 		context = cont;
 		
-		simulator = new Simulator(cont, sem/*, print*/);
-		visualiser = new Visualiser(cont, sem/*, print*/);
+		initThreads();
 		
 		tracks = true;
+	}
+	
+	private void initThreads(){
+		simulator = new Simulator(context, sem/*, print*/);
+		visualiser = new Visualiser(context, sem/*, print*/);
 	}
 	
 	/**
@@ -118,6 +122,9 @@ public class Controller {
 	
 	public void reset(){
 		context.resetBodies();
+		initThreads();
+		visualiser.start();
+		simulator.start();
 		//context.print_body();
 		// The Visualiser thread must be print the new situation
 		sem.release();
@@ -152,7 +159,5 @@ public class Controller {
 	public void setDeltaT(double dt){
 		context.dt = dt;
 	}
-	
-	
 	
 }
