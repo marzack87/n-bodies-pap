@@ -69,7 +69,15 @@ public class Context {
      * It save a copy of allbodies array.
      */
     public void copyBodies(){
-    	for(int i=0; i<allbodies.length; i++) allbodies_copy[i] = allbodies[i];
+    	for(int i=0; i<allbodies.length; i++) Util.allbodies_copy[i] = allbodies[i];
+    }
+    
+    /**
+     * Method resetBodies.
+     * It save a copy of allbodies array.
+     */
+    public void resetBodies(){
+    	for(int i=0; i<allbodies.length; i++) allbodies[i] = Util.allbodies_copy[i];
     }
     
     /**
@@ -77,7 +85,7 @@ public class Context {
      * Prints all the value of the Body.
      * 
      */
-   private void print_body(){
+   public void print_body(){
 		System.out.println("Printing bodies data from context......");
 		for(int i = 0; i<allbodies.length; i++){
 			System.out.println("AllBodies: " + this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );

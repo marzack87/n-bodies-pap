@@ -15,7 +15,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import support.Util;
-import concurrency.Visualiser;
 import entity.Controller;
 
 /**
@@ -30,7 +29,7 @@ import entity.Controller;
  */
 public class GalaxyPanel extends JPanel implements ActionListener, ChangeListener{
 
-	private JButton btn_start,btn_stop,btn_step, btn_save;
+	private JButton btn_start,btn_stop,btn_step, btn_save, btn_reset;
 	private JLabel lbl_cmd, lbl_dt, lbl_legend, lbl_one, lbl_two, lbl_three, lbl_four, lbl_sun;
 	private JCheckBox chb_tracks;
 	private JSlider sld_velocity;
@@ -40,7 +39,6 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	 * Class GalaxyPanel default constructor.
 	 * 
 	 * @param contr Controller entity
-	 * @param v Visualiser thread
 	 * 
 	 * @see entity.Controller
 	 * @see concurrency.Visualiser
@@ -52,9 +50,12 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		lbl_cmd = new JLabel(" Commands: ");
 		lbl_cmd.setAlignmentX(CENTER_ALIGNMENT);
 		
+		// Create the command button
 		btn_start = new JButton("Play");
 		btn_step = new JButton("Step Mode");
 		btn_stop = new JButton("Stop");
+		btn_reset = new JButton("Reset");
+		btn_reset.setEnabled(false);
 		btn_save = new JButton("Save Data");
 		btn_save.setEnabled(false);
 		
@@ -62,28 +63,23 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		chb_tracks.setSelected(true);
 		
 		lbl_dt = new JLabel("  dt = 0.001");
-		//lbl_dt.setAlignmentX(CENTER_ALIGNMENT);
 		
-		//Create the slider.
+		// Create the slider
 		sld_velocity = new JSlider(JSlider.HORIZONTAL, 1, 6, 3);
 		sld_velocity.addChangeListener(this);
 		sld_velocity.setMajorTickSpacing(1);
 		sld_velocity.setSnapToTicks(true);
 		sld_velocity.setPaintTicks(true);
-
-		//Create the label table.
+		// Create the slider label table
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-
 		labelTable.put(new Integer( 1 ), new JLabel(createImageIcon("images/slow.png", "slow")));
-		
 		labelTable.put(new Integer( 6 ), new JLabel(createImageIcon("images/fast.png", "fast")));
-		
 		sld_velocity.setLabelTable(labelTable);
 		sld_velocity.setBorder(this.getBorder());
 		sld_velocity.setPaintLabels(true);
-		
 		sld_velocity.setPreferredSize(new Dimension(10,10));
 		
+		// Create the legend
 		lbl_legend = new JLabel("Legend: ");
 		lbl_legend.setAlignmentX(CENTER_ALIGNMENT);
 		ImageIcon icon_one = icon_body(1);
@@ -94,13 +90,13 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		lbl_three = new JLabel("Mid-big mass ", icon_three, JLabel.LEFT);
 		ImageIcon icon_four = icon_body(4);
 		lbl_four = new JLabel("Bigger mass ", icon_four, JLabel.LEFT);
-		
 		ImageIcon icon_sun = icon_body(5);
 	    lbl_sun = new JLabel("Sun ", icon_sun, JLabel.LEFT);
 		
 		btn_start.addActionListener(this);
 		btn_step.addActionListener(this);
 		btn_stop.addActionListener(this);
+        btn_reset.addActionListener(this);
 		btn_save.addActionListener(this);
 		chb_tracks.addActionListener(this);
 		
@@ -110,6 +106,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(btn_start);
 		add(btn_step);
 		add(btn_stop);
+		add(btn_reset);
 		add(btn_save);
 		add(Box.createRigidArea(new Dimension(0,50)));
 		add(lbl_dt);
@@ -131,8 +128,9 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		// Start Button
+		
 		if(source == btn_start){
+			// Start Button
 			if(btn_start.getText().equals("Pause")){
 				btn_start.setText("Play");
 				log("Simulation freezed");
@@ -152,7 +150,6 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		} else if(source == btn_step){
 			log("Step-by-step button");
 			// The simulation's step-by-step modality
-			// qui vedremo come implementare il tutto..
 			btn_step.setText("Next Step");
 			if(btn_start.getText().equals("Pause")){
 				btn_start.setText("Play");
@@ -167,7 +164,6 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		} else if(source == btn_stop){
 			log("Stop Button");
 			// The simulation will finish
-			// si faranno terminare tutti i thread in qualche modo e il visualizer dopo aver stampato a video l'ultima posizione aggiornata morira anche lui
 			if(btn_step.getText().equals("Next Step")){
 				btn_step.setText("Step Mode");
 			}
@@ -177,15 +173,24 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			btn_save.setEnabled(true);
 			btn_start.setEnabled(false);
 			btn_step.setEnabled(false);
+			btn_reset.setEnabled(true);
 			btn_stop.setEnabled(false);
 			
 			controller.stopSimulation();
 		} else if(source == btn_save){
 			log("Save Button");
 			savefile();
+		} else if(source == btn_reset){
+				log("Reset Button");
+				// Reset the simulation
+				controller.reset();
+				btn_start.setEnabled(true);
+				btn_step.setEnabled(true);
+				btn_stop.setEnabled(true);
+				btn_save.setEnabled(false);
 		} else if (source == chb_tracks) {
-			
 			if (chb_tracks.isSelected()){
+				// Track selected or not
 				log("tracks ON");
 				controller.tracks = true;
 			} else {

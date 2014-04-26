@@ -13,16 +13,18 @@ public class Simulator extends Thread {
 	private boolean simulation;
 	private Context context;
 	private Semaphore sem;
+	//private Semaphore printed;
 	
 	private static final int NTHREADS = Runtime.getRuntime().availableProcessors() + 1;
 	private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS);
 	private List<Future<Body>> list = new ArrayList<Future<Body>>();
 	
-	public Simulator(Context c, Semaphore sem) {
+	public Simulator(Context c, Semaphore sem/*, Semaphore print*/) {
 		context = c;
 		go = false;
 		simulation = true;
 		this.sem = sem;
+		//this.printed = print;
 	}
 	
 	public void run(){
@@ -85,6 +87,11 @@ public class Simulator extends Thread {
 		}
 		list.clear();
 		this.sem.release();
+		/*try {
+			this.printed.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}*/
 	}
 	
 	/**

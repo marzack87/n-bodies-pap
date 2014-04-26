@@ -68,6 +68,7 @@ public class BodyDialog extends JDialog implements ActionListener{
 				int n = Integer.parseInt(body.getText());
 				mp.initWithRandom(n,sun.isSelected());
 			}catch(Exception ex) { 
+				ex.printStackTrace();
 				System.err.println(ex); 
 				JOptionPane.showMessageDialog(this, "Wrong input data, a number MUST be inserted!!!", "Error", JOptionPane.ERROR_MESSAGE, null);
 			}

@@ -30,6 +30,7 @@ public class Controller {
 	public boolean tracks;
 	
 	Semaphore sem = new Semaphore(0); 
+	Semaphore print = new Semaphore(0);
 	
 	/**
 	 * Class Controller constructor.
@@ -44,8 +45,8 @@ public class Controller {
 		gen = new Generator(cont);
 		context = cont;
 		
-		simulator = new Simulator(cont, sem);
-		visualiser = new Visualiser(cont, sem);
+		simulator = new Simulator(cont, sem/*, print*/);
+		visualiser = new Visualiser(cont, sem/*, print*/);
 		
 		tracks = true;
 	}
@@ -113,6 +114,13 @@ public class Controller {
 	
 	public void step(){
 		simulator.step();
+	}
+	
+	public void reset(){
+		context.resetBodies();
+		//context.print_body();
+		// The Visualiser thread must be print the new situation
+		sem.release();
 	}
 	
 	public void setUpVisualiser(VisualiserPanel v){

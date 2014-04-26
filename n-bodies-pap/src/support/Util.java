@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import entity.Body;
+
 public class Util {
 	
 	public static final double SUN_MASS = 500000;
@@ -38,6 +40,8 @@ public class Util {
 	
 	// sun flower
 	public static final Color sun = new Color(0xF1C442);
+	
+	public static Body[] allbodies_copy;
 	
 	private Util(){
 		
