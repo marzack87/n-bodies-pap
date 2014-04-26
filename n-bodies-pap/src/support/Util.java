@@ -40,8 +40,7 @@ public class Util {
 	
 	// sun flower
 	public static final Color sun = new Color(0xF1C442);
-	
-	public static Body[] allbodies_copy;
+
 	
 	private Util(){
 		

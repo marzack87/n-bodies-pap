@@ -154,7 +154,6 @@ public class Generator {
 			P2d pos = new P2d(data[0][i], data[1][i]);
 			V2d vel = new V2d(data[2][i], data[3][i]);
 			context.allbodies[i] = new Body(pos, vel, mass, i);
-			Util.allbodies_copy[i] = new Body(pos, vel, mass, i);
 		}
 		if(sun){
 			double mass_1 = Util.SUN_MASS;
