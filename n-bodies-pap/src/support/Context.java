@@ -69,7 +69,7 @@ public class Context {
      * It save a copy of allbodies array.
      */
     public void copyBodies(){
-    	for(int i=0; i<allbodies.length; i++) Util.allbodies_copy[i] = allbodies[i];
+    	for(int i=0; i<allbodies.length; i++) allbodies_copy[i] = allbodies[i].copy();
     }
     
     /**
@@ -77,7 +77,7 @@ public class Context {
      * It save a copy of allbodies array.
      */
     public void resetBodies(){
-    	for(int i=0; i<allbodies.length; i++) allbodies[i] = Util.allbodies_copy[i];
+    	for(int i=0; i<allbodies.length; i++) allbodies[i] = allbodies_copy[i].copy();
     }
     
     /**

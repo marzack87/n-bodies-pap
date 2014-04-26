@@ -173,4 +173,8 @@ public class Body {
 	public String toString(){
         return "----\nBody\nposition("+p.x+","+p.y+")\nvelocity("+v.x+","+v.y+")\nmass " + mass+"\nindex " +index +"\n-----";
     }
+	
+	public Body copy(){
+		return new Body(this.p, this.v, this.mass, this.index);
+	}
 }
