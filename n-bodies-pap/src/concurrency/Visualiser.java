@@ -75,5 +75,9 @@ public class Visualiser extends Thread {
 		this.v = v;
 	}
 	
+	public void flushHistoryPositions(){
+		v.reset();
+	}
+	
 
 }

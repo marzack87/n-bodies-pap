@@ -176,7 +176,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			btn_reset.setEnabled(true);
 			btn_stop.setEnabled(false);
 			
-			controller.stopSimulation();
+			//controller.stopSimulation();
 		} else if(source == btn_save){
 			log("Save Button");
 			savefile();

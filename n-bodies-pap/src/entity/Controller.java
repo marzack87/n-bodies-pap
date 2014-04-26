@@ -122,9 +122,7 @@ public class Controller {
 	
 	public void reset(){
 		context.resetBodies();
-		initThreads();
-		visualiser.start();
-		simulator.start();
+		visualiser.flushHistoryPositions();
 		//context.print_body();
 		// The Visualiser thread must be print the new situation
 		sem.release();

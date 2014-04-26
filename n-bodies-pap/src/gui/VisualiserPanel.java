@@ -168,4 +168,8 @@ public class VisualiserPanel extends JPanel {
                 repaint();
             }
         }
+        
+        public void reset(){
+        	history.clear();
+        }
 }
