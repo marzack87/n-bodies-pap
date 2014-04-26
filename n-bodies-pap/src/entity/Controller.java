@@ -134,7 +134,7 @@ public class Controller {
 	 * Method print_body.
 	 * Print all the informations about all the bodies presented in the allbodies array 
 	 */
-	private void print_body(){
+	public void print_body(){
 		System.out.println("Printing bodies data by Controller......");
 		for(int i = 0; i<n; i++){
 			System.out.println(context.allbodies[i].getPosition() + " " + context.allbodies[i].getVelocity() + " " + context.allbodies[i].getMass() );

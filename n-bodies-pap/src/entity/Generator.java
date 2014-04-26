@@ -147,6 +147,7 @@ public class Generator {
 	 */
 	public void initBody(boolean sun){
 		context.allbodies = new Body[number];
+		context.allbodies_copy = new Body[number];
 		double[][] data = this.getData();
 		for(int i = 0; i < number; i++){
 			double mass = data[4][i];
@@ -173,7 +174,8 @@ public class Generator {
 			context.allbodies[number-4] = new Body(pos_4, vel_4, mass_4, number-4);
 			*/
 		}
-		
+		context.copyBodies();
+		//context.print_body();
 	}
 	
 	/**

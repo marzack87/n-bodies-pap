@@ -16,7 +16,7 @@ import entity.Body;
 public class Context {
 
     // per rimettere allbodies privato dovremo implementare i metodi per la restituzione dei body 
-	public Body[] allbodies;
+	public Body[] allbodies, allbodies_copy;
 	public Boolean stop;
 	
 	public double dt;
@@ -59,33 +59,30 @@ public class Context {
      * @param pos
      * @return
      */
-    /*
+    
     public Body getBody(int pos){
-    	// restituisce un singolo body data una posizione
-    	return;
-    }*/
+    	return allbodies[pos];
+    }
     
     /**
-     * Method getOtherBody.
-     * It return all the value of the bodies except the body of the position specified.
-     * 
-     * @return
+     * Method copyBodies.
+     * It save a copy of allbodies array.
      */
-    /*
-    public Body getOtherBody(int mypos){
-    	//dall'array o che altro mi faccio dare tutti i body
-    	return;
-    }*/
+    public void copyBodies(){
+    	for(int i=0; i<allbodies.length; i++) allbodies_copy[i] = allbodies[i];
+    }
     
     /**
      * Private method print_body.
      * Prints all the value of the Body.
      * 
      */
-    private void print_body(){
+   private void print_body(){
 		System.out.println("Printing bodies data from context......");
 		for(int i = 0; i<allbodies.length; i++){
-			System.out.println(this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );
+			System.out.println("AllBodies: " + this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );
+			System.out.println("Copy: " + this.allbodies_copy[i].getPosition() + " " + this.allbodies_copy[i].getVelocity() + " " + this.allbodies_copy[i].getMass() );
+
 		}
 	}
     
