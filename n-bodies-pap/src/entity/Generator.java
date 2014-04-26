@@ -147,8 +147,7 @@ public class Generator {
 	 */
 	public void initBody(boolean sun){
 		context.allbodies = new Body[number];
-		//context.allbodies_copy = new Body[number];
-		Util.allbodies_copy = new Body[number];
+		context.allbodies_copy = new Body[number];
 		double[][] data = this.getData();
 		for(int i = 0; i < number; i++){
 			double mass = data[4][i];
@@ -162,7 +161,6 @@ public class Generator {
 			P2d pos_1 = new P2d(Util.VisualiserAvailableSpace().getWidth()/2, Util.VisualiserAvailableSpace().getHeight()/2);
 			V2d vel_1 = new V2d(0, 0);
 			context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
-			Util.allbodies_copy[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
 			/*double mass_2 = Util.SUN_MASS;
 			P2d pos_2 = new P2d(600, 300);
 			V2d vel_2 = new V2d(0, 0);
@@ -177,7 +175,7 @@ public class Generator {
 			context.allbodies[number-4] = new Body(pos_4, vel_4, mass_4, number-4);
 			*/
 		}
-		//context.copyBodies();
+		context.copyBodies();
 		//context.print_body();
 	}
 	
