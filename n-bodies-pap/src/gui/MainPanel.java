@@ -66,7 +66,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			}else{
 				// File is opened
 				File f = choose.getSelectedFile();
-				System.out.println("Open button");
+				log("Open Button");
 				
 				contr.genFromFile(f);
 				
@@ -78,7 +78,7 @@ public class MainPanel extends JPanel implements ActionListener{
 		}
 		// Initialize the body randomly.
 		else if (source == create){
-			System.out.println("Create button");
+			log("Create Button");
 			
 			JDialog body = new BodyDialog(this);
 			body.setVisible(true);
@@ -99,6 +99,10 @@ public class MainPanel extends JPanel implements ActionListener{
 		GalaxyFrame gframe = new GalaxyFrame("N-Body Simulation: GALAXY", contr);
 		gframe.setVisible(true);
 	}
+	
+	private void log(String msg){
+        System.out.println("[MAIN PANEL] "+msg);
+    }
 }
 
 
@@ -121,3 +125,5 @@ class TxtFileFilter extends FileFilter {
     }
 
 }
+
+

@@ -132,33 +132,40 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		if(source == btn_start){
 			// Start Button
 			if(btn_start.getText().equals("Pause")){
+				// Simulation is running -> Freeze it
 				btn_start.setText("Play");
-				log("Simulation freezed");
+				log("Pause Button");
 				controller.pause();
+				btn_reset.setEnabled(true);
+				btn_stop.setEnabled(true);
+				btn_step.setEnabled(true);
 			}else{
-				log("Start button");
+				log("Start Button");
+				// Start/re-start simulation
 				btn_start.setText("Pause");
+				btn_step.setEnabled(true);
+				btn_reset.setEnabled(false);
 				if(btn_step.getText().equals("Next Step")){
 					btn_step.setText("Step Mode");
 				}
-				
 				if (!controller.SimulationIsAlive()){
 					controller.startSimulation();
 				}
 				controller.play();
 			}
 		} else if(source == btn_step){
-			log("Step-by-step button");
+			log("Step-Mode Button");
 			// The simulation's step-by-step modality
 			btn_step.setText("Next Step");
 			if(btn_start.getText().equals("Pause")){
 				btn_start.setText("Play");
 			}
-			if (!controller.SimulationIsAlive()){
-				controller.startSimulation();
-			}
 			if(controller.SimulationIsRunning()){
 				controller.pause();
+			}
+			if (!controller.SimulationIsAlive()){
+				// Start in step mode
+				controller.startSimulation();
 			}
 			controller.step();
 		} else if(source == btn_stop){
@@ -166,23 +173,25 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			// The simulation will finish
 			if(btn_step.getText().equals("Next Step")){
 				btn_step.setText("Step Mode");
-			}
-			if(btn_start.getText().equals("Pause")){
+			}else if(btn_start.getText().equals("Pause")){
 				btn_start.setText("Play");
 			}
 			btn_save.setEnabled(true);
 			btn_start.setEnabled(false);
 			btn_step.setEnabled(false);
-			btn_reset.setEnabled(true);
+			btn_reset.setEnabled(false);
 			btn_stop.setEnabled(false);
 			
-			//controller.stopSimulation();
+			controller.stopSimulation();
 		} else if(source == btn_save){
 			log("Save Button");
 			savefile();
 		} else if(source == btn_reset){
 				log("Reset Button");
 				// Reset the simulation
+				if(btn_step.getText().equals("Next Step")){
+					btn_step.setText("Step Mode");
+				}
 				controller.reset();
 				btn_start.setEnabled(true);
 				btn_step.setEnabled(true);
