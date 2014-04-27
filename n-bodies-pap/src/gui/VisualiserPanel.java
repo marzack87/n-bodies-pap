@@ -74,43 +74,45 @@ public class VisualiserPanel extends JPanel {
 	            	P2d[] all = null;
 					all = it.next();
 	            	
-	            	for(int i=0; i<all.length; i++){
-	            		
-	            		int x_1, y_1, x_2, y_2;
-	            		
-	                	if (j == 0){
-	            			
-	                		before[i] = all[i];
-	                		
-	            		} else {
-	            			
-	            			x_1 = (int)before[i].x;
-	            			y_1 = (int)before[i].y;
-	            			
-	            			x_2 = (int)all[i].x;
-	            			y_2 = (int)all[i].y;
-	            			
-	            			double mass = allbodies[i].getMassValue();
-	            			Color c = null;
-	            			
-	            			
-	            			if (mass <= levels[0]) {
-	                    		c = Util.dark_one;
-	                    	} else if (mass <= levels[1]) {
-	                    		c = Util.dark_two;
-	                    	} else if (mass <= levels[2]) {
-	                    		c = Util.dark_three;
-	                    	} else if (mass <= levels[3]) {
-	                    		c = Util.dark_five;
-	                    	}
-	            			
-	            			g.setColor(c);
-	            			g.drawLine(x_1, y_1, x_2, y_2);
-	            			
-	            			before[i] = all[i];
-	                	
-	            		}
-	                }
+					if (all != null){
+		            	for(int i=0; i<all.length; i++){
+		            		
+		            		int x_1, y_1, x_2, y_2;
+		            		
+		                	if (j == 0){
+		            			
+		                		before[i] = all[i];
+		                		
+		            		} else {
+		            			
+		            			x_1 = (int)before[i].x;
+		            			y_1 = (int)before[i].y;
+		            			
+		            			x_2 = (int)all[i].x;
+		            			y_2 = (int)all[i].y;
+		            			
+		            			double mass = allbodies[i].getMassValue();
+		            			Color c = null;
+		            			
+		            			
+		            			if (mass <= levels[0]) {
+		                    		c = Util.dark_one;
+		                    	} else if (mass <= levels[1]) {
+		                    		c = Util.dark_two;
+		                    	} else if (mass <= levels[2]) {
+		                    		c = Util.dark_three;
+		                    	} else if (mass <= levels[3]) {
+		                    		c = Util.dark_five;
+		                    	}
+		            			
+		            			g.setColor(c);
+		            			g.drawLine(x_1, y_1, x_2, y_2);
+		            			
+		            			before[i] = all[i];
+		                	
+		            		}
+		                }
+					}
 	            	
 	            	j++;
 	            }
