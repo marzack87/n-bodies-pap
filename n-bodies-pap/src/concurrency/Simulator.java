@@ -13,6 +13,7 @@ public class Simulator extends Thread {
 	private boolean simulation;
 	private Context context;
 	private Semaphore sem;
+	private boolean step;
 	//private Semaphore printed;
 	
 	private static final int NTHREADS = Runtime.getRuntime().availableProcessors() + 1;
@@ -24,6 +25,7 @@ public class Simulator extends Thread {
 		go = false;
 		simulation = true;
 		this.sem = sem;
+		step = false;
 		//this.printed = print;
 	}
 	
@@ -31,7 +33,7 @@ public class Simulator extends Thread {
 		log("I'm running..");
 		log("Simulation started");
 		while (simulation){
-			if (go == true){
+			if (go || step){
 					loop();
 			}
 		}
@@ -48,8 +50,9 @@ public class Simulator extends Thread {
 	
 	public void step(){
 		this.pause();
+		step = true;
 		log("Step");
-		loop();
+		step = false;
 	}
 	
 	public void suicide(){
