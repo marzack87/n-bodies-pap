@@ -62,30 +62,23 @@ public class VisualiserPanel extends JPanel {
         	if (controller.tracks) {
         	
 	            ArrayList<P2d[]> h = new ArrayList<P2d[]>();
-	            
 	            h.addAll(history);
 	            
 	            int j = 0;
 	            P2d[] before = new P2d[allbodies.length];
-	            
 	            ListIterator<P2d[]> it = h.listIterator();
 	            
 	            while (it.hasNext()) {
 	            	
 	            	P2d[] all = null;
 					all = it.next();
-	            	
 					if (all != null){
 		            	for(int i=0; i<all.length; i++){
 		            		
 		            		int x_1, y_1, x_2, y_2;
-		            		
 		                	if (j == 0){
-		            			
 		                		before[i] = all[i];
-		                		
 		            		} else {
-		            			
 		            			x_1 = (int)before[i].x;
 		            			y_1 = (int)before[i].y;
 		            			
@@ -94,7 +87,6 @@ public class VisualiserPanel extends JPanel {
 		            			
 		            			double mass = allbodies[i].getMassValue();
 		            			Color c = null;
-		            			
 		            			
 		            			if (mass <= levels[0]) {
 		                    		c = Util.dark_one;
@@ -114,7 +106,6 @@ public class VisualiserPanel extends JPanel {
 		            		}
 		                }
 					}
-	            	
 	            	j++;
 	            }
         	}
@@ -157,7 +148,7 @@ public class VisualiserPanel extends JPanel {
                 	g.setColor(c);
                 	g.drawOval(x-r,y-r, r*2, r*2);
                 	//draw velocity
-                	//g.drawLine(x, y, x+v_x, y+v_y);
+                	if (controller.tracks) g.drawLine(x, y, x+v_x, y+v_y);
             	}
             }
             

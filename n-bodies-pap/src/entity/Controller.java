@@ -28,6 +28,7 @@ public class Controller {
 	private Visualiser visualiser;
 	
 	public boolean tracks;
+	public boolean velocity;
 	
 	Semaphore sem = new Semaphore(0); 
 	Semaphore print = new Semaphore(0);
@@ -48,6 +49,7 @@ public class Controller {
 		initThreads();
 		
 		tracks = true;
+		velocity = true;
 	}
 	
 	private void initThreads(){

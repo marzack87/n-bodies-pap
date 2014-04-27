@@ -31,7 +31,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 
 	private JButton btn_start,btn_stop,btn_step, btn_save, btn_reset;
 	private JLabel lbl_cmd, lbl_dt, lbl_legend, lbl_one, lbl_two, lbl_three, lbl_four, lbl_sun;
-	private JCheckBox chb_tracks;
+	private JCheckBox chb_tracks, chb_velocity;
 	private JSlider sld_velocity;
 	private Controller controller;
 	
@@ -61,6 +61,9 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		
 		chb_tracks = new JCheckBox("Tracks");
 		chb_tracks.setSelected(true);
+		
+		chb_velocity = new JCheckBox("Velocity");
+		chb_velocity.setSelected(true);
 		
 		lbl_dt = new JLabel("  dt = 0.001");
 		
@@ -99,6 +102,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
         btn_reset.addActionListener(this);
 		btn_save.addActionListener(this);
 		chb_tracks.addActionListener(this);
+		chb_velocity.addActionListener(this);
 		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		add(lbl_cmd);
@@ -113,6 +117,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(sld_velocity);
 		add(Box.createRigidArea(new Dimension(0,10)));
 		add(chb_tracks);
+		add(chb_velocity);
 		add(Box.createRigidArea(new Dimension(0,50)));
 		add(lbl_legend);
 		add(Box.createRigidArea(new Dimension(0,10)));
@@ -202,11 +207,20 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		} else if (source == chb_tracks) {
 			if (chb_tracks.isSelected()){
 				// Track selected or not
-				log("tracks ON");
+				log("Tracks ON");
 				controller.tracks = true;
 			} else {
-				log("tracks OFF");
+				log("Tracks OFF");
 				controller.tracks = false;
+			}
+		} else if (source == chb_velocity) {
+			if (chb_velocity.isSelected()){
+				// Velocity selected or not
+				log("Velocity ON");
+				controller.velocity = true;
+			} else {
+				log("Velocity OFF");
+				controller.velocity = false;
 			}
 		}
 		
