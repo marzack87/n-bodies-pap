@@ -63,7 +63,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		chb_tracks.setSelected(true);
 		
 		chb_velocity = new JCheckBox("Velocity");
-		chb_velocity.setSelected(true);
+		chb_velocity.setSelected(false);
 		
 		lbl_dt = new JLabel("  dt = 0.001");
 		
