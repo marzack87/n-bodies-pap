@@ -54,7 +54,7 @@ public class Visualiser extends Thread {
     		v.updatePositions(position);
     		//this.printed.release();
     	}
-    	log("I'm dying..");
+    	log("I'm dead..");
     }
     
     public void suicide(){

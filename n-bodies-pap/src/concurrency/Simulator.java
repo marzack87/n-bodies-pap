@@ -29,17 +29,17 @@ public class Simulator extends Thread {
 	
 	public void run(){
 		log("I'm running..");
+		log("Simulation started");
 		while (simulation){
 			if (go == true){
 					loop();
 			}
 		}
-		log("I'm dying..");
+		log("I'm dead..");
 	}
 	
 	public void play(){
 		go = true;
-		log("Simulation started");
 	}
 	
 	public void pause(){
@@ -47,8 +47,9 @@ public class Simulator extends Thread {
 	}
 	
 	public void step(){
-		loop();
+		this.pause();
 		log("Step");
+		loop();
 	}
 	
 	public void suicide(){
