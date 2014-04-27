@@ -157,6 +157,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			log("Step-Mode Button");
 			// The simulation's step-by-step modality
 			btn_step.setText("Next Step");
+			btn_reset.setEnabled(true);
 			if(btn_start.getText().equals("Pause")){
 				btn_start.setText("Play");
 			}
