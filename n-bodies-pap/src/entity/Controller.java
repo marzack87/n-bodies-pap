@@ -49,7 +49,7 @@ public class Controller {
 		initThreads();
 		
 		tracks = true;
-		velocity = true;
+		velocity = false;
 	}
 	
 	private void initThreads(){
