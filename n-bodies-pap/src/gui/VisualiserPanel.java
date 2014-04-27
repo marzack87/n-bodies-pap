@@ -148,7 +148,7 @@ public class VisualiserPanel extends JPanel {
                 	g.setColor(c);
                 	g.drawOval(x-r,y-r, r*2, r*2);
                 	//draw velocity
-                	if (controller.tracks) g.drawLine(x, y, x+v_x, y+v_y);
+                	if (controller.velocity) g.drawLine(x, y, x+v_x, y+v_y);
             	}
             }
             
