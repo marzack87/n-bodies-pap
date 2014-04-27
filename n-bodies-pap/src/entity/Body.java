@@ -17,6 +17,10 @@ public class Body {
 	private double mass; //mass
 	private int index;
 	
+	private boolean collision;
+	private V2d vel_after_collision;
+	
+	
 	/**
 	 * Class Body default constructor.
 	 * Initialize the properties of the body with the object passed as parameter.
@@ -32,6 +36,9 @@ public class Body {
 		this.v = v;
 		this.mass = mass;
 		this.index = index;
+		
+		collision = false;
+		vel_after_collision = new V2d(0,0);
 	}
 	
 	/**
@@ -45,11 +52,20 @@ public class Body {
 	 * @see support.Vector
 	 */
 	public void move(V2d f, double dt) { 
-		V2d a = f.mul(1/mass);
-		V2d dv = a.mul(dt);
-		V2d dp = (v.sum(dv.mul(1/2))).mul(dt);
-		p = p.sum(dp);
-		v = v.sum(dv);
+		if (collision){
+			this.v = vel_after_collision;
+			V2d dp = this.v.mul(dt);
+			p = p.sum(dp);
+		} else {
+			V2d a = f.mul(1/mass);
+			V2d dv = a.mul(dt);
+			V2d dp = (v.sum(dv.mul(1/2))).mul(dt);
+			p = p.sum(dp);
+			v = v.sum(dv);
+		}
+		
+		collision = false;
+		vel_after_collision = new V2d(0,0);
 	}
 	
 	/**
@@ -68,7 +84,14 @@ public class Body {
 		V2d p_that = new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.min(p_this);
 		double dist = that.p.dist(this.p);
-		dist = dist - 4;
+		//dist = dist - 4;
+		
+		if (that.getMassValue() == Util.SUN_MASS){
+			if (dist <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
+		} else {
+			if (dist <= (Util.BODY_RADIUS * 2)) collision(that);
+		}
+		
 		double F = (G * (this.mass) * (that.mass)) / (dist * dist);
 		
 		V2d delta_normalized = delta.getNormalized();
@@ -77,6 +100,15 @@ public class Body {
 		return Force;
 	} 
 	 
+	private void collision(Body that){
+		collision = true;
+		
+		V2d final_v = this.v.mul(this.mass - that.mass).sum(that.v.mul(2 * that.mass)).mul(1 / (this.mass + that.mass));
+		vel_after_collision = vel_after_collision.sum(final_v);
+		
+		//System.out.println("COLLISION! FINAL VELOCITY: " + final_v + " - " + vel_after_collision);
+	}
+	
 	/**
 	 * Method getPosition.
 	 * It returns a String representation of the Vector position of the body calling the method toString()

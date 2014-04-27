@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -140,19 +141,22 @@ public class VisualiserPanel extends JPanel {
             		c = Util.light_five;
             	}
             	
-            	
+            	int r;
             	
             	if (m == Util.SUN_MASS) {
             		c = Util.sun;
+            		r = Util.SUN_RADIUS;
             		g.setColor(c);
-                	g.fillOval(x-10,y-10,20,20);
+            		g.fillOval(x-r,y-r, r*2, r*2);
                 	g.setColor(Color.red);
-                	g.drawOval(x-10,y-10,20,20);
+                	g.drawOval(x-r,y-r, r*2, r*2);
             	} else {
+            		r = Util.BODY_RADIUS;
             		g.setColor(c);
-                	g.fillOval(x-2,y-2,4,4);
+                	g.fillOval(x-r,y-r, r*2, r*2);
                 	g.setColor(c);
-                	g.drawOval(x-2,y-2,4,4);
+                	g.drawOval(x-r,y-r, r*2, r*2);
+                	//draw velocity
                 	//g.drawLine(x, y, x+v_x, y+v_y);
             	}
             }

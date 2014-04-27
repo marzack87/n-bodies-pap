@@ -10,6 +10,9 @@ public class Util {
 	
 	public static final double SUN_MASS = 500000;
 	
+	public static final int SUN_RADIUS = 10;
+	public static final int BODY_RADIUS = 2;
+	
 	public static final double RANGE_BODIES_VELOCITY = 50;
 	public static final double RANGE_BODIES_MASS = 500;
 	
