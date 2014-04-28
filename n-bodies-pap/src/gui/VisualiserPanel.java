@@ -34,6 +34,8 @@ public class VisualiserPanel extends JPanel {
 		private ArrayList<P2d[]> history = new ArrayList<P2d[]>();
 		private GalaxyPanel gpanel;
 		
+		private static double scaleFact_x, scaleFact_y; 
+		
 		/**
 		 * Class VisualiserPanel constructor.
 		 * 
@@ -47,6 +49,9 @@ public class VisualiserPanel extends JPanel {
             for (Body b : allbodies) pos[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
             history.add(pos);
             gpanel = gp;
+            
+            scaleFact_x = this.getWidth()/Util.GALAXY_RADIUS;
+            scaleFact_y = this.getHeight()/Util.GALAXY_RADIUS;
         }
 
         public void paint(Graphics g){
@@ -83,11 +88,11 @@ public class VisualiserPanel extends JPanel {
 		                	if (j == 0){
 		                		before[i] = all[i];
 		            		} else {
-		            			x_1 = (int)before[i].x;
-		            			y_1 = (int)before[i].y;
+		            			x_1 = (int)before[i].x /* *scaleFact_x*/ ;
+		            			y_1 = (int)before[i].y /* *scaleFact_y*/;
 		            			
-		            			x_2 = (int)all[i].x;
-		            			y_2 = (int)all[i].y;
+		            			x_2 = (int)all[i].x /* *scaleFact_x*/;
+		            			y_2 = (int)all[i].y /* *scaleFact_y*/;
 		            			
 		            			double mass = allbodies[i].getMassValue();
 		            			Color c = null;
@@ -117,12 +122,12 @@ public class VisualiserPanel extends JPanel {
             for(int i=0; i<allbodies.length; i++){
             	int x,y,m,v_x,v_y;
             	Color c = null;
-            	x = (int)allbodies[i].getPosition_X();
-            	y = (int)allbodies[i].getPosition_Y();
+            	x = (int)allbodies[i].getPosition_X() /* *scaleFact_x*/;
+            	y = (int)allbodies[i].getPosition_Y() /* *scaleFact_y*/;
             	m = (int)allbodies[i].getMassValue();
             	
-            	v_x = (int)allbodies[i].getVelocity_X();
-            	v_y = (int)allbodies[i].getVelocity_Y();
+            	v_x = (int)allbodies[i].getVelocity_X() /* *scaleFact_x*/;
+            	v_y = (int)allbodies[i].getVelocity_Y() /* *scaleFact_y*/;
             	
             	// We divide to the range of the masses in four bands and assegnamo a color, 
             	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and gray bigger masses. 

@@ -48,7 +48,7 @@ public class Controller {
 		
 		initThreads();
 		
-		tracks = true;
+		tracks = false;
 		velocity = false;
 	}
 	

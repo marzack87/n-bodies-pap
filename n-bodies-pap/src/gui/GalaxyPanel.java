@@ -60,7 +60,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		btn_save.setEnabled(false);
 		
 		chb_tracks = new JCheckBox("Tracks");
-		chb_tracks.setSelected(true);
+		chb_tracks.setSelected(false);
 		
 		chb_velocity = new JCheckBox("Velocity");
 		chb_velocity.setSelected(false);
@@ -253,7 +253,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	 * Returns an ImageIcon, or null if the path was invalid.
 	 * 
 	 * @param path The path of the image file 
-	 * @param description Description of te image
+	 * @param description Description of the image
 	 */
 	private ImageIcon createImageIcon(String path,String description) {
 	    java.net.URL imgURL = getClass().getResource(path);
@@ -289,6 +289,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			}else{
 				out.println(" No Sun present ");
 			}
+			out.println(" Mass Bodies range: 1" + " - " + Util.RANGE_BODIES_MASS);
 			//out.println(" Mass Bodies range: " + Util.MIN_BODIES_MASS + " - " + Util.MAX_BODIES_MASS);
 			out.println(" Velocity Bodies range: 0 - " + Util.RANGE_BODIES_VELOCITY);
 			out.println("");
@@ -305,7 +306,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	}
 	
 	private ImageIcon icon_body(int type){
-		int size = (type == 5) ? Util.SUN_RADIUS*2 : (Util.BODY_RADIUS <=2) ? Util.BODY_RADIUS*5 : Util.BODY_RADIUS*2;
+		int size = (type == 5) ? Util.SUN_RADIUS*2 : (Util.BODY_RADIUS<2) ? Util.BODY_RADIUS*5 : Util.BODY_RADIUS*8/3;
 		BufferedImage image=new BufferedImage(size, size, BufferedImage.TYPE_3BYTE_BGR);
 	    Graphics2D g = image.createGraphics();
 	    g.setColor(new Color(0xEEEEEE));

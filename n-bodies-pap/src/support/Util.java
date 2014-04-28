@@ -21,7 +21,7 @@ public class Util {
 	public static final double SUN_MASS = 500000;
 	
 	public static final int SUN_RADIUS = 6;
-	public static final int BODY_RADIUS = 2;
+	public static final int BODY_RADIUS = 3;
 	
 	//public static final double MAX_BODIES_MASS = 1.8987*1E27;// Giove
 	//public static final double MIN_BODIES_MASS = 3.302*1E23; // Mercurio
@@ -61,6 +61,8 @@ public class Util {
 	public static final int MAX_SCALE = 25;
 	public static final int MIN_SCALE = 1;
 	public static final int MID_SCALE = (MAX_SCALE%2 == 0) ? (MAX_SCALE/2) : (MAX_SCALE/2) + 1;
+	
+	public static final double GALAXY_RADIUS = 5e12;
 	
 	public static final double DEFAULT_DT = 0.01;
 	
