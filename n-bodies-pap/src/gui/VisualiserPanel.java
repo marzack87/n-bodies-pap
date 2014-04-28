@@ -32,22 +32,26 @@ public class VisualiserPanel extends JPanel {
 		private Controller controller;
 		private Body[] allbodies;
 		private ArrayList<P2d[]> history = new ArrayList<P2d[]>();
+		private GalaxyPanel gpanel;
 		
 		/**
 		 * Class VisualiserPanel constructor.
 		 * 
 		 * @param contr Controller entity
 		 **/
-        public VisualiserPanel(Controller contr){
+        public VisualiserPanel(Controller contr, GalaxyPanel gp){
             setSize(Util.VisualiserAvailableSpace());
             controller = contr;
             allbodies = controller.getAllBodiesFromContext();
             P2d[] pos = new P2d[allbodies.length];
             for (Body b : allbodies) pos[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
             history.add(pos);
+            gpanel = gp;
         }
 
         public void paint(Graphics g){
+        	
+        	gpanel.updatePerformanceData();
         	
         	Graphics2D g2 = (Graphics2D) g;
         	Dimension d = getSize();

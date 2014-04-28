@@ -30,7 +30,7 @@ import entity.Controller;
 public class GalaxyPanel extends JPanel implements ActionListener, ChangeListener{
 
 	private JButton btn_start,btn_stop,btn_step, btn_save, btn_reset;
-	private JLabel lbl_cmd, lbl_dt, lbl_legend, lbl_one, lbl_two, lbl_three, lbl_four, lbl_sun;
+	private JLabel lbl_cmd, lbl_dt, lbl_legend, lbl_one, lbl_two, lbl_three, lbl_four, lbl_sun, lbl_n_iter_title, lbl_last_iter_time_title, lbl_FPS_title, lbl_n_iter, lbl_last_iter_time, lbl_FPS;
 	private JCheckBox chb_tracks, chb_velocity;
 	private JSlider sld_velocity;
 	private Controller controller;
@@ -83,6 +83,16 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		sld_velocity.setPaintLabels(true);
 		sld_velocity.setPreferredSize(new Dimension(10,10));
 		
+		// Performance labels
+		lbl_n_iter_title = new JLabel("ITERATIONS:");
+		lbl_n_iter = new JLabel("" + Util.total_iteration);
+		
+		lbl_last_iter_time_title = new JLabel("LAST ITER TIME:");
+		lbl_last_iter_time = new JLabel("" + Util.last_iter_time);
+		
+		lbl_FPS_title = new JLabel("FPS:");
+		lbl_FPS = new JLabel(String.format( "%.2f",(1e9 / Util.last_iter_time)));
+		
 		// Create the legend
 		lbl_legend = new JLabel("Legend: ");
 		lbl_legend.setAlignmentX(CENTER_ALIGNMENT);
@@ -119,7 +129,14 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(Box.createRigidArea(new Dimension(0,10)));
 		add(chb_tracks);
 		add(chb_velocity);
-		add(Box.createRigidArea(new Dimension(0,50)));
+		add(Box.createRigidArea(new Dimension(0,30)));
+		add(lbl_n_iter_title);
+		add(lbl_n_iter);
+		add(lbl_last_iter_time_title);
+		add(lbl_last_iter_time);
+		add(lbl_FPS_title);
+		add(lbl_FPS);
+		add(Box.createRigidArea(new Dimension(0,30)));
 		add(lbl_legend);
 		add(Box.createRigidArea(new Dimension(0,10)));
 		add(lbl_one);
@@ -302,14 +319,19 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	@Override
 	public void stateChanged(ChangeEvent e) {
 	JSlider source = (JSlider)e.getSource();
-	if (!source.getValueIsAdjusting()) {
-		int step = source.getValue();
-		//step = source.getMaximum() - step;
-		double dt = (Util.DEFAULT_DT * step) / Util.MID_SCALE;
-		//double dt = (Util.DEFAULT_DT * (Math.pow(10, (Util.MAX_SCALE - Util.MID_SCALE)))) / (Math.pow(10, step));
-		controller.setDeltaT(dt);
-		lbl_dt.setText("dt = " + String.format( "%.7f", dt ));
-	}	
+		if (!source.getValueIsAdjusting()) {
+			int step = source.getValue();
+			//step = source.getMaximum() - step;
+			double dt = (Util.DEFAULT_DT * step) / Util.MID_SCALE;
+			//double dt = (Util.DEFAULT_DT * (Math.pow(10, (Util.MAX_SCALE - Util.MID_SCALE)))) / (Math.pow(10, step));
+			controller.setDeltaT(dt);
+			lbl_dt.setText("dt = " + String.format( "%.7f", dt ));
+		}	
 	}
 	
+	public void updatePerformanceData(){
+		lbl_n_iter.setText("" + Util.total_iteration);
+		lbl_last_iter_time.setText("" + Util.last_iter_time);
+		lbl_FPS.setText(String.format( "%.2f",(1e9 / Util.last_iter_time)));
+	}
 }

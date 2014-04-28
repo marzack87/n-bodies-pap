@@ -40,10 +40,9 @@ public class GalaxyFrame extends JFrame{
 		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
-		
-		vpanel = new VisualiserPanel(contr);
-		contr.setUpVisualiser(vpanel);
 		gpanel = new GalaxyPanel(contr);
+		vpanel = new VisualiserPanel(contr, gpanel);
+		contr.setUpVisualiser(vpanel);
 		getContentPane().add(vpanel, BorderLayout.CENTER);
 	    getContentPane().add(gpanel, BorderLayout.LINE_END);
 	    
