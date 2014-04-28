@@ -135,7 +135,7 @@ public class Generator {
 			position_y[i] = (Math.random() * (posy_range - 1) ) + 1;
 			velocity_x[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
 			velocity_y[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
-			mass[i] = (Math.random() * mass_range) + Util.MIN_BODIES_MASS;
+			mass[i] = (Math.random() * mass_range) + 1/*Util.MIN_BODIES_MASS*/;
 		}
 		
 		// Initialize the context
