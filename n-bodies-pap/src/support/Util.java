@@ -18,13 +18,17 @@ public class Util {
 	public static final int ncores = Runtime.getRuntime().availableProcessors()/2;
 	public static final String architectureOS = System.getProperty("os.arch");
 	
-	public static final double SUN_MASS = 500000;
+	public static final double SUN_MASS = 1.9891*1e30;
 	
-	public static final int SUN_RADIUS = 10;
-	public static final int BODY_RADIUS = 2;
+	public static final int SUN_RADIUS = 6;
+	public static final int BODY_RADIUS = 1;
+	
+	public static final double MAX_MASS = 1.8987*1E27;// Giove
+	public static final double MIN_MASS = 3.302*1E23; // Mercurio
 	
 	public static final double RANGE_BODIES_VELOCITY = 50;
-	public static final double RANGE_BODIES_MASS = 500;
+	//public static final double RANGE_BODIES_MASS = 500;
+	public static final double RANGE_BODIES_MASS = MAX_MASS - MIN_MASS;
 	
 	// emerald
 	public static final Color one = new Color(0x00CD7B);
@@ -58,7 +62,7 @@ public class Util {
 	public static final int MIN_SCALE = 1;
 	public static final int MID_SCALE = (MAX_SCALE%2 == 0) ? (MAX_SCALE/2) : (MAX_SCALE/2) + 1;
 	
-	public static final double DEFAULT_DT = 0.0001;
+	public static final double DEFAULT_DT = 0.01;
 	
 	public static double last_iter_time = 0;
 	public static int total_iteration = 0;
