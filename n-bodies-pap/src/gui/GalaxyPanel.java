@@ -65,18 +65,19 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		chb_velocity = new JCheckBox("Velocity");
 		chb_velocity.setSelected(false);
 		
-		lbl_dt = new JLabel("  dt = 0.001");
+		double dt = Util.DEFAULT_DT;
+		lbl_dt = new JLabel("dt = " + String.format( "%.6f", dt ));
 		
 		// Create the slider
-		sld_velocity = new JSlider(JSlider.HORIZONTAL, 1, 6, 3);
+		sld_velocity = new JSlider(JSlider.HORIZONTAL, Util.MIN_SCALE, Util.MAX_SCALE, Util.MID_SCALE);
 		sld_velocity.addChangeListener(this);
 		sld_velocity.setMajorTickSpacing(1);
 		sld_velocity.setSnapToTicks(true);
 		sld_velocity.setPaintTicks(true);
 		// Create the slider label table
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-		labelTable.put(new Integer( 1 ), new JLabel(createImageIcon("images/slow.png", "slow")));
-		labelTable.put(new Integer( 6 ), new JLabel(createImageIcon("images/fast.png", "fast")));
+		labelTable.put(new Integer( Util.MIN_SCALE ), new JLabel(createImageIcon("images/slow.png", "slow")));
+		labelTable.put(new Integer( Util.MAX_SCALE ), new JLabel(createImageIcon("images/fast.png", "fast")));
 		sld_velocity.setLabelTable(labelTable);
 		sld_velocity.setBorder(this.getBorder());
 		sld_velocity.setPaintLabels(true);
@@ -303,10 +304,11 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	JSlider source = (JSlider)e.getSource();
 	if (!source.getValueIsAdjusting()) {
 		int step = source.getValue();
-		step = source.getMaximum() - step;
-		double dt = 1 / (Math.pow(10, step));
+		//step = source.getMaximum() - step;
+		double dt = (Util.DEFAULT_DT * step) / Util.MID_SCALE;
+		//double dt = (Util.DEFAULT_DT * (Math.pow(10, (Util.MAX_SCALE - Util.MID_SCALE)))) / (Math.pow(10, step));
 		controller.setDeltaT(dt);
-		lbl_dt.setText("  dt = " + dt);
+		lbl_dt.setText("dt = " + String.format( "%.7f", dt ));
 	}	
 	}
 	

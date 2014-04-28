@@ -52,8 +52,10 @@ public class Body {
 	 * @see support.Vector
 	 */
 	public void move(V2d f, double dt) { 
+		//System.out.println("Body " + index);
 		if (collision){
 			this.v = vel_after_collision;
+			//System.out.println("Body " + index + " - vel_after_collision = " + vel_after_collision);
 			V2d dp = this.v.mul(dt);
 			p = p.sum(dp);
 		} else {
@@ -79,12 +81,14 @@ public class Body {
 	 * @see support.Vector
 	 */
 	public V2d forceFrom(Body that) {
+		
+		
+		
 		double G = 6.67/*e-11*/;
 		V2d p_this = new V2d(this.p.x, this.p.y);
 		V2d p_that = new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.min(p_this);
 		double dist = that.p.dist(this.p);
-		//dist = dist - 4;
 		
 		if (that.getMassValue() == Util.SUN_MASS){
 			if (dist <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);

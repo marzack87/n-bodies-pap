@@ -6,6 +6,7 @@ import java.util.concurrent.*;
 
 import entity.Body;
 import support.Context;
+import support.Util;
 
 public class Simulator extends Thread {
 	
@@ -71,6 +72,8 @@ public class Simulator extends Thread {
 		 * - AGGIORNIAMO I DATI
 		 * - LI PASSIAMO AL VISUALIZZATORE 
 		 */
+		double time = System.nanoTime();
+		
 		Body [] all_bodies = context.allbodies;
 		double dt = context.dt;
 		for (int i = 0; i < all_bodies.length; i++){
@@ -90,6 +93,8 @@ public class Simulator extends Thread {
 			}
 		}
 		list.clear();
+		Util.total_iteration++;
+		Util.last_iter_time = System.nanoTime() - time;
 		this.sem.release();
 		/*try {
 			this.printed.acquire();

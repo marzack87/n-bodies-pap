@@ -26,8 +26,7 @@ public class Context {
 	 *
 	 **/
     public Context(){
-    	
-    	dt = 0.001;
+    	dt = Util.DEFAULT_DT;
     } 
     
     /**

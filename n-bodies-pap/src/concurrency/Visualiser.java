@@ -3,6 +3,7 @@ package concurrency;
 import java.util.concurrent.Semaphore;
 
 import support.Context;
+import support.Util;
 import gui.VisualiserPanel;
 import entity.*;
 
@@ -50,6 +51,9 @@ public class Visualiser extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+    		
+    		System.out.println("# " + Util.total_iteration + " - time " + Util.last_iter_time + " FPS " + 1e9 / Util.last_iter_time);
+        	
     		Body[] position = cont.allbodies;
     		v.updatePositions(position);
     		//this.printed.release();
