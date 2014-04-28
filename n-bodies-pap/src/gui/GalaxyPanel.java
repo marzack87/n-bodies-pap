@@ -289,7 +289,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			}else{
 				out.println(" No Sun present ");
 			}
-			out.println(" Mass Bodies range: " + Util.MIN_MASS + " - " + Util.MAX_MASS);
+			out.println(" Mass Bodies range: " + Util.MIN_BODIES_MASS + " - " + Util.MAX_BODIES_MASS);
 			out.println(" Velocity Bodies range: 0 - " + Util.RANGE_BODIES_VELOCITY);
 			out.println("");
 			out.println(" - Simulation info -");

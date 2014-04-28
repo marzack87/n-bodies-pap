@@ -23,12 +23,12 @@ public class Util {
 	public static final int SUN_RADIUS = 6;
 	public static final int BODY_RADIUS = 1;
 	
-	public static final double MAX_MASS = 1.8987*1E27;// Giove
-	public static final double MIN_MASS = 3.302*1E23; // Mercurio
+	public static final double MAX_BODIES_MASS = 1.8987*1E27;// Giove
+	public static final double MIN_BODIES_MASS = 3.302*1E23; // Mercurio
 	
 	public static final double RANGE_BODIES_VELOCITY = 50;
 	//public static final double RANGE_BODIES_MASS = 500;
-	public static final double RANGE_BODIES_MASS = MAX_MASS - MIN_MASS;
+	public static final double RANGE_BODIES_MASS = MAX_BODIES_MASS - MIN_BODIES_MASS;
 	
 	// emerald
 	public static final Color one = new Color(0x00CD7B);
@@ -87,10 +87,10 @@ public class Util {
 	
 	public static double[] massLevels(){
 		double[] levels = new double[4];
-		levels[0] = RANGE_BODIES_MASS / 10;
-		levels[1] = RANGE_BODIES_MASS / 4;
-		levels[2] = RANGE_BODIES_MASS / 2;
-		levels[3] = RANGE_BODIES_MASS;
+		levels[0] = (RANGE_BODIES_MASS / 10) + MIN_BODIES_MASS;
+		levels[1] = (RANGE_BODIES_MASS / 4) + MIN_BODIES_MASS;
+		levels[2] = (RANGE_BODIES_MASS / 2) + MIN_BODIES_MASS;
+		levels[3] = MAX_BODIES_MASS;
 		return levels;
 		
 	}
