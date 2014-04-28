@@ -21,7 +21,7 @@ public class Util {
 	public static final double SUN_MASS = 500000;
 	
 	public static final int SUN_RADIUS = 6;
-	public static final int BODY_RADIUS = 3;
+	public static final int BODY_RADIUS = 1;
 	
 	//public static final double MAX_BODIES_MASS = 1.8987*1E27;// Giove
 	//public static final double MIN_BODIES_MASS = 3.302*1E23; // Mercurio
