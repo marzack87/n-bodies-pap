@@ -1,1 +1,19 @@
-N-Bodies Simulation Performance Stats:
+------------ N-Bodies Simulation ------------
+
+ - Computer info -
+ Name of the OS:  Mac OS X
+ Version of the OS: 10.9.2
+ Architecture of the OS: x86_64
+ Number of cores: 8
+
+ - Bodies info -
+ # of Bodies: 100
+ A Sun is present and its mass is 500000.0
+ Mass Bodies range: 1 - 500.0
+ Velocity Bodies range: 0 - 50.0
+
+ - Simulation info -
+ # of iteration: 3447
+ Total execution time: 2.07024 sec
+
+---------------------------------------------

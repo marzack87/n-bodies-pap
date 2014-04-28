@@ -33,6 +33,7 @@ public class Simulator extends Thread {
 	public void run(){
 		log("I'm running..");
 		log("Simulation started");
+		Util.t_start = System.nanoTime();
 		while (simulation){
 			if (go || step){
 					loop();

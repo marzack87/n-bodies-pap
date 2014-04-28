@@ -8,6 +8,16 @@ import entity.Body;
 
 public class Util {
 	
+	public static int n_bodies = 0;
+	public static boolean one_sun = false;
+	
+	public static double t_start, t_stop;
+	
+	public static final String nameOS = System.getProperty("os.name");  
+	public static final String versionOS = System.getProperty("os.version");
+	public static final int ncores = Runtime.getRuntime().availableProcessors()/2;
+	public static final String architectureOS = System.getProperty("os.arch");
+	
 	public static final double SUN_MASS = 500000;
 	
 	public static final int SUN_RADIUS = 10;

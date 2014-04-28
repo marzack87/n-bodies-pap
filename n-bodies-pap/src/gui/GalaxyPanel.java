@@ -30,7 +30,7 @@ import entity.Controller;
 public class GalaxyPanel extends JPanel implements ActionListener, ChangeListener{
 
 	private JButton btn_start,btn_stop,btn_step, btn_save, btn_reset;
-	private JLabel lbl_cmd, lbl_dt, lbl_legend, lbl_one, lbl_two, lbl_three, lbl_four, lbl_sun, lbl_n_iter_title, lbl_last_iter_time_title, lbl_FPS_title, lbl_n_iter, lbl_last_iter_time, lbl_FPS;
+	private JLabel lbl_cmd, lbl_dt, lbl_legend, lbl_one, lbl_two, lbl_three, lbl_four, lbl_sun, lbl_n_iter_title, lbl_last_iter_time_title, lbl_FPS_title, lbl_n_iter, lbl_last_iter_time, lbl_FPS,lbl_stats;
 	private JCheckBox chb_tracks, chb_velocity;
 	private JSlider sld_velocity;
 	private Controller controller;
@@ -84,14 +84,14 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		sld_velocity.setPreferredSize(new Dimension(10,10));
 		
 		// Performance labels
-		lbl_n_iter_title = new JLabel("ITERATIONS:");
+		lbl_stats = new JLabel(" Performance: ");
+		lbl_stats.setAlignmentX(CENTER_ALIGNMENT);
+		lbl_n_iter_title = new JLabel(" Iterations:");
 		lbl_n_iter = new JLabel("" + Util.total_iteration);
-		
-		lbl_last_iter_time_title = new JLabel("LAST ITER TIME:");
+		lbl_last_iter_time_title = new JLabel(" Last iter time:");
 		lbl_last_iter_time = new JLabel("" + Util.last_iter_time);
-		
-		lbl_FPS_title = new JLabel("FPS:");
-		lbl_FPS = new JLabel(String.format( "%.2f",(1e9 / Util.last_iter_time)));
+		lbl_FPS_title = new JLabel(" FPS:");
+		lbl_FPS = new JLabel("0");
 		
 		// Create the legend
 		lbl_legend = new JLabel("Legend: ");
@@ -126,17 +126,19 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(Box.createRigidArea(new Dimension(0,50)));
 		add(lbl_dt);
 		add(sld_velocity);
-		add(Box.createRigidArea(new Dimension(0,10)));
+		add(Box.createRigidArea(new Dimension(0,30)));
 		add(chb_tracks);
 		add(chb_velocity);
-		add(Box.createRigidArea(new Dimension(0,30)));
+		add(Box.createRigidArea(new Dimension(0,50)));
+		add(lbl_stats);
+		add(Box.createRigidArea(new Dimension(0,10)));
 		add(lbl_n_iter_title);
 		add(lbl_n_iter);
 		add(lbl_last_iter_time_title);
 		add(lbl_last_iter_time);
 		add(lbl_FPS_title);
 		add(lbl_FPS);
-		add(Box.createRigidArea(new Dimension(0,30)));
+		add(Box.createRigidArea(new Dimension(0,50)));
 		add(lbl_legend);
 		add(Box.createRigidArea(new Dimension(0,10)));
 		add(lbl_one);
@@ -207,6 +209,8 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			btn_stop.setEnabled(false);
 			
 			controller.stopSimulation();
+			Util.t_stop = System.nanoTime();
+			log("Total execution time: " + (Util.t_stop-Util.t_start)*1e-9 + " sec");
 		} else if(source == btn_save){
 			log("Save Button");
 			savefile();
@@ -270,7 +274,29 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			// Opening of a new file "Stats".
 			FileWriter f = new FileWriter("Stats.txt");
 			PrintWriter out = new PrintWriter(f);
-			out.println("N-Bodies Simulation Performance Stats:");
+			out.println("------------ N-Bodies Simulation ------------");
+			out.println("");
+			out.println(" - Computer info -");
+			out.println(" Name of the OS:  "+ Util.nameOS);
+			out.println(" Version of the OS: " + Util.versionOS);
+			out.println(" Architecture of the OS: " + Util.architectureOS);
+			out.println(" Number of cores: " + Util.ncores);
+			out.println("");
+			out.println(" - Bodies info -");
+			out.println(" # of Bodies: " + Util.n_bodies);
+			if(Util.one_sun){
+				out.println(" A Sun is present and its mass is " + Util.SUN_MASS);
+			}else{
+				out.println(" No Sun present ");
+			}
+			out.println(" Mass Bodies range: 1 - " + Util.RANGE_BODIES_MASS);
+			out.println(" Velocity Bodies range: 0 - " + Util.RANGE_BODIES_VELOCITY);
+			out.println("");
+			out.println(" - Simulation info -");
+			out.println(" # of iteration: " + Util.total_iteration);
+			out.println(" Total execution time: " + + (Util.t_stop-Util.t_start)*1e-9 + " sec");
+			out.println("");
+			out.println("---------------------------------------------");
 			out.close();
 		}catch (Exception ex) { System.err.println(ex); }
 		DoneDialog done = new DoneDialog();

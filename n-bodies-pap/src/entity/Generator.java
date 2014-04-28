@@ -83,7 +83,8 @@ public class Generator {
 			  String strLine;
 			  
 			  if ((strLine = br.readLine()) != null){
-				  number = Integer.valueOf(strLine); 
+				  number = Integer.valueOf(strLine);
+				  Util.n_bodies = number;
 				  position_x = new double[number];
 				  position_y = new double[number];
 				  velocity_x = new double[number];
@@ -122,6 +123,7 @@ public class Generator {
 	 */
 	public void initWithRandomData(int n, boolean sun){
 		number = n;
+		Util.n_bodies = number;
 		position_x = new double[number];
 		position_y = new double[number];
 		velocity_x = new double[number];

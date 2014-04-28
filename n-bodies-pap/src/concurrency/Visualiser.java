@@ -52,7 +52,7 @@ public class Visualiser extends Thread {
 				e.printStackTrace();
 			}
     		
-    		System.out.println("# " + Util.total_iteration + " - time " + Util.last_iter_time + " FPS " + 1e9 / Util.last_iter_time);
+    		//System.out.println("# " + Util.total_iteration + " - time " + Util.last_iter_time + " FPS " + 1e9 / Util.last_iter_time);
         	
     		Body[] position = cont.allbodies;
     		v.updatePositions(position);

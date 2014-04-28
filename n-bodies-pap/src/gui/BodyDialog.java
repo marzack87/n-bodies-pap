@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import support.Util;
+
 /**
  * Class BodyDialog.
  * Class that extends the JDialog class, and that is the component in which the user, once he have chosen to create the bodies randomly, 
@@ -66,6 +68,7 @@ public class BodyDialog extends JDialog implements ActionListener{
 		
 			try{
 				int n = Integer.parseInt(body.getText());
+				Util.one_sun = sun.isSelected();
 				mp.initWithRandom(n,sun.isSelected());
 			}catch(Exception ex) { 
 				ex.printStackTrace();
