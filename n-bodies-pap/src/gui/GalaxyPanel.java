@@ -282,7 +282,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println(" Architecture of the OS: " + Util.architectureOS);
 			out.println(" Number of cores: " + Util.ncores);
 			out.println("");
-			out.println(" - Bodies info -");
+			out.println(" - Bodies and Galaxy info -");
 			out.println(" # of Bodies: " + Util.n_bodies);
 			if(Util.one_sun){
 				out.println(" A Sun is present and its mass is " + Util.SUN_MASS);
@@ -292,6 +292,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println(" Mass Bodies range: 1" + " - " + Util.RANGE_BODIES_MASS);
 			//out.println(" Mass Bodies range: " + Util.MIN_BODIES_MASS + " - " + Util.MAX_BODIES_MASS);
 			out.println(" Velocity Bodies range: 0 - " + Util.RANGE_BODIES_VELOCITY);
+			out.println(" Galaxy Radius: " + Util.GALAXY_RADIUS);
 			out.println("");
 			out.println(" - Simulation info -");
 			out.println(" # of iteration: " + Util.total_iteration);
