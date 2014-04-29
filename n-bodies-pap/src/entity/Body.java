@@ -84,7 +84,7 @@ public class Body {
 		
 		
 		
-		double G = 6.67e-11;
+		double G = 6.67/*e-11*/;
 		V2d p_this = new V2d(this.p.x, this.p.y);
 		V2d p_that = new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.min(p_this);

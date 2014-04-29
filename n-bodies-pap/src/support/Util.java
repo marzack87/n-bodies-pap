@@ -18,7 +18,7 @@ public class Util {
 	public static final int ncores = Runtime.getRuntime().availableProcessors()/2;
 	public static final String architectureOS = System.getProperty("os.arch");
 	
-	public static final double SUN_MASS = 500000;
+	public static final double SUN_MASS = 50000000;
 	
 	public static final int SUN_RADIUS = 6;
 	public static final int BODY_RADIUS = 1;
@@ -64,7 +64,7 @@ public class Util {
 	
 	public static final double GALAXY_RADIUS = 5e12;
 	
-	public static final double DEFAULT_DT = 0.01;
+	public static final double DEFAULT_DT = 0.1;
 	
 	public static double last_iter_time = 0;
 	public static int total_iteration = 0;
