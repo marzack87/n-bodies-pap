@@ -125,6 +125,7 @@ public class Simulator extends Thread {
 			 exec.execute(new BodyTaskV2(context, all_bodies, i, dt));
 			//System.out.println(exec.toString());
 		}
+		exec.shutdown();
 		try {
 			exec.awaitTermination(600, TimeUnit.SECONDS);
 		} catch (InterruptedException e1) {
