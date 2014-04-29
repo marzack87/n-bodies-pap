@@ -35,7 +35,7 @@ public class Context {
      * 
      * @param body
      */
-    public void updateBody(Body body){
+    public synchronized void updateBody(Body body){
     	allbodies[body.getIndex()] = body;
     }
     

@@ -28,6 +28,7 @@ public class Simulator extends Thread {
 		this.sem = sem;
 		step = false;
 		this.printed = print;
+		
 	}
 	
 	public void run(){
@@ -36,7 +37,11 @@ public class Simulator extends Thread {
 		Util.t_start = System.nanoTime();
 		while (simulation){
 			if (go || step){
-					loop();
+					double t0 = System.nanoTime();
+					//loop();
+					loopV2();
+					double t1 = System.nanoTime();
+					log("Task execution time: " + (t1-t0));
 			}
 		}
 		log("I'm dead..");
@@ -94,6 +99,38 @@ public class Simulator extends Thread {
 			}
 		}
 		list.clear();
+		Util.total_iteration++;
+		Util.last_iter_time = System.nanoTime() - time;
+		this.sem.release();
+		try {
+			this.printed.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void loopV2(){
+		/*
+		 * - LEGGERE I DATI
+		 * - CREARE I BODY TASK PASSANDOGLI I DATI
+		 * - ASPETTIAMO CHE FINISCANO TORNANDOCI I LORO VALORI AGGIORNATI
+		 * - AGGIORNIAMO I DATI
+		 * - LI PASSIAMO AL VISUALIZZATORE 
+		 */
+		double time = System.nanoTime();
+		
+		Body [] all_bodies = context.allbodies.clone();
+		double dt = context.dt;
+		for (int i = 0; i < all_bodies.length; i++){
+			 exec.execute(new BodyTaskV2(context, all_bodies, i, dt));
+			//System.out.println(exec.toString());
+		}
+		try {
+			exec.awaitTermination(600, TimeUnit.SECONDS);
+		} catch (InterruptedException e1) {
+			
+			e1.printStackTrace();
+		}
 		Util.total_iteration++;
 		Util.last_iter_time = System.nanoTime() - time;
 		this.sem.release();
