@@ -23,7 +23,7 @@ public class Visualiser extends Thread {
     private Context cont;
     private VisualiserPanel v;
     private Semaphore sem;
-    //private Semaphore printed;
+    private Semaphore printed;
     private boolean simulation;
     
     /**
@@ -36,10 +36,10 @@ public class Visualiser extends Thread {
 	 * @see entity.Controller
 	 *
 	 **/
-    public Visualiser(Context cont, Semaphore sem/*, Semaphore print*/){
+    public Visualiser(Context cont, Semaphore sem, Semaphore print){
     	this.cont = cont;
     	this.sem = sem;
-    	//this.printed = print;
+    	this.printed = print;
     	simulation = true;
     }
     
@@ -56,7 +56,7 @@ public class Visualiser extends Thread {
         	
     		Body[] position = cont.allbodies;
     		v.updatePositions(position);
-    		//this.printed.release();
+    		this.printed.release();
     	}
     	log("I'm dead..");
     }

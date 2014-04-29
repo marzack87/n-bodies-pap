@@ -15,19 +15,19 @@ public class Simulator extends Thread {
 	private Context context;
 	private Semaphore sem;
 	private boolean step;
-	//private Semaphore printed;
+	private Semaphore printed;
 	
 	private static final int NTHREADS = Runtime.getRuntime().availableProcessors() + 1;
 	private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS);
 	private List<Future<Body>> list = new ArrayList<Future<Body>>();
 	
-	public Simulator(Context c, Semaphore sem/*, Semaphore print*/) {
+	public Simulator(Context c, Semaphore sem, Semaphore print) {
 		context = c;
 		go = false;
 		simulation = true;
 		this.sem = sem;
 		step = false;
-		//this.printed = print;
+		this.printed = print;
 	}
 	
 	public void run(){
@@ -97,11 +97,11 @@ public class Simulator extends Thread {
 		Util.total_iteration++;
 		Util.last_iter_time = System.nanoTime() - time;
 		this.sem.release();
-		/*try {
+		try {
 			this.printed.acquire();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	/**

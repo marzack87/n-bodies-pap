@@ -53,8 +53,8 @@ public class Controller {
 	}
 	
 	private void initThreads(){
-		simulator = new Simulator(context, sem/*, print*/);
-		visualiser = new Visualiser(context, sem/*, print*/);
+		simulator = new Simulator(context, sem, print);
+		visualiser = new Visualiser(context, sem, print);
 	}
 	
 	/**
