@@ -133,7 +133,7 @@ public class Generator {
 			position_y[i] = (Math.random() * (posy_range - 1) ) + 1;
 			velocity_x[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
 			velocity_y[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
-			int index_mass = (int)(Math.random() * 3);
+			int index_mass = (int)Math.round(Math.random() * 3);
 			//System.out.println("mass index: " + index_mass);
 			mass[i] = Util.MASSES[index_mass];
 			//System.out.println("mass: " + mass[i]);

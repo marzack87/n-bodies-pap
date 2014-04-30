@@ -350,8 +350,8 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		if (!source.getValueIsAdjusting()) {
 			int step = source.getValue();
 			//step = source.getMaximum() - step;
-			double dt = (Util.DEFAULT_DT * step) / Util.MID_SCALE;
-			//double dt = (Util.DEFAULT_DT * (Math.pow(10, (Util.MAX_SCALE - Util.MID_SCALE)))) / (Math.pow(10, step));
+			//double dt = (Util.DEFAULT_DT * step) / Util.MID_SCALE;
+			double dt = (Util.DEFAULT_DT * (Math.pow(10, step-1)) / (Math.pow(10, (Util.MAX_SCALE - Util.MID_SCALE))));
 			controller.setDeltaT(dt);
 			lbl_dt.setText("dt = " + String.format( "%.7f", dt ));
 		}	
