@@ -18,7 +18,7 @@ public class BodyTaskV2 implements Runnable {
 	private double dt;
 	
 	/**
-	 * Class BodyTask default constructor.
+	 * Class BodyTaskV2 default constructor.
 	 *
 	 **/
 	public BodyTaskV2(Context cont, Body[] all, int from, int to, double delta_t){

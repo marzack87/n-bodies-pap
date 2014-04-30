@@ -12,13 +12,13 @@ import support.*;
  * @author Richiard Casadei, Marco Zaccheroni
  */
 public class Body { 
-	private P2d p; //position
-	private V2d v; //velocity
-	private double mass; //mass
-	private int index;
+	public P2d p; //position
+	public V2d v; //velocity
+	public double mass; //mass
+	public int index;
 	
-	private boolean collision;
-	private V2d vel_after_collision;
+	public boolean collision;
+	public V2d vel_after_collision;
 	
 	
 	/**

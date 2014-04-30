@@ -141,7 +141,7 @@ public class Generator {
 		
 		// Initialize the context
 		this.initBody(sun);
-		this.print_body();
+		//this.print_body();
 	}
 	
 	/**

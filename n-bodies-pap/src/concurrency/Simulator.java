@@ -39,8 +39,9 @@ public class Simulator extends Thread {
 		while (simulation){
 			if (go || step){
 					//double t0 = System.nanoTime();
-					loop();
+					//loop();
 					//loopV2();
+					loopV3();
 					//double t1 = System.nanoTime();
 					//log("Task execution time: " + (t1-t0));
 			}
@@ -94,9 +95,7 @@ public class Simulator extends Thread {
 			try {
 				Body body = future.get();
 				context.updateBody(body);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (ExecutionException e) {
+			} catch (InterruptedException | ExecutionException e) {
 				e.printStackTrace();
 			}
 		}
@@ -122,7 +121,7 @@ public class Simulator extends Thread {
 		 */
 		double time = System.nanoTime();
 		
-		Body [] all_bodies = context.allbodies.clone();
+		Body [] all_bodies = context.allbodies;
 		double dt = context.dt;
 		
 		int body_to_task = (int)all_bodies.length/(NTHREADS-1);
@@ -149,6 +148,41 @@ public class Simulator extends Thread {
 			}
 		
 		threads.clear();
+		
+		Util.total_iteration++;
+		Util.last_iter_time = (System.nanoTime() - time)*1e-9;
+		this.sem.release();
+		try {
+			this.printed.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void loopV3(){
+		/*
+		 * - FACCIO TUTTO DENTRO CALL() SENZA CHIAMARE I METODI
+		 */
+		double time = System.nanoTime();
+		
+		Body [] all_bodies = context.allbodies;
+		double dt = context.dt;
+		
+		for (int i = 0; i < all_bodies.length; i++) {
+		      BodyTaskV3 task = new BodyTaskV3(context, all_bodies, i, dt);
+		      Future<Body> submit = exec.submit(task);
+				//System.out.println(exec.toString());
+				list.add(submit);
+		}
+		for (Future<Body> future : list) {
+			try {
+				Body body = future.get();
+				context.updateBody(body);
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+		}
+		list.clear();
 		
 		Util.total_iteration++;
 		Util.last_iter_time = (System.nanoTime() - time)*1e-9;
