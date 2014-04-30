@@ -20,6 +20,7 @@ public class Simulator extends Thread {
 	private static final int NTHREADS = Runtime.getRuntime().availableProcessors() + 1;
 	private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS);
 	private List<Future<Body>> list = new ArrayList<Future<Body>>();
+	private List<Thread> threads = new ArrayList<Thread>();
 	
 	public Simulator(Context c, Semaphore sem, Semaphore print) {
 		context = c;
@@ -37,11 +38,11 @@ public class Simulator extends Thread {
 		Util.t_start = System.nanoTime();
 		while (simulation){
 			if (go || step){
-					double t0 = System.nanoTime();
-					//loop();
-					loopV2();
-					double t1 = System.nanoTime();
-					log("Task execution time: " + (t1-t0));
+					//double t0 = System.nanoTime();
+					loop();
+					//loopV2();
+					//double t1 = System.nanoTime();
+					//log("Task execution time: " + (t1-t0));
 			}
 		}
 		log("I'm dead..");
@@ -76,7 +77,8 @@ public class Simulator extends Thread {
 		 * - CREARE I BODY TASK PASSANDOGLI I DATI
 		 * - ASPETTIAMO CHE FINISCANO TORNANDOCI I LORO VALORI AGGIORNATI
 		 * - AGGIORNIAMO I DATI
-		 * - LI PASSIAMO AL VISUALIZZATORE 
+		 * - LI PASSIAMO AL VISUALIZZATORE
+		 * - ATTENDIAMO CHE IL PAINT DEI CORPI SIA STATO ESEGUITO 
 		 */
 		double time = System.nanoTime();
 		
@@ -100,7 +102,7 @@ public class Simulator extends Thread {
 		}
 		list.clear();
 		Util.total_iteration++;
-		Util.last_iter_time = System.nanoTime() - time;
+		Util.last_iter_time = (System.nanoTime() - time);
 		this.sem.release();
 		try {
 			this.printed.acquire();
@@ -111,29 +113,45 @@ public class Simulator extends Thread {
 	
 	private void loopV2(){
 		/*
-		 * - LEGGERE I DATI
+		 * - COPIO L'ARRAY
 		 * - CREARE I BODY TASK PASSANDOGLI I DATI
-		 * - ASPETTIAMO CHE FINISCANO TORNANDOCI I LORO VALORI AGGIORNATI
-		 * - AGGIORNIAMO I DATI
-		 * - LI PASSIAMO AL VISUALIZZATORE 
+		 * - ASPETTIAMO CHE I THREAD FINISCANO IL LORO TASK 
+		 * - PULISCO L'ARRAY DEI THREAD
+		 * - SEGNALIAMO CHE I BODYTASK SONO STATI ESEGUITI TUTTI 
+		 * - ATTENDIAMO CHE IL PAINT DEI CORPI SIA STATO ESEGUITO 
 		 */
 		double time = System.nanoTime();
 		
 		Body [] all_bodies = context.allbodies.clone();
 		double dt = context.dt;
-		for (int i = 0; i < all_bodies.length; i++){
-			 exec.execute(new BodyTaskV2(context, all_bodies, i, dt));
-			//System.out.println(exec.toString());
+		
+		int body_to_task = (int)all_bodies.length/(NTHREADS-1);
+		
+		for(int i=0; i<NTHREADS-1; i++){
+			if(i==NTHREADS-2){
+				Thread simulator_worker = new Thread(new BodyTaskV2(context, all_bodies, i*body_to_task, all_bodies.length-1, dt));
+				//System.out.println(simulator_worker + "From " + i*body_to_task + "to " + (all_bodies.length-1));
+				threads.add(simulator_worker);
+				simulator_worker.start();	
+			}else{
+			Thread simulator_worker = new Thread(new BodyTaskV2(context, all_bodies, i*body_to_task, ((i+1)*body_to_task-1), dt));
+			//System.out.println(simulator_worker + "From " + i*body_to_task + "to " + ((i+1)*body_to_task-1));
+			threads.add(simulator_worker);
+			simulator_worker.start();
+			}
 		}
-		exec.shutdown();
-		try {
-			exec.awaitTermination(600, TimeUnit.SECONDS);
-		} catch (InterruptedException e1) {
-			
-			e1.printStackTrace();
-		}
+		
+		for(Thread worker : threads)
+			try {
+				worker.join();
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		
+		threads.clear();
+		
 		Util.total_iteration++;
-		Util.last_iter_time = System.nanoTime() - time;
+		Util.last_iter_time = (System.nanoTime() - time)*1e-9;
 		this.sem.release();
 		try {
 			this.printed.acquire();

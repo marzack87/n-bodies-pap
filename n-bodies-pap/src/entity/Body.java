@@ -82,18 +82,16 @@ public class Body {
 	 */
 	public V2d forceFrom(Body that) {
 		
-		
-		
-		double G = 6.67/*e-11*/;
+		double G = 6.67;
 		V2d p_this = new V2d(this.p.x, this.p.y);
 		V2d p_that = new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.min(p_this);
 		double dist = that.p.dist(this.p);
 		
 		if (that.getMassValue() == Util.SUN_MASS){
-			if (dist <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
+			if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
 		} else {
-			if (dist <= (Util.BODY_RADIUS * 2)) collision(that);
+			if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) collision(that);
 		}
 		
 		double F = (G * (this.mass) * (that.mass)) / (dist * dist);
@@ -101,6 +99,7 @@ public class Body {
 		V2d delta_normalized = delta.getNormalized();
 		V2d Force = delta_normalized.mul(F);
 		
+		//System.out.println(Force);
 		return Force;
 	} 
 	 

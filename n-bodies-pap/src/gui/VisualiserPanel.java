@@ -32,9 +32,7 @@ public class VisualiserPanel extends JPanel {
 		private Controller controller;
 		private Body[] allbodies;
 		private ArrayList<P2d[]> history = new ArrayList<P2d[]>();
-		private GalaxyPanel gpanel;
-		
-		private static double scaleFact_x, scaleFact_y; 
+		private GalaxyPanel gpanel; 
 		
 		/**
 		 * Class VisualiserPanel constructor.
@@ -49,9 +47,6 @@ public class VisualiserPanel extends JPanel {
             for (Body b : allbodies) pos[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
             history.add(pos);
             gpanel = gp;
-            
-            scaleFact_x = this.getWidth()/Util.GALAXY_RADIUS;
-            scaleFact_y = this.getHeight()/Util.GALAXY_RADIUS;
         }
 
         public void paint(Graphics g){
@@ -62,11 +57,6 @@ public class VisualiserPanel extends JPanel {
         	Dimension d = getSize();
         	g2.setBackground(Color.black);
         	g2.clearRect(0,0,d.width,d.height);
-        	
-        	double[] levels = Util.massLevels();
-            
-        	//g.clearRect(0,0,this.getWidth(),this.getHeight());
-            // sara poi il thread visualizer che avra' in pasto il visualiser panel a richiamare il repaint ogni volta che finisce il ciclo di computazione
             
         	if (controller.tracks) {
         	
@@ -84,31 +74,31 @@ public class VisualiserPanel extends JPanel {
 					if (all != null){
 		            	for(int i=0; i<all.length; i++){
 		            		
-		            		int x_1, y_1, x_2, y_2;
+		            		double x_1, y_1, x_2, y_2;
 		                	if (j == 0){
 		                		before[i] = all[i];
 		            		} else {
-		            			x_1 = (int)before[i].x /* *scaleFact_x*/ ;
-		            			y_1 = (int)before[i].y /* *scaleFact_y*/;
+		            			x_1 = Math.round(before[i].x*Util.scaleFact);
+		            			y_1 = Math.round(before[i].y*Util.scaleFact);
 		            			
-		            			x_2 = (int)all[i].x /* *scaleFact_x*/;
-		            			y_2 = (int)all[i].y /* *scaleFact_y*/;
+		            			x_2 = Math.round(all[i].x*Util.scaleFact);
+		            			y_2 = Math.round(all[i].y*Util.scaleFact);
 		            			
 		            			double mass = allbodies[i].getMassValue();
 		            			Color c = null;
 		            			
-		            			if (mass <= levels[0]) {
+		            			if (Math.abs(mass-Util.SMALL_MASS) < 1e-13) {
 		                    		c = Util.dark_one;
-		                    	} else if (mass <= levels[1]) {
+		                    	} else if (Math.abs(mass-Util.MIDSMALL_MASS) < 1e-13) {
 		                    		c = Util.dark_two;
-		                    	} else if (mass <= levels[2]) {
+		                    	} else if (Math.abs(mass-Util.MIDBIG_MASS) < 1e-13) {
 		                    		c = Util.dark_three;
-		                    	} else if (mass <= levels[3]) {
+		                    	} else if (Math.abs(mass-Util.BIG_MASS) < 1e-13) {
 		                    		c = Util.dark_five;
 		                    	}
 		            			
 		            			g.setColor(c);
-		            			g.drawLine(x_1, y_1, x_2, y_2);
+		            			g.drawLine((int)x_1, (int)y_1, (int)x_2, (int)y_2);
 		            			
 		            			before[i] = all[i];
 		                	
@@ -120,44 +110,44 @@ public class VisualiserPanel extends JPanel {
         	}
             
             for(int i=0; i<allbodies.length; i++){
-            	int x,y,m,v_x,v_y;
+            	double x,y,m,v_x,v_y;
             	Color c = null;
-            	x = (int)allbodies[i].getPosition_X() /* *scaleFact_x*/;
-            	y = (int)allbodies[i].getPosition_Y() /* *scaleFact_y*/;
-            	m = (int)allbodies[i].getMassValue();
+            	x = Math.round(allbodies[i].getPosition_X()*Util.scaleFact);
+            	y = Math.round(allbodies[i].getPosition_Y()*Util.scaleFact);
+            	m = allbodies[i].getMassValue();
             	
-            	v_x = (int)allbodies[i].getVelocity_X() /* *scaleFact_x*/;
-            	v_y = (int)allbodies[i].getVelocity_Y() /* *scaleFact_y*/;
+            	v_x = Math.round(allbodies[i].getVelocity_X()*Util.scaleFact);
+            	v_y = Math.round(allbodies[i].getVelocity_Y()*Util.scaleFact);
             	
             	// We divide to the range of the masses in four bands and assegnamo a color, 
             	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and gray bigger masses. 
-            	if (m <= levels[0]) {
+            	if (Math.abs(m-Util.SMALL_MASS) < 1e13) {
             		c = Util.light_one;
-            	} else if (m <= levels[1]) {
+            	} else if (Math.abs(m-Util.MIDSMALL_MASS) < 1e-13) {
             		c = Util.light_two;
-            	} else if (m <= levels[2]) {
+            	} else if (Math.abs(m-Util.MIDBIG_MASS) < 1e-13) {
             		c = Util.light_three;
-            	} else if (m <= levels[3]) {
+            	} else if (Math.abs(m-Util.BIG_MASS) < 1e-13) {
             		c = Util.light_five;
             	}
             	
             	int r;
-            	
-            	if (m == Util.SUN_MASS) {
+            
+            	if (Math.abs(m-Util.SUN_MASS) < 1e-3) {
             		c = Util.sun;
             		r = Util.SUN_RADIUS;
             		g.setColor(c);
-            		g.fillOval(x-r,y-r, r*2, r*2);
+            		g.fillOval((int)x-r,(int)y-r, r*2, r*2);
                 	g.setColor(Color.red);
-                	g.drawOval(x-r,y-r, r*2, r*2);
+                	g.drawOval((int)x-r,(int)y-r, r*2, r*2);
             	} else {
             		r = Util.BODY_RADIUS;
             		g.setColor(c);
-                	g.fillOval(x-r,y-r, r*2, r*2);
+                	g.fillOval((int)x-r,(int)y-r, r*2, r*2);
                 	g.setColor(c);
-                	g.drawOval(x-r,y-r, r*2, r*2);
+                	g.drawOval((int)x-r,(int)y-r, r*2, r*2);
                 	//draw velocity
-                	if (controller.velocity) g.drawLine(x, y, x+v_x, y+v_y);
+                	if (controller.velocity) g.drawLine((int)x, (int)y, (int)x+(int)v_x, (int)y+(int)v_y);
             	}
             }
             

@@ -1,5 +1,7 @@
 package concurrency;
 
+import java.util.ArrayList;
+
 import support.Context;
 import support.Util;
 import support.V2d;
@@ -8,7 +10,8 @@ import entity.Body;
 public class BodyTaskV2 implements Runnable {
 	
 	private final Body[] all_bodies;
-	private final int my_index;
+	private ArrayList<Body> new_bodies = new ArrayList();
+	private int first_index,last_index;
 	private Body me;
 	private Context cont;
 	
@@ -18,10 +21,10 @@ public class BodyTaskV2 implements Runnable {
 	 * Class BodyTask default constructor.
 	 *
 	 **/
-	public BodyTaskV2(Context cont, Body[] all, int i, double delta_t){
+	public BodyTaskV2(Context cont, Body[] all, int from, int to, double delta_t){
 		all_bodies = all;
-		my_index = i;
-		me = all_bodies[my_index];
+		first_index = from;
+		last_index = to;
 		dt = delta_t;
 		this.cont = cont;
 	}
@@ -29,16 +32,17 @@ public class BodyTaskV2 implements Runnable {
 	public void run() {
 		
 		V2d force = new V2d(0,0);
-		for (int i = 0; i < all_bodies.length; i++) {
-			if (i != my_index) {
-				force = force.sum(me.forceFrom(all_bodies[i]));
+		for(;first_index <= last_index; first_index++){
+			me = all_bodies[first_index];
+			for (int i = 0; i < all_bodies.length; i++) {
+				if (i != first_index) {
+					force = force.sum(me.forceFrom(all_bodies[i]));
+				}
 			}
+			if(me.getMassValue() != Util.SUN_MASS)me.move(force, dt);
+			new_bodies.add(me);
 		}
-		
-		if(me.getMassValue() != Util.SUN_MASS)me.move(force, dt);
-		
-		cont.updateBody(me);
-		
+		for(Body body : new_bodies) cont.updateBody(me);
 	}
 
 }

@@ -31,10 +31,9 @@ public class Generator {
  */
 	private int number;
 	
-	private int posx_range;
-	private int posy_range;
+	private double posx_range;
+	private double posy_range;
 	private double vel_range;
-	private double mass_range;
 	
 	private double[] position_x;
 	private double[] position_y;
@@ -56,11 +55,10 @@ public class Generator {
 		 
 		context = cont;
 		
-		posx_range = Util.VisualiserAvailableSpace().width - 5;
-		posy_range = Util.VisualiserAvailableSpace().height - 5;
+		posx_range = (Util.VisualiserAvailableSpace().width - 5)/Util.scaleFact;
+		posy_range = (Util.VisualiserAvailableSpace().height - 5)/Util.scaleFact;
 		
 		vel_range = Util.RANGE_BODIES_VELOCITY;
-		mass_range = Util.RANGE_BODIES_MASS;
 		
 	}
 	 
@@ -135,12 +133,15 @@ public class Generator {
 			position_y[i] = (Math.random() * (posy_range - 1) ) + 1;
 			velocity_x[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
 			velocity_y[i] = ((Math.random() * (vel_range - 1) ) + 1) - (vel_range / 2);
-			mass[i] = (Math.random() * mass_range) + 1/*Util.MIN_BODIES_MASS*/;
+			int index_mass = (int)(Math.random() * 3);
+			//System.out.println("mass index: " + index_mass);
+			mass[i] = Util.MASSES[index_mass];
+			//System.out.println("mass: " + mass[i]);
 		}
 		
 		// Initialize the context
 		this.initBody(sun);
-		//this.print_body();
+		this.print_body();
 	}
 	
 	/**
@@ -159,22 +160,9 @@ public class Generator {
 		}
 		if(sun){
 			double mass_1 = Util.SUN_MASS;
-			P2d pos_1 = new P2d(Util.VisualiserAvailableSpace().getWidth()/2, Util.VisualiserAvailableSpace().getHeight()/2);
+			P2d pos_1 = new P2d(Util.VisualiserAvailableSpace().getWidth()/(Util.scaleFact*2), Util.VisualiserAvailableSpace().getHeight()/(Util.scaleFact*2));
 			V2d vel_1 = new V2d(0, 0);
 			context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
-			/*double mass_2 = Util.SUN_MASS;
-			P2d pos_2 = new P2d(600, 300);
-			V2d vel_2 = new V2d(0, 0);
-			context.allbodies[number-2] = new Body(pos_2, vel_2, mass_2, number-2);
-			double mass_3 = Util.SUN_MASS;
-			P2d pos_3 = new P2d(400, 200);
-			V2d vel_3 = new V2d(0, 0);
-			context.allbodies[number-3] = new Body(pos_3, vel_3, mass_3, number-3);
-			double mass_4 = Util.SUN_MASS;
-			P2d pos_4 = new P2d(400, 400);
-			V2d vel_4 = new V2d(0, 0);
-			context.allbodies[number-4] = new Body(pos_4, vel_4, mass_4, number-4);
-			*/
 		}
 		context.copyBodies();
 		//context.print_body();
