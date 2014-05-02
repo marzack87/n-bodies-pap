@@ -23,6 +23,7 @@ public class Simulator extends Thread {
 	private List<Future<Body>> list = new ArrayList<Future<Body>>();
 	
 	public Simulator(Context c, Semaphore sem, Semaphore print) {
+		super("Simulator");
 		context = c;
 		go = false;
 		simulation = true;
@@ -39,8 +40,8 @@ public class Simulator extends Thread {
 		while (simulation){
 			if (go || step){
 					//double t0 = System.nanoTime();
-					loop();
-					//loopV4();
+					//loop();
+					loopV4();
 					//double t1 = System.nanoTime();
 					//log("Task execution time: " + (t1-t0));
 			}
@@ -102,8 +103,10 @@ public class Simulator extends Thread {
 		Util.total_iteration++;
 		Util.last_iter_time = (System.nanoTime() - time);
 		this.sem.release();
+		System.out.println(this + "Sem: " + sem.availablePermits());
 		try {
 			this.printed.acquire();
+			System.out.println(this + "Sem: " + sem.availablePermits());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -122,7 +125,9 @@ public class Simulator extends Thread {
 		double dt = context.dt;
 		
 		int n = NTHREADS/2;
+		log("n " + n);
 		int level = Math.round((float)(Math.log(n)/Math.log(2))) + 1;
+		log("level " + level);
 		double delta_t = context.dt;
 		
 		for (int i = 0; i < all_bodies.length; i++) {
@@ -130,12 +135,18 @@ public class Simulator extends Thread {
 			V2d force_dest = new V2d(0,0);
 	     	SimulatorWorker worker1 = new SimulatorWorker(all_bodies, me, 0, all_bodies.length/2, level-1, force_dest, delta_t);
 	     	SimulatorWorker worker2 = new SimulatorWorker(all_bodies, me, all_bodies.length/2, all_bodies.length, level-1, force_dest, delta_t);
+	     	
+	     	worker1.start();
+	     	worker2.start();
+	     	
 	     	try {
 	     		worker1.join();
 	     		worker2.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			System.out.println(Thread.currentThread() + " force_dest: " + force_dest);
+
 			if(me.getMassValue() != Util.SUN_MASS)me.move(force_dest, dt);
 			/*
 			 if(me.getMassValue() != Util.SUN_MASS){
@@ -166,8 +177,10 @@ public class Simulator extends Thread {
 		Util.total_iteration++;
 		Util.last_iter_time = (System.nanoTime() - time)*1e-9;
 		this.sem.release();
+		System.out.println(this + "Sem: " + sem.availablePermits());
 		try {
 			this.printed.acquire();
+			System.out.println(this + "Printed: " + sem.availablePermits());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

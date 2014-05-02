@@ -37,6 +37,7 @@ public class Visualiser extends Thread {
 	 *
 	 **/
     public Visualiser(Context cont, Semaphore sem, Semaphore print){
+    	super("Visualiser");
     	this.cont = cont;
     	this.sem = sem;
     	this.printed = print;

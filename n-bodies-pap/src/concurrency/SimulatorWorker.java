@@ -22,10 +22,11 @@ public class SimulatorWorker extends Thread {
 	private double dt;
 	
 	/**
-	 * Class BodyTaskV4 default constructor.
+	 * Class SimulatorWorker constructor.
 	 *
 	 **/
 	public SimulatorWorker(Body[] all, Body body, int from, int to, int level, V2d force_dest, double delta_t){
+		super("Simulator worker level: " + level);
 		all_bodies = all;
 		me = body;
 		my_index = body.getIndex();
@@ -41,6 +42,7 @@ public class SimulatorWorker extends Thread {
 		
 		
 		if(level > 0){
+			System.out.println(Thread.currentThread() + " Level: " + level);
 			middle = (from+to)/2;
 			
 			SimulatorWorker work1 = new SimulatorWorker(all_bodies, me, from, middle, level-1, force_dest, delta_t);
@@ -99,10 +101,12 @@ public class SimulatorWorker extends Thread {
 			*/
 			
 			V2d force = new V2d(0,0);
+			System.out.println(this + "force: " + force);
 			for (; from < to; from++) {
 				if (from != my_index) {
-					force = force.sum(me.forceFrom(all_bodies[from]));
-					force_dest.sum(force);
+					force_dest = force.sum(me.forceFrom(all_bodies[from]));
+					System.out.println(Thread.currentThread() + " force from bodies: " + force);
+					System.out.println(Thread.currentThread() + " force_dest: " + force_dest);
 				}
 			}
 		}
