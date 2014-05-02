@@ -19,7 +19,7 @@ public class Util {
 	public static final String architectureOS = System.getProperty("os.arch");
 	
 	//public static final double SUN_MASS = 50000000;
-	public static final double SUN_MASS = 5*Math.pow(10, 30);
+	public static final double SUN_MASS = 5*Math.pow(10, 32);
 	
 	public static final int SUN_RADIUS = 6;
 	public static final int BODY_RADIUS = 1;
@@ -27,14 +27,14 @@ public class Util {
 	//public static final double MAX_BODIES_MASS = 2e27; // More or less like Jupiter
 	//public static final double MIN_BODIES_MASS = 3e23; // More or less like Mercury
 	
-	public static final double SMALL_MASS = Math.pow(10, 23);
-	public static final double MIDSMALL_MASS = 3*Math.pow(10, 24);
-	public static final double MIDBIG_MASS = 6*Math.pow(10, 25);
-	public static final double BIG_MASS = Math.pow(10, 26);
+	public static final double SMALL_MASS = Math.pow(10, 25);
+	public static final double MIDSMALL_MASS = 3*Math.pow(10, 26);
+	public static final double MIDBIG_MASS = 6*Math.pow(10, 27);
+	public static final double BIG_MASS = Math.pow(10, 28);
 	
 	public static final double[] MASSES = {SMALL_MASS, MIDSMALL_MASS, MIDBIG_MASS, BIG_MASS};
 	
-	public static final double RANGE_BODIES_VELOCITY = 2*Math.pow(10, 10);
+	public static final double RANGE_BODIES_VELOCITY = 2*Math.pow(10, 6);
 	//public static final double RANGE_BODIES_MASS = 500;
 	
 	// emerald
@@ -65,13 +65,13 @@ public class Util {
 	// sun flower
 	public static final Color sun = new Color(0xF1C442);
 
-	public static final int MAX_SCALE = 3;
+	public static final int MAX_SCALE = 5;
 	public static final int MIN_SCALE = 1;
 	public static final int MID_SCALE = (MAX_SCALE%2 == 0) ? (MAX_SCALE/2) : (MAX_SCALE/2) + 1;
 	
-	public static final double GALAXY_RADIUS = 5e11;
+	public static final double GALAXY_RADIUS = 5e10;
 	
-	public static final double DEFAULT_DT = 0.1;
+	public static final double DEFAULT_DT = 1;
 	
 	public static double last_iter_time = 0;
 	public static int total_iteration = 0;

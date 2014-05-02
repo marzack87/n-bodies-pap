@@ -16,7 +16,9 @@ public class V2d implements java.io.Serializable {
     }
 
     public V2d sum(V2d v){
-        return new V2d(x+v.x,y+v.y);
+    	synchronized (this) {
+    		return new V2d(x+v.x,y+v.y);
+		}
     }
     
     public V2d min(V2d v){

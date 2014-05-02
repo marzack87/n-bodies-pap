@@ -57,6 +57,7 @@ public class SimulatorWorker extends Thread {
 			
 		}else{
 			
+			/*
 			V2d force = new V2d(0,0);
 			
 			for (; from < to; from++) {
@@ -92,6 +93,15 @@ public class SimulatorWorker extends Thread {
 					V2d delta_normalized = delta.getNormalized();
 					force = delta_normalized.mul(F);
 					
+					force_dest.sum(force);
+				}
+			}
+			*/
+			
+			V2d force = new V2d(0,0);
+			for (; from < to; from++) {
+				if (from != my_index) {
+					force = force.sum(me.forceFrom(all_bodies[from]));
 					force_dest.sum(force);
 				}
 			}
