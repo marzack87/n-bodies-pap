@@ -162,7 +162,6 @@ public class VisualiserPanel extends JPanel {
         }
         
         public void updatePositions(Body[] pos){
-            synchronized(this){
                 allbodies = pos;
                 P2d[] positions = new P2d[pos.length];
                 for (Body b : allbodies) positions[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
@@ -170,7 +169,6 @@ public class VisualiserPanel extends JPanel {
                 history.add(positions);
                 //if ((System.currentTimeMillis() - Util.last_paint_time) > 33) repaint();
                 repaint();
-            }
         }
         
         public void reset(){
