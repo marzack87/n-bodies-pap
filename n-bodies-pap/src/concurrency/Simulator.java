@@ -39,7 +39,7 @@ public class Simulator extends Thread {
 		while (simulation){
 			if (go || step){
 					//double t0 = System.nanoTime();
-					//loop();
+					loop();
 					//loopV4();
 					//double t1 = System.nanoTime();
 					//log("Task execution time: " + (t1-t0));
@@ -128,14 +128,18 @@ public class Simulator extends Thread {
 		for (int i = 0; i < all_bodies.length; i++) {
 			Body me = all_bodies[i];
 			V2d force_dest = new V2d(0,0);
-	     	SimulatorWorker master = new SimulatorWorker(all_bodies, me, 0, all_bodies.length, level, force_dest, delta_t);
+	     	SimulatorWorker worker1 = new SimulatorWorker(all_bodies, me, 0, all_bodies.length/2, level-1, force_dest, delta_t);
+	     	SimulatorWorker worker2 = new SimulatorWorker(all_bodies, me, all_bodies.length/2, all_bodies.length, level-1, force_dest, delta_t);
 	     	try {
-				master.join();
+	     		worker1.join();
+	     		worker2.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//if(me.getMassValue() != Util.SUN_MASS)me.move(force, dt);
-			if(me.getMassValue() != Util.SUN_MASS){
+			if(me.getMassValue() != Util.SUN_MASS)me.move(force_dest, dt);
+			/*
+			 if(me.getMassValue() != Util.SUN_MASS){
+			 
 				if (me.collision){
 					me.v = me.vel_after_collision;
 					//System.out.println("Body " + index + " - vel_after_collision = " + vel_after_collision);
@@ -153,6 +157,7 @@ public class Simulator extends Thread {
 				me.vel_after_collision.x = 0;
 				me.vel_after_collision.y = 0;	
 			}
+			*/
 			
 			context.updateBody(me);
 				

@@ -19,7 +19,7 @@ public class Util {
 	public static final String architectureOS = System.getProperty("os.arch");
 	
 	//public static final double SUN_MASS = 50000000;
-	public static final double SUN_MASS = 5*Math.pow(10, 32);
+	public static final double SUN_MASS = 5*Math.pow(10, 30);
 	
 	public static final int SUN_RADIUS = 6;
 	public static final int BODY_RADIUS = 1;
@@ -34,7 +34,7 @@ public class Util {
 	
 	public static final double[] MASSES = {SMALL_MASS, MIDSMALL_MASS, MIDBIG_MASS, BIG_MASS};
 	
-	public static final double RANGE_BODIES_VELOCITY = 2*Math.pow(10, 6);
+	public static final double RANGE_BODIES_VELOCITY = 2*Math.pow(10, 3);
 	//public static final double RANGE_BODIES_MASS = 500;
 	
 	// emerald
@@ -69,7 +69,7 @@ public class Util {
 	public static final int MIN_SCALE = 1;
 	public static final int MID_SCALE = (MAX_SCALE%2 == 0) ? (MAX_SCALE/2) : (MAX_SCALE/2) + 1;
 	
-	public static final double GALAXY_RADIUS = 5e10;
+	public static final double GALAXY_RADIUS = 5e8;
 	
 	public static final double DEFAULT_DT = 1;
 	
