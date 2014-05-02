@@ -76,6 +76,8 @@ public class Util {
 	public static double last_iter_time = 0;
 	public static int total_iteration = 0;
 	
+	public static double last_paint_time = 0;
+	
 	public static final double scaleFact = (Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 50)/Util.GALAXY_RADIUS;
 	
 	private Util(){

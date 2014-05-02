@@ -51,6 +51,10 @@ public class VisualiserPanel extends JPanel {
 
         public void paint(Graphics g){
         	
+        	Util.last_paint_time = System.currentTimeMillis();
+        	
+        	System.out.println("Paint! " + Util.last_paint_time);
+        	
         	//gpanel.updatePerformanceData();
         	System.out.println("Tot iteration: " + Util.total_iteration);
         	System.out.println("Last iter time: " + Util.last_iter_time);
@@ -163,8 +167,8 @@ public class VisualiserPanel extends JPanel {
                 for (Body b : allbodies) positions[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
                 if (history.size() >= 50) history.remove(0);
                 history.add(positions);
+                if ((System.currentTimeMillis() - Util.last_paint_time) > 33) repaint();
                 
-                repaint();
             }
         }
         
