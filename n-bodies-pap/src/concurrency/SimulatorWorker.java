@@ -16,7 +16,7 @@ public class SimulatorWorker extends Thread {
 	private int from;
 	private int to;
 	private int level;
-	private V2d force_dest;
+	private V2d force_dst;
 	private double delta_t;
 	
 	private double dt;
@@ -34,7 +34,7 @@ public class SimulatorWorker extends Thread {
 		this.from = from;
 		this.to = to;
 		this.level = level;
-		this.force_dest = force_dest;
+		this.force_dst = force_dest;
 		this.delta_t = delta_t;
 	}
 	
@@ -45,8 +45,8 @@ public class SimulatorWorker extends Thread {
 			middle = (from+to)/2;
 			
 			log(" Creating other worker..");
-			SimulatorWorker work1 = new SimulatorWorker(all_bodies, me, from, middle, level-1, force_dest, delta_t);
-			SimulatorWorker work2 = new SimulatorWorker(all_bodies, me, middle, to, level-1, force_dest, delta_t);
+			SimulatorWorker work1 = new SimulatorWorker(all_bodies, me, from, middle, level-1, force_dst, delta_t);
+			SimulatorWorker work2 = new SimulatorWorker(all_bodies, me, middle, to, level-1, force_dst, delta_t);
 			work1.start();
 			work2.start();
 			
@@ -103,12 +103,14 @@ public class SimulatorWorker extends Thread {
 			V2d force = new V2d(0,0);
 			for (; from < to; from++) {
 				if (from != my_index) {
-					force_dest = force.sum(me.forceFrom(all_bodies[from]));
+					force = force.sum(me.forceFrom(all_bodies[from]));
 					log(" force from bodies: " + force);
-					log(" force_dest: " + force_dest);
+					force_dst = force_dst.sum(force);
+					log(" force_dst: " + force_dst);
 				}
 			}
 		}
+		log("Dead..");
 		
 	}
 	

@@ -57,9 +57,9 @@ public class VisualiserPanel extends JPanel {
         	
         	//gpanel.updatePerformanceData();
         	
-        	System.out.println("Tot iteration: " + Util.total_iteration);
-        	System.out.println("Last iter time: " + Util.last_iter_time);
-        	System.out.println("FPS: " + (1e9 / Util.last_iter_time));
+        	//System.out.println("Tot iteration: " + Util.total_iteration);
+        	//System.out.println("Last iter time: " + Util.last_iter_time);
+        	//System.out.println("FPS: " + (1e9 / Util.last_iter_time));
         	
         	Graphics2D g2 = (Graphics2D) g;
         	Dimension d = getSize();

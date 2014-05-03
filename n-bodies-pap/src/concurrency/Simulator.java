@@ -131,10 +131,10 @@ public class Simulator extends Thread {
 		double delta_t = context.dt;
 		
 		for (int i = 0; i < all_bodies_clone.length; i++) {
-			Body me = all_bodies_clone[i];
+			//Body me = all_bodies_clone[i];
 			V2d force_dest = new V2d(0,0);
-	     	SimulatorWorker worker1 = new SimulatorWorker(all_bodies_clone, me, 0, all_bodies_clone.length/2, level-1, force_dest, delta_t);
-	     	SimulatorWorker worker2 = new SimulatorWorker(all_bodies_clone, me, all_bodies_clone.length/2, all_bodies_clone.length, level-1, force_dest, delta_t);
+	     	SimulatorWorker worker1 = new SimulatorWorker(all_bodies_clone, all_bodies_clone[i], 0, all_bodies_clone.length/2, level-1, force_dest, delta_t);
+	     	SimulatorWorker worker2 = new SimulatorWorker(all_bodies_clone, all_bodies_clone[i], all_bodies_clone.length/2, all_bodies_clone.length, level-1, force_dest, delta_t);
 	     	
 	     	worker1.start();
 	     	worker2.start();
@@ -147,42 +147,43 @@ public class Simulator extends Thread {
 			}
 			log(" force_dest: " + force_dest);
 
-			if(me.getMassValue() != Util.SUN_MASS)me.move(force_dest, dt);
-			/*
-			 if(me.getMassValue() != Util.SUN_MASS){
+			//if(all_bodies_clone[i].getMassValue() != Util.SUN_MASS)all_bodies_clone[i].move(force_dest, dt);
+			
+			 if(all_bodies_clone[i].getMassValue() != Util.SUN_MASS){
 			 
-				if (me.collision){
-					me.v = me.vel_after_collision;
+				if (all_bodies_clone[i].collision){
+					all_bodies_clone[i].v = all_bodies_clone[i].vel_after_collision;
 					//System.out.println("Body " + index + " - vel_after_collision = " + vel_after_collision);
-					V2d dp = me.v.mul(dt);
-					me.p = me.p.sum(dp);
+					V2d dp = all_bodies_clone[i].v.mul(dt);
+					all_bodies_clone[i].p = all_bodies_clone[i].p.sum(dp);
 				} else {
-					V2d a = force_dest.mul(1/me.mass);
+					V2d a = force_dest.mul(1/all_bodies_clone[i].mass);
 					V2d dv = a.mul(dt);
-					V2d dp = (me.v.sum(dv.mul(1/2))).mul(dt);
-					me.p = me.p.sum(dp);
-					me.v = me.v.sum(dv);
+					V2d dp = (all_bodies_clone[i].v.sum(dv.mul(1/2))).mul(dt);
+					all_bodies_clone[i].p = all_bodies_clone[i].p.sum(dp);
+					all_bodies_clone[i].v = all_bodies_clone[i].v.sum(dv);
 				}
 				
-				me.collision = false;
-				me.vel_after_collision.x = 0;
-				me.vel_after_collision.y = 0;	
+				all_bodies_clone[i].collision = false;
+				all_bodies_clone[i].vel_after_collision.x = 0;
+				all_bodies_clone[i].vel_after_collision.y = 0;	
 			}
-			*/
-			System.out.println("Body from workers: " + me);
-			context.updateBody(me);
+			
+			//System.out.println("Body from workers: " + me);
+			context.updateBody(all_bodies_clone[i]);
 			System.out.println("Body in context: " + context.allbodies[i]);
 				
 		}
 		
 		Util.total_iteration++;
 		Util.last_iter_time = (System.nanoTime() - time)*1e-9;
+		log(" Release Sem");
 		this.sem.release();
 		log(" Sem: " + sem.availablePermits());
 		log(" Printed before: " + sem.availablePermits());
 		try {
 			this.printed.acquire();
-			log(" Printed: " + sem.availablePermits());
+			log(" Printed acquired: " + sem.availablePermits());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
