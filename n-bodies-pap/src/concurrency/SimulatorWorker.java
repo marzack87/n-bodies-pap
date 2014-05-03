@@ -3,6 +3,7 @@ package concurrency;
 import java.util.concurrent.Callable;
 
 import support.Context;
+import support.P2d;
 import support.Util;
 import support.V2d;
 import entity.Body;
@@ -59,48 +60,50 @@ public class SimulatorWorker extends Thread {
 			
 		}else{
 			
-			/*
+			
 			V2d force = new V2d(0,0);
 			
 			for (; from < to; from++) {
 				if (from != my_index) {
 					//force = force.sum(me.forceFrom(all_bodies[i]));
 					double G = 6.67;
-					Body that = all_bodies[from];
+					/*Body that = all_bodies[from];
 					V2d p_this = new V2d(me.p.x, me.p.y);
 					V2d p_that = new V2d(that.p.x, that.p.y);
 					V2d delta = p_that.min(p_this);
-					double dist = that.p.dist(me.p);
+					double dist = that.p.dist(me.p);*/
+					double dist = all_bodies[from].p.dist(me.p);
+					V2d delta = me.p.sub(all_bodies[from].p);
 					
-					if (that.getMassValue() == Util.SUN_MASS){
+					if (all_bodies[from].getMassValue() == Util.SUN_MASS){
 						if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)){
 							//collision(that);
 							me.collision = true;
 							
-							V2d final_v = me.v.mul(me.mass - that.mass).sum(that.v.mul(2 * that.mass)).mul(1 / (me.mass + that.mass));
+							V2d final_v = me.v.mul(me.mass - all_bodies[from].mass).sum(all_bodies[from].v.mul(2 * all_bodies[from].mass)).mul(1 / (me.mass + all_bodies[from].mass));
 							me.vel_after_collision = me.vel_after_collision.sum(final_v);
 						}
 					} else {
 						if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) {
 							me.collision = true;
 							
-							V2d final_v = me.v.mul(me.mass - that.mass).sum(that.v.mul(2 * that.mass)).mul(1 / (me.mass + that.mass));
+							V2d final_v = me.v.mul(me.mass - all_bodies[from].mass).sum(all_bodies[from].v.mul(2 * all_bodies[from].mass)).mul(1 / (me.mass + all_bodies[from].mass));
 							me.vel_after_collision = me.vel_after_collision.sum(final_v);
 						
 						}
 					}
 					
-					double F = (G * (me.mass) * (that.mass)) / (dist * dist);
+					double F = (G * (me.mass) * (all_bodies[from].mass)) / (dist * dist);
 					
 					V2d delta_normalized = delta.getNormalized();
 					force = delta_normalized.mul(F);
 					
-					force_dest.sum(force);
+					force_dst.sum(force);
 				}
 			}
-			*/
 			
-			V2d force = new V2d(0,0);
+			
+			/*V2d force = new V2d(0,0);
 			for (; from < to; from++) {
 				if (from != my_index) {
 					force = force.sum(me.forceFrom(all_bodies[from]));
@@ -108,7 +111,7 @@ public class SimulatorWorker extends Thread {
 					force_dst = force_dst.sum(force);
 					log(" force_dst: " + force_dst);
 				}
-			}
+			}*/
 		}
 		log("Dead..");
 		
