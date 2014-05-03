@@ -41,10 +41,10 @@ public class SimulatorWorker extends Thread {
 	public void run() {
 		
 		
-		if(level > 0){
-			System.out.println(Thread.currentThread() + " Level: " + level);
+		if(level > 1){
 			middle = (from+to)/2;
 			
+			log(" Creating other worker..");
 			SimulatorWorker work1 = new SimulatorWorker(all_bodies, me, from, middle, level-1, force_dest, delta_t);
 			SimulatorWorker work2 = new SimulatorWorker(all_bodies, me, middle, to, level-1, force_dest, delta_t);
 			work1.start();
@@ -101,16 +101,25 @@ public class SimulatorWorker extends Thread {
 			*/
 			
 			V2d force = new V2d(0,0);
-			System.out.println(this + "force: " + force);
 			for (; from < to; from++) {
 				if (from != my_index) {
 					force_dest = force.sum(me.forceFrom(all_bodies[from]));
-					System.out.println(Thread.currentThread() + " force from bodies: " + force);
-					System.out.println(Thread.currentThread() + " force_dest: " + force_dest);
+					log(" force from bodies: " + force);
+					log(" force_dest: " + force_dest);
 				}
 			}
 		}
 		
 	}
+	
+	/**
+     * Private method log.
+     * Prints to the console a log of the activity of the Visualiser.
+     * 
+     * @param msg the message to be printed
+     */
+	private void log(String msg){
+        System.out.println("[SIMULATOR WORKER] LV. " + level + msg);
+    }
 
 }

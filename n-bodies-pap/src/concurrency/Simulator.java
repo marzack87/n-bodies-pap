@@ -121,7 +121,7 @@ public class Simulator extends Thread {
 		 */
 		double time = System.nanoTime();
 		
-		Body [] all_bodies = context.allbodies.clone();
+		Body [] all_bodies_clone = context.allbodies.clone();
 		double dt = context.dt;
 		
 		int n = NTHREADS/2;
@@ -130,11 +130,11 @@ public class Simulator extends Thread {
 		log("level " + level);
 		double delta_t = context.dt;
 		
-		for (int i = 0; i < all_bodies.length; i++) {
-			Body me = all_bodies[i];
+		for (int i = 0; i < all_bodies_clone.length; i++) {
+			Body me = all_bodies_clone[i];
 			V2d force_dest = new V2d(0,0);
-	     	SimulatorWorker worker1 = new SimulatorWorker(all_bodies, me, 0, all_bodies.length/2, level-1, force_dest, delta_t);
-	     	SimulatorWorker worker2 = new SimulatorWorker(all_bodies, me, all_bodies.length/2, all_bodies.length, level-1, force_dest, delta_t);
+	     	SimulatorWorker worker1 = new SimulatorWorker(all_bodies_clone, me, 0, all_bodies_clone.length/2, level-1, force_dest, delta_t);
+	     	SimulatorWorker worker2 = new SimulatorWorker(all_bodies_clone, me, all_bodies_clone.length/2, all_bodies_clone.length, level-1, force_dest, delta_t);
 	     	
 	     	worker1.start();
 	     	worker2.start();
@@ -145,7 +145,7 @@ public class Simulator extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println(Thread.currentThread() + " force_dest: " + force_dest);
+			log(" force_dest: " + force_dest);
 
 			if(me.getMassValue() != Util.SUN_MASS)me.move(force_dest, dt);
 			/*
@@ -169,18 +169,20 @@ public class Simulator extends Thread {
 				me.vel_after_collision.y = 0;	
 			}
 			*/
-			
+			System.out.println("Body from workers: " + me);
 			context.updateBody(me);
+			System.out.println("Body in context: " + context.allbodies[i]);
 				
 		}
 		
 		Util.total_iteration++;
 		Util.last_iter_time = (System.nanoTime() - time)*1e-9;
 		this.sem.release();
-		System.out.println(this + "Sem: " + sem.availablePermits());
+		log(" Sem: " + sem.availablePermits());
+		log(" Printed before: " + sem.availablePermits());
 		try {
 			this.printed.acquire();
-			System.out.println(this + "Printed: " + sem.availablePermits());
+			log(" Printed: " + sem.availablePermits());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
