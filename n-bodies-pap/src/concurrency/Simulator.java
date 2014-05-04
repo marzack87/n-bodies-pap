@@ -17,10 +17,13 @@ public class Simulator extends Thread {
 	private Semaphore sem;
 	private boolean step;
 	private Semaphore printed;
+	Semaphore mutex_force = new Semaphore(1); 
 	
 	private static final int NTHREADS = Runtime.getRuntime().availableProcessors() + 1;
 	private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS);
 	private List<Future<Body>> list = new ArrayList<Future<Body>>();
+	private List<V2d> partial_force = new ArrayList<V2d>();
+	private List<Thread> workers = new ArrayList<Thread>();
 	
 	public Simulator(Context c, Semaphore sem, Semaphore print) {
 		super("Simulator");
@@ -41,7 +44,9 @@ public class Simulator extends Thread {
 			if (go || step){
 					//double t0 = System.nanoTime();
 					//loop();
-					loopV4();
+					//loopV4();
+					//loopV5();
+					loopV6();
 					//double t1 = System.nanoTime();
 					//log("Task execution time: " + (t1-t0));
 			}
@@ -103,10 +108,10 @@ public class Simulator extends Thread {
 		Util.total_iteration++;
 		Util.last_iter_time = (System.nanoTime() - time);
 		this.sem.release();
-		System.out.println(this + "Sem: " + sem.availablePermits());
+		log(" Sem: " + sem.availablePermits());
 		try {
 			this.printed.acquire();
-			System.out.println(this + "Sem: " + sem.availablePermits());
+			log(" Sem: " + sem.availablePermits());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -132,46 +137,19 @@ public class Simulator extends Thread {
 		
 		for (int i = 0; i < all_bodies_clone.length; i++) {
 			//Body me = all_bodies_clone[i];
-			V2d force_dest = new V2d(0,0);
-	     	SimulatorWorker worker1 = new SimulatorWorker(all_bodies_clone, all_bodies_clone[i], 0, all_bodies_clone.length/2, level-1, force_dest, delta_t);
-	     	SimulatorWorker worker2 = new SimulatorWorker(all_bodies_clone, all_bodies_clone[i], all_bodies_clone.length/2, all_bodies_clone.length, level-1, force_dest, delta_t);
-	     	
-	     	worker1.start();
-	     	worker2.start();
+			//V2d force_dest = new V2d(0,0);
+	     	SimulatorWorker master = new SimulatorWorker(all_bodies_clone, all_bodies_clone[i], 0, all_bodies_clone.length, level, delta_t);
+	     	master.start();
 	     	
 	     	try {
-	     		worker1.join();
-	     		worker2.join();
+	     		master.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-			log(" force_dest: " + force_dest);
-
-			//if(all_bodies_clone[i].getMassValue() != Util.SUN_MASS)all_bodies_clone[i].move(force_dest, dt);
-			
-			 if(all_bodies_clone[i].getMassValue() != Util.SUN_MASS){
-			 
-				if (all_bodies_clone[i].collision){
-					all_bodies_clone[i].v = all_bodies_clone[i].vel_after_collision;
-					//System.out.println("Body " + index + " - vel_after_collision = " + vel_after_collision);
-					V2d dp = all_bodies_clone[i].v.mul(dt);
-					all_bodies_clone[i].p = all_bodies_clone[i].p.sum(dp);
-				} else {
-					V2d a = force_dest.mul(1/all_bodies_clone[i].mass);
-					V2d dv = a.mul(dt);
-					V2d dp = (all_bodies_clone[i].v.sum(dv.mul(1/2))).mul(dt);
-					all_bodies_clone[i].p = all_bodies_clone[i].p.sum(dp);
-					all_bodies_clone[i].v = all_bodies_clone[i].v.sum(dv);
-				}
-				
-				all_bodies_clone[i].collision = false;
-				all_bodies_clone[i].vel_after_collision.x = 0;
-				all_bodies_clone[i].vel_after_collision.y = 0;	
 			}
 			
 			//System.out.println("Body from workers: " + me);
 			context.updateBody(all_bodies_clone[i]);
-			System.out.println("Body in context: " + context.allbodies[i]);
+			//System.out.println("Body in context: " + context.allbodies[i]);
 				
 		}
 		
@@ -188,7 +166,100 @@ public class Simulator extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
+
+	private void loopV5(){
+		/*
+		 * - PER CIASCUN CORPO:
+		 * - DIVIDO L'ARRAY DEI BODY E FACCIO CALCOLARE DAI WORKER LA FORZA TOTALE DELLA SOTTOPORZIONE DELL'ARRAY
+		 * - SOMMO LE FORZE PARZIALI
+		 * - MUOVO IL CORPO 
+		 * - AGGIORNO IL CORPO NEL CONTEXT
+		 */
+		double time = System.nanoTime();
+		
+		Body [] all_bodies_clone = context.allbodies.clone();
+		double dt = context.dt;
+		
+		int parts = all_bodies_clone.length/NTHREADS;
+		
+		for (int i = 0; i < all_bodies_clone.length; i++){
+			for(int j = 0; j < NTHREADS; j++){
+				if(j == NTHREADS-1){
+					SimulatorWorker worker = new SimulatorWorker(all_bodies_clone, all_bodies_clone[i], j*parts, all_bodies_clone.length, partial_force, mutex_force);
+					worker.start();
+					workers.add(worker);
+				}else{
+					SimulatorWorker worker = new SimulatorWorker(all_bodies_clone, all_bodies_clone[i], j*parts, (j+1)*parts, partial_force, mutex_force);
+					worker.start();
+					workers.add(worker);
+				}
+			}
+			for(Thread w : workers){
+				try {
+					w.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			workers.clear();
+			V2d force_tot = new V2d(0,0);
+			for(V2d f : partial_force)force_tot.sum(f);
+			
+			if(all_bodies_clone[i].getMassValue() != Util.SUN_MASS) all_bodies_clone[i].move(force_tot, dt);
+			
+			context.updateBody(all_bodies_clone[i]);
+			partial_force.clear();
+		}
+		
+				
+		
+		Util.total_iteration++;
+		Util.last_iter_time = (System.nanoTime() - time);
+		this.sem.release();
+		log(" Sem: " + sem.availablePermits());
+		try {
+			this.printed.acquire();
+			log(" Sem: " + sem.availablePermits());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void loopV6(){
+		double time = System.nanoTime();
+		
+		Body [] all_bodies = context.allbodies;
+		double dt = context.dt;
+		
+		int i=0;
+		while(i<all_bodies.length){
+			for(int j=0; j<NTHREADS; j++){
+				Thread worker = new Thread(new BodyTaskV6(context, all_bodies, (i+j), dt));
+				worker.start();
+				workers.add(worker);
+			}
+			for(Thread w : workers)
+				try {
+					w.join();
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
+				}
+			workers.clear();
+			i+= NTHREADS;
+		}		
+		
+		Util.total_iteration++;
+		Util.last_iter_time = (System.nanoTime() - time);
+		this.sem.release();
+		log(" Sem: " + sem.availablePermits());
+		try {
+			this.printed.acquire();
+			log(" Sem: " + sem.availablePermits());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
      * Private method log.
