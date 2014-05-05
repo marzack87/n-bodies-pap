@@ -24,8 +24,7 @@ public class Simulator extends Thread {
 	private static final int NTHREADS = Runtime.getRuntime().availableProcessors() + 1;
 	private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS);
 	private List<Future<Body>> list = new ArrayList<Future<Body>>();
-	private List<V2d> partial_force = new ArrayList<V2d>();
-	private List<Thread> workers = new ArrayList<Thread>();
+
 	
 	public Simulator(Context c, Semaphore sem, Semaphore print) {
 		super("Simulator");
