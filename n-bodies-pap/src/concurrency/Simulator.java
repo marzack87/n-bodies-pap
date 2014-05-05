@@ -2,10 +2,12 @@ package concurrency;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.concurrent.*;
 
 import entity.Body;
 import support.Context;
+import support.P2d;
 import support.Util;
 import support.V2d;
 
@@ -46,7 +48,8 @@ public class Simulator extends Thread {
 					//loop();
 					//loopV4();
 					//loopV5();
-					loopV6();
+					//loopV6();
+					loopV7();
 					//double t1 = System.nanoTime();
 					//log("Task execution time: " + (t1-t0));
 			}
@@ -259,6 +262,43 @@ public class Simulator extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void loopV7(){
+		/*
+		 * - PER CIASCUN CORPO:
+		 * - DIVIDO L'ARRAY DEI BODY E FACCIO CALCOLARE DAI WORKER LA FORZA TOTALE DELLA SOTTOPORZIONE DELL'ARRAY
+		 * - SOMMO LE FORZE PARZIALI
+		 * - MUOVO IL CORPO 
+		 * - AGGIORNO IL CORPO NEL CONTEXT
+		 */
+		double time = System.nanoTime();
+		
+		Body [] all_bodies_clone = context.allbodies.clone();
+		double dt = context.dt;
+		
+		int parts = all_bodies_clone.length/NTHREADS;
+		
+		for (int i = 0; i < all_bodies_clone.length; i++){
+			for(int j = 0; j < NTHREADS; j++){
+				if(j == NTHREADS-1){
+					Thread worker = new Thread(new BodyTaskV7(all_bodies_clone, all_bodies_clone[i], j*parts, all_bodies_clone.length, partial_force, mutex_force));
+					worker.start();
+					workers.add(worker);
+				}else{
+					Thread worker = new Thread(new BodyTaskV7(all_bodies_clone, all_bodies_clone[i], j*parts, (j+1)*parts, partial_force, mutex_force));
+					worker.start();
+					workers.add(worker);
+				}
+			}
+			System.out.println("partial force: " + partial_force);
+			V2d force_tot = new V2d(0,0);
+			for(int k=0; k<partial_force.size(); k++) force_tot = force_tot.sum(partial_force.get(k));
+			partial_force.clear();
+			if(all_bodies_clone[i].getMassValue() != Util.SUN_MASS)all_bodies_clone[i].move(force_tot, dt);
+			context.updateBody(all_bodies_clone[i]);
+		}
+		
 	}
 	
 	/**
