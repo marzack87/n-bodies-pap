@@ -281,17 +281,25 @@ public class Simulator extends Thread {
 		
 		for (int i = 0; i < all_bodies_clone.length; i++){
 			for(int j = 0; j < NTHREADS; j++){
+				Thread worker;
 				if(j == NTHREADS-1){
-					Thread worker = new Thread(new BodyTaskV7(all_bodies_clone, all_bodies_clone[i], j*parts, all_bodies_clone.length, partial_force, mutex_force));
+					worker = new Thread(new BodyTaskV7(all_bodies_clone, all_bodies_clone[i], j*parts, all_bodies_clone.length, partial_force, mutex_force));
 					worker.start();
 					workers.add(worker);
 				}else{
-					Thread worker = new Thread(new BodyTaskV7(all_bodies_clone, all_bodies_clone[i], j*parts, (j+1)*parts, partial_force, mutex_force));
+					worker = new Thread(new BodyTaskV7(all_bodies_clone, all_bodies_clone[i], j*parts, (j+1)*parts, partial_force, mutex_force));
 					worker.start();
 					workers.add(worker);
 				}
 			}
-			System.out.println("partial force: " + partial_force);
+			for(Thread t : workers){
+				try {
+					t.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			//System.out.println("partial force: " + partial_force);
 			V2d force_tot = new V2d(0,0);
 			for(int k=0; k<partial_force.size(); k++) force_tot = force_tot.sum(partial_force.get(k));
 			partial_force.clear();
