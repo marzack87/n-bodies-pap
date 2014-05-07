@@ -291,7 +291,10 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			// Opening of a new file "Stats".
 			FileWriter f = new FileWriter("Stats.txt");
 			PrintWriter out = new PrintWriter(f);
-			out.println("------------ N-Bodies Simulation ------------");
+			out.println("--------------- N-Bodies Simulation ---------------");
+			out.println("");
+			out.println("Author:");
+			out.println("Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)");
 			out.println("");
 			out.println(" - Computer info -");
 			out.println(" Name of the OS:  "+ Util.nameOS);
@@ -317,9 +320,13 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println(" - Simulation info -");
 			out.println(" # of iteration: " + Util.total_iteration);
 			out.println(" Total execution time: " + (Util.t_stop-Util.t_start)*Math.pow(10, -9) + " sec");
-			out.println(" Average # of iteration per sec: " + (Util.total_iteration/((Util.t_stop-Util.t_start)*Math.pow(10, -9))) + " sec");
+			out.println(" Average # of iteration per sec: " + (Util.total_iteration/((Util.t_stop-Util.t_start)*Math.pow(10, -9))));
 			out.println("");
-			out.println("---------------------------------------------");
+			out.println("---------------------------------------------------");
+			out.println("");
+			out.println("            May the Force be with you");
+			out.println("");
+			out.println("---------------------------------------------------");
 			out.close();
 		}catch (Exception ex) { System.err.println(ex); }
 		DoneDialog done = new DoneDialog();

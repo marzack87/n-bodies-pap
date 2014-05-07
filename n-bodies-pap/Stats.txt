@@ -1,4 +1,7 @@
------------- N-Bodies Simulation ------------
+--------------- N-Bodies Simulation ---------------
+
+Author:
+Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)
 
  - Computer info -
  Name of the OS:  Mac OS X
@@ -18,8 +21,12 @@
  Galaxy Radius: 5.0E8
 
  - Simulation info -
- # of iteration: 1120
- Total execution time: 2.280477184 sec
- Average # of iteration per sec: 491.12528196204045 sec
+ # of iteration: 1539
+ Total execution time: 2.3481349120000004 sec
+ Average # of iteration per sec: 655.413789103443
 
----------------------------------------------
+---------------------------------------------------
+
+            May the Force be with you
+
+---------------------------------------------------

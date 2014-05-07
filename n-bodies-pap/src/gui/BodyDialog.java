@@ -58,7 +58,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
-		JLabel s = new JLabel("HOW MANY BODIES?");
+		JLabel s = new JLabel("How many bodies do you want?");
 		add(s);
 		s.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
@@ -89,7 +89,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		add(Box.createVerticalStrut(5));
 		
-		JLabel o = new JLabel("OPTIONS:");
+		JLabel o = new JLabel("Options:");
 		o.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(o);
 		
@@ -102,7 +102,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		add(Box.createVerticalStrut(5));
 		
-		custom = new JButton("SHOW CUSTOM PARAMETERS");
+		custom = new JButton("Show Custom Parameters >>");
 		custom.addActionListener(this);
 		custom.setMinimumSize(new Dimension(220, 30));
 		custom.setMaximumSize(new Dimension(220, 30));
@@ -153,7 +153,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 			}
 			this.setVisible(false);
 		} else if (source == custom) {
-			if (custom.getText().equals("SHOW CUSTOM PARAMETERS")) {
+			if (custom.getText().equals("Show Custom Parameters >>")) {
 				setSize(new Dimension(250, 350));
 				
 				sun_mass.setVisible(true);
@@ -162,7 +162,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 				lvl3_mass.setVisible(true);
 				lvl4_mass.setVisible(true);
 				
-				custom.setText("HIDE CUSTOM PARAMETERS");
+				custom.setText("<< Hide Custom Parameters");
 				
 			} else {
 				sun_mass.setVisible(false);
