@@ -11,8 +11,9 @@ import support.Util;
 /**
  * Class Simulator.
  * Class that extends Thread Java class.
- *
- * It represents the entity/thread which controls the behavior of the simulation reacting to the user inpunt. 
+ * <p>
+ * It represents the entity/thread which controls the behavior of the simulation reacting to the user inpunt.
+ *  
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  *
@@ -51,8 +52,8 @@ public class Simulator extends Thread {
 	
 	/**
      * Method run.
-     * 
-     * If one of the two condition(continuous mode or step-by-step mode) are satisfied it calls the metod loop.
+     * <p>
+     * If one of the two condition(continuous mode or step-by-step mode) are satisfied it calls the private method loop.
      */
 	public void run(){
 		log("I'm running..");
@@ -73,7 +74,7 @@ public class Simulator extends Thread {
 	/**
      * Method loop.
      * The core of the simulation.
-     * 
+     * <p>
      * Following the master-worker pattern, the Simulator assigns to a ExecutorService pool(newFixedThreadPool(NTHREADS)) thread an appropriate BodyTask. 
      * After the ends of all tasks computation, the Simulator retrieves their results and update the context, 
      * then it reports to the Visualiser that the update is completed and waits for the termination of the VisualiserPanel repaint.
@@ -120,7 +121,7 @@ public class Simulator extends Thread {
 	
 	/**
 	 * Method play.
-	 * 
+	 * <p>
 	 * It starts the simulation in continuous-time mode.  
 	 */
 	public void play(){
@@ -129,7 +130,7 @@ public class Simulator extends Thread {
 	
 	/**
 	 * Method pause.
-	 * 
+	 * <p>
 	 * It freezes the simulation.  
 	 */
 	public void pause(){
@@ -149,7 +150,7 @@ public class Simulator extends Thread {
 	
 	/**
 	 * Method suicide.
-	 * 
+	 * <p>
 	 * It terminate the execution of run method.  
 	 */
 	public void suicide(){
@@ -158,7 +159,7 @@ public class Simulator extends Thread {
 	
 	/**
 	 * Method go.
-	 * 
+	 * <p>
 	 * It returns the value of the simulation continuous-time mode   
 	 * 
 	 * @return go	Boolean value
@@ -169,7 +170,7 @@ public class Simulator extends Thread {
 	
 	/**
      * Private method log.
-     * 
+     * <p>
      * Prints to the console a log of the activity of the Visualiser.
      * 
      * @param msg the message to be printed

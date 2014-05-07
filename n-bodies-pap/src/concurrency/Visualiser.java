@@ -9,12 +9,15 @@ import entity.*;
 /**
  * Class Visualiser.
  * Class that extends Thread Java class.
- *
+ * <p>
  * Entity / thread which has the task of displaying the set of bodies, their movements and their interactions. 
- * Its behavior will vary according to the type of operation of the simulation: 
+ * </p>
+ * <p>Its behavior will vary according to the type of operation of the simulation:</p> 
+ * <ul>
+ *	<li>Display a continuous-time behavior of the simulation by clicking the Play button in the commands provided in the GUI</li>
+ *  <li>Display a "snapshot" of a single state of the simulation (discrete-time behavior) by clicking the Step Mode button</li>
+ * <ul>
  * 
- * - Display a continuous-time behavior of the simulation by clicking the Play button in the commands provided in the GUI 
- * - Display a "snapshot" of a single state of the simulation (discrete-time behavior) by clicking the Step Mode button
  *
  * @author Richiard Casadei, Marco Zaccheroni
  * 
@@ -45,7 +48,7 @@ public class Visualiser extends Thread {
     
     /**
      * Method run.
-     * 
+     * <p>
      * It waits until the Simulator thread end one computation and takes the updated data from the context,
      * and it updates the graphics view calling the VisualiserPanel method updatePosition.
      */
@@ -71,7 +74,7 @@ public class Visualiser extends Thread {
     
    /**
     * Method suicide.
-    * 
+    * <p>
     * It terminate the execution of run method.  
     */
     public void suicide(){
@@ -81,7 +84,7 @@ public class Visualiser extends Thread {
     
     /**
      * Private method log.
-     * 
+     * <p>
      * Prints to the console a log of the activity of the Visualiser.
      * 
      * @param msg the message to be printed
@@ -92,7 +95,7 @@ public class Visualiser extends Thread {
 	
 	/**
 	 * Method setVisualiserPanel.
-	 * 
+	 * <p>
 	 * Set the VisualiserPanel controlled by Visualiser Thread
 	 * 
 	 * @param v	The VisualiserPanel
@@ -103,7 +106,7 @@ public class Visualiser extends Thread {
 	
 	/**
 	 * Method flushHistoryPosition.
-	 * 
+	 * <p>
 	 * Reset the older position array stored in the VisualiserPanel
 	 */
 	public void flushHistoryPositions(){

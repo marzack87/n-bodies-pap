@@ -6,10 +6,13 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Hashtable;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -19,13 +22,11 @@ import entity.Controller;
 
 /**
  * Class GalaxyPanel.
+ * <p>
  * Component that contains the commands that are useful for the simulation 
  * and a legend to explain the meaning of the colors of bodies.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- * 
- * @see java.awt
- * @see javax.swing
  */
 public class GalaxyPanel extends JPanel implements ActionListener, ChangeListener{
 
@@ -34,6 +35,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	private JCheckBox chb_tracks, chb_velocity;
 	private JSlider sld_velocity;
 	private Controller controller;
+	private Clip clip;
 	
 	/**
 	 * Class GalaxyPanel default constructor.
@@ -148,6 +150,18 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(lbl_sun);
 		add(Box.createRigidArea(new Dimension(0,10)));
 		
+		String sound_path = "sound/imperial.wav";
+		File soundFile = new File(getClass().getResource(sound_path).getPath());
+		try {
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+			// Get a sound clip resource.
+	         clip = AudioSystem.getClip();
+	         // Open audio clip and load samples from the audio input stream.
+	         clip.open(audioIn);
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	
@@ -177,6 +191,8 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 					controller.startSimulation();
 				}
 				controller.play();
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+				
 			}
 		} else if(source == btn_step){
 			log("Step-Mode Button");
@@ -211,6 +227,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			controller.stopSimulation();
 			Util.t_stop = System.nanoTime();
 			log("Total execution time: " + (Util.t_stop-Util.t_start)*1e-9 + " sec");
+			clip.stop();
 		} else if(source == btn_save){
 			log("Save Button");
 			savefile();

@@ -38,7 +38,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 	
 	private MainPanel mp;
 	private JTextField body, s_mass, first_mass, second_mass, third_mass, fourth_mass;
-	private JButton well, custom;
+	private JButton ok, custom;
 	private JCheckBox sun;
 	private JLabel sun_mass, lvl1_mass, lvl2_mass, lvl3_mass, lvl4_mass;
 	
@@ -72,12 +72,12 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		add(Box.createVerticalStrut(5));
 		
-		well = new JButton("GO!");
-		well.addActionListener(this);
-		well.setMinimumSize(new Dimension(this.getSize().width, 25));
-		well.setMaximumSize(new Dimension(this.getSize().width, 25));
-		well.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(well);
+		ok = new JButton("GO!");
+		ok.addActionListener(this);
+		ok.setMinimumSize(new Dimension(this.getSize().width, 25));
+		ok.setMaximumSize(new Dimension(this.getSize().width, 25));
+		ok.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(ok);
 		add(Box.createVerticalStrut(5));
 		
 		// BARRETTA
@@ -141,7 +141,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 	public void actionPerformed(ActionEvent e){
 		
 		JButton source = (JButton) e.getSource();
-		if (source == well){
+		if (source == ok){
 			try{
 				int n = Integer.parseInt(body.getText());
 				Util.one_sun = sun.isSelected();
