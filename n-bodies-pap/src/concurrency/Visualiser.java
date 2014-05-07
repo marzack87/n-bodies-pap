@@ -9,22 +9,15 @@ import entity.*;
 /**
  * Class Visualiser.
  * Class that extends Thread Java class.
- * 
+ *
  * Entity / thread which has the task of displaying the set of bodies, their movements and their interactions. 
  * Its behavior will vary according to the type of operation of the simulation: 
  * 
  * - Display a continuous-time behavior of the simulation by clicking the Play button in the commands provided in the GUI 
  * - Display a "snapshot" of a single state of the simulation (discrete-time behavior) by clicking the Step Mode button
- * 
- * 
+ *
  * @author Richiard Casadei, Marco Zaccheroni
  * 
- * @see suppor.Context
- * @see gui.VisualiserPanel
- * @see entity
- * 
- * @see Semaphore
- * @see Thread
  */
 
 public class Visualiser extends Thread {
@@ -38,11 +31,9 @@ public class Visualiser extends Thread {
     /**
 	 * Class Visualiser constructor.
 	 * 
-	 * @param panel the VisualiserPanel where all bodies are printed
-	 * @param contr the Controller entity with which the visualiser will communicate 
-	 * 
-	 * @see gui.VisualiserPanel
-	 * @see entity.Controller
+	 * @param cont 		The Controller entity with which the visualiser will communicate 
+	 * @param sem		The event semaphore to notify the computation end 
+	 * @param print		The event semaphore to wait the end of VisualiserPanel repain
 	 **/
     public Visualiser(Context cont, Semaphore sem, Semaphore print){
     	super("Visualiser");

@@ -19,11 +19,6 @@ import entity.Body;
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  * 
- * @see support.Util;
- * @see support.V2d;
- * @see entity.Body;
- * 
- * @see Callable
  */
 
 public class BodyTask implements Callable<Body> {

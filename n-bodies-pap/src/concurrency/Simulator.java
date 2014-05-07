@@ -11,12 +11,11 @@ import support.Util;
 /**
  * Class Simulator.
  * Class that extends Thread Java class.
- * 
+ *
  * It represents the entity/thread which controls the behavior of the simulation reacting to the user inpunt. 
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- * 
- * @see Thread
+ *
  */
 
 public class Simulator extends Thread {
@@ -38,9 +37,6 @@ public class Simulator extends Thread {
 	* @param c 		The context
 	* @param sem 		The event semaphore to notify the computation end 
 	* @param print		The event semaphore to wait the end of VisualiserPanel repaint
-	* 
-	* @see gui.VisualiserPanel
-	* @see entity.Controller
 	*/
 	public Simulator(Context c, Semaphore sem, Semaphore print) {
 		super("Simulator");
@@ -77,7 +73,7 @@ public class Simulator extends Thread {
 	/**
      * Method loop.
      * The core of the simulation.
-     *  
+     * 
      * Following the master-worker pattern, the Simulator assigns to a ExecutorService pool(newFixedThreadPool(NTHREADS)) thread an appropriate BodyTask. 
      * After the ends of all tasks computation, the Simulator retrieves their results and update the context, 
      * then it reports to the Visualiser that the update is completed and waits for the termination of the VisualiserPanel repaint.
@@ -142,7 +138,7 @@ public class Simulator extends Thread {
 	
 	/**
 	 * Method step.
-	 * 
+	 * <p>
 	 * It permits to simulate the galaxy behavior one step at time.  
 	 */
 	public void step(){

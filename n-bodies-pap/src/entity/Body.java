@@ -4,14 +4,12 @@ import support.*;
 
 /**
  * Class Body. 
- * 
+ *
  * Represent the body single entity. Each body has three private fields that stand for his properties:
  * 
  * - Vector p, position vector given by the coordination x,y
  * - Vector v, velocity vector
  * - double mass, the value of the mass of the body(planet)  
- * 
- * 
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
@@ -34,8 +32,6 @@ public class Body {
 	 * @param p Position vector
 	 * @param v Velocity vector
 	 * @param mass Value of the mass of the body
-	 * 
-	 * @see support.Vector
 	 */
 	public Body(P2d p, V2d v, double mass, int index) {
 		this.p = p;
@@ -55,8 +51,6 @@ public class Body {
 	 * 
 	 * @param f Force vector
 	 * @param dt Time
-	 * 
-	 * @see support.Vector
 	 */
 	public void move(V2d f, double dt) { 
 		//System.out.println("Body " + index);
@@ -84,9 +78,6 @@ public class Body {
 	 * 
 	 * @param that Body passed
 	 * @return Vector object The force vector requested
-	 * 
-	 * @see entity.Body
-	 * @see support.Vector
 	 */
 	public V2d forceFrom(Body that) {
 		
@@ -127,8 +118,6 @@ public class Body {
 	 * of the Vector Class.
 	 * 
 	 * @return String
-	 * 
-	 * @see String 
 	 */
 	public String getPosition(){
 		return p.toString();
@@ -163,8 +152,6 @@ public class Body {
 	 * of the Vector Class.
 	 * 
 	 * @return String
-	 * 
-	 * @see String
 	 */
 	public String getVelocity(){
 		return v.toString();
@@ -198,8 +185,6 @@ public class Body {
 	 * It returns a String representation of the mass of the body.
 	 * 
 	 * @return String
-	 * 
-	 * @see String
 	 */
 	public String getMass(){
 		return "" + mass;
