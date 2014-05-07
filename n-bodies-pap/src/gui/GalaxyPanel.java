@@ -193,7 +193,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 					controller.startSimulation();
 				}
 				controller.play();
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
+				if (Util.star_wars_mode) clip.loop(Clip.LOOP_CONTINUOUSLY);
 				
 			}
 		} else if(source == btn_step){
