@@ -88,7 +88,11 @@ public class Body {
 		double dist = that.p.dist(this.p);
 		
 		if (that.getMassValue() == Util.SUN_MASS){
-			if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
+			if (Util.star_wars_mode){
+				if (dist*Util.scaleFact <= (Util.DEATHSTAR_RADIUS + Util.BODY_RADIUS)) collision(that);
+			} else {
+				if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
+			}
 		} else {
 			if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) collision(that);
 		}

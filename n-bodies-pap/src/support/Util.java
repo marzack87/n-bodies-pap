@@ -17,6 +17,8 @@ public class Util {
 	public static int n_bodies = 0;
 	public static boolean one_sun = false;
 	
+	public static boolean star_wars_mode = true;
+	
 	public static double t_start, t_stop;
 	
 	public static final String nameOS = System.getProperty("os.name");  
@@ -27,6 +29,7 @@ public class Util {
 	public static final double SUN_MASS = 5*Math.pow(10, 30);
 	
 	public static final int SUN_RADIUS = 6;
+	public static final int DEATHSTAR_RADIUS = 16;
 	public static final int BODY_RADIUS = 1;
 	
 	//public static final double MAX_BODIES_MASS = 2e27; // More or less like Jupiter

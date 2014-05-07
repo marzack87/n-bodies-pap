@@ -38,7 +38,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 	private MainPanel mp;
 	private JTextField body, s_mass, first_mass, second_mass, third_mass, fourth_mass;
 	private JButton ok, custom;
-	private JCheckBox sun;
+	private JCheckBox sun, star_wars;
 	private JLabel sun_mass, lvl1_mass, lvl2_mass, lvl3_mass, lvl4_mass;
 	
 	/**
@@ -92,7 +92,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		add(Box.createVerticalStrut(5));
 		
-		sun = new JCheckBox("Sun");
+		sun = new JCheckBox("Star");
 		sun.setSelected(true);
 		sun.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(sun);
@@ -108,11 +108,18 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		add(Box.createVerticalStrut(5));
 		
-		sun_mass = new JLabel("Sun mass:");
+		star_wars = new JCheckBox("Star Wars Mode");
+		star_wars.setSelected(Util.star_wars_mode);
+		star_wars.setAlignmentX(Component.CENTER_ALIGNMENT);
+		star_wars.setVisible(false);
+		add(star_wars);
+		add(Box.createVerticalStrut(5));
 		
+		sun_mass = new JLabel("Star mass:");
 		sun_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
 		sun_mass.setVisible(false);
 		add(sun_mass);
+		add(Box.createVerticalStrut(5));
 		
 		lvl1_mass = new JLabel("Lv.1 mass:");
 		lvl1_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -142,6 +149,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 			try{
 				int n = Integer.parseInt(body.getText());
 				Util.one_sun = sun.isSelected();
+				Util.star_wars_mode = star_wars.isSelected();
 				mp.initWithRandom(n,sun.isSelected());
 			}catch(Exception ex) { 
 				ex.printStackTrace();
@@ -154,6 +162,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 				setSize(new Dimension(250, 350));
 				
 				sun_mass.setVisible(true);
+				star_wars.setVisible(true);
 				lvl1_mass.setVisible(true);
 				lvl2_mass.setVisible(true);
 				lvl3_mass.setVisible(true);
@@ -163,6 +172,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 				
 			} else {
 				sun_mass.setVisible(false);
+				star_wars.setVisible(false);
 				lvl1_mass.setVisible(false);
 				lvl2_mass.setVisible(false);
 				lvl3_mass.setVisible(false);

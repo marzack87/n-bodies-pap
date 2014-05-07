@@ -4,12 +4,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import support.P2d;
@@ -135,12 +141,19 @@ public class VisualiserPanel extends JPanel {
             	int r;
             
             	if (Math.abs(m-Util.SUN_MASS) < 1e-3) {
-            		c = Util.sun;
-            		r = Util.SUN_RADIUS;
-            		g.setColor(c);
-            		g.fillOval((int)x-r,(int)y-r, r*2, r*2);
-                	g.setColor(Color.red);
-                	g.drawOval((int)x-r,(int)y-r, r*2, r*2);
+            		if (Util.star_wars_mode){
+            			r = Util.DEATHSTAR_RADIUS;
+            			java.net.URL imgURL = getClass().getResource("images/DeathStar.png");
+            			ImageIcon img = new ImageIcon(imgURL, "DeathStar");
+            			g.drawImage(img.getImage(), (int)x-r, (int)y-r, r*2, r*2, this);
+            		} else {
+            			c = Util.sun;
+	            		r = Util.SUN_RADIUS;
+	            		g.setColor(c);
+	            		g.fillOval((int)x-r,(int)y-r, r*2, r*2);
+	                	g.setColor(Color.red);
+	                	g.drawOval((int)x-r,(int)y-r, r*2, r*2);
+            		}
             	} else {
             		r = Util.BODY_RADIUS;
             		g.setColor(c);
