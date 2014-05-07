@@ -1,22 +1,32 @@
 package concurrency;
 
-/**
- * Class Visualiser.
- * Class that extends Thread Java class.
- * Entity / thread which has the task of displaying the set of bodies, their movements and their interactions. 
- * Its behavior will vary according to the type of operation of the simulation: 
- * - Display a continuous-time behavior of the simulation by clicking the Play button in the commands provided in the GUI 
- * - Display a "snapshot" of a single state of the simulation (discrete-time behavior) by clicking the Step Mode button
- * 
- * @author Richiard Casadei, Marco Zaccheroni
- */
-
 import java.util.concurrent.Semaphore;
 
 import support.Context;
 import gui.VisualiserPanel;
 import entity.*;
 	
+/**
+ * Class Visualiser.
+ * Class that extends Thread Java class.
+ * 
+ * Entity / thread which has the task of displaying the set of bodies, their movements and their interactions. 
+ * Its behavior will vary according to the type of operation of the simulation: 
+ * 
+ * - Display a continuous-time behavior of the simulation by clicking the Play button in the commands provided in the GUI 
+ * - Display a "snapshot" of a single state of the simulation (discrete-time behavior) by clicking the Step Mode button
+ * 
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ * 
+ * @see suppor.Context
+ * @see gui.VisualiserPanel
+ * @see entity
+ * 
+ * @see Semaphore
+ * @see Thread
+ */
+
 public class Visualiser extends Thread {
 	    
     private Context cont;
@@ -44,6 +54,7 @@ public class Visualiser extends Thread {
     
     /**
      * Method run.
+     * 
      * It waits until the Simulator thread end one computation and takes the updated data from the context,
      * and it updates the graphics view calling the VisualiserPanel method updatePosition.
      */
@@ -69,6 +80,7 @@ public class Visualiser extends Thread {
     
    /**
     * Method suicide.
+    * 
     * It terminate the execution of run method.  
     */
     public void suicide(){
@@ -78,6 +90,7 @@ public class Visualiser extends Thread {
     
     /**
      * Private method log.
+     * 
      * Prints to the console a log of the activity of the Visualiser.
      * 
      * @param msg the message to be printed
@@ -86,10 +99,22 @@ public class Visualiser extends Thread {
         System.out.println("[VISUALISER] "+msg);
     }
 	
+	/**
+	 * Method setVisualiserPanel.
+	 * 
+	 * Set the VisualiserPanel controlled by Visualiser Thread
+	 * 
+	 * @param v	The VisualiserPanel
+	 */
 	public void setVisualiserPanel(VisualiserPanel v){
 		this.v = v;
 	}
 	
+	/**
+	 * Method flushHistoryPosition.
+	 * 
+	 * Reset the older position array stored in the VisualiserPanel
+	 */
 	public void flushHistoryPositions(){
 		v.reset();
 	}

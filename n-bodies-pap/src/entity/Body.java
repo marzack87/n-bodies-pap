@@ -1,16 +1,20 @@
 package entity;
 
+import support.*;
+
 /**
  * Class Body. 
+ * 
  * Represent the body single entity. Each body has three private fields that stand for his properties:
+ * 
  * - Vector p, position vector given by the coordination x,y
  * - Vector v, velocity vector
  * - double mass, the value of the mass of the body(planet)  
  * 
+ * 
+ * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
-
-import support.*;
 
 public class Body { 
 	public P2d p; //position
@@ -24,6 +28,7 @@ public class Body {
 	
 	/**
 	 * Class Body default constructor.
+	 * 
 	 * Initialize the properties of the body with the object passed as parameter.
 	 * 
 	 * @param p Position vector
@@ -44,6 +49,7 @@ public class Body {
 	
 	/**
 	 * Method move.
+	 * 
 	 * Permit to update the position of the body based on the force applied to the body by the others
 	 * and the discrete time.
 	 * 
@@ -73,6 +79,7 @@ public class Body {
 	
 	/**
 	 * Method forceFrom.
+	 * 
 	 * It calculates the force between the body and an another body passed as param 
 	 * 
 	 * @param that Body passed
@@ -115,6 +122,7 @@ public class Body {
 	
 	/**
 	 * Method getPosition.
+	 * 
 	 * It returns a String representation of the Vector position of the body calling the method toString()
 	 * of the Vector Class.
 	 * 
@@ -128,6 +136,7 @@ public class Body {
 	
 	/**
 	 * Method getPosition_X.
+	 * 
 	 * It returns a double with the value of the coordinate X of the Position of the Body.
 	 * 
 	 * @return double Value of the position coordinate X
@@ -138,6 +147,7 @@ public class Body {
 	
 	/**
 	 * Method getPosition_Y.
+	 * 
 	 * It returns a double with the value of the coordinate Y of the Position of the Body.
 	 * 
 	 * @return double Value of the position coordinate Y
@@ -148,6 +158,7 @@ public class Body {
 	
 	/**
 	 * Method getVelocity.
+	 * 
 	 * It returns a String representation of the Vector velocity of the body calling the method toString()
 	 * of the Vector Class.
 	 * 
@@ -161,6 +172,7 @@ public class Body {
 	
 	/**
 	 * Method getVelocity_X.
+	 * 
 	 * It returns a double with the value of the coordinate X of the Velocity of the Body.
 	 * 
 	 * @return double Value of the velocity coordinate X
@@ -171,6 +183,7 @@ public class Body {
 	
 	/**
 	 * Method getVelocity_Y.
+	 * 
 	 * It returns a double with the value of the coordinate Y of the Velocity of the Body.
 	 * 
 	 * @return double Value of the velocity coordinate Y
@@ -181,6 +194,7 @@ public class Body {
 	
 	/**
 	 * Method getMass.
+	 * 
 	 * It returns a String representation of the mass of the body.
 	 * 
 	 * @return String
@@ -193,6 +207,7 @@ public class Body {
 	
 	/**
 	 * Method getMassValue.
+	 * 
 	 * It returns the double value of the mass of the body.
 	 * 
 	 * @return double Value of the mass
