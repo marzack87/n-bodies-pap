@@ -1,17 +1,5 @@
 package entity;
 
-import gui.VisualiserPanel;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.io.File;
-import java.util.concurrent.Semaphore;
-
-import concurrency.Simulator;
-import concurrency.Visualiser;
-import support.*;
-
-
 /**
  * Class Controller. 
  * Represent the entity that initialize the universe and the bodies taking the necessary 
@@ -19,6 +7,16 @@ import support.*;
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
+
+import gui.VisualiserPanel;
+
+import java.io.File;
+import java.util.concurrent.Semaphore;
+
+import concurrency.Simulator;
+import concurrency.Visualiser;
+import support.*;
+
 public class Controller {
 	 
 	private int n;

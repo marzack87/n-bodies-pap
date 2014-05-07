@@ -1,15 +1,5 @@
 package entity;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-
-import javax.swing.JOptionPane;
-
-import support.*;
-
 /**
  * Class Generator. 
  * Represent the entity that takes care to recover the data from a file or to generate them in a random way.
@@ -20,6 +10,15 @@ import support.*;
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
+import support.*;
+
 public class Generator {
 	
 /* It take care of the file's data or it create the data randomly

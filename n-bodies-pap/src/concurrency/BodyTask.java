@@ -1,5 +1,22 @@
 package concurrency;
 
+/**
+ * Class BodyTask.
+ * Class that implements the Callable<?> Java interface.
+ * It represents the task to be assigned to a thread in the ExecutorService pool and that, 
+ * through the method call forceFrom the Body class, performs the operations necessary to calculate the force exerted on a single body
+ * (passed as a parameter to the constructor of the class) from each body present in the "galaxy". 
+ * After the computation of the total force exerted on the body, the task continues updating information(position, speed and possible collisions) 
+ * inside the Body and finally returns the updated Body.
+ * 
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ * 
+ * @see support.Util;
+ * @see support.V2d;
+ * @see entity.Body;
+ */
+
 import java.util.concurrent.Callable;
 
 import support.Util;
@@ -16,7 +33,10 @@ public class BodyTask implements Callable<Body> {
 	
 	/**
 	 * Class BodyTask default constructor.
-	 *
+	 * 
+	 * @param all 		The bodies array
+	 * @param i 		The array index representing the Body on which we want compute the total gravitational force
+	 * @param delta_t 	Time istant
 	 **/
 	public BodyTask(Body[] all, int i, double delta_t){
 		all_bodies = all;
@@ -25,6 +45,14 @@ public class BodyTask implements Callable<Body> {
 		dt = delta_t;
 	}
 	
+	/**
+	 * Method call.
+	 * Simple implementation of the brute force algorithm for the calculation of the total gravitational force acting on a body.
+	 * This method also updates the Body data, calling the Class Body method move().
+	 * 
+	 * @throws Exception
+	 * @return me 	The updated Body
+	 */
 	public Body call() throws Exception {
 		
 		V2d force = new V2d(0,0);

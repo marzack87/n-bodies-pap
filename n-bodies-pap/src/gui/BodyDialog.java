@@ -1,18 +1,10 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridBagLayoutInfo;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Hashtable;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -32,7 +24,7 @@ import support.Util;
 
 /**
  * Class BodyDialog.
- * Class that extends the JDialog class, and that is the component in which the user, once he have chosen to create the bodies randomly, 
+ * Class that extends the JDialog class, and represents the component in which the user, once he have chosen to create the bodies randomly, 
  * can specify their number and start their real initialization. 
  * Once confirmation of the number of bodies the component will call the component that will represent the "Galaxy"
  * 
@@ -45,10 +37,10 @@ import support.Util;
 public class BodyDialog extends JDialog implements ActionListener, ChangeListener{
 	
 	private MainPanel mp;
-	private JTextField body;
+	private JTextField body, s_mass, first_mass, second_mass, third_mass, fourth_mass;
 	private JButton well, custom;
 	private JCheckBox sun;
-	private JLabel sun_mass;
+	private JLabel sun_mass, lvl1_mass, lvl2_mass, lvl3_mass, lvl4_mass;
 	
 	/**
 	 * Class BodyDialog constructor.
@@ -121,9 +113,26 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		sun_mass = new JLabel("SUN MASS:");
 		
-		add(sun_mass);
 		sun_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
 		sun_mass.setVisible(false);
+		add(sun_mass);
+		
+		lvl1_mass = new JLabel("Lv.1 MASS:");
+		lvl1_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lvl1_mass.setVisible(false);
+		add(lvl1_mass);
+		lvl2_mass = new JLabel("Lv.1 MASS:");
+		lvl2_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lvl2_mass.setVisible(false);
+		add(lvl2_mass);
+		lvl3_mass = new JLabel("Lv.1 MASS:");
+		lvl3_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lvl3_mass.setVisible(false);
+		add(lvl3_mass);
+		lvl4_mass = new JLabel("Lv.1 MASS:");
+		lvl4_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lvl4_mass.setVisible(false);
+		add(lvl4_mass);
 		
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
@@ -145,11 +154,22 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 			this.setVisible(false);
 		} else if (source == custom) {
 			if (custom.getText().equals("SHOW CUSTOM PARAMETERS")) {
-				sun_mass.setVisible(true);
-				custom.setText("HIDE CUSTOM PARAMETERS");
 				setSize(new Dimension(250, 350));
+				
+				sun_mass.setVisible(true);
+				lvl1_mass.setVisible(true);
+				lvl2_mass.setVisible(true);
+				lvl3_mass.setVisible(true);
+				lvl4_mass.setVisible(true);
+				
+				custom.setText("HIDE CUSTOM PARAMETERS");
+				
 			} else {
 				sun_mass.setVisible(false);
+				lvl1_mass.setVisible(false);
+				lvl2_mass.setVisible(false);
+				lvl3_mass.setVisible(false);
+				lvl4_mass.setVisible(false);
 				custom.setText("SHOW CUSTOM PARAMETERS");
 				setSize(new Dimension(250, 220));
 			}

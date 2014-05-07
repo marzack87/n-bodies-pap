@@ -1,14 +1,8 @@
 package concurrency;
 
-import java.util.concurrent.Semaphore;
-
-import support.Context;
-import support.Util;
-import gui.VisualiserPanel;
-import entity.*;
-
 /**
  * Class Visualiser.
+ * Class that extends Thread Java class.
  * Entity / thread which has the task of displaying the set of bodies, their movements and their interactions. 
  * Its behavior will vary according to the type of operation of the simulation: 
  * - Display a continuous-time behavior of the simulation by clicking the Play button in the commands provided in the GUI 
@@ -17,6 +11,11 @@ import entity.*;
  * @author Richiard Casadei, Marco Zaccheroni
  */
 
+import java.util.concurrent.Semaphore;
+
+import support.Context;
+import gui.VisualiserPanel;
+import entity.*;
 	
 public class Visualiser extends Thread {
 	    
@@ -34,7 +33,6 @@ public class Visualiser extends Thread {
 	 * 
 	 * @see gui.VisualiserPanel
 	 * @see entity.Controller
-	 *
 	 **/
     public Visualiser(Context cont, Semaphore sem, Semaphore print){
     	super("Visualiser");
@@ -44,6 +42,11 @@ public class Visualiser extends Thread {
     	simulation = true;
     }
     
+    /**
+     * Method run.
+     * It waits until the Simulator thread end one computation and takes the updated data from the context,
+     * and it updates the graphics view calling the VisualiserPanel method updatePosition.
+     */
     public void run(){
     	log("I'm running..");
     	while(simulation){ 
@@ -64,9 +67,14 @@ public class Visualiser extends Thread {
     	log("I'm dead..");
     }
     
+   /**
+    * Method suicide.
+    * It terminate the execution of run method.  
+    */
     public void suicide(){
 		simulation = false;
 	}
+    
     
     /**
      * Private method log.

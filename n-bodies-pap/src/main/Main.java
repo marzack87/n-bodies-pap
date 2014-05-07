@@ -1,4 +1,14 @@
 package main;
+
+/**
+ *  N-BODY SIMULATION
+ *  
+ *  Progetto di Programmazione Avanza e Paradigmi
+ *  Anno accademico 2013-2014
+ *  Prof. Alessandro Ricci
+ *  
+ *  @author Richiard Casadei, Marco Zaccheroni
+ */
  
 import entity.Controller;
 import gui.MainFrame;

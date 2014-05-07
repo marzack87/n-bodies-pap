@@ -1,7 +1,5 @@
 package entity;
 
-import support.*;
-
 /**
  * Class Body. 
  * Represent the body single entity. Each body has three private fields that stand for his properties:
@@ -11,6 +9,9 @@ import support.*;
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
+
+import support.*;
+
 public class Body { 
 	public P2d p; //position
 	public V2d v; //velocity

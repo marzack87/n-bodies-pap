@@ -1,10 +1,15 @@
 package support;
 
+/**
+ *  Class Util.
+ *  Helper class that stores some of the data of the simulation
+ *  
+ *  @author Richiard Casadei, Marco Zaccheroni
+ */
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
-import entity.Body;
 
 public class Util {
 	
@@ -18,7 +23,6 @@ public class Util {
 	public static final int ncores = Runtime.getRuntime().availableProcessors()/2;
 	public static final String architectureOS = System.getProperty("os.arch");
 	
-	//public static final double SUN_MASS = 50000000;
 	public static final double SUN_MASS = 5*Math.pow(10, 30);
 	
 	public static final int SUN_RADIUS = 6;
@@ -84,6 +88,12 @@ public class Util {
 		
 	}
 	
+	/**
+     * Method displayAvailableSpace.
+     * It return the dimension of the screen.
+     * 
+     * @return Dimension(w,h)	New Dimension object initialized with the screen width and height
+     */
 	public static Dimension displayAvailableSpace() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int w = (int) screenSize.getWidth() - 50;
@@ -91,6 +101,12 @@ public class Util {
 		return new Dimension(w, h);	
 	}
 	
+	/**
+     * Method VisualiserAvailableSpace.
+     * It return the dimension of the screen avaible for the VisualiserPanel.
+     * 
+     * @return Dimension(w,h)	New Dimension object initialized with the screen width and height without the space occupied by the GalaxyPanel
+     */
 	public static Dimension VisualiserAvailableSpace() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int w = (int) screenSize.getWidth() - 50;
