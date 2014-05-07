@@ -283,20 +283,24 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println(" Number of cores: " + Util.ncores);
 			out.println("");
 			out.println(" - Bodies and Galaxy info -");
-			out.println(" # of Bodies: " + Util.n_bodies);
 			if(Util.one_sun){
 				out.println(" A Sun is present and its mass is " + Util.SUN_MASS);
 			}else{
 				out.println(" No Sun present ");
 			}
-			//out.println(" Mass Bodies range: 1" + " - " + Util.RANGE_BODIES_MASS);
-			//out.println(" Mass Bodies range: " + Util.MIN_BODIES_MASS + " - " + Util.MAX_BODIES_MASS);
+			out.println(" # of Bodies: " + Util.n_bodies);
+			out.println(" The 4 mass levels of the bodies are: ");
+			out.println(" Level 1:" + " - " + Util.SMALL_MASS + " (Smallest mass)");
+			out.println(" Level 2:" + " - " + Util.MIDSMALL_MASS + " (Mid-Small mass)");
+			out.println(" Level 3:" + " - " + Util.MIDBIG_MASS + " (Mid-Big mass)");
+			out.println(" Level 4:" + " - " + Util.BIG_MASS + " (Biggest mass)");
 			out.println(" Velocity Bodies range: 0 - " + Util.RANGE_BODIES_VELOCITY);
 			out.println(" Galaxy Radius: " + Util.GALAXY_RADIUS);
 			out.println("");
 			out.println(" - Simulation info -");
 			out.println(" # of iteration: " + Util.total_iteration);
-			out.println(" Total execution time: " + + (Util.t_stop-Util.t_start)*1e-9 + " sec");
+			out.println(" Total execution time: " + (Util.t_stop-Util.t_start)*Math.pow(10, -9) + " sec");
+			out.println(" Average # of iteration per sec: " + (Util.total_iteration/((Util.t_stop-Util.t_start)*Math.pow(10, -9))) + " sec");
 			out.println("");
 			out.println("---------------------------------------------");
 			out.close();
