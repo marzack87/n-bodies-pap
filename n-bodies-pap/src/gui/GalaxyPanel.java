@@ -79,8 +79,19 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		sld_velocity.setPaintTicks(true);
 		// Create the slider label table
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-		labelTable.put(new Integer( Util.MIN_SCALE ), new JLabel(createImageIcon("images/slow.png", "slow")));
-		labelTable.put(new Integer( Util.MAX_SCALE ), new JLabel(createImageIcon("images/fast.png", "fast")));
+		
+		String slow;
+		String fast;
+		if (Util.star_wars_mode){
+			slow = "images/R2D2.png";
+			fast = "images/M-Falcon.png";
+		} else {
+			slow = "images/slow.png";
+			fast = "images/fast.png";
+		}
+		
+		labelTable.put(new Integer( Util.MIN_SCALE ), new JLabel(createImageIcon(slow, "slow")));
+		labelTable.put(new Integer( Util.MAX_SCALE ), new JLabel(createImageIcon(fast, "fast")));
 		sld_velocity.setLabelTable(labelTable);
 		sld_velocity.setBorder(this.getBorder());
 		sld_velocity.setPaintLabels(true);
