@@ -61,12 +61,13 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		btn_save = new JButton("Save Data");
 		btn_save.setEnabled(false);
 		
+		// Create the CheckBox for tracks and velocity
 		chb_tracks = new JCheckBox("Tracks");
 		chb_tracks.setSelected(false);
-		
 		chb_velocity = new JCheckBox("Velocity");
 		chb_velocity.setSelected(false);
 		
+		// Label for dt
 		double dt = Util.DEFAULT_DT;
 		lbl_dt = new JLabel("dt = " + String.format( "%.6f", dt ));
 		
@@ -150,6 +151,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(lbl_sun);
 		add(Box.createRigidArea(new Dimension(0,10)));
 		
+		// The Empire Strikes Back LOL
 		String sound_path = "sound/imperial.wav";
 		File soundFile = new File(getClass().getResource(sound_path).getPath());
 		try {
@@ -267,6 +269,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	
 	/** 
 	 * Private method createImageIcon.
+	 * <p>
 	 * Returns an ImageIcon, or null if the path was invalid.
 	 * 
 	 * @param path The path of the image file 
@@ -284,6 +287,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	
 	/**
 	 * Private method savefile.
+	 * <p>
 	 * Save all the information of the simulation in a text file.
 	 */
 	private void savefile(){
@@ -335,7 +339,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	}
 	
 	private ImageIcon icon_body(int type){
-		int size = (type == 5) ? Util.SUN_RADIUS*2 : (Util.BODY_RADIUS<2) ? Util.BODY_RADIUS*5 : Util.BODY_RADIUS*8/3;
+		int size = (type == 5) ? Util.SUN_RADIUS*2 : (Util.BODY_RADIUS<=2) ? Util.BODY_RADIUS*5 : Util.BODY_RADIUS*8/3;
 		BufferedImage image=new BufferedImage(size, size, BufferedImage.TYPE_3BYTE_BGR);
 	    Graphics2D g = image.createGraphics();
 	    g.setColor(new Color(0xEEEEEE));

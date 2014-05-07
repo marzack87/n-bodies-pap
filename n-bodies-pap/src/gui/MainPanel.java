@@ -13,12 +13,10 @@ import entity.Controller;
 
 /**
  * Class MainPanel.
+ * <p>
  * Component containing the two buttons for selecting the method of initialization of the bodies.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- * 
- * @see java.awt
- * @see javax.swing
  */
 public class MainPanel extends JPanel implements ActionListener{
 	
@@ -30,8 +28,6 @@ public class MainPanel extends JPanel implements ActionListener{
 	 * Class MainPanel default constructor.
 	 * 
 	 * @param contr Controller entity
-	 * 
-	 * @see entity.Controller
 	 **/
 	public MainPanel(Controller contr){
 		create = new JButton("Create Randomly");
@@ -88,6 +84,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	/**
 	 * Method initWithRandom.
+	 * <p>
 	 * Initialize the simulation calling the initWithRandomData method of the Controller class.
 	 * 
 	 * @param number - Number of Body taken from the BodyDialog.
@@ -109,10 +106,8 @@ public class MainPanel extends JPanel implements ActionListener{
 
 /**
  * Inner class TxtFileFilter.
+ * <p>
  * Represent the filename extension filter of the input file. Only .txt files are accepted.
- * 
- * @see FileFilter
- * @see File
  */
 class TxtFileFilter extends FileFilter {
     

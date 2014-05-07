@@ -8,8 +8,8 @@ import entity.*;
 	
 /**
  * Class Visualiser.
- * Class that extends Thread Java class.
  * <p>
+ * Class that extends Thread Java class.<br>
  * Entity / thread which has the task of displaying the set of bodies, their movements and their interactions. 
  * </p>
  * <p>Its behavior will vary according to the type of operation of the simulation:</p> 

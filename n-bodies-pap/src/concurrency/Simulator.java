@@ -10,8 +10,8 @@ import support.Util;
 
 /**
  * Class Simulator.
- * Class that extends Thread Java class.
  * <p>
+ * Class that extends Thread Java class.<br>
  * It represents the entity/thread which controls the behavior of the simulation reacting to the user inpunt.
  *  
  * 

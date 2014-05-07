@@ -18,13 +18,11 @@ import entity.Body;
 import entity.Controller;
 
 /**
- * Class VisualiserPanel
+ * Class VisualiserPanel.
+ * <p>
  * Component where all the bodies and their interactions are visualized.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- * 
- * @see java.awt
- * @see javax.swing
  */
    
 public class VisualiserPanel extends JPanel {
@@ -56,10 +54,6 @@ public class VisualiserPanel extends JPanel {
         	//System.out.println("Paint! " + Util.last_paint_time);
         	
         	//gpanel.updatePerformanceData();
-        	
-        	//System.out.println("Tot iteration: " + Util.total_iteration);
-        	//System.out.println("Last iter time: " + Util.last_iter_time);
-        	//System.out.println("FPS: " + (1e9 / Util.last_iter_time));
         	
         	Graphics2D g2 = (Graphics2D) g;
         	Dimension d = getSize();
@@ -127,8 +121,7 @@ public class VisualiserPanel extends JPanel {
             	v_x = Math.round(allbodies[i].getVelocity_X()*Util.scaleFact);
             	v_y = Math.round(allbodies[i].getVelocity_Y()*Util.scaleFact);
             	
-            	// We divide to the range of the masses in four bands and assegnamo a color, 
-            	// white indicates the smaller masses, cyan mid-small masses, blue mid-big masses and gray bigger masses. 
+            	// We divide to the range of the masses in four bands and give them a color,  
             	if (Math.abs(m-Util.SMALL_MASS) < 1e13) {
             		c = Util.light_one;
             	} else if (Math.abs(m-Util.MIDSMALL_MASS) < 1e-13) {

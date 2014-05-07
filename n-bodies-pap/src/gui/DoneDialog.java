@@ -8,13 +8,11 @@ import java.awt.event.*;
 
 /**
  * Class DoneDialog.
- * Class that extends the JDialog class, and it is the component,
- * that will inform the user about the correct saving of the simulation information.
+ * <p>
+ * Class that extends the JDialog class.<br>
+ * It is the component,that will inform the user about the correct saving of the simulation information.
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- * 
- * @see java.awt
- * @see javax.swing
  **/
  
 public class DoneDialog extends JDialog implements ActionListener{

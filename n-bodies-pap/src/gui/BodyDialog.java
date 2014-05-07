@@ -24,14 +24,13 @@ import support.Util;
 
 /**
  * Class BodyDialog.
- * Class that extends the JDialog class, and represents the component in which the user, once he have chosen to create the bodies randomly, 
+ * <p>
+ * Class that extends the JDialog class.<br>
+ * It represents the component in which the user, once he have chosen to create the bodies randomly, 
  * can specify their number and start their real initialization. 
  * Once confirmation of the number of bodies the component will call the component that will represent the "Galaxy"
  * 
  * @author Richiard Casadei, Marco Zaccheroni
- * 
- * @see java.awt
- * @see javax.swing
  */
 
 public class BodyDialog extends JDialog implements ActionListener, ChangeListener{
@@ -45,9 +44,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 	/**
 	 * Class BodyDialog constructor.
 	 * 
-	 * @param mp MainPanel component
-	 * 
-	 * @see MainPanel 
+	 * @param mp MainPanel component 
 	 **/
 	public BodyDialog(MainPanel mp){
 		
@@ -72,7 +69,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		add(Box.createVerticalStrut(5));
 		
-		ok = new JButton("GO!");
+		ok = new JButton("Go!");
 		ok.addActionListener(this);
 		ok.setMinimumSize(new Dimension(this.getSize().width, 25));
 		ok.setMaximumSize(new Dimension(this.getSize().width, 25));
@@ -111,25 +108,25 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		add(Box.createVerticalStrut(5));
 		
-		sun_mass = new JLabel("SUN MASS:");
+		sun_mass = new JLabel("Sun mass:");
 		
 		sun_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
 		sun_mass.setVisible(false);
 		add(sun_mass);
 		
-		lvl1_mass = new JLabel("Lv.1 MASS:");
+		lvl1_mass = new JLabel("Lv.1 mass:");
 		lvl1_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lvl1_mass.setVisible(false);
 		add(lvl1_mass);
-		lvl2_mass = new JLabel("Lv.1 MASS:");
+		lvl2_mass = new JLabel("Lv.2 mass:");
 		lvl2_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lvl2_mass.setVisible(false);
 		add(lvl2_mass);
-		lvl3_mass = new JLabel("Lv.1 MASS:");
+		lvl3_mass = new JLabel("Lv.3 mass:");
 		lvl3_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lvl3_mass.setVisible(false);
 		add(lvl3_mass);
-		lvl4_mass = new JLabel("Lv.1 MASS:");
+		lvl4_mass = new JLabel("Lv.4 mass:");
 		lvl4_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lvl4_mass.setVisible(false);
 		add(lvl4_mass);
@@ -170,7 +167,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 				lvl2_mass.setVisible(false);
 				lvl3_mass.setVisible(false);
 				lvl4_mass.setVisible(false);
-				custom.setText("SHOW CUSTOM PARAMETERS");
+				custom.setText("Show Custom Parameters >>");
 				setSize(new Dimension(250, 220));
 			}
 		}

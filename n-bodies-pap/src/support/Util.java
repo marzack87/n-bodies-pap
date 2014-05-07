@@ -1,15 +1,16 @@
 package support;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *  Class Util.
+ *  <p>
  *  Helper class that stores some of the data of the simulation
  *  
  *  @author Richiard Casadei, Marco Zaccheroni
  */
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
 public class Util {
 	
@@ -90,6 +91,7 @@ public class Util {
 	
 	/**
      * Method displayAvailableSpace.
+     * <p>
      * It return the dimension of the screen.
      * 
      * @return Dimension(w,h)	New Dimension object initialized with the screen width and height
@@ -103,6 +105,7 @@ public class Util {
 	
 	/**
      * Method VisualiserAvailableSpace.
+     * <p>
      * It return the dimension of the screen avaible for the VisualiserPanel.
      * 
      * @return Dimension(w,h)	New Dimension object initialized with the screen width and height without the space occupied by the GalaxyPanel
