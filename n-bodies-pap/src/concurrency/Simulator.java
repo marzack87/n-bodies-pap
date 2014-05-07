@@ -1,6 +1,8 @@
 package concurrency;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.*;
@@ -43,10 +45,10 @@ public class Simulator extends Thread {
 		Util.t_start = System.nanoTime();
 		while (simulation){
 			if (go || step){
-					//double t0 = System.nanoTime();
+					double t0 = System.nanoTime();
 					loop();
-					//double t1 = System.nanoTime();
-					//log("Task execution time: " + (t1-t0));
+					double t1 = System.nanoTime();
+					log("Task execution time: " + (t1-t0));
 			}
 		}
 		log("I'm dead..");
@@ -106,15 +108,14 @@ public class Simulator extends Thread {
 		Util.total_iteration++;
 		Util.last_iter_time = (System.nanoTime() - time);
 		this.sem.release();
-		log(" Sem: " + sem.availablePermits());
+		//log(" Sem: " + sem.availablePermits());
 		try {
 			this.printed.acquire();
-			log(" Sem: " + sem.availablePermits());
+			//log(" Sem: " + sem.availablePermits());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	/**
      * Private method log.

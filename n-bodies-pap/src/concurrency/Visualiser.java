@@ -49,7 +49,7 @@ public class Visualiser extends Thread {
     	while(simulation){ 
     		try {
 				this.sem.acquire();
-				log(" Sem acquired: " + sem.availablePermits());
+				//log(" Sem acquired: " + sem.availablePermits());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -59,7 +59,7 @@ public class Visualiser extends Thread {
     		Body[] position = cont.allbodies;
     		v.updatePositions(position);
     		this.printed.release();
-    		log(" Printed released: " + sem.availablePermits());
+    		//log(" Printed released: " + sem.availablePermits());
     	}
     	log("I'm dead..");
     }
