@@ -9,7 +9,7 @@ import entity.Body;
 /**
  * Class BodyTask.
  * Class that implements the Callable<?> Java interface.
- * 
+ * <p>
  * It represents the task to be assigned to a thread in the ExecutorService pool and that, 
  * through the method call forceFrom the Body class, performs the operations necessary to calculate the force exerted on a single body
  * (passed as a parameter to the constructor of the class) from each body present in the "galaxy". 
