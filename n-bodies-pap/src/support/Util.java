@@ -31,7 +31,7 @@ public class Util {
 	
 	public static final int SUN_RADIUS = 6;
 	public static final int DEATHSTAR_RADIUS = 16;
-	public static final int BODY_RADIUS = 1;
+	public static final int BODY_RADIUS = 2;
 	
 	// Masses range
 	// Jupiter more or less is 2e27

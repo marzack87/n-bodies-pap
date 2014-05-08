@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -161,6 +162,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		chb_tracks.addActionListener(this);
 		chb_velocity.addActionListener(this);
 		
+		// Star Wars Mode ON -> Change the skin LOL
 		if (Util.star_wars_mode){
 			setBackground(Color.black);
 			lbl_cmd.setForeground(Color.YELLOW);
@@ -213,7 +215,13 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(lbl_three);
 		add(lbl_four);
 		add(lbl_sun);
-		add(Box.createRigidArea(new Dimension(0,10)));
+		add(Box.createRigidArea(new Dimension(0,70)));
+		if(Util.star_wars_mode){
+			ImageIcon logo = createImageIcon("images/starwars-logo.png", "Logo");
+			JLabel logosw = new JLabel(logo);
+			logosw.setAlignmentX(CENTER_ALIGNMENT);
+			add(logosw);
+		}
 		
 		// The Empire Strikes Back LOL
 		String sound_path = "sound/imperial.wav";
