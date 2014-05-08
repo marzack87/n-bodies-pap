@@ -215,7 +215,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(lbl_three);
 		add(lbl_four);
 		add(lbl_sun);
-		add(Box.createRigidArea(new Dimension(0,70)));
+		add(Box.createRigidArea(new Dimension(0,200)));
 		if(Util.star_wars_mode){
 			ImageIcon logo = createImageIcon("images/starwars-logo.png", "Logo");
 			JLabel logosw = new JLabel(logo);
