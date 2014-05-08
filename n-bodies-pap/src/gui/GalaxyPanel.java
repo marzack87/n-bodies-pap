@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,22 +55,34 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		
 		// Create the command button
 		btn_start = new JButton("Play");
+		btn_start.setAlignmentX(CENTER_ALIGNMENT);
+		
 		btn_step = new JButton("Step Mode");
+		btn_step.setAlignmentX(CENTER_ALIGNMENT);
+		
 		btn_stop = new JButton("Stop");
+		btn_stop.setAlignmentX(CENTER_ALIGNMENT);
+		
 		btn_reset = new JButton("Reset");
+		btn_reset.setAlignmentX(CENTER_ALIGNMENT);
 		btn_reset.setEnabled(false);
+		
 		btn_save = new JButton("Save Data");
+		btn_save.setAlignmentX(CENTER_ALIGNMENT);
 		btn_save.setEnabled(false);
 		
 		// Create the CheckBox for tracks and velocity
 		chb_tracks = new JCheckBox("Tracks");
 		chb_tracks.setSelected(false);
+		chb_tracks.setAlignmentX(CENTER_ALIGNMENT);
 		chb_velocity = new JCheckBox("Velocity");
 		chb_velocity.setSelected(false);
+		chb_velocity.setAlignmentX(CENTER_ALIGNMENT);
 		
 		// Label for dt
 		double dt = Util.DEFAULT_DT;
 		lbl_dt = new JLabel("dt = " + String.format( "%.6f", dt ));
+		lbl_dt.setAlignmentX(CENTER_ALIGNMENT);
 		
 		// Create the slider
 		sld_velocity = new JSlider(JSlider.HORIZONTAL, Util.MIN_SCALE, Util.MAX_SCALE, Util.MID_SCALE);
@@ -95,31 +108,50 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		sld_velocity.setLabelTable(labelTable);
 		sld_velocity.setBorder(this.getBorder());
 		sld_velocity.setPaintLabels(true);
-		sld_velocity.setPreferredSize(new Dimension(10,10));
+		sld_velocity.setPreferredSize(new Dimension(180,60));
+		sld_velocity.setMaximumSize(new Dimension(180,60));
 		
 		// Performance labels
 		lbl_stats = new JLabel(" Performance: ");
 		lbl_stats.setAlignmentX(CENTER_ALIGNMENT);
 		lbl_n_iter_title = new JLabel(" Iterations:");
+		lbl_n_iter_title.setAlignmentX(CENTER_ALIGNMENT);
 		lbl_n_iter = new JLabel("" + Util.total_iteration);
+		lbl_n_iter.setFont(new Font("Arial", Font.BOLD, 20));
+		lbl_n_iter.setAlignmentX(CENTER_ALIGNMENT);
 		lbl_last_iter_time_title = new JLabel(" Last iter time:");
+		lbl_last_iter_time_title.setAlignmentX(CENTER_ALIGNMENT);
 		lbl_last_iter_time = new JLabel("" + Util.last_iter_time);
+		lbl_last_iter_time.setFont(new Font("Arial", Font.BOLD, 20));
+		lbl_last_iter_time.setAlignmentX(CENTER_ALIGNMENT);
 		lbl_FPS_title = new JLabel(" FPS:");
+		lbl_FPS_title.setAlignmentX(CENTER_ALIGNMENT);
 		lbl_FPS = new JLabel("0");
+		lbl_FPS.setFont(new Font("Arial", Font.BOLD, 20));
+		lbl_FPS.setAlignmentX(CENTER_ALIGNMENT);
 		
 		// Create the legend
 		lbl_legend = new JLabel("Legend: ");
 		lbl_legend.setAlignmentX(CENTER_ALIGNMENT);
 		ImageIcon icon_one = icon_body(1);
 		lbl_one = new JLabel("Smaller mass ", icon_one, JLabel.LEFT);
+		lbl_one.setAlignmentX(CENTER_ALIGNMENT);
 		ImageIcon icon_two = icon_body(2);
 		lbl_two = new JLabel("Mid-small mass  ", icon_two, JLabel.LEFT);
+		lbl_two.setAlignmentX(CENTER_ALIGNMENT);
 		ImageIcon icon_three = icon_body(3);
 		lbl_three = new JLabel("Mid-big mass ", icon_three, JLabel.LEFT);
+		lbl_three.setAlignmentX(CENTER_ALIGNMENT);
 		ImageIcon icon_four = icon_body(4);
 		lbl_four = new JLabel("Bigger mass ", icon_four, JLabel.LEFT);
+		lbl_four.setAlignmentX(CENTER_ALIGNMENT);
 		ImageIcon icon_sun = icon_body(5);
-	    lbl_sun = new JLabel("Sun ", icon_sun, JLabel.LEFT);
+	    if (Util.star_wars_mode){
+	    	lbl_sun = new JLabel("Death Star ", icon_sun, JLabel.LEFT);
+	    } else {
+	    	lbl_sun = new JLabel("Sun ", icon_sun, JLabel.LEFT);
+	    }
+	    lbl_sun.setAlignmentX(CENTER_ALIGNMENT);
 		
 		btn_start.addActionListener(this);
 		btn_step.addActionListener(this);
@@ -129,6 +161,27 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		chb_tracks.addActionListener(this);
 		chb_velocity.addActionListener(this);
 		
+		if (Util.star_wars_mode){
+			setBackground(Color.black);
+			lbl_cmd.setForeground(Color.YELLOW);
+			lbl_dt.setForeground(Color.YELLOW);
+			lbl_stats.setForeground(Color.YELLOW);
+			lbl_n_iter_title.setForeground(Color.YELLOW);
+			lbl_n_iter.setForeground(Color.YELLOW);
+			lbl_last_iter_time_title.setForeground(Color.YELLOW);
+			lbl_last_iter_time.setForeground(Color.YELLOW);
+			lbl_FPS_title.setForeground(Color.YELLOW);
+			lbl_FPS.setForeground(Color.YELLOW);
+			lbl_legend.setForeground(Color.YELLOW);
+			lbl_one.setForeground(Color.YELLOW);
+			lbl_two.setForeground(Color.YELLOW);
+			lbl_three.setForeground(Color.YELLOW);
+			lbl_four.setForeground(Color.YELLOW);
+			lbl_sun.setForeground(Color.YELLOW);
+			chb_tracks.setForeground(Color.YELLOW);
+			chb_velocity.setForeground(Color.YELLOW);
+		}
+		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		add(lbl_cmd);
 		add(Box.createRigidArea(new Dimension(0,10)));
@@ -137,13 +190,13 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(btn_stop);
 		add(btn_reset);
 		add(btn_save);
-		add(Box.createRigidArea(new Dimension(0,50)));
+		add(Box.createRigidArea(new Dimension(0,30)));
 		add(lbl_dt);
 		add(sld_velocity);
-		add(Box.createRigidArea(new Dimension(0,30)));
+		add(Box.createRigidArea(new Dimension(0,40)));
 		add(chb_tracks);
 		add(chb_velocity);
-		add(Box.createRigidArea(new Dimension(0,50)));
+		add(Box.createRigidArea(new Dimension(0,40)));
 		add(lbl_stats);
 		add(Box.createRigidArea(new Dimension(0,10)));
 		add(lbl_n_iter_title);
@@ -152,7 +205,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(lbl_last_iter_time);
 		add(lbl_FPS_title);
 		add(lbl_FPS);
-		add(Box.createRigidArea(new Dimension(0,50)));
+		add(Box.createRigidArea(new Dimension(0,30)));
 		add(lbl_legend);
 		add(Box.createRigidArea(new Dimension(0,10)));
 		add(lbl_one);
@@ -350,7 +403,20 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	}
 	
 	private ImageIcon icon_body(int type){
-		int size = (type == 5) ? Util.SUN_RADIUS*2 : (Util.BODY_RADIUS<=2) ? Util.BODY_RADIUS*5 : Util.BODY_RADIUS*8/3;
+		int size = 0;
+		if (type == 5) {
+			if (Util.star_wars_mode){
+				return createImageIcon("images/DeathStar.png", "DeathStar");
+			} else {
+				size = Util.SUN_RADIUS*2;
+			}
+		} else {
+			if (Util.BODY_RADIUS<=2) {
+				size = Util.BODY_RADIUS*5;
+			} else {
+				size = Util.BODY_RADIUS*(8/3);
+			}
+		}
 		BufferedImage image=new BufferedImage(size, size, BufferedImage.TYPE_3BYTE_BGR);
 	    Graphics2D g = image.createGraphics();
 	    g.setColor(new Color(0xEEEEEE));
@@ -370,12 +436,22 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	    	c = Util.sun;
 	    }
 	    
-	    g.setColor(c);
-	    g.fillOval(0, 0, image.getWidth()-1, image.getHeight()-1);
-	    if (type == 5){
-	    	 g.setColor(Color.red);
-	    	g.drawOval(0, 0, image.getWidth()-1, image.getHeight()-1);
-	    }
+	    if(Util.star_wars_mode){
+	    	if (type == 5){
+	    		ImageIcon img = createImageIcon("images/DeathStar.png", "DeathStar");
+    			g.drawImage(img.getImage(), image.getWidth()-1, image.getHeight()-1, this);
+		    } else {
+		    	g.setColor(c);
+			    g.fillOval(0, 0, image.getWidth()-1, image.getHeight()-1);
+		    }
+	    } else {
+	    	g.setColor(c);
+		    g.fillOval(0, 0, image.getWidth()-1, image.getHeight()-1);
+		    if (type == 5){
+		    	g.setColor(Color.red);
+		    	g.drawOval(0, 0, image.getWidth()-1, image.getHeight()-1);
+		    }
+	    } 
 	    
 	    g.dispose();
 		
