@@ -50,7 +50,7 @@ public class VisualiserPanel extends JPanel {
         	
         	//System.out.println("Paint! " + Util.last_paint_time);
         	
-        	//gpanel.updatePerformanceData();
+        	gpanel.updatePerformanceData();
         	
         	Graphics2D g2 = (Graphics2D) g;
         	Dimension d = getSize();

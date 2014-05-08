@@ -1,16 +1,5 @@
 package entity;
 
-/**
- * Class Generator. 
- * Represent the entity that takes care to recover the data from a file or to generate them in a random way.
- * If the mode choose to star the simulation is taking the data from a file, an object of this class recovered from the file these data: 
- * the number of planets (bodies) to create, in the below columns the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses.
- * Otherwise the object to initialize the simulation creates all the data in a random way.
- * The data recovered/created are passed to the Controller object through a matrix. 
- * 
- * @author Richiard Casadei, Marco Zaccheroni
- */
-
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
@@ -18,6 +7,18 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 import support.*;
+
+/**
+ * Class Generator. 
+ * <p>
+ * Represent the entity that takes care to recover the data from a file or to generate them in a random way.<br>
+ * If the mode choose to star the simulation is taking the data from a file, an object of this class recovered from the file these data:<br> 
+ * the number of planets (bodies) to create, in the below columns the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses.<br>
+ * Otherwise the object to initialize the simulation creates all the data in a random way.><br>
+ * The data recovered/created are passed to the Controller object through a matrix. 
+ * 
+ * @author Richiard Casadei, Marco Zaccheroni
+ */
 
 public class Generator {
 	
@@ -44,11 +45,10 @@ public class Generator {
 	
 	/**
 	 * Class Generator constructor.
+	 * <p>
 	 * It takes a reference of the system context
 	 * 
 	 * @param cont The system context
-	 * 
-	 * @see support.Context
 	 */
 	public Generator(Context cont){
 		 
@@ -63,11 +63,10 @@ public class Generator {
 	 
 	/**
 	 * Method initFromFile.
+	 * <p>
 	 * It recovers from the file the data necessary to the initialization of the bodies. 
 	 * 
 	 * @param f The input file
-	 * 
-	 * @see File
 	 */
 	public void initFromFile(File f){
 		try{
@@ -114,6 +113,7 @@ public class Generator {
 	
 	/**
 	 * Method initWithRandonData.
+	 * <p>
 	 * It generates the data for the initialization in a random way.
 	 * 
 	 * @param n Number of Body
@@ -145,6 +145,7 @@ public class Generator {
 	
 	/**
 	 * Method initBody.
+	 * <p>
 	 * It creates and updates the array list of the Body Objects with the data taken from the initialization(both choice methods: random and from file).
 	 */
 	public void initBody(boolean sun){
@@ -168,18 +169,9 @@ public class Generator {
 	}
 	
 	/**
-	 * Method getNumberOfBodies.
-	 * It returns the number of bodies.
-	 * 
-	 * @return number Number of bodies
-	 */
-	public int getNumberOfBodies(){
-		return number;
-	}
-	
-	/**
 	 * Method getData.
-	 * It creates the matrix which contains the data of the bodies.
+	 * <p>
+	 * It creates the matrix which contains the data of the bodies.<br>
 	 * Each line contains the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses.
 	 * 
 	 * @return data Data matrix
@@ -189,11 +181,24 @@ public class Generator {
 		return data;
 	}
 	
+	
+	/**
+	 * Method getNumberOfBodies.
+	 * <p>
+	 * It returns the number of bodies.
+	 * 
+	 * @return number Number of bodies
+	 */
+	public int getNumberOfBodies(){
+		return number;
+	}
+	
 	/**
 	 * Method print_body.
+	 * <p>
 	 * Print all the informations about all the bodies presented in the allbodies array. 
 	 */
-	private void print_body(){
+	public void print_body(){
 		System.out.println("Printing bodies data by Generator......");
 		for(int i = 0; i<number; i++){
 			System.out.println(context.allbodies[i].getPosition() + " " + context.allbodies[i].getVelocity() + " " + context.allbodies[i].getMass() );
