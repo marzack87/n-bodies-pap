@@ -4,12 +4,14 @@ import support.*;
 
 /**
  * Class Body. 
- *
+ *<p>
  * Represent the body single entity. Each body has three private fields that stand for his properties:
- * 
- * - Vector p, position vector given by the coordination x,y
- * - Vector v, velocity vector
- * - double mass, the value of the mass of the body(planet)  
+ * </p>
+ * <ul>
+ * 	<li>Vector p, position vector given by the coordination x,y</li>
+ * 	<li>Vector v, velocity vector</li>
+ * 	<li>double mass, the value of the mass of the body(planet)</li>  
+ * </ul>
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
@@ -26,7 +28,7 @@ public class Body {
 	
 	/**
 	 * Class Body default constructor.
-	 * 
+	 * <p>
 	 * Initialize the properties of the body with the object passed as parameter.
 	 * 
 	 * @param p Position vector
@@ -44,36 +46,20 @@ public class Body {
 	}
 	
 	/**
-	 * Method move.
+	 * Method copy.
+	 * <p>
+	 * It returns a copy of the body.
 	 * 
-	 * Permit to update the position of the body based on the force applied to the body by the others
-	 * and the discrete time.
-	 * 
-	 * @param f Force vector
-	 * @param dt Time
+	 * @return Body A new Body object
 	 */
-	public void move(V2d f, double dt) { 
-		//System.out.println("Body " + index);
-		if (collision){
-			this.v = vel_after_collision;
-			//System.out.println("Body " + index + " - vel_after_collision = " + vel_after_collision);
-			V2d dp = this.v.mul(dt);
-			p = p.sum(dp);
-		} else {
-			V2d a = f.mul(1/mass);
-			V2d dv = a.mul(dt);
-			V2d dp = (v.sum(dv.mul(1/2))).mul(dt);
-			p = p.sum(dp);
-			v = v.sum(dv);
-		}
+	public Body copy(){
+		return new Body(this.p, this.v, this.mass, this.index);
 		
-		collision = false;
-		vel_after_collision = new V2d(0,0);
 	}
 	
 	/**
 	 * Method forceFrom.
-	 * 
+	 * <p>
 	 * It calculates the force between the body and an another body passed as param 
 	 * 
 	 * @param that Body passed
@@ -104,20 +90,44 @@ public class Body {
 		
 		//System.out.println(Force);
 		return Force;
-	} 
-	 
-	private void collision(Body that){
-		collision = true;
-		
-		V2d final_v = this.v.mul(this.mass - that.mass).sum(that.v.mul(2 * that.mass)).mul(1 / (this.mass + that.mass));
-		vel_after_collision = vel_after_collision.sum(final_v);
-		
-		//System.out.println("COLLISION! FINAL VELOCITY: " + final_v + " - " + vel_after_collision);
+	}
+	
+	/**
+	 * Method getIndex.
+	 * <p>
+	 * It returns the index of the body.
+	 * 
+	 * @return index Index of the body
+	 */
+	public int getIndex(){
+		return index;
+	}
+	
+	/**
+	 * Method getMass.
+	 * <p>
+	 * It returns a String representation of the mass of the body.
+	 * 
+	 * @return String
+	 */
+	public String getMass(){
+		return "" + mass;
+	}
+	
+	/**
+	 * Method getMassValue.
+	 * <p>
+	 * It returns the double value of the mass of the body.
+	 * 
+	 * @return double Value of the mass
+	 */
+	public double getMassValue(){
+		return mass;
 	}
 	
 	/**
 	 * Method getPosition.
-	 * 
+	 * <p>
 	 * It returns a String representation of the Vector position of the body calling the method toString()
 	 * of the Vector Class.
 	 * 
@@ -129,7 +139,7 @@ public class Body {
 	
 	/**
 	 * Method getPosition_X.
-	 * 
+	 * <p>
 	 * It returns a double with the value of the coordinate X of the Position of the Body.
 	 * 
 	 * @return double Value of the position coordinate X
@@ -140,7 +150,7 @@ public class Body {
 	
 	/**
 	 * Method getPosition_Y.
-	 * 
+	 * <p>
 	 * It returns a double with the value of the coordinate Y of the Position of the Body.
 	 * 
 	 * @return double Value of the position coordinate Y
@@ -151,7 +161,7 @@ public class Body {
 	
 	/**
 	 * Method getVelocity.
-	 * 
+	 * <p>
 	 * It returns a String representation of the Vector velocity of the body calling the method toString()
 	 * of the Vector Class.
 	 * 
@@ -163,7 +173,7 @@ public class Body {
 	
 	/**
 	 * Method getVelocity_X.
-	 * 
+	 * <p>
 	 * It returns a double with the value of the coordinate X of the Velocity of the Body.
 	 * 
 	 * @return double Value of the velocity coordinate X
@@ -174,7 +184,7 @@ public class Body {
 	
 	/**
 	 * Method getVelocity_Y.
-	 * 
+	 * <p>
 	 * It returns a double with the value of the coordinate Y of the Velocity of the Body.
 	 * 
 	 * @return double Value of the velocity coordinate Y
@@ -184,38 +194,64 @@ public class Body {
 	}
 	
 	/**
-	 * Method getMass.
+	 * Method move.
+	 * <p>
+	 * Permit to update the position of the body based on the force applied to the body by the others
+	 * and the discrete time.
 	 * 
-	 * It returns a String representation of the mass of the body.
-	 * 
-	 * @return String
+	 * @param f Force vector
+	 * @param dt Time
 	 */
-	public String getMass(){
-		return "" + mass;
+	public void move(V2d f, double dt) { 
+		//System.out.println("Body " + index);
+		if (collision){
+			this.v = vel_after_collision;
+			//System.out.println("Body " + index + " - vel_after_collision = " + vel_after_collision);
+			V2d dp = this.v.mul(dt);
+			p = p.sum(dp);
+		} else {
+			V2d a = f.mul(1/mass);
+			V2d dv = a.mul(dt);
+			V2d dp = (v.sum(dv.mul(1/2))).mul(dt);
+			p = p.sum(dp);
+			v = v.sum(dv);
+		}
+		
+		collision = false;
+		vel_after_collision = new V2d(0,0);
+	}
+	
+	 
+	/**
+	 * Private method collision.
+	 * <p>
+	 * Represents the management of collisions.<br>
+	 * It uses the formula of impact elastic in a one-dimensional collision event:
+	 * </p>
+	 * <p>
+	 * v1f = ((m1-m2)*v1i + 2*m2*v2i)/(m1+m2)
+	 *  
+	 *  
+	 * @param that
+	 */
+	private void collision(Body that){
+		collision = true;
+		
+		V2d final_v = this.v.mul(this.mass - that.mass).sum(that.v.mul(2 * that.mass)).mul(1 / (this.mass + that.mass));
+		vel_after_collision = vel_after_collision.sum(final_v);
+		
+		//System.out.println("COLLISION! FINAL VELOCITY: " + final_v + " - " + vel_after_collision);
 	}
 	
 	/**
-	 * Method getMassValue.
+	 * Method toString.
+	 * <p>
+	 * It returns a String representation of the body.
 	 * 
-	 * It returns the double value of the mass of the body.
-	 * 
-	 * @return double Value of the mass
+	 * @return String
 	 */
-	public double getMassValue(){
-		return mass;
-	}
-	
-	
-	public int getIndex(){
-		return index;
-	}
-	
 	public String toString(){
         return "----\nBody\nposition("+p.x+","+p.y+")\nvelocity("+v.x+","+v.y+")\nmass " + mass+"\nindex " +index +"\n-----";
     }
-	
-	public Body copy(){
-		return new Body(this.p, this.v, this.mass, this.index);
-		
-	}
+
 }

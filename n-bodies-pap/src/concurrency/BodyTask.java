@@ -32,9 +32,9 @@ public class BodyTask implements Callable<Body> {
 	/**
 	 * Class BodyTask default constructor.
 	 * 
-	 * @param all 		The bodies array
-	 * @param i 		The array index representing the Body on which we want compute the total gravitational force
-	 * @param delta_t 	Time instant
+	 * @param all The bodies array
+	 * @param i The array index representing the Body on which we want compute the total gravitational force
+	 * @param delta_t Time instant
 	 **/
 	public BodyTask(Body[] all, int i, double delta_t){
 		all_bodies = all;
@@ -49,7 +49,7 @@ public class BodyTask implements Callable<Body> {
 	 * Simple implementation of the brute force algorithm for the calculation of the total gravitational force acting on a body.
 	 * This method also updates the Body data, calling the Class Body method move().
 	 * 
-	 * @return me 		The updated Body
+	 * @return me The updated Body
 	 * @throws Exception
 	 */
 	public Body call() throws Exception {

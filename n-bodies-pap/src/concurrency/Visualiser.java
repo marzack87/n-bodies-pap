@@ -34,9 +34,9 @@ public class Visualiser extends Thread {
     /**
 	 * Class Visualiser constructor.
 	 * 
-	 * @param cont 		The Controller entity with which the visualiser will communicate 
-	 * @param sem		The event semaphore to notify the computation end 
-	 * @param print		The event semaphore to wait the end of VisualiserPanel repain
+	 * @param cont The Controller entity with which the visualiser will communicate 
+	 * @param sem The event semaphore to notify the computation end 
+	 * @param print	The event semaphore to wait the end of VisualiserPanel repain
 	 **/
     public Visualiser(Context cont, Semaphore sem, Semaphore print){
     	super("Visualiser");
@@ -45,6 +45,15 @@ public class Visualiser extends Thread {
     	this.printed = print;
     	simulation = true;
     }
+    
+    /**
+	 * Method flushHistoryPosition.
+	 * <p>
+	 * Reset the older position array stored in the VisualiserPanel
+	 */
+	public void flushHistoryPositions(){
+		v.reset();
+	}
     
     /**
      * Method run.
@@ -72,6 +81,17 @@ public class Visualiser extends Thread {
     	log("I'm dead..");
     }
     
+    /**
+	 * Method setVisualiserPanel.
+	 * <p>
+	 * Set the VisualiserPanel controlled by Visualiser Thread
+	 * 
+	 * @param v	The VisualiserPanel
+	 */
+	public void setVisualiserPanel(VisualiserPanel v){
+		this.v = v;
+	}
+    
    /**
     * Method suicide.
     * <p>
@@ -87,31 +107,11 @@ public class Visualiser extends Thread {
      * <p>
      * Prints to the console a log of the activity of the Visualiser.
      * 
-     * @param msg the message to be printed
+     * @param msg The message to be printed
      */
 	private void log(String msg){
         System.out.println("[VISUALISER] "+msg);
     }
-	
-	/**
-	 * Method setVisualiserPanel.
-	 * <p>
-	 * Set the VisualiserPanel controlled by Visualiser Thread
-	 * 
-	 * @param v	The VisualiserPanel
-	 */
-	public void setVisualiserPanel(VisualiserPanel v){
-		this.v = v;
-	}
-	
-	/**
-	 * Method flushHistoryPosition.
-	 * <p>
-	 * Reset the older position array stored in the VisualiserPanel
-	 */
-	public void flushHistoryPositions(){
-		v.reset();
-	}
 	
 
 }

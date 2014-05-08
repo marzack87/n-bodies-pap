@@ -35,9 +35,9 @@ public class Simulator extends Thread {
    /**
 	* Class Simulator constructor.
 	* 
-	* @param c 		The context
-	* @param sem 		The event semaphore to notify the computation end 
-	* @param print		The event semaphore to wait the end of VisualiserPanel repaint
+	* @param c The context
+	* @param sem The event semaphore to notify the computation end 
+	* @param print The event semaphore to wait the end of VisualiserPanel repaint
 	*/
 	public Simulator(Context c, Semaphore sem, Semaphore print) {
 		super("Simulator");
@@ -48,6 +48,17 @@ public class Simulator extends Thread {
 		step = 0;
 		this.printed = print;
 		
+	}
+	
+	/**
+	 * Method go.
+	 * <p>
+	 * It returns the value of the simulation continuous-time mode   
+	 * 
+	 * @return go Boolean value
+	 */
+	public boolean go(){
+		return go;
 	}
 	
 	/**
@@ -120,21 +131,21 @@ public class Simulator extends Thread {
 	}
 	
 	/**
-	 * Method play.
-	 * <p>
-	 * It starts the simulation in continuous-time mode.  
-	 */
-	public void play(){
-		go = true;
-	}
-	
-	/**
 	 * Method pause.
 	 * <p>
 	 * It freezes the simulation.  
 	 */
 	public void pause(){
 		go = false;
+	}
+	
+	/**
+	 * Method play.
+	 * <p>
+	 * It starts the simulation in continuous-time mode.  
+	 */
+	public void play(){
+		go = true;
 	}
 	
 	/**
@@ -158,22 +169,11 @@ public class Simulator extends Thread {
 	}
 	
 	/**
-	 * Method go.
-	 * <p>
-	 * It returns the value of the simulation continuous-time mode   
-	 * 
-	 * @return go	Boolean value
-	 */
-	public boolean go(){
-		return go;
-	}
-	
-	/**
      * Private method log.
      * <p>
      * Prints to the console a log of the activity of the Visualiser.
      * 
-     * @param msg the message to be printed
+     * @param msg The message to be printed
      */
 	private void log(String msg){
         System.out.println("[SIMULATOR] "+msg);
