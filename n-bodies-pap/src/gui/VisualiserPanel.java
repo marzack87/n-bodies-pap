@@ -158,6 +158,23 @@ public class VisualiserPanel extends JPanel {
             
         }
         
+        /**
+         * Method reset.
+         * <p>
+         * It reset the array of the older position of the body.<br>
+         * That array permits to paint the tracks of each body.
+         */
+        public void reset(){
+        	history.clear();
+        }
+        
+        /**
+         * Method updatePositions
+         * <p>
+         * Called by the Visualiser thread to update the body position array stored and to repaint the VisualiserPanel
+         * 
+         * @param pos
+         */
         public void updatePositions(Body[] pos){
                 allbodies = pos;
                 V2d[] positions = new V2d[pos.length];
@@ -168,7 +185,4 @@ public class VisualiserPanel extends JPanel {
                 repaint();
         }
         
-        public void reset(){
-        	history.clear();
-        }
 }

@@ -97,6 +97,13 @@ public class MainPanel extends JPanel implements ActionListener{
 		gframe.setVisible(true);
 	}
 	
+	/**
+     * Private method log.
+     * <p>
+     * Prints to the console a log of the activity of the MainPanel.
+     * 
+     * @param msg The message to be printed
+     */
 	private void log(String msg){
         System.out.println("[MAIN PANEL] "+msg);
     }

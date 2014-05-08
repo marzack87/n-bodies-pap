@@ -83,7 +83,7 @@ public class Simulator extends Thread {
 	}
 	
 	/**
-     * Method loop.
+     * Private method loop.
      * The core of the simulation.
      * <p>
      * Following the master-worker pattern, the Simulator assigns to a ExecutorService pool(newFixedThreadPool(NTHREADS)) thread an appropriate BodyTask. 

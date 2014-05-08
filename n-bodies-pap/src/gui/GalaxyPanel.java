@@ -339,6 +339,19 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		
 	}
 	
+	@Override
+	public void stateChanged(ChangeEvent e) {
+	JSlider source = (JSlider)e.getSource();
+		if (!source.getValueIsAdjusting()) {
+			int step = source.getValue();
+			//step = source.getMaximum() - step;
+			//double dt = (Util.DEFAULT_DT * step) / Util.MID_SCALE;
+			double dt = (Util.DEFAULT_DT * (Math.pow(10, step-1)) / (Math.pow(10, (Util.MAX_SCALE - Util.MID_SCALE))));
+			controller.setDeltaT(dt);
+			lbl_dt.setText("dt = " + String.format( "%.7f", dt ));
+		}	
+	}
+	
 	/** 
 	 * Private method createImageIcon.
 	 * <p>
@@ -355,6 +368,68 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	        System.err.println("Couldn't find file: " + path);
 	        return null;
 	    }
+	}
+	
+	/**
+	 * Private method icon_body.
+	 * <p>
+	 * Used to create the icon of each body in the legend.
+	 * 
+	 * @param type
+	 * @return image New ImageIcon
+	 */
+	@SuppressWarnings("unused")
+	private ImageIcon icon_body(int type){
+		int size = 0;
+		if (type == 5) {
+			if (Util.star_wars_mode){
+				return createImageIcon("images/DeathStar.png", "DeathStar");
+			} else {
+				size = Util.SUN_RADIUS*2;
+			}
+		} else {
+			if (Util.BODY_RADIUS<=2) {
+				size = Util.BODY_RADIUS*5;
+			} else {
+				size = Util.BODY_RADIUS*(8/3);
+			}
+		}
+		BufferedImage image=new BufferedImage(size, size, BufferedImage.TYPE_3BYTE_BGR);
+	    Graphics2D g = image.createGraphics();
+	    g.setColor(new Color(0xEEEEEE));
+	    g.fillRect(0, 0, image.getWidth(), image.getHeight());
+	    
+	    Color c = null;
+	    if (type == 1) {
+	    	c = Util.light_one;
+	    } else if (type == 2) {
+	    	c = Util.light_two;
+	    } else if (type == 3) {
+	    	c = Util.light_three;
+	    } else if (type == 4) {
+	    	c = Util.light_five;
+	    } else if (type == 5) {
+	    	c = Util.sun;
+	    }
+	    
+	    if(Util.star_wars_mode){
+	    	if (type == 5){
+	    		ImageIcon img = createImageIcon("images/DeathStar.png", "DeathStar");
+    			g.drawImage(img.getImage(), image.getWidth()-1, image.getHeight()-1, this);
+		    } else {
+		    	g.setColor(c);
+			    g.fillOval(0, 0, image.getWidth()-1, image.getHeight()-1);
+		    }
+	    } else {
+	    	g.setColor(c);
+		    g.fillOval(0, 0, image.getWidth()-1, image.getHeight()-1);
+		    if (type == 5){
+		    	g.setColor(Color.red);
+		    	g.drawOval(0, 0, image.getWidth()-1, image.getHeight()-1);
+		    }
+	    } 
+	    g.dispose();
+	    return new ImageIcon(image);
 	}
 	
 	/**
@@ -410,83 +485,26 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	
 	}
 	
-	private ImageIcon icon_body(int type){
-		int size = 0;
-		if (type == 5) {
-			if (Util.star_wars_mode){
-				return createImageIcon("images/DeathStar.png", "DeathStar");
-			} else {
-				size = Util.SUN_RADIUS*2;
-			}
-		} else {
-			if (Util.BODY_RADIUS<=2) {
-				size = Util.BODY_RADIUS*5;
-			} else {
-				size = Util.BODY_RADIUS*(8/3);
-			}
-		}
-		BufferedImage image=new BufferedImage(size, size, BufferedImage.TYPE_3BYTE_BGR);
-	    Graphics2D g = image.createGraphics();
-	    g.setColor(new Color(0xEEEEEE));
-	    g.fillRect(0, 0, image.getWidth(), image.getHeight());
-	    
-	    Color c = null;
-	    
-	    if (type == 1) {
-	    	c = Util.light_one;
-	    } else if (type == 2) {
-	    	c = Util.light_two;
-	    } else if (type == 3) {
-	    	c = Util.light_three;
-	    } else if (type == 4) {
-	    	c = Util.light_five;
-	    } else if (type == 5) {
-	    	c = Util.sun;
-	    }
-	    
-	    if(Util.star_wars_mode){
-	    	if (type == 5){
-	    		ImageIcon img = createImageIcon("images/DeathStar.png", "DeathStar");
-    			g.drawImage(img.getImage(), image.getWidth()-1, image.getHeight()-1, this);
-		    } else {
-		    	g.setColor(c);
-			    g.fillOval(0, 0, image.getWidth()-1, image.getHeight()-1);
-		    }
-	    } else {
-	    	g.setColor(c);
-		    g.fillOval(0, 0, image.getWidth()-1, image.getHeight()-1);
-		    if (type == 5){
-		    	g.setColor(Color.red);
-		    	g.drawOval(0, 0, image.getWidth()-1, image.getHeight()-1);
-		    }
-	    } 
-	    
-	    g.dispose();
-		
-	    return new ImageIcon(image);
-	}
-	
-	private void log(String msg){
-        System.out.println("[GALAXY PANEL] "+msg);
-    }
-
-
-	@Override
-	public void stateChanged(ChangeEvent e) {
-	JSlider source = (JSlider)e.getSource();
-		if (!source.getValueIsAdjusting()) {
-			int step = source.getValue();
-			//step = source.getMaximum() - step;
-			//double dt = (Util.DEFAULT_DT * step) / Util.MID_SCALE;
-			double dt = (Util.DEFAULT_DT * (Math.pow(10, step-1)) / (Math.pow(10, (Util.MAX_SCALE - Util.MID_SCALE))));
-			controller.setDeltaT(dt);
-			lbl_dt.setText("dt = " + String.format( "%.7f", dt ));
-		}	
-	}
-	
+	/**
+	 * Method updatePerformanceData.
+	 * <p>
+	 * Called by the Visualiser thread to update the performance statistics shown in the GalaxyPanel
+	 */
 	public void updatePerformanceData(){
 		lbl_n_iter.setText("" + Util.total_iteration);
 		lbl_last_iter_time.setText("" + Util.last_iter_time);
 		lbl_FPS.setText(String.format( "%.2f",(1e9 / Util.last_iter_time)));
 	}
+	
+	/**
+     * Private method log.
+     * <p>
+     * Prints to the console a log of the activity of the GalaxyPanel.
+     * 
+     * @param msg The message to be printed
+     */
+	private void log(String msg){
+        System.out.println("[GALAXY PANEL] "+msg);
+    }
+
 }
