@@ -4,22 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ListIterator;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import support.P2d;
 import support.Util;
+import support.V2d;
 import entity.Body;
 import entity.Controller;
 
@@ -35,7 +26,7 @@ public class VisualiserPanel extends JPanel {
 		
 		private Controller controller;
 		private Body[] allbodies;
-		private ArrayList<P2d[]> history = new ArrayList<P2d[]>();
+		private ArrayList<V2d[]> history = new ArrayList<V2d[]>();
 		private GalaxyPanel gpanel; 
 		
 		/**
@@ -47,8 +38,8 @@ public class VisualiserPanel extends JPanel {
             setSize(Util.VisualiserAvailableSpace());
             controller = contr;
             allbodies = controller.getAllBodiesFromContext();
-            P2d[] pos = new P2d[allbodies.length];
-            for (Body b : allbodies) pos[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
+            V2d[] pos = new V2d[allbodies.length];
+            for (Body b : allbodies) pos[b.getIndex()] = new V2d(b.getPosition_X(), b.getPosition_Y());
             history.add(pos);
             gpanel = gp;
         }
@@ -68,16 +59,16 @@ public class VisualiserPanel extends JPanel {
             
         	if (controller.tracks) {
         	
-	            ArrayList<P2d[]> h = new ArrayList<P2d[]>();
+	            ArrayList<V2d[]> h = new ArrayList<V2d[]>();
 	            h.addAll(history);
 	            
 	            int j = 0;
-	            P2d[] before = new P2d[allbodies.length];
-	            ListIterator<P2d[]> it = h.listIterator();
+	            V2d[] before = new V2d[allbodies.length];
+	            ListIterator<V2d[]> it = h.listIterator();
 	            
 	            while (it.hasNext()) {
 	            	
-	            	P2d[] all = null;
+	            	V2d[] all = null;
 					all = it.next();
 					if (all != null){
 		            	for(int i=0; i<all.length; i++){
@@ -169,8 +160,8 @@ public class VisualiserPanel extends JPanel {
         
         public void updatePositions(Body[] pos){
                 allbodies = pos;
-                P2d[] positions = new P2d[pos.length];
-                for (Body b : allbodies) positions[b.getIndex()] = new P2d(b.getPosition_X(), b.getPosition_Y());
+                V2d[] positions = new V2d[pos.length];
+                for (Body b : allbodies) positions[b.getIndex()] = new V2d(b.getPosition_X(), b.getPosition_Y());
                 if (history.size() >= 50) history.remove(0);
                 history.add(positions);
                 //if ((System.currentTimeMillis() - Util.last_paint_time) > 33) repaint();

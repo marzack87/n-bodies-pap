@@ -21,6 +21,7 @@ public class Util {
 	
 	public static double t_start, t_stop;
 	
+	// System info
 	public static final String nameOS = System.getProperty("os.name");  
 	public static final String versionOS = System.getProperty("os.version");
 	public static final int ncores = Runtime.getRuntime().availableProcessors()/2;
@@ -32,9 +33,9 @@ public class Util {
 	public static final int DEATHSTAR_RADIUS = 16;
 	public static final int BODY_RADIUS = 1;
 	
-	//public static final double MAX_BODIES_MASS = 2e27; // More or less like Jupiter
-	//public static final double MIN_BODIES_MASS = 3e23; // More or less like Mercury
-	
+	// Masses range
+	// Jupiter more or less is 2e27
+	// Mercury more or less is 3e23
 	public static final double SMALL_MASS = Math.pow(10, 25);
 	public static final double MIDSMALL_MASS = 3*Math.pow(10, 26);
 	public static final double MIDBIG_MASS = 6*Math.pow(10, 27);
@@ -43,7 +44,6 @@ public class Util {
 	public static final double[] MASSES = {SMALL_MASS, MIDSMALL_MASS, MIDBIG_MASS, BIG_MASS};
 	
 	public static final double RANGE_BODIES_VELOCITY = 2*Math.pow(10, 3);
-	//public static final double RANGE_BODIES_MASS = 500;
 	
 	// emerald
 	public static final Color one = new Color(0x00CD7B);

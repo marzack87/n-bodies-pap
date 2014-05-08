@@ -15,7 +15,7 @@ import support.*;
  */
 
 public class Body { 
-	public P2d p; //position
+	public V2d p; //position
 	public V2d v; //velocity
 	public double mass; //mass
 	public int index;
@@ -33,7 +33,7 @@ public class Body {
 	 * @param v Velocity vector
 	 * @param mass Value of the mass of the body
 	 */
-	public Body(P2d p, V2d v, double mass, int index) {
+	public Body(V2d p, V2d v, double mass, int index) {
 		this.p = p;
 		this.v = v;
 		this.mass = mass;
@@ -84,7 +84,7 @@ public class Body {
 		double G = 6.67e-11;
 		V2d p_this = new V2d(this.p.x, this.p.y);
 		V2d p_that = new V2d(that.p.x, that.p.y);
-		V2d delta = p_that.min(p_this);
+		V2d delta = p_that.sub(p_this);
 		double dist = that.p.dist(this.p);
 		
 		if (that.getMassValue() == Util.SUN_MASS){
@@ -216,5 +216,6 @@ public class Body {
 	
 	public Body copy(){
 		return new Body(this.p, this.v, this.mass, this.index);
+		
 	}
 }

@@ -153,13 +153,13 @@ public class Generator {
 		double[][] data = this.getData();
 		for(int i = 0; i < number; i++){
 			double mass = data[4][i];
-			P2d pos = new P2d(data[0][i], data[1][i]);
+			V2d pos = new V2d(data[0][i], data[1][i]);
 			V2d vel = new V2d(data[2][i], data[3][i]);
 			context.allbodies[i] = new Body(pos, vel, mass, i);
 		}
 		if(sun){
 			double mass_1 = Util.SUN_MASS;
-			P2d pos_1 = new P2d(Util.VisualiserAvailableSpace().getWidth()/(Util.scaleFact*2), Util.VisualiserAvailableSpace().getHeight()/(Util.scaleFact*2));
+			V2d pos_1 = new V2d(Util.VisualiserAvailableSpace().getWidth()/(Util.scaleFact*2), Util.VisualiserAvailableSpace().getHeight()/(Util.scaleFact*2));
 			V2d vel_1 = new V2d(0, 0);
 			context.allbodies[number-1] = new Body(pos_1, vel_1, mass_1, number-1);
 		}

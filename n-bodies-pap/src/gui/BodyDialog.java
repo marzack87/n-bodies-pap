@@ -33,7 +33,7 @@ import support.Util;
  * @author Richiard Casadei, Marco Zaccheroni
  */
 
-public class BodyDialog extends JDialog implements ActionListener, ChangeListener{
+public class BodyDialog extends JDialog implements ActionListener{
 	
 	private MainPanel mp;
 	private JTextField body, s_mass, first_mass, second_mass, third_mass, fourth_mass;
@@ -71,8 +71,8 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 		ok = new JButton("Go!");
 		ok.addActionListener(this);
-		ok.setMinimumSize(new Dimension(this.getSize().width, 25));
-		ok.setMaximumSize(new Dimension(this.getSize().width, 25));
+		ok.setMinimumSize(new Dimension(220, 30));
+		ok.setMaximumSize(new Dimension(220, 30));
 		ok.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(ok);
 		add(Box.createVerticalStrut(5));
@@ -184,7 +184,7 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 		
 	}
 
-	@Override
+	/*@Override
 	public void stateChanged(ChangeEvent e) {
 	JSlider source = (JSlider)e.getSource();
 		if (!source.getValueIsAdjusting()) {
@@ -197,6 +197,6 @@ public class BodyDialog extends JDialog implements ActionListener, ChangeListene
 				setSize(new Dimension(250, 250));
 			}
 		}	
-	}
+	}*/
 	
 }

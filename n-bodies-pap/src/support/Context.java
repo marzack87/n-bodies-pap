@@ -28,14 +28,12 @@ public class Context {
     } 
     
     /**
-     * Method synchronized updateBody.
+     * Method copyBodies.
      * <p>
-     * It update the data of a single body present in the list of all bodies.
-     * 
-     * @param body	The Body updated that it will be inserted in the all bodies list.
+     * It save a copy of all bodies array.
      */
-    public synchronized void updateBody(Body body){
-    	allbodies[body.getIndex()] = body;
+    public void copyBodies(){
+    	for(int i=0; i<allbodies.length; i++) allbodies_copy[i] = allbodies[i].copy();
     }
     
     /**
@@ -60,26 +58,8 @@ public class Context {
 	public int getNumberOfBodies(){
 		return allbodies.length;
 	}
-    
-    /**
-     * Method copyBodies.
-     * <p>
-     * It save a copy of all bodies array.
-     */
-    public void copyBodies(){
-    	for(int i=0; i<allbodies.length; i++) allbodies_copy[i] = allbodies[i].copy();
-    }
-    
-    /**
-     * Method resetBodies.
-     * <p>
-     * It reset the all bodies array to the initial condition.
-     */
-    public void resetBodies(){
-    	for(int i=0; i<allbodies.length; i++) allbodies[i] = allbodies_copy[i].copy();
-    }
-    
-    /**
+   
+	/**
      * Private method print_body.
      * <p>
      * Prints all the value of the Body.
@@ -92,5 +72,25 @@ public class Context {
 
 		}
 	}
+	
+    /**
+     * Method resetBodies.
+     * <p>
+     * It reset the all bodies array to the initial condition.
+     */
+    public void resetBodies(){
+    	for(int i=0; i<allbodies.length; i++) allbodies[i] = allbodies_copy[i].copy();
+    }
    
-}
+   /**
+    * Method synchronized updateBody.
+    * <p>
+    * It update the data of a single body present in the list of all bodies.
+    * 
+    * @param body	The Body updated that it will be inserted in the all bodies list.
+    */
+   public synchronized void updateBody(Body body){
+   	allbodies[body.getIndex()] = body;
+   }   
+   
+}//End of class
