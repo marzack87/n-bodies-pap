@@ -5,6 +5,7 @@ package jpf;
  * <p>
  * Class test to verify that in the system a deadlock situation in all the possible scenarios envisaged is not present.<br>
  * 
+ * @author Richiard Casadei, Marco Zaccheroni
  */
 
 import java.util.ArrayList;
