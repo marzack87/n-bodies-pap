@@ -90,7 +90,7 @@ public class Context {
     * @param body	The Body updated that it will be inserted in the all bodies list.
     */
    public synchronized void updateBody(Body body){
-   	allbodies[body.getIndex()] = body;
+   		allbodies[body.getIndex()] = body;
    }   
    
 }

@@ -1,0 +1,13 @@
+#+classpath=${config_path}/bin
+target=jpf.DeadlockTest
+report.console.property_violation=error,snapshot,trace
+
+# Deadlock Analyzer is a deadlock-specific trace report generator
+listener+=,.listener.DeadlockAnalyzer
+# Overlapping Method Analyzer reports which method is called concurrently by different threads (if any)
+listener+=,.listener.OverlappingMethodAnalyzer
+# Coverage Analyzer gives statistics about method invocation
+listener+=,.listener.CoverageAnalyzer
+
+deadlock.format=essential
+#coverage.exclude_handlers=true
