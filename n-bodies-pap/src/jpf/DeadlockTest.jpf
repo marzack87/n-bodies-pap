@@ -1,5 +1,5 @@
-#+classpath=${config_path}/bin
-target=jpf.DeadlockTest
+#+classpath=/Users/richiardcasadei/Eclipse/workspace_nbodies/n-bodies-pap/bin
+target=DeadlockTest
 report.console.property_violation=error,snapshot,trace
 
 # Deadlock Analyzer is a deadlock-specific trace report generator
