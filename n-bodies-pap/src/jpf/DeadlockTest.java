@@ -79,7 +79,7 @@ public class DeadlockTest {
 			this.initBody(c);
 		}
 		
-		private void initBody(Context c){
+		public void initBody(Context c){
 			c.allbodies = new Body[400];
 			double[][] data = this.getData();
 			for(int i = 0; i < c.allbodies.length; i++){
@@ -90,7 +90,7 @@ public class DeadlockTest {
 			}
 		}
 		
-		private double[][] getData(){
+		public double[][] getData(){
 			double[][] data = {position_x, position_y, velocity_x, velocity_y, mass};
 			return data;
 		}
@@ -173,7 +173,7 @@ public class DeadlockTest {
 
 	public static void main(String[] args) {
 		
-		Verify.beginAtomic();
+		//Verify.beginAtomic();
 		
 		// inizializzo il generatore ed il context
 		Context c = new Context();
@@ -192,7 +192,7 @@ public class DeadlockTest {
 		vis.start();
 		
 		// controllero' il deadlock
-		Verify.endAtomic();
+		//Verify.endAtomic();
 
 	}
 
