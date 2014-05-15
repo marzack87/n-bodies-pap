@@ -8,6 +8,8 @@ package jpf;
  * @author Richiard Casadei, Marco Zaccheroni
  */
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -22,22 +24,22 @@ import support.Util;
 import support.V2d;
 import entity.Body;
 
-import gov.nasa.jpf.vm.Verify;
-
 public class DeadlockTest {
 	
 	static class Context{
 		public Body[] allbodies;
-		public double dt = 0.01;
+		public double dt;
 		
 		public Context(){
+			dt = 0.01;
+			allbodies = new Body[400];
 		}
 		
 		public synchronized void updateBody(Body body){
 	   		allbodies[body.getIndex()] = body;
 		}
 		
-		public void print_body(){
+		public void print_body() throws Exception{
 			System.out.println("Printing bodies data from context......");
 			for(int i = 0; i<allbodies.length; i++){
 				System.out.println("AllBodies: " + this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );
@@ -57,17 +59,18 @@ public class DeadlockTest {
 		
 		public Generator(Context c){
 			this.c = c;
+				initRandom(400);
 		}
 		
 		// inizializzo l'array allbodies in modo random
-		public void initRandom(){
-			position_x = new double[400];
-			position_y = new double[400];
-			velocity_x = new double[400];
-			velocity_y = new double[400];
-			mass = new double[400];
+		public void initRandom(int number){
+			position_x = new double[number];
+			position_y = new double[number];
+			velocity_x = new double[number];
+			velocity_y = new double[number];
+			mass = new double[number];
 			
-			for (int i = 0; i < 400; i++){
+			for (int i = 0; i < number; i++){
 				position_x[i] = (Math.random() * ((Util.VisualiserAvailableSpace().width - 5)/Util.scaleFact - 1) ) + 1;
 				position_y[i] = (Math.random() * ((Util.VisualiserAvailableSpace().height - 5)/Util.scaleFact - 1) ) + 1;
 				velocity_x[i] = ((Math.random() * (Util.RANGE_BODIES_VELOCITY - 1) ) + 1) - (Util.RANGE_BODIES_VELOCITY / 2);
@@ -76,11 +79,11 @@ public class DeadlockTest {
 				mass[i] = Util.MASSES[index_mass];
 			}
 			
-			this.initBody(c);
+			this.initBody(c, number);
 		}
 		
-		public void initBody(Context c){
-			c.allbodies = new Body[400];
+		public void initBody(Context c, int number){
+			c.allbodies = new Body[number];
 			double[][] data = this.getData();
 			for(int i = 0; i < c.allbodies.length; i++){
 				double mass = data[4][i];
@@ -126,7 +129,7 @@ public class DeadlockTest {
 			for (Future<Body> future : list){
 				try {
 					Body body = future.get();
-					c.updateBody(body);
+						c.updateBody(body);
 				} catch (InterruptedException | ExecutionException e) {
 					e.printStackTrace();
 				}
@@ -138,6 +141,7 @@ public class DeadlockTest {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			System.out.println("Simulator dead");
 		}
 	}
 	
@@ -159,27 +163,51 @@ public class DeadlockTest {
 		// metto in attesa
 		// stampo nuovamente
 		// segnalo
-			c.print_body();
+			System.out.println("Print Bodies");
+			try {
+				savefile("AllBodiesJPF.txt");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			try {
 				this.sem.acquire();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			System.out.println("Print Bodies updated");
-			c.print_body();
+			try {
+				savefile("AllBodiesUpdatedJPF.txt");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
     		this.printed.release();
+    		System.out.println("Visualiser dead");
+		}
+		
+		private void savefile(String s) throws Exception{
+			try{
+				// Opening of a new file "Stats".
+				FileWriter f = new FileWriter(s);
+				PrintWriter out = new PrintWriter(f);
+				out.println("--------------- N-Bodies Simulation ---------------");
+				out.println("");
+				out.println("Author:");
+				out.println("Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)");
+				out.println("");
+				out.println(" - Bodies and Galaxy info -");
+				for(int i = 0; i<c.allbodies.length; i++){
+					out.println("Body: " + c.allbodies[i].getIndex() + " " + c.allbodies[i].getPosition() + " " + c.allbodies[i].getVelocity() + " " + c.allbodies[i].getMass() );
+				}
+				out.close();
+			}catch (Exception ex) { System.err.println(ex); }
 		}
 	}
 
 	public static void main(String[] args) {
 		
-		//Verify.beginAtomic();
-		
 		// inizializzo il generatore ed il context
 		Context c = new Context();
 		Generator gen = new Generator(c);
-		gen.initRandom();
-
 		
 		Semaphore sem = new Semaphore(0);
 		Semaphore printed = new Semaphore(0);
@@ -190,9 +218,6 @@ public class DeadlockTest {
 		// li faccio partire
 		sim.start();
 		vis.start();
-		
-		// controllero' il deadlock
-		//Verify.endAtomic();
 
 	}
 

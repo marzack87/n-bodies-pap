@@ -1,5 +1,3 @@
-#classpath = /Users/richiardcasadei/Eclipse/workspace_nbodies/n-bodies-pap/n-bodies-pap/bin
-target = jpf/DeadlockTest
-
-#listener = .listener.DeadlockAnalyzer
-#deadlock.format=essential
+#@using = jpf-core
+classpath=/Users/richiardcasadei/Eclipse/workspace_nbodies/n-bodies-pap/n-bodies-pap/bin
+target=jpf.DeadlockTest
