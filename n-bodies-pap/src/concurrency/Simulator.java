@@ -105,9 +105,10 @@ public class Simulator extends Thread {
 		 * - ATTENDIAMO CHE IL PAINT DEI CORPI SIA STATO ESEGUITO 
 		 */
 		double time = System.nanoTime();
-		
-		for (BodyTask bt : bodytasks_array){
-			Callable<Body> task = bt;
+		double dt = context.dt;
+		for (int i = 0; i < context.allbodies.length; i++){
+			bodytasks_array[i].updateDt(dt);
+			Callable<Body> task = bodytasks_array[i];
 			Future<Body> submit = exec.submit(task);
 			//System.out.println(exec.toString());
 			list.add(submit);

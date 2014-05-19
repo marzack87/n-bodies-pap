@@ -66,4 +66,8 @@ public class BodyTask implements Callable<Body> {
 		return me;
 	}
 
+	public void updateDt(double delta_time) {
+		dt = delta_time;
+	}
+
 }
