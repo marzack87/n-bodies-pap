@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 import entity.Body;
+import concurrency.BodyTask;
 import support.Context;
 import support.Util;
 
@@ -31,7 +32,8 @@ public class Simulator extends Thread {
 	private static final int NTHREADS = Runtime.getRuntime().availableProcessors() + 1;
 	private static final ExecutorService exec = Executors.newFixedThreadPool(NTHREADS);
 	private List<Future<Body>> list = new ArrayList<Future<Body>>();
-
+	private BodyTask[] bodytasks_array;
+	
    /**
 	* Class Simulator constructor.
 	* 
@@ -47,7 +49,10 @@ public class Simulator extends Thread {
 		this.sem = sem;
 		step = 0;
 		this.printed = print;
-		
+		bodytasks_array = new BodyTask[context.allbodies.length];
+		for (int i = 0; i < context.allbodies.length; i++){
+			bodytasks_array[i] = new BodyTask(context.allbodies, i, context.dt);
+		}
 	}
 	
 	/**
@@ -101,10 +106,8 @@ public class Simulator extends Thread {
 		 */
 		double time = System.nanoTime();
 		
-		Body [] all_bodies = context.allbodies;
-		double dt = context.dt;
-		for (int i = 0; i < all_bodies.length; i++){
-			Callable<Body> task = new BodyTask(all_bodies, i, dt);
+		for (BodyTask bt : bodytasks_array){
+			Callable<Body> task = bt;
 			Future<Body> submit = exec.submit(task);
 			//System.out.println(exec.toString());
 			list.add(submit);

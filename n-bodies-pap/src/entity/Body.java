@@ -57,6 +57,13 @@ public class Body {
 		
 	}
 	
+	public void reset(Body b){
+		this.p = b.p;
+		this.v = b.v;
+		this.index = b.index;
+		this.mass = b.mass;
+	}
+	
 	/**
 	 * Method forceFrom.
 	 * <p>

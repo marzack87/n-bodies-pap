@@ -150,7 +150,7 @@ public class Generator {
 	 */
 	public void initBody(boolean sun){
 		context.allbodies = new Body[number];
-		context.allbodies_copy = new Body[number];
+		context.allbodies_backup = new Body[number];
 		double[][] data = this.getData();
 		for(int i = 0; i < number; i++){
 			double mass = data[4][i];

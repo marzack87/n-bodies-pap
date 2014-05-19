@@ -44,8 +44,6 @@ public class Controller {
 		gen = new Generator(cont);
 		context = cont;
 		
-		initThreads();
-		
 		tracks = false;
 		velocity = false;
 	}
@@ -71,6 +69,7 @@ public class Controller {
 	public void initWithRandomData(int n, boolean sun){
 		
 		gen.initWithRandomData(n, sun);
+		initThreads();
 		
 	}
 	
@@ -97,6 +96,7 @@ public class Controller {
 		
 		File f = myfile;
 		gen.initFromFile(f);
+		initThreads();
 		
 	}
 	

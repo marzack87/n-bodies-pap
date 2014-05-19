@@ -14,7 +14,7 @@ import entity.Body;
 
 public class Context {
  
-	public Body[] allbodies, allbodies_copy;
+	public Body[] allbodies, allbodies_backup;
 	public Boolean stop;
 	
 	public double dt;
@@ -33,7 +33,7 @@ public class Context {
      * It save a copy of all bodies array.
      */
     public void copyBodies(){
-    	for(int i=0; i<allbodies.length; i++) allbodies_copy[i] = allbodies[i].copy();
+    	for(int i=0; i<allbodies.length; i++) allbodies_backup[i] = allbodies[i].copy();
     }
     
     /**
@@ -68,7 +68,7 @@ public class Context {
 		System.out.println("Printing bodies data from context......");
 		for(int i = 0; i<allbodies.length; i++){
 			System.out.println("AllBodies: " + this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );
-			System.out.println("Copy: " + this.allbodies_copy[i].getPosition() + " " + this.allbodies_copy[i].getVelocity() + " " + this.allbodies_copy[i].getMass() );
+			System.out.println("Copy: " + this.allbodies_backup[i].getPosition() + " " + this.allbodies_backup[i].getVelocity() + " " + this.allbodies_backup[i].getMass() );
 
 		}
 	}
@@ -79,7 +79,7 @@ public class Context {
      * It reset the all bodies array to the initial condition.
      */
     public void resetBodies(){
-    	for(int i=0; i<allbodies.length; i++) allbodies[i] = allbodies_copy[i].copy();
+    	for(int i=0; i<allbodies.length; i++) allbodies[i].reset(allbodies_backup[i].copy());
     }
    
    /**
