@@ -68,8 +68,8 @@ public class Body {
 	public V2d forceFrom(Body that) {
 		
 		double G = 6.67e-11;
-		V2d p_this = new V2d(this.p.x, this.p.y);
-		V2d p_that = new V2d(that.p.x, that.p.y);
+		V2d p_this = this.p; //new V2d(this.p.x, this.p.y);
+		V2d p_that = that.p;  //new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.sub(p_this);
 		double dist = that.p.dist(this.p);
 		
