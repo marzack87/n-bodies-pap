@@ -31,7 +31,7 @@ public class Util {
 	
 	public static final int SUN_RADIUS = 6;
 	public static final int DEATHSTAR_RADIUS = 16;
-	public static final int BODY_RADIUS = 2;
+	public static final int BODY_RADIUS = 1;
 	
 	// Masses range
 	// Jupiter more or less is 2e27
@@ -77,7 +77,7 @@ public class Util {
 	public static final int MIN_SCALE = 1;
 	public static final int MID_SCALE = (MAX_SCALE%2 == 0) ? (MAX_SCALE/2) : (MAX_SCALE/2) + 1;
 	
-	public static final double GALAXY_RADIUS = 5e8;
+	public static final double GALAXY_RADIUS = 5*Math.pow(10, 8);
 	
 	public static final double DEFAULT_DT = 1;
 	
