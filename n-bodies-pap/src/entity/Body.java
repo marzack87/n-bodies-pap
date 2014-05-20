@@ -74,7 +74,7 @@ public class Body {
 	 */
 	public V2d forceFrom(Body that) {
 		
-		double G = 6.67e-11;
+		double G = 6.67*Math.pow(10, -11);
 		V2d p_this = this.p; //new V2d(this.p.x, this.p.y);
 		V2d p_that = that.p;  //new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.sub(p_this);
@@ -82,15 +82,15 @@ public class Body {
 		
 		if (that.getMassValue() == Util.SUN_MASS){
 			if (Util.star_wars_mode){
-				if (dist*Util.scaleFact <= (Util.DEATHSTAR_RADIUS + Util.BODY_RADIUS)) collision(that);
+				//if (dist*Util.scaleFact <= (Util.DEATHSTAR_RADIUS + Util.BODY_RADIUS)) collision(that);
 			} else {
-				if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
+				//if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
 			}
 		} else {
-			if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) collision(that);
+			//if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) collision(that);
 		}
 		
-		double F = (G * (this.mass) * (that.mass)) / (dist * dist);
+		double F = (G * (this.mass) * (that.mass)) / ((dist * dist) + Math.pow(10, 16));
 		
 		V2d delta_normalized = delta.getNormalized();
 		V2d Force = delta_normalized.mul(F);
