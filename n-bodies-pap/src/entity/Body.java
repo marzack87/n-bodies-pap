@@ -57,13 +57,6 @@ public class Body {
 		
 	}
 	
-	public void reset(Body b){
-		this.p = b.p;
-		this.v = b.v;
-		this.index = b.index;
-		this.mass = b.mass;
-	}
-	
 	/**
 	 * Method forceFrom.
 	 * <p>
@@ -77,21 +70,20 @@ public class Body {
 		double G = 6.67e-11;
 		V2d p_this = this.p; //new V2d(this.p.x, this.p.y);
 		V2d p_that = that.p;  //new V2d(that.p.x, that.p.y);
-		V2d delta = p_that.sub(p_this);
 		double dist = that.p.dist(this.p);
 		
 		if (that.getMassValue() == Util.SUN_MASS){
 			if (Util.star_wars_mode){
-				if (dist*Util.scaleFact <= (Util.DEATHSTAR_RADIUS + Util.BODY_RADIUS)) collision(that);
+				if (dist*Util.scaleFact <= (Util.DEATHSTAR_RADIUS + Util.BODY_RADIUS + 1)) collision(that);
 			} else {
-				if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
+				if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS + 1)) collision(that);
 			}
 		} else {
 			if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) collision(that);
 		}
 		
 		double F = (G * (this.mass) * (that.mass)) / (dist * dist);
-		
+		V2d delta = p_that.sub(p_this);
 		V2d delta_normalized = delta.getNormalized();
 		V2d Force = delta_normalized.mul(F);
 		
@@ -224,7 +216,7 @@ public class Body {
 			v = v.sum(dv);
 		}
 		
-		collision = false;
+		collision = false; 
 		vel_after_collision = new V2d(0,0);
 	}
 	
@@ -248,6 +240,20 @@ public class Body {
 		vel_after_collision = vel_after_collision.sum(final_v);
 		
 		//System.out.println("COLLISION! FINAL VELOCITY: " + final_v + " - " + vel_after_collision);
+	}
+	
+	/**
+	 * Method reset.
+	 * <p>
+	 * It reset the value of a body taking the data from the body passed as parameter.
+	 * 
+	 * @param b The Body from which we take the reset data
+	 */
+	public void reset(Body b){
+		this.p = b.p;
+		this.v = b.v;
+		this.index = b.index;
+		this.mass = b.mass;
 	}
 	
 	/**

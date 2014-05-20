@@ -66,6 +66,13 @@ public class BodyTask implements Callable<Body> {
 		return me;
 	}
 
+	/**
+	 * Method updateDt.
+	 * <p>
+	 * It update the instant time value
+	 * 
+	 * @param delta_time The updated instant time value
+	 */
 	public void updateDt(double delta_time) {
 		dt = delta_time;
 	}

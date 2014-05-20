@@ -22,6 +22,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
+
+import concurrency.BodyTask;
 //import support.Util;
 import support.V2d;
 //import support.Util;
@@ -152,21 +154,26 @@ public class DeadlockTest {
 		
 		private static final ExecutorService exec = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
 		private List<Future<Body>> list = new ArrayList<Future<Body>>();
+		private BodyTask[] bodytasks_array;
 		
 		public Simulator(Context c, Semaphore s, Semaphore p){
 			this.c = c;
 			sem = s;
 			printed = p;
+			bodytasks_array = new BodyTask[c.allbodies.length];
+			for (int i = 0; i < c.allbodies.length; i++){
+				bodytasks_array[i] = new BodyTask(c.allbodies, i, c.dt);
+			}
 		}
 		
 		
 		public void run(){
 			
 			//while(c.step > 0){
-				Body [] all_bodies = c.allbodies;
-				double dt = c.dt;
-				for (int i = 0; i < all_bodies.length; i++){
-					Callable<Body> task = new BodyTask(all_bodies, i, dt);
+			double dt = c.dt;
+			for (int i = 0; i < c.allbodies.length; i++){
+					bodytasks_array[i].updateDt(dt);
+					Callable<Body> task = bodytasks_array[i];
 					Future<Body> submit = exec.submit(task);
 					list.add(submit);
 				}
@@ -217,6 +224,10 @@ public class DeadlockTest {
 			me.move(force, dt);
 			
 			return me;
+		}
+		
+		public void updateDt(double delta_time) {
+			dt = delta_time;
 		}
 
 	}
