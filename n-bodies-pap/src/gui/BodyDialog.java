@@ -137,30 +137,15 @@ public class BodyDialog extends JDialog implements ActionListener{
 		add(star_wars);
 		//add(Box.createVerticalStrut(5));
 		
-		sun_mass = new JLabel("Death Star mass:");
-		sun_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
-		sun_mass.setVisible(false);
-		add(sun_mass);
-		//add(Box.createVerticalStrut(5));
+		if(Util.physics_mode){
+			sun.setSelected(false);
+			Util.one_sun = false;
+			sun.setEnabled(false);
+			star_wars.setSelected(false);
+			Util.star_wars_mode = false;
+			star_wars.setEnabled(false);
+		}
 		
-		/*
-		lvl1_mass = new JLabel("Lv.1 mass:");
-		lvl1_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lvl1_mass.setVisible(false);
-		add(lvl1_mass);
-		lvl2_mass = new JLabel("Lv.2 mass:");
-		lvl2_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lvl2_mass.setVisible(false);
-		add(lvl2_mass);
-		lvl3_mass = new JLabel("Lv.3 mass:");
-		lvl3_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lvl3_mass.setVisible(false);
-		add(lvl3_mass);
-		lvl4_mass = new JLabel("Lv.4 mass:");
-		lvl4_mass.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lvl4_mass.setVisible(false);
-		add(lvl4_mass);
-		*/
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
 	}

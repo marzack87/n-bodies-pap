@@ -1,13 +1,18 @@
 package gui;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
 import javax.swing.*;
 
+import support.Util;
 import entity.Controller;
 
 
@@ -21,7 +26,7 @@ import entity.Controller;
 public class MainPanel extends JPanel implements ActionListener{
 	
 	private JButton create, open;
-	private Box BOX, BOX_button;
+	private JCheckBox ph;
 	private Controller contr;
 	
 	/**
@@ -30,20 +35,39 @@ public class MainPanel extends JPanel implements ActionListener{
 	 * @param contr Controller entity
 	 **/
 	public MainPanel(Controller contr){
-		create = new JButton("Create Randomly");
-		open = new JButton("Read datas from file");
 		
 		this.contr = contr;
 		
-		open.addActionListener(this);
+		create = new JButton("Create Randomly");
+		create.setMinimumSize(new Dimension(220, 30));
+		create.setMaximumSize(new Dimension(220, 30));
+		create.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(create);
 		create.addActionListener(this);
 		
-		BOX = new Box(BoxLayout.LINE_AXIS);
-		BOX_button = new Box(BoxLayout.X_AXIS);
-		BOX_button.add(create);
-		BOX_button.add(open);
-		BOX.add(BOX_button);
-		add(BOX);
+		open = new JButton("Read datas from file");
+		open.setMinimumSize(new Dimension(220, 30));
+		open.setMaximumSize(new Dimension(220, 30));
+		open.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(open);
+		open.addActionListener(this);
+		
+		ph = new JCheckBox("Physics Mode");
+		ph.setSelected(false);
+		ph.setAlignmentX(Component.CENTER_ALIGNMENT);
+		ph.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				
+			    	if(!ph.isSelected()){
+						Util.physics_mode = false;
+					}else{
+						Util.physics_mode = true;
+					}
+			    }
+		});
+		add(ph);	
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {

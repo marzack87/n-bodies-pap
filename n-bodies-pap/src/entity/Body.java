@@ -79,19 +79,24 @@ public class Body {
 		V2d p_that = that.p;  //new V2d(that.p.x, that.p.y);
 		V2d delta = p_that.sub(p_this);
 		double dist = that.p.dist(this.p);
+		double F;
 		
-		if (that.getMassValue() == Util.SUN_MASS){
-			if (Util.star_wars_mode){
-				//if (dist*Util.scaleFact <= (Util.DEATHSTAR_RADIUS + Util.BODY_RADIUS)) collision(that);
+		if (Util.physics_mode){
+			F = (G * (this.mass) * (that.mass)) / ((dist * dist) + Math.pow(10, 20));
+		}else{
+			if (that.getMassValue() == Util.SUN_MASS){
+				if (Util.star_wars_mode){
+					if (dist*Util.scaleFact <= (Util.DEATHSTAR_RADIUS + Util.BODY_RADIUS)) collision(that);
+				} else {
+					if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
+				}
 			} else {
-				//if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
+				if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) collision(that);
 			}
-		} else {
-			//if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) collision(that);
+			
+			F = (G * (this.mass) * (that.mass)) / (dist * dist);
 		}
-		
-		double F = (G * (this.mass) * (that.mass)) / ((dist * dist) + Math.pow(10, 20));
-		
+			
 		V2d delta_normalized = delta.getNormalized();
 		V2d Force = delta_normalized.mul(F);
 		

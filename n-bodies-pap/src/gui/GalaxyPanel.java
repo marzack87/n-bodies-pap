@@ -469,6 +469,11 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println(" Galaxy Radius: " + Util.GALAXY_RADIUS);
 			out.println("");
 			out.println(" - Simulation info -");
+			if(Util.physics_mode) {
+				out.println(" Execution Mode: Physics");
+			}else{
+				out.println(" Execution Mode: Astronomical");
+			}
 			out.println(" # of iteration: " + Util.total_iteration);
 			out.println(" Total execution time: " + (Util.t_stop-Util.t_start)*Math.pow(10, -9) + " sec");
 			out.println(" Average # of iteration per sec: " + (Util.total_iteration/((Util.t_stop-Util.t_start)*Math.pow(10, -9))));

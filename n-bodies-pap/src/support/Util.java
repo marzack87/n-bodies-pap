@@ -18,6 +18,7 @@ public class Util {
 	public static boolean one_sun = false;
 	
 	public static boolean star_wars_mode = true;
+	public static boolean physics_mode = false;
 	
 	public static double t_start, t_stop;
 	

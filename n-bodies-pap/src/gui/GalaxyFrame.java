@@ -37,22 +37,9 @@ public class GalaxyFrame extends JFrame{
 		setSize(Util.displayAvailableSpace());
 		setResizable(false);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
-		/*
-		JPanel globalPanel = new JPanel();
-		this.add(globalPanel);
-		if (Util.star_wars_mode) {
-			globalPanel.setBackground(Color.blue);
-		} else {
-			globalPanel.setBackground(new Color(0xEEEEEE));
-		}
 		
-		globalPanel.setLayout(new BoxLayout(globalPanel, BoxLayout.X_AXIS));
-		*/
 		gpanel = new GalaxyPanel(contr);
 		vpanel = new VisualiserPanel(contr, gpanel);
-		
-		//add(vpanel);
-		//add(gpanel);
 		
 		contr.setUpVisualiser(vpanel);
 		vpanel.setLocation(0, 0);
