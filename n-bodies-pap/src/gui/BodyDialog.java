@@ -38,10 +38,10 @@ import support.Util;
 public class BodyDialog extends JDialog implements ActionListener{
 	
 	private MainPanel mp;
-	private JTextField body, s_mass, first_mass, second_mass, third_mass, fourth_mass;
+	private JTextField body;
 	private JButton ok, custom;
 	private JCheckBox sun, star_wars;
-	private JLabel sun_mass, lvl1_mass, lvl2_mass, lvl3_mass, lvl4_mass, o;
+	private JLabel o;
 	
 	/**
 	 * Class BodyDialog constructor.
@@ -171,28 +171,16 @@ public class BodyDialog extends JDialog implements ActionListener{
 				
 				o.setVisible(true);
 				sun.setVisible(true);
-				//sun_mass.setVisible(true);
 				star_wars.setVisible(true);
-				/*
-				lvl1_mass.setVisible(true);
-				lvl2_mass.setVisible(true);
-				lvl3_mass.setVisible(true);
-				lvl4_mass.setVisible(true);
-				*/
+				
 				
 				custom.setText("<< Hide Custom Parameters");
 				
 			} else {
 				o.setVisible(false);
 				sun.setVisible(false);
-				//sun_mass.setVisible(false);
 				star_wars.setVisible(false);
-				/*
-				lvl1_mass.setVisible(false);
-				lvl2_mass.setVisible(false);
-				lvl3_mass.setVisible(false);
-				lvl4_mass.setVisible(false);
-				*/
+				
 				custom.setText("Show Custom Parameters >>");
 				setSize(new Dimension(250, 175));
 			}
