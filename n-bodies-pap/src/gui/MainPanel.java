@@ -63,6 +63,7 @@ public class MainPanel extends JPanel implements ActionListener{
 						Util.physics_mode = false;
 					}else{
 						Util.physics_mode = true;
+						Util.star_wars_mode = false;
 					}
 			    }
 		});
