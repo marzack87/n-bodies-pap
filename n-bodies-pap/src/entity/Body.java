@@ -80,7 +80,7 @@ public class Body {
 		double F;
 		
 		if (Util.soft_param_mode){
-			F = (G * (this.mass) * (that.mass)) / ((dist * dist) + Math.pow(10, 20));
+			F = (G * (this.mass) * (that.mass)) / ((dist * dist) + Util.EPS);
 		}else{
 			if (that.getMassValue() == Util.SUN_MASS){
 				if (Util.star_wars_theme){
