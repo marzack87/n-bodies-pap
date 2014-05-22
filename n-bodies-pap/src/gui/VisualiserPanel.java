@@ -132,7 +132,7 @@ public class VisualiserPanel extends JPanel {
             	int r;
             
             	if (Math.abs(m-Util.SUN_MASS) < 1e-3) {
-            		if (Util.star_wars_mode){
+            		if (Util.star_wars_theme){
             			r = Util.DEATHSTAR_RADIUS;
             			java.net.URL imgURL = getClass().getResource("images/DeathStar.png");
             			ImageIcon img = new ImageIcon(imgURL, "DeathStar");

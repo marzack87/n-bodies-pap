@@ -39,9 +39,7 @@ public class BodyDialog extends JDialog implements ActionListener{
 	
 	private MainPanel mp;
 	private JTextField body;
-	private JButton ok, custom;
-	private JCheckBox sun, star_wars;
-	private JLabel o;
+	private JButton ok;
 	
 	/**
 	 * Class BodyDialog constructor.
@@ -53,7 +51,7 @@ public class BodyDialog extends JDialog implements ActionListener{
 		super();
 		this.mp = mp;
 		
-		setSize(new Dimension(250, 175));
+		setSize(new Dimension(230, 125));
 		
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
@@ -82,69 +80,7 @@ public class BodyDialog extends JDialog implements ActionListener{
 		add(ok);
 		add(Box.createVerticalStrut(5));
 		
-		// BARRETTA
-		JSeparator sep = new JSeparator(SwingConstants.HORIZONTAL);
-		Dimension d = sep.getPreferredSize();
-		d.width = sep.getMaximumSize().width;
-		sep.setMaximumSize(d);
-		add(sep);
 		
-		add(Box.createVerticalStrut(5));
-		
-		custom = new JButton("Show Custom Parameters >>");
-		custom.addActionListener(this);
-		custom.setMinimumSize(new Dimension(220, 30));
-		custom.setMaximumSize(new Dimension(220, 30));
-		custom.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(custom);
-		
-		//add(Box.createVerticalStrut(5));
-		
-		o = new JLabel("Options:");
-		o.setAlignmentX(Component.CENTER_ALIGNMENT);
-		o.setVisible(false);
-		add(o);
-		
-		//add(Box.createVerticalStrut(5));
-		
-		sun = new JCheckBox("Death Star");
-		sun.setSelected(true);
-		sun.setVisible(false);
-		sun.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(sun);
-		
-		//add(Box.createVerticalStrut(5));
-		
-		star_wars = new JCheckBox("Star Wars Mode");
-		star_wars.setSelected(Util.star_wars_mode);
-		star_wars.setAlignmentX(Component.CENTER_ALIGNMENT);
-		star_wars.setVisible(false);
-		star_wars.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				Object source = e.getItemSelectable();
-
-			    if (source == star_wars) {
-			    	if(!star_wars.isSelected()){
-						sun.setText("Sun");
-					}else{
-						sun.setText("Death Star");
-					}
-			    }
-				
-			}
-		});
-		add(star_wars);
-		//add(Box.createVerticalStrut(5));
-		
-		if(Util.physics_mode){
-			sun.setSelected(false);
-			Util.one_sun = false;
-			sun.setEnabled(false);
-			star_wars.setSelected(false);
-			Util.star_wars_mode = false;
-			star_wars.setEnabled(false);
-		}
 		
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getWidth()) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getHeight()) / 2);
 		
@@ -156,34 +92,15 @@ public class BodyDialog extends JDialog implements ActionListener{
 		if (source == ok){
 			try{
 				int n = Integer.parseInt(body.getText());
-				Util.one_sun = sun.isSelected();
-				Util.star_wars_mode = star_wars.isSelected();
-				mp.initWithRandom(n,sun.isSelected());
+				//Util.one_sun = sun.isSelected();
+				//Util.star_wars_mode = star_wars.isSelected();
+				mp.initWithRandom(n,Util.one_sun);
 			}catch(Exception ex) { 
 				ex.printStackTrace();
 				System.err.println(ex); 
 				JOptionPane.showMessageDialog(this, "Wrong input data, a number MUST be inserted!!!", "Error", JOptionPane.ERROR_MESSAGE, null);
 			}
 			this.setVisible(false);
-		} else if (source == custom) {
-			if (custom.getText().equals("Show Custom Parameters >>")) {
-				setSize(new Dimension(250, 240));
-				
-				o.setVisible(true);
-				sun.setVisible(true);
-				star_wars.setVisible(true);
-				
-				
-				custom.setText("<< Hide Custom Parameters");
-				
-			} else {
-				o.setVisible(false);
-				sun.setVisible(false);
-				star_wars.setVisible(false);
-				
-				custom.setText("Show Custom Parameters >>");
-				setSize(new Dimension(250, 175));
-			}
 		}
 		
 	}

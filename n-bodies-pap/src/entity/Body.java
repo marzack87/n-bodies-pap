@@ -1,5 +1,7 @@
 package entity;
 
+import com.sun.swing.internal.plaf.synth.resources.synth;
+
 import support.*;
 
 /**
@@ -8,9 +10,12 @@ import support.*;
  * Represent the body single entity. Each body has three private fields that stand for his properties:
  * </p>
  * <ul>
- * 	<li>Vector p, position vector given by the coordination x,y</li>
- * 	<li>Vector v, velocity vector</li>
- * 	<li>double mass, the value of the mass of the body(planet)</li>  
+ * 	<li>V2d p, position vector given by the coordination x,y</li>
+ * 	<li>V2d v, velocity vector</li>
+ * 	<li>double mass, the value of the mass of the body(planet)</li> 
+ * 	<li>int index, the body index in the allbodies array</li>
+ * 	<li>boolean collision</li>
+ * 	<li>V2d vel_after_collision, velocity after a collision</li> 
  * </ul>
  * 
  * @author Richiard Casadei, Marco Zaccheroni
@@ -57,13 +62,6 @@ public class Body {
 		
 	}
 	
-	public void reset(Body b){
-		this.p = b.p;
-		this.v = b.v;
-		this.index = b.index;
-		this.mass = b.mass;
-	}
-	
 	/**
 	 * Method forceFrom.
 	 * <p>
@@ -81,11 +79,11 @@ public class Body {
 		double dist = that.p.dist(this.p);
 		double F;
 		
-		if (Util.physics_mode){
+		if (Util.soft_param_mode){
 			F = (G * (this.mass) * (that.mass)) / ((dist * dist) + Math.pow(10, 20));
 		}else{
 			if (that.getMassValue() == Util.SUN_MASS){
-				if (Util.star_wars_mode){
+				if (Util.star_wars_theme){
 					if (dist*Util.scaleFact <= (Util.DEATHSTAR_RADIUS + Util.BODY_RADIUS)) collision(that);
 				} else {
 					if (dist*Util.scaleFact <= (Util.SUN_RADIUS + Util.BODY_RADIUS)) collision(that);
@@ -214,7 +212,7 @@ public class Body {
 	 * @param f Force vector
 	 * @param dt Time
 	 */
-	public void move(V2d f, double dt) { 
+	public synchronized void move(V2d f, double dt) { 
 		//System.out.println("Body " + index);
 		if (collision){
 			this.v = vel_after_collision;
@@ -253,6 +251,20 @@ public class Body {
 		vel_after_collision = vel_after_collision.sum(final_v);
 		
 		//System.out.println("COLLISION! FINAL VELOCITY: " + final_v + " - " + vel_after_collision);
+	}
+	
+	/**
+	 * Method reset.
+	 * <p>
+	 * It resets the body data as the info of the body taken as param
+	 * 
+	 * @param b  
+	 */
+	public void reset(Body b){
+		this.p = b.p;
+		this.v = b.v;
+		this.index = b.index;
+		this.mass = b.mass;
 	}
 	
 	/**

@@ -6,7 +6,7 @@ import entity.Body;
  * Class Context.
  * <p> 
  * Represents the context in which our simulation will be based and 
- * contains all the resources needed to regulate the behavior of the system (Semaphore and Future array list) and 
+ * contains all the resources needed to regulate the behavior of the system and 
  * the resources on which the worker will act.  
  * 
  * @author Richiard Casadei, Marco Zaccheroni
@@ -15,7 +15,6 @@ import entity.Body;
 public class Context {
  
 	public Body[] allbodies, allbodies_backup;
-	public Boolean stop;
 	
 	public double dt;
 	

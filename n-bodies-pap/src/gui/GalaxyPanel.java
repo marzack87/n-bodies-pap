@@ -96,7 +96,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		
 		String slow;
 		String fast;
-		if (Util.star_wars_mode){
+		if (Util.star_wars_theme){
 			slow = "images/R2D2.png";
 			fast = "images/M-Falcon.png";
 		} else {
@@ -147,7 +147,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		lbl_four = new JLabel("Bigger mass ", icon_four, JLabel.LEFT);
 		lbl_four.setAlignmentX(CENTER_ALIGNMENT);
 		ImageIcon icon_sun = icon_body(5);
-	    if (Util.star_wars_mode){
+	    if (Util.star_wars_theme){
 	    	lbl_sun = new JLabel("Death Star ", icon_sun, JLabel.LEFT);
 	    } else {
 	    	lbl_sun = new JLabel("Sun ", icon_sun, JLabel.LEFT);
@@ -163,7 +163,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		chb_velocity.addActionListener(this);
 		
 		// Star Wars Mode ON -> Change the skin LOL
-		if (Util.star_wars_mode){
+		if (Util.star_wars_theme){
 			setBackground(Color.black);
 			lbl_cmd.setForeground(Color.YELLOW);
 			lbl_dt.setForeground(Color.YELLOW);
@@ -216,7 +216,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		add(lbl_four);
 		add(lbl_sun);
 		add(Box.createRigidArea(new Dimension(0,200)));
-		if(Util.star_wars_mode){
+		if(Util.star_wars_theme){
 			ImageIcon logo = createImageIcon("images/starwars-logo.png", "Logo");
 			JLabel logosw = new JLabel(logo);
 			logosw.setAlignmentX(CENTER_ALIGNMENT);
@@ -265,7 +265,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 					controller.startSimulation();
 				}
 				controller.play();
-				if (Util.star_wars_mode) clip.loop(Clip.LOOP_CONTINUOUSLY);
+				if (Util.star_wars_theme) clip.loop(Clip.LOOP_CONTINUOUSLY);
 				
 			}
 		} else if(source == btn_step){
@@ -382,7 +382,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	private ImageIcon icon_body(int type){
 		int size = 0;
 		if (type == 5) {
-			if (Util.star_wars_mode){
+			if (Util.star_wars_theme){
 				return createImageIcon("images/DeathStar.png", "DeathStar");
 			} else {
 				size = Util.SUN_RADIUS*2;
@@ -412,7 +412,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	    	c = Util.sun;
 	    }
 	    
-	    if(Util.star_wars_mode){
+	    if(Util.star_wars_theme){
 	    	if (type == 5){
 	    		ImageIcon img = createImageIcon("images/DeathStar.png", "DeathStar");
     			g.drawImage(img.getImage(), image.getWidth()-1, image.getHeight()-1, this);
@@ -469,7 +469,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println(" Galaxy Radius: " + Util.GALAXY_RADIUS);
 			out.println("");
 			out.println(" - Simulation info -");
-			if(Util.physics_mode) {
+			if(Util.soft_param_mode) {
 				out.println(" Execution Mode: Physics");
 			}else{
 				out.println(" Execution Mode: Astronomical");

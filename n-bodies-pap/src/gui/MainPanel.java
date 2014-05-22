@@ -23,11 +23,15 @@ import entity.Controller;
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
-public class MainPanel extends JPanel implements ActionListener{
+public class MainPanel extends JPanel implements ActionListener, ItemListener{
 	
 	private JButton create, open;
-	private JCheckBox ph;
+	private JCheckBox star_wars, sun;
+	private JComboBox<String> cb;  
 	private Controller contr;
+	private JLabel o;
+	final static String ONE = "Collision Mode";
+    final static String TWO = "Softening Param Mode";
 	
 	/**
 	 * Class MainPanel default constructor.
@@ -37,6 +41,16 @@ public class MainPanel extends JPanel implements ActionListener{
 	public MainPanel(Controller contr){
 		
 		this.contr = contr;
+		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		add(Box.createVerticalStrut(5));
+		
+		JLabel s = new JLabel("How do you want to create the Bodies?");
+		add(s);
+		s.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		add(Box.createVerticalStrut(5));
 		
 		create = new JButton("Create Randomly");
 		create.setMinimumSize(new Dimension(220, 30));
@@ -52,22 +66,46 @@ public class MainPanel extends JPanel implements ActionListener{
 		add(open);
 		open.addActionListener(this);
 		
-		ph = new JCheckBox("Physics Mode");
-		ph.setSelected(false);
-		ph.setAlignmentX(Component.CENTER_ALIGNMENT);
-		ph.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				
-			    	if(!ph.isSelected()){
-						Util.physics_mode = false;
-					}else{
-						Util.physics_mode = true;
-						Util.star_wars_mode = false;
-					}
-			    }
-		});
-		add(ph);	
+		add(Box.createVerticalStrut(5));
+		
+		// BARRETTA
+		JSeparator sep = new JSeparator(SwingConstants.HORIZONTAL);
+		Dimension d = sep.getPreferredSize();
+		d.width = sep.getMaximumSize().width;
+		sep.setMaximumSize(d);
+		sep.setVisible(true);
+		add(sep);
+		
+		add(Box.createVerticalStrut(5));
+		
+		o = new JLabel("Options:");
+		o.setAlignmentX(Component.CENTER_ALIGNMENT);
+		o.setVisible(true);
+		add(o);
+		
+		String comboBoxItems[] = { ONE, TWO };
+		cb = new JComboBox<String>(comboBoxItems);
+		cb.setEditable(false);
+		cb.setMinimumSize(new Dimension(220, 30));
+		cb.setMaximumSize(new Dimension(220, 30));
+		cb.addActionListener(this);
+		add(cb);
+		
+		add(Box.createVerticalStrut(5));
+		
+		star_wars = new JCheckBox("Star Wars Theme");
+		star_wars.setSelected(Util.star_wars_theme);
+		star_wars.setAlignmentX(Component.CENTER_ALIGNMENT);
+		star_wars.addItemListener(this);
+		add(star_wars);
+		
+		sun = new JCheckBox("Death Star");
+		sun.setSelected(Util.one_sun);
+		sun.setAlignmentX(Component.CENTER_ALIGNMENT);
+		sun.addItemListener(this);
+		add(sun);
+		
+		add(Box.createVerticalStrut(5));
 		
 	}
 	
@@ -105,6 +143,35 @@ public class MainPanel extends JPanel implements ActionListener{
 			body.setVisible(true);
 			
 		}
+		else if (source == cb){
+			String s = (String) cb.getSelectedItem();
+			if(s.equals("Softening Param Mode")){
+				Util.soft_param_mode = true;
+			}else{
+				Util.soft_param_mode = false;
+			}
+		}
+	}
+	
+	public void itemStateChanged(ItemEvent e) {
+		Object source = e.getItemSelectable();
+
+	    if (source == star_wars) {
+	    	if(!star_wars.isSelected()){
+				Util.star_wars_theme = false;
+				sun.setText("Sun");
+			}else{
+				Util.star_wars_theme = true;
+				sun.setText("Death Star");
+			}
+	    }else if(source == sun) {
+	    	if(!sun.isSelected()){
+				Util.one_sun = false;
+			}else{
+				Util.one_sun = true;
+			}
+	    }
+		
 	}
 	
 	/**
