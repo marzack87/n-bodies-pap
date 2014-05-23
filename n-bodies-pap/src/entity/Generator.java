@@ -15,7 +15,7 @@ import support.*;
  * If the mode choose to star the simulation is taking the data from a file, an object of this class recovered from the file these data:<br> 
  * the number of planets (bodies) to create, in the below columns the Cartesian coordinates x and y of the position and the speed of every bodies and their relative masses.<br>
  * Otherwise the object to initialize the simulation creates all the data in a random way.><br>
- * The data recovered/created are passed to the Controller object through a matrix. 
+ * The data recovered/created are stored in a matrix used to initialize the context. 
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */

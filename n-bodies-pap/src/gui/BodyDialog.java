@@ -92,9 +92,13 @@ public class BodyDialog extends JDialog implements ActionListener{
 		if (source == ok){
 			try{
 				int n = Integer.parseInt(body.getText());
-				//Util.one_sun = sun.isSelected();
-				//Util.star_wars_mode = star_wars.isSelected();
-				mp.initWithRandom(n,Util.one_sun);
+				if(n<2) {
+					JOptionPane.showMessageDialog(this, "Insert at least two bodies!!!", "Warning", JOptionPane.WARNING_MESSAGE, null);
+				}else{
+					//Util.one_sun = sun.isSelected();
+					//Util.star_wars_mode = star_wars.isSelected();
+					mp.initWithRandom(n,Util.one_sun);
+				}
 			}catch(Exception ex) { 
 				ex.printStackTrace();
 				System.err.println(ex); 
