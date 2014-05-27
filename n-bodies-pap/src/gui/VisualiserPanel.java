@@ -47,8 +47,8 @@ public class VisualiserPanel extends JPanel {
         public void paint(Graphics g){
         	
         	//Util.last_paint_time = System.currentTimeMillis();
-        	
         	//System.out.println("Paint! " + Util.last_paint_time);
+        	//double t0 = System.nanoTime();
         	
         	gpanel.updatePerformanceData();
         	
@@ -156,6 +156,9 @@ public class VisualiserPanel extends JPanel {
             	}
             }
             
+            //double t1 = System.nanoTime();
+			//log("Paint execution time: " + (t1-t0));
+            
         }
         
         /**
@@ -183,6 +186,17 @@ public class VisualiserPanel extends JPanel {
                 history.add(positions);
                 //if ((System.currentTimeMillis() - Util.last_paint_time) > 33) repaint();
                 repaint();
+        }
+        
+        /**
+         * Private method log.
+         * <p>
+         * Prints to the console a log of the activity of the GalaxyPanel.
+         * 
+         * @param msg The message to be printed
+         */
+    	private void log(String msg){
+            System.out.println("[VISUALISER PANEL] "+msg);
         }
         
 }
