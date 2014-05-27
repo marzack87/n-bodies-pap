@@ -158,7 +158,8 @@ public class VisualiserPanel extends JPanel {
             
             //double t1 = System.nanoTime();
 			//log("Paint execution time: " + (t1-t0));
-            
+            Util.last_paint_interval = System.nanoTime() - Util.last_paint_time;
+            Util.last_paint_time = System.nanoTime();
         }
         
         /**

@@ -263,10 +263,11 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 				}
 				if (!controller.SimulationIsAlive()){
 					controller.startSimulation();
+					// 
+					if (Util.last_paint_time == 0) Util.last_paint_time = System.nanoTime();
 				}
 				controller.play();
 				if (Util.star_wars_theme) clip.loop(Clip.LOOP_CONTINUOUSLY);
-				
 			}
 		} else if(source == btn_step){
 			log("Step-Mode Button");
@@ -497,8 +498,8 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	 */
 	public void updatePerformanceData(){
 		lbl_n_iter.setText("" + Util.total_iteration);
-		lbl_last_iter_time.setText("" + Util.last_iter_time);
-		lbl_FPS.setText(String.format( "%.2f",(1e9 / Util.last_iter_time)));
+		lbl_last_iter_time.setText("" + String.format( "%.7f", Util.last_iter_time / Math.pow(10, 9)) + " sec");
+		lbl_FPS.setText(String.format( "%.2f",(Math.pow(10, 9) / Util.last_paint_interval)));
 	}
 	
 	/**

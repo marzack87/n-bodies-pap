@@ -1,7 +1,5 @@
 package entity;
 
-import com.sun.swing.internal.plaf.synth.resources.synth;
-
 import support.*;
 
 /**
@@ -91,7 +89,6 @@ public class Body {
 			} else {
 				if (dist*Util.scaleFact <= (Util.BODY_RADIUS * 2)) collision(that);
 			}
-			
 			F = (G * (this.mass) * (that.mass)) / (dist * dist);
 		}
 			
