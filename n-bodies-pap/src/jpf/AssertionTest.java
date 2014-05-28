@@ -23,23 +23,24 @@ import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
 import gov.nasa.jpf.vm.Verify;
-
 import support.Util;
 import support.V2d;
 import entity.Body;
 
-public class DeadlockTest {
+public class AssertionTest {
 	
 	static class Context{
 		public Body[] allbodies;
 		public double dt;
 		public int step;
 		public int number;
+		public int assertion_variable;
 		
 		public Context(){
 			dt = 0.01;
 			step = 10;
 			number = 10;
+			assertion_variable = 0;
 		}
 		
 		public synchronized void updateBody(Body body){
@@ -51,6 +52,10 @@ public class DeadlockTest {
 			for(int i = 0; i<allbodies.length; i++){
 				System.out.println("AllBodies: " + this.allbodies[i].getPosition() + " " + this.allbodies[i].getVelocity() + " " + this.allbodies[i].getMass() );
 			}
+		}
+		
+		public synchronized void inc(){
+			assertion_variable++;
 		}
 	}
 	
@@ -254,6 +259,7 @@ public class DeadlockTest {
 					e.printStackTrace();
 				}
 				System.out.println("Print Bodies updated");
+				c.inc();
 	    		this.printed.release();
 			//}
 		}
@@ -280,7 +286,13 @@ public class DeadlockTest {
 		vis.start();
 		
 		Verify.endAtomic();
-		
+		try {
+			sim.join();
+			vis.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assert c.assertion_variable == (c.number+1);
 	}
 
 }
