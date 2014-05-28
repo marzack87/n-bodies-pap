@@ -5,13 +5,8 @@ target=jpf.AssertionTest
 report.console.property_violation=error,snapshot,trace
 
 # Deadlock Analyzer is a deadlock-specific trace report generator
-# Shared Checker is a property-specific (jpf-aprop extension's annotation) checker
 # Overlapping Method Analyzer reports which method is called concurrently by different threads (if any)
-# Coverage Analyzer gives statistics about method invocation
 listener+=,.listener.DeadlockAnalyzer
-#listener+=,gov.nasa.jpf.aprop.listener.SharedChecker
 listener+=,.listener.OverlappingMethodAnalyzer
-#listener+=,.listener.CoverageAnalyzer
 
 deadlock.format=essential
-#coverage.exclude_handlers=true

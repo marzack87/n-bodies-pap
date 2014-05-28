@@ -267,7 +267,17 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 					if (Util.last_paint_time == 0) Util.last_paint_time = System.nanoTime();
 				}
 				controller.play();
+				// Attack to Black Star Yo!!!
 				if (Util.star_wars_theme) clip.loop(Clip.LOOP_CONTINUOUSLY);
+				
+				if(Util.star_wars_theme){
+					lbl_FPS_title.setForeground(Color.YELLOW);
+					lbl_FPS.setForeground(Color.YELLOW);
+				}else{
+					lbl_FPS_title.setForeground(Color.BLACK);
+					lbl_FPS.setForeground(Color.BLACK);
+				}
+				
 			}
 		} else if(source == btn_step){
 			log("Step-Mode Button");
@@ -285,6 +295,10 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 				controller.startSimulation();
 			}
 			controller.step();
+			
+			lbl_FPS_title.setForeground(new Color(0xEEEEEE));
+			lbl_FPS.setForeground(new Color(0xEEEEEE));
+			
 		} else if(source == btn_stop){
 			log("Stop Button");
 			// The simulation will finish
@@ -303,6 +317,7 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			Util.t_stop = System.nanoTime();
 			log("Total execution time: " + (Util.t_stop-Util.t_start)*1e-9 + " sec");
 			clip.stop();
+			
 		} else if(source == btn_save){
 			log("Save Button");
 			savefile();

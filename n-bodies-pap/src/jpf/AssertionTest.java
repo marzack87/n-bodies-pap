@@ -45,6 +45,7 @@ public class AssertionTest {
 		
 		public synchronized void updateBody(Body body){
 	   		allbodies[body.getIndex()] = body;
+	   		inc();
 		}
 		
 		public void print_body() throws Exception{
@@ -54,7 +55,7 @@ public class AssertionTest {
 			}
 		}
 		
-		public synchronized void inc(){
+		public void inc(){
 			assertion_variable++;
 		}
 	}
