@@ -2,11 +2,10 @@
 classpath=/Users/richiardcasadei/Eclipse/workspace_nbodies/n-bodies-pap/n-bodies-pap/bin
 target=jpf.AssertionTest
 
-report.console.property_violation=error,snapshot,trace
-
 # Deadlock Analyzer is a deadlock-specific trace report generator
 # Overlapping Method Analyzer reports which method is called concurrently by different threads (if any)
 listener+=,.listener.DeadlockAnalyzer
+deadlock.format=essential
 listener+=,.listener.OverlappingMethodAnalyzer
 
-deadlock.format=essential
+report.console.property_violation=error,snapshot,trace

@@ -8,11 +8,11 @@ package jpf;
  * @author Richiard Casadei, Marco Zaccheroni
  */
 
-/*import java.io.BufferedReader;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStreamReader;*/
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -23,7 +23,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
 import gov.nasa.jpf.vm.Verify;
-
 import support.Util;
 import support.V2d;
 import entity.Body;
@@ -35,16 +34,21 @@ public class DeadlockTest {
 		public double dt;
 		public int step;
 		public int number;
+		public int assertion_variable;
 		
 		public Context(){
 			dt = 0.01;
 			step = 10;
-			number = 10;
+			assertion_variable = 0;
 		}
 		
 		public synchronized void updateBody(Body body){
 	   		allbodies[body.getIndex()] = body;
 		}
+		
+		public synchronized void inc(){
+			assertion_variable++;
+	}
 		
 		public void print_body() throws Exception{
 			System.out.println("Printing bodies data from context......");
@@ -67,10 +71,11 @@ public class DeadlockTest {
 		
 		public Generator(Context c){
 			this.c = c;
+			number = c.number;
 		}
 		
 		
-		public void initRandom(int number){
+		/*public void initRandom(){
 			position_x = new double[number];
 			position_y = new double[number];
 			velocity_x = new double[number];
@@ -87,9 +92,9 @@ public class DeadlockTest {
 			}
 			
 			this.initBody(c, number);
-		}
+		}*/
 		
-		/*
+		
 		public void initFromFile(File f){
 			try{
 				
@@ -117,6 +122,7 @@ public class DeadlockTest {
 					  velocity_x[i] = Double.valueOf(values[2]);
 					  velocity_y[i] = Double.valueOf(values[3]);
 					  mass[i] = Double.valueOf(values[4]);
+					  System.out.println(" Px: " + position_x[i] +" Py: " + position_y[i] +" Vx: " + velocity_x[i] +" Vy: " + velocity_x[i]);
 					  i++;
 				  }
 				  in.close();
@@ -127,13 +133,13 @@ public class DeadlockTest {
 
 			this.initBody(c, number);
 		}
-		*/
 		
 		public void initBody(Context c, int number){
 			c.allbodies = new Body[number];
 			double[][] data = this.getData();
 			for(int i = 0; i < c.allbodies.length; i++){
 				double mass = data[4][i];
+				System.out.println("Mass: " + mass);
 				V2d pos = new V2d(data[0][i], data[1][i]);
 				V2d vel = new V2d(data[2][i], data[3][i]);
 				c.allbodies[i] = new Body(pos, vel, mass, i);
@@ -162,7 +168,7 @@ public class DeadlockTest {
 			printed = p;
 			bodytasks_array = new BodyTask[c.allbodies.length];
 			for (int i = 0; i < c.allbodies.length; i++){
-				bodytasks_array[i] = new BodyTask(c.allbodies, i, c.dt);
+				bodytasks_array[i] = new BodyTask(c.allbodies, i, c.dt, c);
 			}
 		}
 		
@@ -186,6 +192,7 @@ public class DeadlockTest {
 					}
 				}
 				list.clear();
+				c.inc();
 				this.sem.release();
 				try {
 					this.printed.acquire();
@@ -197,19 +204,21 @@ public class DeadlockTest {
 		}
 	}
 	
-	static class BodyTask implements Callable<Body> {
+static class BodyTask implements Callable<Body> {
 		
 		private final Body[] all_bodies;
 		private final int my_index;
 		private Body me;
+		private Context c;
 		
 		private double dt;
 	
-		public BodyTask(Body[] all, int i, double delta_t){
+		public BodyTask(Body[] all, int i, double delta_t, Context c){
 			all_bodies = all;
 			my_index = i;
 			me = all_bodies[my_index];
 			dt = delta_t;
+			this.c = c;
 		}
 		
 		public Body call() throws Exception {
@@ -222,6 +231,7 @@ public class DeadlockTest {
 			}
 			
 			me.move(force, dt);
+			c.inc();
 			
 			return me;
 		}
@@ -254,6 +264,7 @@ public class DeadlockTest {
 					e.printStackTrace();
 				}
 				System.out.println("Print Bodies updated");
+				c.inc();
 	    		this.printed.release();
 			//}
 		}
@@ -264,12 +275,12 @@ public class DeadlockTest {
 		
 		Verify.beginAtomic();
 		
-		//File f = new File("BodiesJPF.txt");
+		File f = new File("BodiesJPF.txt");
 		
 		Context c = new Context();
 		Generator gen = new Generator(c);
-		gen.initBody(c, c.number);
-		//gen.initFromFile(f);
+		//gen.initRandom();
+		gen.initFromFile(f);
 		
 		Semaphore sem = new Semaphore(0);
 		Semaphore printed = new Semaphore(0);
@@ -280,6 +291,14 @@ public class DeadlockTest {
 		vis.start();
 		
 		Verify.endAtomic();
+		
+		try {
+			sim.join();
+			vis.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assert c.assertion_variable == (c.number+2);
 		
 	}
 

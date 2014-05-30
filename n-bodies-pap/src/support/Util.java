@@ -92,10 +92,6 @@ public class Util {
 	
 	public static final double scaleFact = (Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 50)/Util.GALAXY_RADIUS;
 	
-	private Util(){
-		
-	}
-	
 	/**
      * Method displayAvailableSpace.
      * <p>
@@ -103,7 +99,7 @@ public class Util {
      * 
      * @return Dimension(w,h)	New Dimension object initialized with the screen width and height
      */
-	public static Dimension displayAvailableSpace() {
+	public static final Dimension displayAvailableSpace() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int w = (int) screenSize.getWidth() - 50;
 		int h = (int) screenSize.getHeight() - 50;
@@ -117,7 +113,7 @@ public class Util {
      * 
      * @return Dimension(w,h)	New Dimension object initialized with the screen width and height without the space occupied by the GalaxyPanel
      */
-	public static Dimension VisualiserAvailableSpace() {
+	public static final Dimension VisualiserAvailableSpace() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int w = (int) screenSize.getWidth() - 50;
 		int h = (int) screenSize.getHeight() - 50;
