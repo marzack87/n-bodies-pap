@@ -84,6 +84,7 @@ public class Simulator extends Thread {
 					//log("Task execution time: " + (t1-t0));
 			}
 		}
+		exec.shutdown();
 		log("I'm dead..");
 	}
 	
