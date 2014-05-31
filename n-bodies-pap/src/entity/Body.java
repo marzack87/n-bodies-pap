@@ -71,8 +71,8 @@ public class Body {
 	public V2d forceFrom(Body that) {
 		
 		double G = 6.67*Math.pow(10,-11);
-		V2d p_this = this.p; //new V2d(this.p.x, this.p.y);
-		V2d p_that = that.p;  //new V2d(that.p.x, that.p.y);
+		V2d p_this = this.p; 
+		V2d p_that = that.p; 
 		V2d delta = p_that.sub(p_this);
 		double dist = that.p.dist(this.p);
 		double F;
@@ -213,7 +213,6 @@ public class Body {
 		//System.out.println("Body " + index);
 		if (collision){
 			this.v = vel_after_collision;
-			//System.out.println("Body " + index + " - vel_after_collision = " + vel_after_collision);
 			V2d dp = this.v.mul(dt);
 			p = p.sum(dp);
 		} else {

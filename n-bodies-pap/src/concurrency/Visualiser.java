@@ -66,17 +66,12 @@ public class Visualiser extends Thread {
     	while(simulation){ 
     		try {
 				this.sem.acquire();
-				//log(" Sem acquired: " + sem.availablePermits());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-    		
-    		//System.out.println("# " + Util.total_iteration + " - time " + Util.last_iter_time + " FPS " + 1e9 / Util.last_iter_time);
-        	
-    		Body[] position = cont.allbodies;
+       		Body[] position = cont.allbodies;
     		v.updatePositions(position);
     		this.printed.release();
-    		//log(" Printed released: " + sem.availablePermits());
     	}
     	log("I'm dead..");
     }

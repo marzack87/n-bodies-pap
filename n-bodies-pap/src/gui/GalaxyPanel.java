@@ -91,9 +91,9 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		sld_velocity.setMajorTickSpacing(1);
 		sld_velocity.setSnapToTicks(true);
 		sld_velocity.setPaintTicks(true);
+		
 		// Create the slider label table
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-		
 		String slow;
 		String fast;
 		if (Util.star_wars_theme){
@@ -103,7 +103,6 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			slow = "images/slow.png";
 			fast = "images/fast.png";
 		}
-		
 		labelTable.put(new Integer( Util.MIN_SCALE ), new JLabel(createImageIcon(slow, "slow")));
 		labelTable.put(new Integer( Util.MAX_SCALE ), new JLabel(createImageIcon(fast, "fast")));
 		sld_velocity.setLabelTable(labelTable);
@@ -229,9 +228,9 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 		try {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 			// Get a sound clip resource.
-	         clip = AudioSystem.getClip();
-	         // Open audio clip and load samples from the audio input stream.
-	         clip.open(audioIn);
+	        clip = AudioSystem.getClip();
+	        // Open audio clip and load samples from the audio input stream.
+	        clip.open(audioIn);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 			e.printStackTrace();
 		}
@@ -360,8 +359,6 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 	JSlider source = (JSlider)e.getSource();
 		if (!source.getValueIsAdjusting()) {
 			int step = source.getValue();
-			//step = source.getMaximum() - step;
-			//double dt = (Util.DEFAULT_DT * step) / Util.MID_SCALE;
 			double dt = (Util.DEFAULT_DT * (Math.pow(10, step-1)) / (Math.pow(10, (Util.MAX_SCALE - Util.MID_SCALE))));
 			controller.setDeltaT(dt);
 			lbl_dt.setText("dt = " + String.format( "%.7f", dt ));

@@ -97,21 +97,13 @@ public class Simulator extends Thread {
      * then it reports to the Visualiser that the update is completed and waits for the termination of the VisualiserPanel repaint.
      */
 	private void loop(){
-		/*
-		 * - LEGGERE I DATI
-		 * - CREARE I BODY TASK PASSANDOGLI I DATI
-		 * - ASPETTIAMO CHE FINISCANO TORNANDOCI I LORO VALORI AGGIORNATI
-		 * - AGGIORNIAMO I DATI
-		 * - SEGNALIAMO IL VISUALIZZATORE
-		 * - ATTENDIAMO CHE IL PAINT DEI CORPI SIA STATO ESEGUITO 
-		 */
+		
 		double time = System.nanoTime();
 		double dt = context.dt;
 		for (int i = 0; i < context.allbodies.length; i++){
 			bodytasks_array[i].updateDt(dt);
 			Callable<Body> task = bodytasks_array[i];
 			Future<Body> submit = exec.submit(task);
-			//System.out.println(exec.toString());
 			list.add(submit);
 		}
 		for (Future<Body> future : list){
@@ -126,10 +118,8 @@ public class Simulator extends Thread {
 		Util.total_iteration++;
 		Util.last_iter_time = (System.nanoTime() - time);
 		this.sem.release();
-		//log(" Sem: " + sem.availablePermits());
 		try {
 			this.printed.acquire();
-			//log(" Sem: " + sem.availablePermits());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

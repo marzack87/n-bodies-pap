@@ -138,8 +138,7 @@ public class Controller {
 	public void reset(){
 		context.resetBodies();
 		visualiser.flushHistoryPositions();
-		//context.print_body();
-		// The Visualiser thread must be print the new situation
+		// The Visualiser thread have to print the new situation
 		sem.release();
 	}
 	

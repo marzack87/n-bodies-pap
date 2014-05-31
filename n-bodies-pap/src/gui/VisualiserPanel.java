@@ -46,8 +46,6 @@ public class VisualiserPanel extends JPanel {
 
         public void paint(Graphics g){
         	
-        	//Util.last_paint_time = System.currentTimeMillis();
-        	//System.out.println("Paint! " + Util.last_paint_time);
         	//double t0 = System.nanoTime();
         	
         	gpanel.updatePerformanceData();
