@@ -8,11 +8,7 @@ package jpf;
  * @author Richiard Casadei, Marco Zaccheroni
  */
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -23,18 +19,15 @@ import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
 import gov.nasa.jpf.vm.Verify;
-import support.Util;
-import support.V2d;
-import entity.Body;
 
-public class DeadlockTest {
+public class ModelTest {
 	
 	static class Context{
 		public Body[] allbodies;
 		public double dt;
 		public int step;
 		public int number;
-		public int assertion_variable;
+		protected int assertion_variable;
 		
 		public Context(){
 			dt = 0.01;
@@ -49,6 +42,10 @@ public class DeadlockTest {
 		
 		public synchronized void inc(){
 			assertion_variable++;
+		}
+		
+		public int getVariable(){
+			return assertion_variable;
 		}
 		
 	}
@@ -79,12 +76,12 @@ public class DeadlockTest {
 			mass = new int[number];
 			
 			for (int i = 0; i < number; i++){
-				position_x[i] = Verify.getInt(1, 1024);	//(Math.random() * ((Util.VisualiserAvailableSpace().width - 5)/Util.scaleFact - 1) ) + 1;
-				position_y[i] = Verify.getInt(1, 800);	//(Math.random() * ((Util.VisualiserAvailableSpace().height - 5)/Util.scaleFact - 1) ) + 1;
-				velocity_x[i] = Verify.getInt(1, 50);	//((Math.random() * (Util.RANGE_BODIES_VELOCITY - 1) ) + 1) - (Util.RANGE_BODIES_VELOCITY / 2);
-				velocity_y[i] = Verify.getInt(1, 50);	//((Math.random() * (Util.RANGE_BODIES_VELOCITY - 1) ) + 1) - (Util.RANGE_BODIES_VELOCITY / 2);
+				position_x[i] = Verify.getInt(1, 1024);	
+				position_y[i] = Verify.getInt(1, 800);	
+				velocity_x[i] = Verify.getInt(1, 50);	
+				velocity_y[i] = Verify.getInt(1, 50);	
 				mass[i] = Verify.getInt(1, 10);
-				System.out.println(" Px: " + position_x[i] +" Py: " + position_y[i] +" Vx: " + velocity_x[i] +" Vy: " + velocity_x[i]);
+				//System.out.println(" Px: " + position_x[i] +" Py: " + position_y[i] +" Vx: " + velocity_x[i] +" Vy: " + velocity_x[i]);
 			}
 			
 			
@@ -96,7 +93,6 @@ public class DeadlockTest {
 			int[][] data = this.getData();
 			for(int i = 0; i < c.allbodies.length; i++){
 				double mass = data[4][i];
-				System.out.println("Mass: " + mass);
 				V2d pos = new V2d(data[0][i], data[1][i]);
 				V2d vel = new V2d(data[2][i], data[3][i]);
 				c.allbodies[i] = new Body(pos, vel, mass, i);
@@ -189,17 +185,11 @@ public class DeadlockTest {
 		public double mass; //mass
 		public int index;
 		
-		public boolean collision;
-		public V2d vel_after_collision;
-		
 		public Body(V2d p, V2d v, double mass, int index) {
 			this.p = p;
 			this.v = v;
 			this.mass = mass;
 			this.index = index;
-			
-			collision = false;
-			vel_after_collision = new V2d(0,0);
 		}
 		
 		public Body copy(){
@@ -214,8 +204,8 @@ public class DeadlockTest {
 		public V2d forceFrom(Body that) {
 			
 			double G = 6.67*Math.pow(10,-11);
-			V2d p_this = this.p; //new V2d(this.p.x, this.p.y);
-			V2d p_that = that.p;  //new V2d(that.p.x, that.p.y);
+			V2d p_this = this.p; 
+			V2d p_that = that.p;  
 			V2d delta = p_that.sub(p_this);
 			double dist = that.p.dist(this.p);
 			double F;
@@ -236,11 +226,61 @@ public class DeadlockTest {
 			V2d dp = (v.sum(dv.mul(1/2))).mul(dt);
 			p = p.sum(dp);
 			v = v.sum(dv);
-			
-			collision = false;
-			vel_after_collision = new V2d(0,0);
 		}
 
+	}
+	
+	public static class V2d{
+
+	    public double x,y;
+
+	    public V2d(double x,double y){
+	        this.x=x;
+	        this.y=y;
+	    }
+	    
+	    public double abs(){
+	        return (double)Math.sqrt(x*x+y*y);
+	    }
+	    
+	    public double dist(V2d v){
+	    	return Math.sqrt(( x - v.x )*( x - v.x )+( y - v.y )*( y - v.y ));
+	    	
+	    }
+	    
+	    public V2d getNormalized(){
+	        double module=(double)Math.sqrt(x*x+y*y);
+	        //return new V2d(x/module,y/module);
+	        this.x = x/module;
+	        this.y = y/module;
+	        return this;
+	    }
+	    
+	    public V2d mul(double fact){
+	        //return new V2d(x*fact,y*fact);
+	        this.x = x*fact;
+	        this.y = y*fact;
+	        return this;
+	    }
+
+	    public synchronized V2d sum(V2d v){
+			//return new V2d(x+v.x,y+v.y);
+			this.x = this.x+v.x;
+			this.y = this.y+v.y;
+			return this;
+	    }
+	    
+	    public V2d sub(V2d v){
+	        //return new V2d(x-v.x,y-v.y);
+	    	this.x = this.x-v.x;
+	    	this.y = this.y-v.y;
+	    	return this;
+	    }
+
+	    public String toString(){
+	        return "V2d("+x+","+y+")";
+	    }
+	    
 	}
 	
 	static class Simulator extends Thread{
@@ -259,7 +299,8 @@ public class DeadlockTest {
 			printed = p;
 			bodytasks_array = new BodyTask[c.allbodies.length];
 			for (int i = 0; i < c.allbodies.length; i++){
-				bodytasks_array[i] = new BodyTask(c.allbodies, i, c.dt, c);
+				bodytasks_array[i] = new BodyTask(c.allbodies, i, c.dt);
+				c.inc();
 			}
 		}
 		
@@ -293,7 +334,6 @@ public class DeadlockTest {
 			//c.step--;
 			//}
 			exec.shutdown();
-			System.out.println("Sim Done");
 		}
 	}
 	
@@ -302,16 +342,14 @@ static class BodyTask implements Callable<Body> {
 		private final Body[] all_bodies;
 		private final int my_index;
 		private Body me;
-		private Context c;
 		
 		private double dt;
 	
-		public BodyTask(Body[] all, int i, double delta_t, Context c){
+		public BodyTask(Body[] all, int i, double delta_t){
 			all_bodies = all;
 			my_index = i;
 			me = all_bodies[my_index];
 			dt = delta_t;
-			this.c = c;
 		}
 		
 		public Body call() throws Exception {
@@ -324,8 +362,7 @@ static class BodyTask implements Callable<Body> {
 			}
 			
 			me.move(force, dt);
-			c.inc();
-			System.out.println("Task complete");
+			//c.inc();
 			
 			return me;
 		}
@@ -357,10 +394,9 @@ static class BodyTask implements Callable<Body> {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println("Print Bodies updated");
+				// Here the Visualiser call updatePosition()
 				c.inc();
 	    		this.printed.release();
-	    		System.out.println("Vis Done");
 			//}
 		}
 		
@@ -370,7 +406,7 @@ static class BodyTask implements Callable<Body> {
 		
 		Verify.beginAtomic();
 		
-		File f = new File("BodiesJPF.txt");
+		//File f = new File("BodiesJPF.txt");
 		
 		Context c = new Context();
 		Generator gen = new Generator(c);
@@ -393,8 +429,8 @@ static class BodyTask implements Callable<Body> {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("c.assertion_variable: " +c. assertion_variable);
-		assert c.assertion_variable == (c.number+2);
+		int value = c.getVariable();
+		assert value == 12;
 		
 	}
 
