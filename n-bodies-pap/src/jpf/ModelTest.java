@@ -3,7 +3,7 @@ package jpf;
 /**
  * Class DeadlockTest.
  * <p>
- * Class test to verify that in the system a deadlock situation in all the possible scenarios envisaged is not present.<br>
+ * Class test to verify the safety e liveness propriety in the system.<br>
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
@@ -32,7 +32,7 @@ public class ModelTest {
 		public Context(){
 			dt = 0.01;
 			step = 10;
-			number = 10;
+			number = 2;
 			assertion_variable = 0;
 		}
 		
@@ -202,7 +202,7 @@ public class ModelTest {
 		}
 		
 		public V2d forceFrom(Body that) {
-			
+
 			double G = 6.67*Math.pow(10,-11);
 			V2d p_this = this.p; 
 			V2d p_that = that.p;  
@@ -226,6 +226,7 @@ public class ModelTest {
 			V2d dp = (v.sum(dv.mul(1/2))).mul(dt);
 			p = p.sum(dp);
 			v = v.sum(dv);
+			
 		}
 
 	}
@@ -355,6 +356,9 @@ static class BodyTask implements Callable<Body> {
 		public Body call() throws Exception {
 			
 			V2d force = new V2d(0,0);
+			
+			Verify.beginAtomic();
+			
 			for (int i = 0; i < all_bodies.length; i++) {
 				if (i != my_index) {
 					force = force.sum(me.forceFrom(all_bodies[i]));
@@ -363,6 +367,7 @@ static class BodyTask implements Callable<Body> {
 			
 			me.move(force, dt);
 			//c.inc();
+			Verify.endAtomic();
 			
 			return me;
 		}
@@ -430,7 +435,7 @@ static class BodyTask implements Callable<Body> {
 			e.printStackTrace();
 		}
 		int value = c.getVariable();
-		assert value == 12;
+		assert value == 4;
 		
 	}
 
