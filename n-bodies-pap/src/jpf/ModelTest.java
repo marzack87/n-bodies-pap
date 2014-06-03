@@ -105,80 +105,6 @@ public class ModelTest {
 		}
 	}
 	
-	// For init from file
-	/*static class Generator{
-		
-		private Context c;
-		
-		private double[] position_x;
-		private double[] position_y;
-		private double[] velocity_x;
-		private double[] velocity_y;
-		private double[] mass;
-		private int number;
-		
-		public Generator(Context c){
-			this.c = c;
-			number = c.number;
-		}
-		
-		public void initFromFile(File f){
-			try{
-				
-				  FileInputStream fstream = new FileInputStream(f);
-
-				  DataInputStream in = new DataInputStream(fstream);
-				  BufferedReader br = new BufferedReader(new InputStreamReader(in));
-				  String strLine;
-				  
-				  if ((strLine = br.readLine()) != null){
-					  number = Integer.valueOf(strLine);
-					  position_x = new double[number];
-					  position_y = new double[number];
-					  velocity_x = new double[number];
-					  velocity_y = new double[number];
-					  mass = new double[number];
-				  } else {
-					  System.err.println("File is empty");
-				  }
-				  int i = 0;
-				  while ((strLine = br.readLine()) != null)   {
-					  String[] values = strLine.split(" ");
-					  position_x[i] = Double.valueOf(values[0]);
-					  position_y[i] = Double.valueOf(values[1]);
-					  velocity_x[i] = Double.valueOf(values[2]);
-					  velocity_y[i] = Double.valueOf(values[3]);
-					  mass[i] = Double.valueOf(values[4]);
-					  System.out.println(" Px: " + position_x[i] +" Py: " + position_y[i] +" Vx: " + velocity_x[i] +" Vy: " + velocity_x[i]);
-					  i++;
-				  }
-				  in.close();
-				  
-			}catch (Exception ex){
-				System.err.println(ex); 
-			}
-
-			this.initBody(c, number);
-		}
-		
-		public void initBody(Context c, int number){
-			c.allbodies = new Body[number];
-			double[][] data = this.getData();
-			for(int i = 0; i < c.allbodies.length; i++){
-				double mass = data[4][i];
-				System.out.println("Mass: " + mass);
-				V2d pos = new V2d(data[0][i], data[1][i]);
-				V2d vel = new V2d(data[2][i], data[3][i]);
-				c.allbodies[i] = new Body(pos, vel, mass, i);
-			}
-		}
-		
-		public double[][] getData(){
-			double[][] data = {position_x, position_y, velocity_x, velocity_y, mass};
-			return data;
-		}
-	}*/
-	
 	public static class Body { 
 		public V2d p; //position
 		public V2d v; //velocity
@@ -264,7 +190,7 @@ public class ModelTest {
 	        return this;
 	    }
 
-	    public synchronized V2d sum(V2d v){
+	    public V2d sum(V2d v){
 			//return new V2d(x+v.x,y+v.y);
 			this.x = this.x+v.x;
 			this.y = this.y+v.y;
@@ -290,7 +216,7 @@ public class ModelTest {
 		private Semaphore sem;
 		private Semaphore printed;
 		
-		private static final ExecutorService exec = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
+		private static final ExecutorService exec = Executors.newFixedThreadPool(2);
 		private List<Future<Body>> list = new ArrayList<Future<Body>>();
 		private BodyTask[] bodytasks_array;
 		
@@ -309,6 +235,7 @@ public class ModelTest {
 		public void run(){
 			
 			//while(c.step > 0){
+			Verify.beginAtomic();
 			double dt = c.dt;
 			for (int i = 0; i < c.allbodies.length; i++){
 					bodytasks_array[i].updateDt(dt);
@@ -316,6 +243,8 @@ public class ModelTest {
 					Future<Body> submit = exec.submit(task);
 					list.add(submit);
 			}
+			Verify.endAtomic();
+			
 			for (Future<Body> future : list){
 				try {
 					Body body = future.get();
@@ -323,18 +252,21 @@ public class ModelTest {
 				} catch (InterruptedException | ExecutionException e) {
 					e.printStackTrace();
 				}
+			
 			}
+			
+			Verify.beginAtomic();
+			exec.shutdown();
 			list.clear();
 			c.inc();
+			Verify.endAtomic();
 			this.sem.release();
 			try {
 				this.printed.acquire();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//c.step--;
-			//}
-			exec.shutdown();
+			
 		}
 	}
 	
@@ -355,9 +287,8 @@ static class BodyTask implements Callable<Body> {
 		
 		public Body call() throws Exception {
 			
-			V2d force = new V2d(0,0);
-			
 			Verify.beginAtomic();
+			V2d force = new V2d(0,0);
 			
 			for (int i = 0; i < all_bodies.length; i++) {
 				if (i != my_index) {
@@ -366,10 +297,9 @@ static class BodyTask implements Callable<Body> {
 			}
 			
 			me.move(force, dt);
-			//c.inc();
 			Verify.endAtomic();
-			
 			return me;
+			
 		}
 		
 		public void updateDt(double delta_time) {
@@ -411,12 +341,9 @@ static class BodyTask implements Callable<Body> {
 		
 		Verify.beginAtomic();
 		
-		//File f = new File("BodiesJPF.txt");
-		
 		Context c = new Context();
 		Generator gen = new Generator(c);
 		gen.initRandom(c.number);
-		//gen.initFromFile(f);
 		
 		Semaphore sem = new Semaphore(0);
 		Semaphore printed = new Semaphore(0);

@@ -33,7 +33,7 @@ public class V2d implements java.io.Serializable {
         return new V2d(x*fact,y*fact);
     }
 
-    public synchronized V2d sum(V2d v){
+    public V2d sum(V2d v){
 		return new V2d(x+v.x,y+v.y);
 		/*this.x = this.x+v.x;
 		this.y = this.y+v.y;
