@@ -1,7 +1,7 @@
 package jpf;
 
 /**
- * Class DeadlockTest.
+ * Class ModelTest.
  * <p>
  * Class test to verify the safety e liveness propriety in the system.<br>
  * 
