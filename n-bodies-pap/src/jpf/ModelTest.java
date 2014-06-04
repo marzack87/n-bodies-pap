@@ -177,31 +177,31 @@ public class ModelTest {
 	    
 	    public V2d getNormalized(){
 	        double module=(double)Math.sqrt(x*x+y*y);
-	        //return new V2d(x/module,y/module);
-	        this.x = x/module;
+	        return new V2d(x/module,y/module);
+	        /*this.x = x/module;
 	        this.y = y/module;
-	        return this;
+	        return this;*/
 	    }
 	    
 	    public V2d mul(double fact){
-	        //return new V2d(x*fact,y*fact);
-	        this.x = x*fact;
+	        return new V2d(x*fact,y*fact);
+	        /*this.x = x*fact;
 	        this.y = y*fact;
-	        return this;
+	        return this;*/
 	    }
 
 	    public V2d sum(V2d v){
-			//return new V2d(x+v.x,y+v.y);
-			this.x = this.x+v.x;
+			return new V2d(x+v.x,y+v.y);
+			/*this.x = this.x+v.x;
 			this.y = this.y+v.y;
-			return this;
+			return this;*/
 	    }
 	    
 	    public V2d sub(V2d v){
-	        //return new V2d(x-v.x,y-v.y);
-	    	this.x = this.x-v.x;
+	        return new V2d(x-v.x,y-v.y);
+	    	/*this.x = this.x-v.x;
 	    	this.y = this.y-v.y;
-	    	return this;
+	    	return this;*/
 	    }
 
 	    public String toString(){
