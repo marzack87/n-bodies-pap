@@ -3,7 +3,7 @@ package jpf;
 /**
  * Class ModelTest.
  * <p>
- * Class test to verify the safety e liveness propriety in the system.<br>
+ * Class test to verify the safety e liveness property in the system.<br>
  * 
  * @author Richiard Casadei, Marco Zaccheroni
  */
