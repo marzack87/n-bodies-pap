@@ -76,11 +76,11 @@ public class ModelTest {
 			mass = new int[number];
 			
 			for (int i = 0; i < number; i++){
-				position_x[i] = Verify.getInt(1, 1024);	
-				position_y[i] = Verify.getInt(1, 800);	
-				velocity_x[i] = Verify.getInt(1, 50);	
-				velocity_y[i] = Verify.getInt(1, 50);	
-				mass[i] = Verify.getInt(1, 10);
+				position_x[i] = Verify.getInt(599, 600);	
+				position_y[i] = Verify.getInt(499, 500);	
+				velocity_x[i] = Verify.getInt(1, 2);	
+				velocity_y[i] = Verify.getInt(1, 2);	
+				mass[i] = Verify.getInt(5, 6);
 				//System.out.println(" Px: " + position_x[i] +" Py: " + position_y[i] +" Vx: " + velocity_x[i] +" Vy: " + velocity_x[i]);
 			}
 			
