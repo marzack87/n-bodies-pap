@@ -68,7 +68,6 @@ public class MainPanel extends JPanel implements ActionListener, ItemListener{
 		
 		add(Box.createVerticalStrut(5));
 		
-		// BARRETTA
 		JSeparator sep = new JSeparator(SwingConstants.HORIZONTAL);
 		Dimension d = sep.getPreferredSize();
 		d.width = sep.getMaximumSize().width;

@@ -5,13 +5,13 @@ Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)
 
  - Computer info -
  Name of the OS:  Mac OS X
- Version of the OS: 10.9.2
+ Version of the OS: 10.9.4
  Architecture of the OS: x86_64
  Number of cores: 4
 
  - Bodies and Galaxy info -
- A Sun is present and its mass is 5.0E30
- # of Bodies: 100
+ No Sun present 
+ # of Bodies: 3000
  The 4 mass levels of the bodies are: 
  Level 1: - 1.0E25 (Smallest mass)
  Level 2: - 3.0000000000000003E26 (Mid-Small mass)
@@ -21,9 +21,10 @@ Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)
  Galaxy Radius: 5.0E8
 
  - Simulation info -
- # of iteration: 1539
- Total execution time: 2.3481349120000004 sec
- Average # of iteration per sec: 655.413789103443
+ Execution Mode: Collision
+ # of iteration: 577
+ Total execution time: 50.287513088000004 sec
+ Average # of iteration per sec: 11.47402137366161
 
 ---------------------------------------------------
 

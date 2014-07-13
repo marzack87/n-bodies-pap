@@ -483,9 +483,9 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println("");
 			out.println(" - Simulation info -");
 			if(Util.soft_param_mode) {
-				out.println(" Execution Mode: Physics");
+				out.println(" Simulation Mode: Softening param");
 			}else{
-				out.println(" Execution Mode: Astronomical");
+				out.println(" Execution Mode: Collision");
 			}
 			out.println(" # of iteration: " + Util.total_iteration);
 			out.println(" Total execution time: " + (Util.t_stop-Util.t_start)*Math.pow(10, -9) + " sec");

@@ -92,6 +92,7 @@ public class BodyDialog extends JDialog implements ActionListener{
 		if (source == ok){
 			try{
 				int n = Integer.parseInt(body.getText());
+				// Control the number of body..they would be at least 2 for the gravitational interaction
 				if(n<2) {
 					JOptionPane.showMessageDialog(this, "Insert at least two bodies!!!", "Warning", JOptionPane.WARNING_MESSAGE, null);
 				}else{
