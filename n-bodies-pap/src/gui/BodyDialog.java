@@ -97,13 +97,13 @@ public class BodyDialog extends JDialog implements ActionListener{
 					JOptionPane.showMessageDialog(this, "Insert at least two bodies!!!", "Warning", JOptionPane.WARNING_MESSAGE, null);
 				}else{
 					mp.initWithRandom(n,Util.one_sun);
+					this.setVisible(false);
 				}
 			}catch(Exception ex) { 
 				ex.printStackTrace();
 				System.err.println(ex); 
 				JOptionPane.showMessageDialog(this, "Wrong input data, a number MUST be inserted!!!", "Error", JOptionPane.ERROR_MESSAGE, null);
 			}
-			this.setVisible(false);
 		}
 		
 	}
