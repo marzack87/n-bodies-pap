@@ -11,7 +11,7 @@ Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)
 
  - Bodies and Galaxy info -
  No Sun present 
- # of Bodies: 3000
+ # of Bodies: 100
  The 4 mass levels of the bodies are: 
  Level 1: - 1.0E25 (Smallest mass)
  Level 2: - 3.0000000000000003E26 (Mid-Small mass)
@@ -22,9 +22,9 @@ Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)
 
  - Simulation info -
  Execution Mode: Collision
- # of iteration: 577
- Total execution time: 50.287513088000004 sec
- Average # of iteration per sec: 11.47402137366161
+ # of iteration: 0
+ Total execution time: 1.4056980287070432E9 sec
+ Average # of iteration per sec: 0.0
 
 ---------------------------------------------------
 
