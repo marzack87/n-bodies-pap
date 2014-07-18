@@ -294,9 +294,13 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 				controller.startSimulation();
 			}
 			controller.step();
-			
-			lbl_FPS_title.setForeground(new Color(0xEEEEEE));
-			lbl_FPS.setForeground(new Color(0xEEEEEE));
+			if(Util.star_wars_theme){
+				lbl_FPS_title.setForeground(Color.YELLOW);
+				lbl_FPS.setForeground(Color.YELLOW);
+			}else{
+				lbl_FPS_title.setForeground(new Color(0xEEEEEE));
+				lbl_FPS.setForeground(new Color(0xEEEEEE));
+			}
 			
 		} else if(source == btn_stop){
 			log("Stop Button");
