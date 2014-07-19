@@ -98,7 +98,7 @@ public class MainPanel extends JPanel implements ActionListener, ItemListener{
 		star_wars.addItemListener(this);
 		add(star_wars);
 		
-		sun = new JCheckBox("Death Star");
+		sun = new JCheckBox("Sun");
 		sun.setSelected(Util.one_sun);
 		sun.setAlignmentX(Component.CENTER_ALIGNMENT);
 		sun.addItemListener(this);
