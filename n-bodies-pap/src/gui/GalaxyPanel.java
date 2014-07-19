@@ -462,7 +462,11 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println("--------------- N-Bodies Simulation ---------------");
 			out.println("");
 			out.println("Author:");
-			out.println("Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)");
+			if(Util.star_wars_theme){
+				out.println("Richiard Casadei(Sith) & Marco Zaccheroni(Jedi)");
+			}else{
+				out.println("Richiard Casadei & Marco Zaccheroni");
+			}
 			out.println("");
 			out.println(" - Computer info -");
 			out.println(" Name of the OS:  "+ Util.nameOS);
@@ -497,7 +501,11 @@ public class GalaxyPanel extends JPanel implements ActionListener, ChangeListene
 			out.println("");
 			out.println("---------------------------------------------------");
 			out.println("");
-			out.println("            May the Force be with you");
+			if(Util.star_wars_theme){
+				out.println("            May the Force be with you");
+			}else{
+				out.println("       Have more fun with Star Wars mode!");
+			}
 			out.println("");
 			out.println("---------------------------------------------------");
 			out.close();

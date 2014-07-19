@@ -17,7 +17,7 @@ public class Util {
 	public static int n_bodies = 0;
 	public static boolean one_sun = false;
 	
-	public static boolean star_wars_theme = true;
+	public static boolean star_wars_theme = false;
 	public static boolean soft_param_mode = false;
 	
 	public static double t_start, t_stop;
